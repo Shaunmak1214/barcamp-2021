@@ -50,7 +50,8 @@ const Index = () => {
             <Text>FOLLOW US</Text>
             <HStack>
               <Text>
-                <span opacity=".8">Organized by</span>IT Society Cyberjaya
+                <span style={{ opacity: 0.8 }}>Organized by</span> IT Society
+                Cyberjaya
               </Text>
             </HStack>
           </VStack>
