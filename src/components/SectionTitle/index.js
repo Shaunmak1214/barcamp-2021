@@ -1,21 +1,80 @@
 import React from 'react';
 import { Heading } from '@chakra-ui/react';
-import { HStack } from '@chakra-ui/layout';
+import { VStack, Box } from '@chakra-ui/layout';
 import PropTypes from 'prop-types';
 
-const SectionTitle = ({ ...props }) => {
+const SectionTitle = ({ type, ...props }) => {
   let children = props.children;
-  return (
-    <HStack borderBottom="1px solid linear-gradient(90deg, #5BA4FF 0%, #FF5E66 100%); ">
-      <Heading size="4x1" {...props}>
-        {children}
-      </Heading>
-    </HStack>
-  );
+  if (type === 'left') {
+    return (
+      <VStack>
+        <Heading
+          d="flex"
+          justifyContent="center"
+          position="relative"
+          {...props}
+        >
+          {children}
+          <Box
+            position="absolute"
+            bottom="-15px"
+            left="0px"
+            h="3px"
+            w="90px"
+            bg="linear-gradient(90deg, #5BA4FF 0%, #FF5E66 100%)"
+            style={{ content: ' ' }}
+          ></Box>
+        </Heading>
+      </VStack>
+    );
+  } else if (type === 'center') {
+    return (
+      <VStack>
+        <Heading
+          d="flex"
+          justifyContent="center"
+          position="relative"
+          {...props}
+        >
+          {children}
+          <Box
+            position="absolute"
+            bottom="-15px"
+            h="3px"
+            w="90px"
+            bg="linear-gradient(90deg, #5BA4FF 0%, #FF5E66 100%)"
+            style={{ content: ' ' }}
+          ></Box>
+        </Heading>
+      </VStack>
+    );
+  } else {
+    return (
+      <VStack>
+        <Heading
+          d="flex"
+          justifyContent="center"
+          position="relative"
+          {...props}
+        >
+          {children}
+          <Box
+            position="absolute"
+            bottom="-15px"
+            h="3px"
+            w="90px"
+            bg="linear-gradient(90deg, #5BA4FF 0%, #FF5E66 100%)"
+            style={{ content: ' ' }}
+          ></Box>
+        </Heading>
+      </VStack>
+    );
+  }
 };
 
 SectionTitle.propTypes = {
   children: PropTypes.node,
+  type: PropTypes.string,
 };
 
 export { SectionTitle };
