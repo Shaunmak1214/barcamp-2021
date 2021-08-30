@@ -7,7 +7,6 @@ const theme = extendTheme({
   },
   colors: {
     primary: '#EB202B',
-    accent: '#1050A0',
     secondary: '#1050A0',
     highlight: '#FF7C83',
     warning: '#FFC75F',
