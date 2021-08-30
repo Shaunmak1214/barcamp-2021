@@ -7,36 +7,10 @@ import App from './App';
 // import { Router } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { ChakraProvider } from '@chakra-ui/react';
 
 import store from './store/store';
-
-import { ChakraProvider } from '@chakra-ui/react';
-import { extendTheme } from '@chakra-ui/react';
-
-const theme = extendTheme({
-  colors: {
-    primary: '#ABC4FF',
-    accent: '#F2F6FF',
-    secondary: '#D9F3F0',
-    highlight: '#00C9A7',
-    warning: '#FFC75F',
-    danger: '#C34A36',
-  },
-  components: {
-    Button: {
-      variants: {
-        solid() {
-          return {
-            _hover: {
-              bg: `#BBC7E4`,
-            },
-            _active: { bg: `#BBC7E4` },
-          };
-        },
-      },
-    },
-  },
-});
+import theme from './utils/theme';
 
 // const history = createHistory();
 
