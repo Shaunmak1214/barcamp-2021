@@ -3,8 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import createHistory from 'history/createBrowserHistory';
-import { Router } from 'react-router';
+// import createHistory from 'history/createBrowserHistory';
+// import { Router } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
@@ -38,16 +38,14 @@ const theme = extendTheme({
   },
 });
 
-const history = createHistory();
+// const history = createHistory();
 
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>
-      <Router history={history}>
-        <ChakraProvider theme={theme}>
-          <App />
-        </ChakraProvider>
-      </Router>
+      <ChakraProvider theme={theme}>
+        <App />
+      </ChakraProvider>
     </Provider>
   </BrowserRouter>,
   document.getElementById('root'),
