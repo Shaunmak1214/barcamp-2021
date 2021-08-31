@@ -1,7 +1,7 @@
 import { Button } from '@chakra-ui/button';
 import { Text } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useRef } from 'react';
 
 const PrimaryButton = ({ ...props }) => {
   let children = props.children;
@@ -30,6 +30,37 @@ const SecondaryButton = ({ ...props }) => {
   );
 };
 
+const FaqButton = ({ selected, ...props }) => {
+  let textRef = useRef(null);
+  let children = props.children;
+  return (
+    <Button
+      variant="outlined"
+      bg={selected ? '#1050A0' : 'none'}
+      border="1px solid #1050A0"
+      borderRadius="50px"
+      onMouseOver={() => {
+        if (selected) return;
+        textRef.current.style.color = '#FFFFFF';
+      }}
+      onMouseLeave={() => {
+        if (selected) return;
+        textRef.current.style.color = '#1050A0';
+      }}
+      {...props}
+    >
+      <Text
+        ref={textRef}
+        as="h2"
+        fontSize="16px"
+        color={selected ? 'white' : '#1050A0'}
+      >
+        {children}
+      </Text>
+    </Button>
+  );
+};
+
 PrimaryButton.propTypes = {
   children: PropTypes.node.isRequired,
 };
@@ -38,4 +69,9 @@ SecondaryButton.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export { PrimaryButton, SecondaryButton };
+FaqButton.propTypes = {
+  children: PropTypes.node.isRequired,
+  selected: PropTypes.bool,
+};
+
+export { PrimaryButton, SecondaryButton, FaqButton };
