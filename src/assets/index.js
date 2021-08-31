@@ -3,11 +3,12 @@ import BarcampLandingImg from './jpg-pngs/landing.png';
 import BarcampWhiteLogo from './jpg-pngs/barcamp-white.png';
 import AuronexLogo from './jpg-pngs/auronex.png';
 import PlatinumIcon from './svgs/diamond.svg';
-import WhatIsBarcampBg from './jpg-pngs/what-is-barcamp-bg.png';
+import SectionBg from './jpg-pngs/section-bg.png';
 import ShareIcon from './jpg-pngs/share-icon.png';
 import IconContainer from './jpg-pngs/icon-container.png';
 import LightIcon from './jpg-pngs/light-icon.png';
 import TrainingIcon from './jpg-pngs/training-icon.png';
+import SamplePic from './jpg-pngs/sample-pic.png';
 
 export {
   BarcampFullLogo,
@@ -15,9 +16,10 @@ export {
   BarcampWhiteLogo,
   AuronexLogo,
   PlatinumIcon,
-  WhatIsBarcampBg,
+  SectionBg,
   ShareIcon,
   IconContainer,
   LightIcon,
   TrainingIcon,
+  SamplePic,
 };
