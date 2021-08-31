@@ -1,5 +1,12 @@
 import { Image } from '@chakra-ui/image';
-import { Container, HStack, VStack, Center } from '@chakra-ui/layout';
+import {
+  Container,
+  HStack,
+  VStack,
+  Center,
+  Box,
+  Flex,
+} from '@chakra-ui/layout';
 import { Text } from '@chakra-ui/react';
 import React from 'react';
 
@@ -7,7 +14,14 @@ import { SecondaryButton } from '../components/Buttons';
 import BCSpacer from '../components/Spacer';
 import { SectionTitle } from '../components/SectionTitle';
 
-import { BarcampLandingImg } from '../assets';
+import {
+  BarcampLandingImg,
+  WhatIsBarcampBg,
+  ShareIcon,
+  IconContainer,
+  TrainingIcon,
+  LightIcon,
+} from '../assets';
 
 const Index = () => {
   return (
@@ -32,10 +46,57 @@ const Index = () => {
           </VStack>
         </Container>
       </HStack>
-      <Center>
-        <HStack>
-          <SectionTitle>Hi shaun</SectionTitle>
-        </HStack>
+      {/* What is Barcamp section */}
+      <Center py="20" bgImage={WhatIsBarcampBg} flexDir="column">
+        <Container maxW="container.xl">
+          <SectionTitle type={'center'} color="#ffffff" alignItems="flex-start">
+            What is Barcamp?
+          </SectionTitle>
+        </Container>
+        <Container
+          maxW="container.lg"
+          py="70px"
+          d="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Text color="#ffffff" textAlign="center" fontSize={['18px', '25px']}>
+            Barcamp Cyberjaya is an annual user-generated unconference with
+            topics surrounding technology and entrepreneurships.
+          </Text>
+        </Container>
+        <Container maxW="container.md" pt="25px">
+          <Flex
+            flexDir={['column', 'column', 'row']}
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <VStack mb="35px">
+              <Box p="35px" borderRadous="5px" bgImage={IconContainer}>
+                <Image src={ShareIcon} />
+              </Box>
+              <Text pt="12px" color="#ffffff">
+                Share
+              </Text>
+            </VStack>
+            <VStack mb="35px">
+              <Box p="35px" borderRadius="5px" bgImage={IconContainer}>
+                <Image src={TrainingIcon} />
+              </Box>
+              <Text pt="12px" color="#ffffff">
+                Learn
+              </Text>
+            </VStack>
+            <VStack mb="35px">
+              <Box p="35px" borderRadius="5px" bgImage={IconContainer}>
+                <Image src={LightIcon} />
+              </Box>
+              <Text pt="12px" color="#ffffff">
+                Inspire
+              </Text>
+            </VStack>
+          </Flex>
+        </Container>
       </Center>
     </>
   );
