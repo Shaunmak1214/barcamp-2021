@@ -13,6 +13,7 @@ import React from 'react';
 import { SecondaryButton } from '../components/Buttons';
 import BCSpacer from '../components/Spacer';
 import { SectionTitle } from '../components/SectionTitle';
+import Banner from '../components/Banner';
 
 import {
   BarcampLandingImg,
@@ -142,6 +143,9 @@ const Index = () => {
           </Flex>
         </Container>
       </Center>
+
+      {/* Footer */}
+      <Banner />
     </>
   );
 };
