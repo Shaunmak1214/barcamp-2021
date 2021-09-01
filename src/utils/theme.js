@@ -39,6 +39,15 @@ const theme = extendTheme({
             _active: { bg: `#FF7C83` },
           };
         },
+        outlined() {
+          return {
+            _hover: {
+              bg: `#001D41`,
+              color: '#fff',
+            },
+            _active: { bg: `#00234F` },
+          };
+        },
       },
     },
   },

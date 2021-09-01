@@ -11,6 +11,7 @@ import {
 import { Text } from '@chakra-ui/react';
 import React from 'react';
 
+import Faq from '../components/Faqs';
 import { SecondaryButton } from '../components/Buttons';
 import BCSpacer from '../components/Spacer';
 import { SectionTitle } from '../components/SectionTitle';
@@ -101,9 +102,8 @@ const Index = () => {
           </Flex>
         </Container>
       </Center>
-      <Center bgColor="white">
-        <Box>awsdfa</Box>
-      </Center>
+      {/* FAQs section */}
+      <Faq />
       {/* Gallery Section */}
       <Center pt="80px" bgImage={SectionBg} flexDir="column">
         <Container pb="50px" maxW="container.xl">
