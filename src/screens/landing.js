@@ -6,6 +6,7 @@ import {
   Center,
   Box,
   Flex,
+  SimpleGrid,
 } from '@chakra-ui/layout';
 import { Text } from '@chakra-ui/react';
 import React from 'react';
@@ -109,38 +110,27 @@ const Index = () => {
           <SectionTitle color="#ffffff">GALLERY</SectionTitle>
         </Container>
         <Container maxW="container.xl">
-          <Flex
-            flexDir={['column', 'column', 'row']}
-            alignItems="center"
-            justifyContent="space-between"
-            py="50px"
-          >
-            <Box w={['100%', '50%', '75%']} mb={['25px', '0']}>
+          <SimpleGrid columns={3} spacing={5}>
+            <Box>
               <Image src={SamplePic} />
             </Box>
-            <Box w={['100%', '50%', '75%']} mb={['25px', '0']}>
+            <Box>
               <Image src={SamplePic} />
             </Box>
-            <Box w={['100%', '50%', '75%']} mb={['25px', '0']}>
+            <Box>
               <Image src={SamplePic} />
             </Box>
-          </Flex>
-          <Flex
-            flexDir={['column', 'column', 'row']}
-            alignItems="center"
-            justifyContent="space-between"
-            pb="90px"
-          >
-            <Box w={['100%', '50%', '75%']} mb={['25px', '0']}>
+            <Box>
               <Image src={SamplePic} />
             </Box>
-            <Box w={['100%', '50%', '75%']} mb={['25px', '0']}>
+            <Box>
               <Image src={SamplePic} />
             </Box>
-            <Box w={['100%', '50%', '75%']} mb={['25px', '0']}>
+            <Box>
               <Image src={SamplePic} />
             </Box>
-          </Flex>
+          </SimpleGrid>
+          <BCSpacer size="md" />
         </Container>
       </Center>
 
