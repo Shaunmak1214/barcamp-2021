@@ -30,6 +30,25 @@ const SecondaryButton = ({ ...props }) => {
   );
 };
 
+const RegisterButton = ({ ...props }) => {
+  console.log('redner');
+  return (
+    <Button
+      variant="register"
+      boxShadow="0px 16px 40px rgba(80, 157, 253, 0.25);"
+      bg="linear-gradient(90deg, #A23052 0%, #EB202B 100%)"
+      borderRadius="8px"
+      py="25px"
+      px="10"
+      {...props}
+    >
+      <Text as="h2" fontSize="18px" color="white">
+        Register Now
+      </Text>
+    </Button>
+  );
+};
+
 PrimaryButton.propTypes = {
   children: PropTypes.node.isRequired,
 };
@@ -38,4 +57,8 @@ SecondaryButton.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export { PrimaryButton, SecondaryButton };
+RegisterButton.propTypes = {
+  children: PropTypes.node,
+};
+
+export { PrimaryButton, SecondaryButton, RegisterButton };

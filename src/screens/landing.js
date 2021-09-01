@@ -6,6 +6,7 @@ import {
   Center,
   Box,
   Flex,
+  SimpleGrid,
 } from '@chakra-ui/layout';
 import { Text } from '@chakra-ui/react';
 import React from 'react';
@@ -13,14 +14,16 @@ import React from 'react';
 import { SecondaryButton } from '../components/Buttons';
 import BCSpacer from '../components/Spacer';
 import { SectionTitle } from '../components/SectionTitle';
+import Banner from '../components/Banner';
 
 import {
   BarcampLandingImg,
-  WhatIsBarcampBg,
   ShareIcon,
   IconContainer,
   TrainingIcon,
   LightIcon,
+  SectionBg,
+  SamplePic,
 } from '../assets';
 
 const Index = () => {
@@ -47,7 +50,7 @@ const Index = () => {
         </Container>
       </HStack>
       {/* What is Barcamp section */}
-      <Center py="20" bgImage={WhatIsBarcampBg} flexDir="column">
+      <Center py="20" bgImage={SectionBg} flexDir="column">
         <Container maxW="container.xl">
           <SectionTitle type={'center'} color="#ffffff" alignItems="flex-start">
             What is Barcamp?
@@ -98,6 +101,41 @@ const Index = () => {
           </Flex>
         </Container>
       </Center>
+      <Center bgColor="white">
+        <Box>awsdfa</Box>
+      </Center>
+      {/* Gallery Section */}
+      <Center pt="80px" bgImage={SectionBg} flexDir="column">
+        <Container pb="50px" maxW="container.xl">
+          <SectionTitle color="#ffffff">GALLERY</SectionTitle>
+        </Container>
+        <Container maxW="container.xl">
+          <SimpleGrid columns={3} spacing={5}>
+            <Box>
+              <Image src={SamplePic} />
+            </Box>
+            <Box>
+              <Image src={SamplePic} />
+            </Box>
+            <Box>
+              <Image src={SamplePic} />
+            </Box>
+            <Box>
+              <Image src={SamplePic} />
+            </Box>
+            <Box>
+              <Image src={SamplePic} />
+            </Box>
+            <Box>
+              <Image src={SamplePic} />
+            </Box>
+          </SimpleGrid>
+          <BCSpacer size="md" />
+        </Container>
+      </Center>
+
+      {/* Footer */}
+      <Banner />
     </>
   );
 };
