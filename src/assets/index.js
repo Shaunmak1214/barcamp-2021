@@ -12,6 +12,7 @@ import SamplePic from './jpg-pngs/sample-pic.png';
 import PlatinumBadge from './svgs/platinum-badge.svg';
 import GoldBadge from './svgs/gold-badge.svg';
 import SilverBadge from './svgs/silver-badge.svg';
+import CountDownGif from './gif/countdown.gif';
 
 export {
   BarcampFullLogo,
@@ -28,4 +29,5 @@ export {
   PlatinumBadge,
   GoldBadge,
   SilverBadge,
+  CountDownGif,
 };
