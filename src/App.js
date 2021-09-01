@@ -9,6 +9,7 @@ function App() {
       <comp.Header />
       <Switch>
         <Route exact path="/" component={screens.Landing} />
+        <Route exact path="/login" component={screens.Login} />
       </Switch>
       <comp.Footer />
     </Router>
