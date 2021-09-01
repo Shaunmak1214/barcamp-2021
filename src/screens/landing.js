@@ -45,7 +45,7 @@ const Index = () => {
               We bring people together to share their passion around technology.
             </Text>
             <BCSpacer size="sm" />
-            <SecondaryButton py="7" px="10">
+            <SecondaryButton px="10" py="6">
               Join Us Now
             </SecondaryButton>
           </VStack>
