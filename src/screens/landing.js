@@ -15,6 +15,7 @@ import Faq from '../components/Faqs';
 import { SecondaryButton } from '../components/Buttons';
 import BCSpacer from '../components/Spacer';
 import { SectionTitle } from '../components/SectionTitle';
+import Sponsor from '../components/Sponsors';
 import Banner from '../components/Banner';
 
 import {
@@ -50,6 +51,7 @@ const Index = () => {
           </VStack>
         </Container>
       </HStack>
+
       {/* What is Barcamp section */}
       <Center py="20" bgImage={SectionBg} flexDir="column">
         <Container maxW="container.xl">
@@ -102,12 +104,16 @@ const Index = () => {
           </Flex>
         </Container>
       </Center>
+
       {/* FAQs section */}
       <Faq />
+
       {/* Gallery Section */}
       <Center pt="80px" bgImage={SectionBg} flexDir="column">
         <Container pb="50px" maxW="container.xl">
-          <SectionTitle color="#ffffff">GALLERY</SectionTitle>
+          <SectionTitle type="center" color="#ffffff">
+            GALLERY
+          </SectionTitle>
         </Container>
         <Container maxW="container.xl">
           <SimpleGrid columns={3} spacing={5}>
@@ -134,7 +140,10 @@ const Index = () => {
         </Container>
       </Center>
 
-      {/* Footer */}
+      {/* Sponsorship Section */}
+      <Sponsor />
+
+      {/* Banner */}
       <Banner />
     </>
   );
