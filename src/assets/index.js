@@ -9,6 +9,9 @@ import IconContainer from './jpg-pngs/icon-container.png';
 import LightIcon from './jpg-pngs/light-icon.png';
 import TrainingIcon from './jpg-pngs/training-icon.png';
 import SamplePic from './jpg-pngs/sample-pic.png';
+import PlatinumBadge from './svgs/platinum-badge.svg';
+import GoldBadge from './svgs/gold-badge.svg';
+import SilverBadge from './svgs/silver-badge.svg';
 
 export {
   BarcampFullLogo,
@@ -22,4 +25,7 @@ export {
   LightIcon,
   TrainingIcon,
   SamplePic,
+  PlatinumBadge,
+  GoldBadge,
+  SilverBadge,
 };
