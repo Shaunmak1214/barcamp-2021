@@ -18,7 +18,11 @@ const Index = () => {
           >
             GET YOUR SEATS NOW!
           </Text>
-          <RegisterButton />
+          <RegisterButton
+            onClick={() => {
+              window.location.href = '/login';
+            }}
+          />
         </HStack>
       </Container>
     </Center>
