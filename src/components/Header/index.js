@@ -105,6 +105,7 @@ const Index = () => {
       zIndex="50"
       w="100%"
       py="5px"
+      top="15px"
       transition="150ms cubic-bezier(0.215,0.61,0.355,1);"
       ref={headerSticky}
     >
