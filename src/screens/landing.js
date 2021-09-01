@@ -10,11 +10,12 @@ import {
 } from '@chakra-ui/layout';
 import { Text } from '@chakra-ui/react';
 import React from 'react';
-
+import { useState, useRef, useEffect } from 'react';
 import Faq from '../components/Faqs';
 import { SecondaryButton } from '../components/Buttons';
 import BCSpacer from '../components/Spacer';
 import { SectionTitle } from '../components/SectionTitle';
+import { CountDownBlock } from 'components/Countdown';
 import Sponsor from '../components/Sponsors';
 import Banner from '../components/Banner';
 
@@ -26,9 +27,52 @@ import {
   LightIcon,
   SectionBg,
   SamplePic,
+  CountDownGif,
 } from '../assets';
 
 const Index = () => {
+  const [days, setDays] = useState(0);
+  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+
+  let interval = useRef();
+  const countDownTimer = () => {
+    const countDownDate = new Date('September 25, 2021 00:00:00').getTime();
+    //@ts-ignore
+    interval = setInterval(() => {
+      const now = new Date().getTime();
+
+      const distance = countDownDate - now;
+
+      const calDays = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const calHours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+      );
+      const calMinutes = Math.floor(
+        (distance % (1000 * 60 * 60)) / (1000 * 60),
+      );
+      const calSeconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      if (distance < 0) {
+        clearInterval(interval.current);
+      } else {
+        setDays(calDays);
+        setHours(calHours);
+        setMinutes(calMinutes);
+        setSeconds(calSeconds);
+      }
+    }, 1000);
+  };
+
+  useEffect(() => {
+    countDownTimer();
+
+    return () => {
+      clearInterval(interval.current);
+    };
+  }, []);
+
   return (
     <>
       <HStack
@@ -51,7 +95,67 @@ const Index = () => {
           </VStack>
         </Container>
       </HStack>
+      <Center id="countdown-timer" alignItems="center" justifyContent="center">
+        <Container
+          maxW="container.xl"
+          py={['50px', '100px']}
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Text textAlign="center" fontSize="32px">
+            We can&apos;t wait to show you what we&apos;ve got prepared
+          </Text>
+          <Box
+            position="relative"
+            d="flex"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Image src={CountDownGif} />
+          </Box>
 
+          <SimpleGrid
+            columns={[1, 1, 4]}
+            spacing={2}
+            textAlign="center"
+            justifyItems="center"
+            alignItems="center"
+          >
+            <CountDownBlock>
+              <Text fontSize="25px" fontWeight="bold" color="#1050A0">
+                {days}
+              </Text>
+              <Text fontSize="15px" color="#EB202B">
+                Days
+              </Text>
+            </CountDownBlock>
+            <CountDownBlock>
+              <Text fontSize="25px" fontWeight="bold" color="#1050A0">
+                {hours}
+              </Text>
+              <Text fontSize="15px" color="#EB202B">
+                Hours
+              </Text>
+            </CountDownBlock>
+            <CountDownBlock>
+              <Text fontSize="25px" fontWeight="bold" color="#1050A0">
+                {minutes}
+              </Text>
+              <Text fontSize="15px" color="#EB202B">
+                Minutes
+              </Text>
+            </CountDownBlock>
+            <CountDownBlock>
+              <Text fontSize="25px" fontWeight="bold" color="#1050A0">
+                {seconds}
+              </Text>
+              <Text fontSize="15px" color="#EB202B">
+                Seconds
+              </Text>
+            </CountDownBlock>
+          </SimpleGrid>
+        </Container>
+      </Center>
       {/* What is Barcamp section */}
       <Center py="20" bgImage={SectionBg} flexDir="column">
         <Container maxW="container.xl">
@@ -71,6 +175,7 @@ const Index = () => {
             topics surrounding technology and entrepreneurships.
           </Text>
         </Container>
+
         <Container maxW="container.md" pt="25px">
           <Flex
             flexDir={['column', 'column', 'row']}
