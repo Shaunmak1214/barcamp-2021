@@ -139,9 +139,7 @@ const Index = () => {
             >
               <Text fontSize="14px">SPONSORS</Text>
             </Link>
-            <PrimaryButton px="10" borderRadius="8px">
-              Join us now
-            </PrimaryButton>
+            <PrimaryButton px="10">Join us now</PrimaryButton>
 
             <HStack
               ref={sponsorHover}
