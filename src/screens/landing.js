@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/layout';
 import { Text } from '@chakra-ui/react';
 import React from 'react';
-import { useState, useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import Faq from '../components/Faqs';
 import { SecondaryButton } from '../components/Buttons';
 import BCSpacer from '../components/Spacer';
@@ -31,10 +31,10 @@ import {
 } from '../assets';
 
 const Index = () => {
-  const [days, setDays] = useState(0);
-  const [hours, setHours] = useState(0);
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(0);
+  const daysRef = useRef(null);
+  const hoursRef = useRef(null);
+  const minutesRef = useRef(null);
+  const secondsRef = useRef(null);
 
   let interval = useRef();
   const countDownTimer = () => {
@@ -57,10 +57,10 @@ const Index = () => {
       if (distance < 0) {
         clearInterval(interval.current);
       } else {
-        setDays(calDays);
-        setHours(calHours);
-        setMinutes(calMinutes);
-        setSeconds(calSeconds);
+        daysRef.current.innerText = calDays;
+        hoursRef.current.innerText = calHours;
+        minutesRef.current.innerText = calMinutes;
+        secondsRef.current.innerText = calSeconds;
       }
     }, 1000);
   };
@@ -89,7 +89,7 @@ const Index = () => {
               We bring people together to share their passion around technology.
             </Text>
             <BCSpacer size="sm" />
-            <SecondaryButton py="7" px="10">
+            <SecondaryButton px="10" py="6">
               Join Us Now
             </SecondaryButton>
           </VStack>
@@ -122,32 +122,52 @@ const Index = () => {
             alignItems="center"
           >
             <CountDownBlock>
-              <Text fontSize="25px" fontWeight="bold" color="#1050A0">
-                {days}
+              <Text
+                ref={daysRef}
+                fontSize="25px"
+                fontWeight="bold"
+                color="#1050A0"
+              >
+                0
               </Text>
               <Text fontSize="15px" color="#EB202B">
                 Days
               </Text>
             </CountDownBlock>
             <CountDownBlock>
-              <Text fontSize="25px" fontWeight="bold" color="#1050A0">
-                {hours}
+              <Text
+                ref={hoursRef}
+                fontSize="25px"
+                fontWeight="bold"
+                color="#1050A0"
+              >
+                0
               </Text>
               <Text fontSize="15px" color="#EB202B">
                 Hours
               </Text>
             </CountDownBlock>
             <CountDownBlock>
-              <Text fontSize="25px" fontWeight="bold" color="#1050A0">
-                {minutes}
+              <Text
+                ref={minutesRef}
+                fontSize="25px"
+                fontWeight="bold"
+                color="#1050A0"
+              >
+                0
               </Text>
               <Text fontSize="15px" color="#EB202B">
                 Minutes
               </Text>
             </CountDownBlock>
             <CountDownBlock>
-              <Text fontSize="25px" fontWeight="bold" color="#1050A0">
-                {seconds}
+              <Text
+                ref={secondsRef}
+                fontSize="25px"
+                fontWeight="bold"
+                color="#1050A0"
+              >
+                0
               </Text>
               <Text fontSize="15px" color="#EB202B">
                 Seconds

@@ -6,7 +6,7 @@ import React, { useRef } from 'react';
 const PrimaryButton = ({ ...props }) => {
   let children = props.children;
   return (
-    <Button bg="#EB202B" {...props}>
+    <Button bg="#EB202B" borderRadius="4px" {...props}>
       <Text as="h2" fontSize="16px" color="white">
         {children}
       </Text>
@@ -20,6 +20,7 @@ const SecondaryButton = ({ ...props }) => {
     <Button
       variant="secondary"
       bg="#1050A0"
+      borderRadius="4px"
       boxShadow="0px 16px 40px rgba(80, 157, 253, 0.25);"
       {...props}
     >
@@ -36,8 +37,9 @@ const RegisterButton = ({ ...props }) => {
     <Button
       variant="register"
       boxShadow="0px 16px 40px rgba(80, 157, 253, 0.25);"
+      backgroundColor="red"
       bg="linear-gradient(90deg, #A23052 0%, #EB202B 100%)"
-      borderRadius="8px"
+      borderRadius="4px"
       py="25px"
       px="10"
       {...props}
