@@ -7,7 +7,7 @@ import { SecondaryButton } from '../components/Buttons';
 
 import * as yup from 'yup';
 import { Formik, Form, Field } from 'formik';
-import { TextFormField } from '../components/Forms';
+import { TextFormField, SelectFormField } from '../components/Forms';
 
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -20,6 +20,16 @@ const schema = yup.object({
 });
 
 const updateProfile = () => {
+  const [select, setSelect] = React.useState(true);
+
+  const onSelect = React.useCallback(
+    (value) => {
+      // console.log(select);
+      setSelect(value);
+    },
+    [setSelect],
+  );
+
   return (
     <VStack
       w="100%"
@@ -83,9 +93,21 @@ const updateProfile = () => {
                   <Box
                     w="100%"
                     h="250px"
-                    border="2px solid #C2C2C2;"
+                    py="5"
+                    // p="5"
+                    // border="2px solid #C2C2C2;"
                     borderRadius="8px"
-                  ></Box>
+                  >
+                    <SelectFormField selected={select} onSelect={onSelect}>
+                      <Text>Facebook</Text>
+                    </SelectFormField>
+                    <SelectFormField selected={select} onSelect={onSelect}>
+                      <Text>Facebook</Text>
+                    </SelectFormField>
+                    <SelectFormField selected={select} onSelect={onSelect}>
+                      <Text>Facebook</Text>
+                    </SelectFormField>
+                  </Box>
                 </VStack>
 
                 <SecondaryButton

@@ -1,3 +1,4 @@
 import TextFormField from './TextFormField';
+import SelectFormField from './SelectFormField';
 
-export { TextFormField };
+export { TextFormField, SelectFormField };
