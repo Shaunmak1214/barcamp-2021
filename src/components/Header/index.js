@@ -74,7 +74,7 @@ const Index = () => {
             {sponsorData.sponsors.map((sponsor, idx) => {
               return (
                 <Center key={idx} p={3} borderRadius="4px" bg="#F5F5F5">
-                  <Image src={sponsor.imageSrc} />
+                  <Image src={sponsor.imageSrc} w="100%" h="100%" />
                 </Center>
               );
             })}
