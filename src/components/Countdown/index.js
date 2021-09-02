@@ -16,10 +16,8 @@ const CountDownBlock = ({ ...props }) => {
       justifyContent="center"
       alignItems="center"
       flexDir="column"
-      marginTop="-150px"
-      marginBottom={['180px', '0']}
       zIndex="3"
-      background="rgba(255, 255, 255, 0.8)"
+      {...props}
     >
       <Text>{children}</Text>
     </Box>
