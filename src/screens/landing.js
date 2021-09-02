@@ -214,7 +214,7 @@ const Index = () => {
             alignItems="center"
           >
             <VStack mb="35px">
-              <Box p="35px" borderRadous="5px" bgImage={IconContainer}>
+              <Box p="35px" borderRadius="5px" bgImage={IconContainer}>
                 <Image src={ShareIcon} />
               </Box>
               <Text pt="12px" color="#ffffff">
