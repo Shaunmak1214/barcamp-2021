@@ -7,25 +7,24 @@ const SectionTitle = ({ type, ...props }) => {
   let children = props.children;
   if (type === 'left') {
     return (
-      <VStack>
-        <Heading
-          d="flex"
-          justifyContent="flex-start"
-          position="relative"
-          {...props}
-        >
-          {children}
-          <Box
-            position="absolute"
-            bottom="-15px"
-            left="0px"
-            h="3px"
-            w="90px"
-            bg="linear-gradient(90deg, #5BA4FF 0%, #FF5E66 100%)"
-            style={{ content: ' ' }}
-          ></Box>
-        </Heading>
-      </VStack>
+      <Heading
+        d="flex"
+        justifyContent="flex-start"
+        position="relative"
+        {...props}
+      >
+        {children}
+        <Box
+          position="absolute"
+          bottom="-15px"
+          left="0px"
+          h="3px"
+          w="90px"
+          bg="linear-gradient(90deg, #5BA4FF 0%, #FF5E66 100%)"
+          style={{ content: ' ' }}
+        ></Box>
+      </Heading>
+
     );
   } else if (type === 'center') {
     return (

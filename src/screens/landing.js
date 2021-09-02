@@ -98,8 +98,6 @@ const Index = () => {
               onClick={() => {
                 window.location.href = '/login';
               }}
-              px="10"
-              py="6"
             >
               Join Us Now
             </SecondaryButton>

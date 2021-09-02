@@ -16,6 +16,8 @@ import BCSpacer from '../components/Spacer';
 // import Loader from '../components/Loader';
 import { useRef, useEffect } from 'react';
 
+import { Splash1 } from '../assets';
+
 import { ResultIcon, Splash1, VotingIcon } from '../assets';
 import { CountDownBlock } from 'components/Countdown';
 import { SectionBg, NoMessageIcon } from '../assets';
@@ -238,6 +240,45 @@ const Login = () => {
             border="3px solid #EB202B"
             borderRadius="10px"
           >
+            <Text as="h1" fontSize="35px" fontWeight="600">
+              WELCOME TO BARCAMP
+            </Text>
+            <Text as="h2" fontSize="15px" fontWeight="500">
+              Please login to continue. By logging in, you agree to our{' '}
+              <Link color="blue">privacy policy</Link> . We only use this
+              authentication to get your email and protect the app from
+              unauthorised input.
+            </Text>
+            <BCSpacer size="sm" />
+            <GoogleLogin
+              clientId="202957668239-rkdg4atg2h8n5br8akn5c1k0s4uno6cm.apps.googleusercontent.com"
+              render={(renderProps) => (
+                <PrimaryButton
+                  onClick={() => {
+                    renderProps.onClick();
+                  }}
+                  disabled={renderProps.disabled}
+                  px="50"
+                  py="6"
+                >
+                  Join us now
+                </PrimaryButton>
+              )}
+              autoLoad={false}
+              onAutoLoadFinished={() => {
+                console.log('Google Login Loaded');
+              }}
+              buttonText="Log in with Google"
+              // onSuccess={handleGoogleLogin}
+              // onFailure={handleGoogleLogin}
+              cookiePolicy={'single_host_origin'}
+            />
+          </VStack>
+          <Image d={['none', 'none', 'flex']} src={Splash1} alt="Login" />
+        </SimpleGrid>
+      </Container>
+    </VStack>
+
             <HStack justifyContent="center" alignItems="center" mb="10px">
               <Image src={NoMessageIcon} />
               <Box p="0 50px">
