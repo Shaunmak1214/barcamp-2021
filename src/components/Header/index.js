@@ -111,7 +111,16 @@ const Index = () => {
     >
       <Container maxW="container.xl">
         <HStack w="100%" justifyContent="space-between">
-          <Image width="250px" height="auto" src={BarcampFullLogo} alt="Logo" />
+          <Image
+            onClick={() => {
+              window.location.href = '/';
+            }}
+            cursor="pointer"
+            width="250px"
+            height="auto"
+            src={BarcampFullLogo}
+            alt="Logo"
+          />
           <HStack
             d={['none', 'none', 'flex']}
             className="navbar"
@@ -139,7 +148,14 @@ const Index = () => {
             >
               <Text fontSize="14px">SPONSORS</Text>
             </Link>
-            <PrimaryButton px="10">Join us now</PrimaryButton>
+            <PrimaryButton
+              onClick={() => {
+                window.location.href = '/login';
+              }}
+              px="10"
+            >
+              Join us now
+            </PrimaryButton>
 
             <HStack
               ref={sponsorHover}
