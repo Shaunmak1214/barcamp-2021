@@ -101,7 +101,7 @@ const Index = () => {
 
   return (
     <Center
-      position="fixed"
+      position={['sticky', 'sticky', 'fixed']}
       zIndex="50"
       w="100%"
       py="5px"

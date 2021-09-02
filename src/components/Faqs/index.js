@@ -6,7 +6,7 @@ import {
   AccordionPanel,
   AccordionIcon,
 } from '@chakra-ui/react';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -17,6 +17,13 @@ import BCSpacer from '../Spacer';
 
 const Index = () => {
   const [selectedCat, setSelectedCat] = useState('general');
+
+  const handleFaqSelect = useCallback(
+    (selectedCat) => {
+      setSelectedCat(selectedCat);
+    },
+    [setSelectedCat],
+  );
 
   const FaqCategories = [
     {
@@ -58,7 +65,7 @@ const Index = () => {
           return (
             <FaqButton
               key={idx}
-              onClick={() => setSelectedCat(cat.identifier)}
+              onClick={() => handleFaqSelect(cat.identifier)}
               selected={selectedCat === cat.identifier ? true : false}
             >
               {cat.title}
