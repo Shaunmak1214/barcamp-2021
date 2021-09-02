@@ -8,6 +8,14 @@ import BCSpacer from '../components/Spacer';
 
 import { Splash1 } from '../assets';
 
+import * as yup from 'yup';
+import { Formik, Form, Field } from 'formik';
+import { TextFormField } from '../components/Forms';
+
+const schema = yup.object({
+  email: yup.string().email(),
+});
+
 const Login = () => {
   // const handleGoogleLogin = async (googleData) => {
   //   if (googleData) {
@@ -40,10 +48,10 @@ const Login = () => {
   // };
 
   return (
-    <VStack w="100%" h="100vh" justifyContent="center" alignItems="center">
+    <VStack w="100%" minH="100vh" justifyContent="center" alignItems="center">
       <Container maxW="container.xl">
         <SimpleGrid
-          columns={2}
+          columns={[1, 1, 2]}
           w="100%"
           h="100%"
           justifyContent="center"
@@ -53,7 +61,7 @@ const Login = () => {
             alignItems="flex-start"
             justifyContent="center"
             h="100%"
-            pr={20}
+            pr={[0, 0, 20]}
           >
             <Text as="h1" fontSize="35px" fontWeight="600">
               WELCOME TO BARCAMP
@@ -88,6 +96,25 @@ const Login = () => {
               // onFailure={handleGoogleLogin}
               cookiePolicy={'single_host_origin'}
             />
+
+            <Formik
+              validationSchema={schema}
+              initialValues={{ email: '' }}
+              onSubmit={() => {}}
+            >
+              {() => (
+                <Form>
+                  <div>
+                    <Field
+                      label="Email"
+                      name="email"
+                      placeholder="Enter your email"
+                      component={TextFormField}
+                    />
+                  </div>
+                </Form>
+              )}
+            </Formik>
           </VStack>
           <Image src={Splash1} alt="Login" />
         </SimpleGrid>

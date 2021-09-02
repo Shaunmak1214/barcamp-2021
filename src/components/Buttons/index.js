@@ -32,7 +32,6 @@ const SecondaryButton = ({ ...props }) => {
 };
 
 const RegisterButton = ({ ...props }) => {
-  console.log('redner');
   return (
     <Button
       variant="register"

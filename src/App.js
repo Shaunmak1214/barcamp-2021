@@ -10,6 +10,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={screens.Landing} />
         <Route exact path="/login" component={screens.Login} />
+        <Route exact path="/update-profile" component={screens.UpdateProfile} />
       </Switch>
       <comp.Footer />
     </Router>
