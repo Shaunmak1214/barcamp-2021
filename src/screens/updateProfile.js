@@ -22,13 +22,13 @@ const schema = yup.object({
 const updateProfile = () => {
   return (
     <VStack
-      mt="35px"
       w="100%"
       minh="100vh"
       justifyContent="flex-start"
       alignItems="center"
     >
-      <BCSpacer />
+      <BCSpacer size="xs" />
+      <BCSpacer size="xs" />
       <Container maxW="container.lg" alignItems="flex-start">
         <SectionTitle alignItems="flex-start" fontSize="30px" type="left">
           Register as a

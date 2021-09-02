@@ -8,14 +8,6 @@ import BCSpacer from '../components/Spacer';
 
 import { Splash1 } from '../assets';
 
-import * as yup from 'yup';
-import { Formik, Form, Field } from 'formik';
-import { TextFormField } from '../components/Forms';
-
-const schema = yup.object({
-  email: yup.string().email(),
-});
-
 const Login = () => {
   // const handleGoogleLogin = async (googleData) => {
   //   if (googleData) {
@@ -96,27 +88,8 @@ const Login = () => {
               // onFailure={handleGoogleLogin}
               cookiePolicy={'single_host_origin'}
             />
-
-            <Formik
-              validationSchema={schema}
-              initialValues={{ email: '' }}
-              onSubmit={() => {}}
-            >
-              {() => (
-                <Form>
-                  <div>
-                    <Field
-                      label="Email"
-                      name="email"
-                      placeholder="Enter your email"
-                      component={TextFormField}
-                    />
-                  </div>
-                </Form>
-              )}
-            </Formik>
           </VStack>
-          <Image src={Splash1} alt="Login" />
+          <Image d={['none', 'none', 'flex']} src={Splash1} alt="Login" />
         </SimpleGrid>
       </Container>
     </VStack>

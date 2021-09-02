@@ -34,7 +34,7 @@ const theme = extendTheme({
         register() {
           return {
             _hover: {
-              bg: `#A50009`,
+              bg: `linear-gradient(90deg, #4F0004 0%, #630000 100%)`,
             },
             _active: { bg: `#FF7C83` },
           };
