@@ -10,7 +10,7 @@ const SectionTitle = ({ type, ...props }) => {
       <VStack>
         <Heading
           d="flex"
-          justifyContent="center"
+          justifyContent="flex-start"
           position="relative"
           {...props}
         >

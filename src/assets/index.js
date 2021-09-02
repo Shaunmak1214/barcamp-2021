@@ -19,6 +19,9 @@ import GoldBadge from './svgs/gold-badge.svg';
 import SilverBadge from './svgs/silver-badge.svg';
 import CountDownGif from './gif/countdown.gif';
 import Splash1 from './jpg-pngs/splash-1.png';
+import NoMessageIcon from './jpg-pngs/no-message-icon.png';
+import VotingIcon from './jpg-pngs/voting-icon.png';
+import ResultIcon from './jpg-pngs/result-icon.png';
 
 export {
   BarcampFullLogo,
@@ -42,4 +45,7 @@ export {
   SilverBadge,
   CountDownGif,
   Splash1,
+  NoMessageIcon,
+  VotingIcon,
+  ResultIcon,
 };
