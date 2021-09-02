@@ -1,18 +1,18 @@
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import * as screens from './screens';
-import * as comp from './components';
+import * as Screens from './screens';
+import * as Comp from './components';
 
 function App() {
   return (
     <Router forceRefresh={true}>
-      <comp.Header />
+      <Comp.Header />
       <Switch>
-        <Route exact path="/" component={screens.Landing} />
-        <Route exact path="/login" component={screens.Login} />
-        <Route exact path="/update-profile" component={screens.UpdateProfile} />
+        <Route exact path="/" component={Screens.Landing} />
+        <Route exact path="/login" component={Screens.Login} />
+        <Route exact path="/update-profile" component={Screens.UpdateProfile} />
       </Switch>
-      <comp.Footer />
+      <Comp.Footer />
     </Router>
   );
 }

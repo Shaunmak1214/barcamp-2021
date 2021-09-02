@@ -22,6 +22,8 @@ const SecondaryButton = ({ ...props }) => {
       bg="#1050A0"
       borderRadius="4px"
       boxShadow="0px 16px 40px rgba(80, 157, 253, 0.25);"
+      px="10"
+      py="6"
       {...props}
     >
       <Text as="h2" fontSize="16px" color="white">
