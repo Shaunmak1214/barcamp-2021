@@ -26,7 +26,12 @@ import {
   TrainingIcon,
   LightIcon,
   SectionBg,
-  SamplePic,
+  SamplePicOne,
+  SamplePicTwo,
+  SamplePicThree,
+  SamplePicFour,
+  SamplePicFive,
+  SamplePicSix,
   CountDownGif,
 } from '../assets';
 
@@ -249,22 +254,22 @@ const Index = () => {
         <Container maxW="container.xl">
           <SimpleGrid columns={3} spacing={5}>
             <Box>
-              <Image src={SamplePic} />
+              <Image src={SamplePicOne} />
             </Box>
             <Box>
-              <Image src={SamplePic} />
+              <Image src={SamplePicTwo} />
             </Box>
             <Box>
-              <Image src={SamplePic} />
+              <Image src={SamplePicThree} />
             </Box>
             <Box>
-              <Image src={SamplePic} />
+              <Image src={SamplePicFour} />
             </Box>
             <Box>
-              <Image src={SamplePic} />
+              <Image src={SamplePicFive} />
             </Box>
             <Box>
-              <Image src={SamplePic} />
+              <Image src={SamplePicSix} />
             </Box>
           </SimpleGrid>
           <BCSpacer size="md" />
