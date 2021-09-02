@@ -3,7 +3,7 @@ import { extendTheme } from '@chakra-ui/react';
 const theme = extendTheme({
   fonts: {
     heading: '"Poppins", sans-serif',
-    body: '"Source sans pro", sans-serif',
+    body: '"Source Sans Pro", sans-serif',
   },
   colors: {
     primary: '#EB202B',
