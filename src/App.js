@@ -11,6 +11,7 @@ function App() {
         <BCRoutes
           exact
           header
+          cta
           transparency="sticky"
           path="/"
           component={Screens.Landing}

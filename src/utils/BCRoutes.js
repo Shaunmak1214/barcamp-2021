@@ -7,6 +7,7 @@ class BCRoutes extends React.Component {
     return {
       children: PropTypes.any,
       component: PropTypes.any,
+      cta: PropTypes.bool,
       header: PropTypes.bool,
       transparency: PropTypes.string,
     };
@@ -19,9 +20,10 @@ class BCRoutes extends React.Component {
     const Component = this.props.component;
     const Header = this.props.header;
     const Transparency = this.props.transparency;
+    const Cta = this.props.cta;
     return (
       <>
-        {Header && <Comp.Header type={Transparency} />}
+        {Header && <Comp.Header cta={Cta} type={Transparency} />}
         <Component />
       </>
     );
