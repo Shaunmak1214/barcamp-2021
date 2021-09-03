@@ -26,7 +26,7 @@ function App() {
           exact
           header
           transparency="sticky"
-          path="/login"
+          path="/dashboard"
           component={Screens.Dashboard}
         />
         <BCRoutes

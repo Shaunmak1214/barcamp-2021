@@ -9,7 +9,7 @@ import {
   Box,
 } from '@chakra-ui/layout';
 import React from 'react';
-import { PrimaryButton, SecondaryButton } from '../components/Buttons';
+import { PrimaryButton } from '../components/Buttons';
 import BCSpacer from '../components/Spacer';
 // import Loader from '../components/Loader';
 import { useRef, useEffect } from 'react';
@@ -94,9 +94,9 @@ const Dashboard = () => {
               <BCSpacer size="sm" />
               <HStack>
                 <PrimaryButton width="200px">Propose Topic</PrimaryButton>
-                <SecondaryButton width="250px" backgroundColor="#B1B1B1">
+                <PrimaryButton width="250px" backgroundColor="#B1B1B1">
                   Vote Topic (Comming Soon)
-                </SecondaryButton>
+                </PrimaryButton>
               </HStack>
             </VStack>
             <Image src={Splash1} alt="Login" />
