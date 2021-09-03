@@ -98,8 +98,6 @@ const Index = () => {
               onClick={() => {
                 window.location.href = '/login';
               }}
-              px="10"
-              py="6"
             >
               Join Us Now
             </SecondaryButton>
@@ -132,7 +130,11 @@ const Index = () => {
             justifyItems="center"
             alignItems="center"
           >
-            <CountDownBlock>
+            <CountDownBlock
+              marginTop="-150px"
+              background="rgba(255, 255, 255, 0.8)"
+              marginBottom={['180px', '0']}
+            >
               <Text
                 ref={daysRef}
                 fontSize="25px"
@@ -145,7 +147,11 @@ const Index = () => {
                 Days
               </Text>
             </CountDownBlock>
-            <CountDownBlock>
+            <CountDownBlock
+              marginTop="-150px"
+              background="rgba(255, 255, 255, 0.8)"
+              marginBottom={['180px', '0']}
+            >
               <Text
                 ref={hoursRef}
                 fontSize="25px"
@@ -158,7 +164,11 @@ const Index = () => {
                 Hours
               </Text>
             </CountDownBlock>
-            <CountDownBlock>
+            <CountDownBlock
+              marginTop="-150px"
+              background="rgba(255, 255, 255, 0.8)"
+              marginBottom={['180px', '0']}
+            >
               <Text
                 ref={minutesRef}
                 fontSize="25px"
@@ -171,7 +181,11 @@ const Index = () => {
                 Minutes
               </Text>
             </CountDownBlock>
-            <CountDownBlock>
+            <CountDownBlock
+              marginTop="-150px"
+              background="rgba(255, 255, 255, 0.8)"
+              marginBottom={['180px', '0']}
+            >
               <Text
                 ref={secondsRef}
                 fontSize="25px"
@@ -214,7 +228,7 @@ const Index = () => {
             alignItems="center"
           >
             <VStack mb="35px">
-              <Box p="35px" borderRadous="5px" bgImage={IconContainer}>
+              <Box p="35px" borderRadius="5px" bgImage={IconContainer}>
                 <Image src={ShareIcon} />
               </Box>
               <Text pt="12px" color="#ffffff">

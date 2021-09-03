@@ -1,17 +1,43 @@
 import './App.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import * as screens from './screens';
-import * as comp from './components';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import * as Screens from './screens';
+import * as Comp from './components';
+import BCRoutes from './utils/BCRoutes';
 
 function App() {
   return (
     <Router forceRefresh={true}>
-      <comp.Header />
       <Switch>
-        <Route exact path="/" component={screens.Landing} />
-        <Route exact path="/login" component={screens.Login} />
+        <BCRoutes
+          exact
+          header
+          transparency="sticky"
+          path="/"
+          component={Screens.Landing}
+        />
+        <BCRoutes
+          exact
+          header
+          transparency="sticky"
+          path="/login"
+          component={Screens.Login}
+        />
+        <BCRoutes
+          exact
+          header
+          transparency="sticky"
+          path="/dashboard"
+          component={Screens.Dashboard}
+        />
+        <BCRoutes
+          exact
+          header
+          transparency="fixed"
+          path="/update-profile"
+          component={Screens.UpdateProfile}
+        />
       </Switch>
-      <comp.Footer />
+      <Comp.Footer />
     </Router>
   );
 }

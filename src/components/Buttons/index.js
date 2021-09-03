@@ -22,6 +22,8 @@ const SecondaryButton = ({ ...props }) => {
       bg="#1050A0"
       borderRadius="4px"
       boxShadow="0px 16px 40px rgba(80, 157, 253, 0.25);"
+      px="10"
+      py="6"
       {...props}
     >
       <Text as="h2" fontSize="16px" color="white">
@@ -32,12 +34,10 @@ const SecondaryButton = ({ ...props }) => {
 };
 
 const RegisterButton = ({ ...props }) => {
-  console.log('redner');
   return (
     <Button
       variant="register"
       boxShadow="0px 16px 40px rgba(80, 157, 253, 0.25);"
-      backgroundColor="red"
       bg="linear-gradient(90deg, #A23052 0%, #EB202B 100%)"
       borderRadius="4px"
       py="25px"
