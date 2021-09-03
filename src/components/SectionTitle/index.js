@@ -24,7 +24,6 @@ const SectionTitle = ({ type, ...props }) => {
           style={{ content: ' ' }}
         ></Box>
       </Heading>
-
     );
   } else if (type === 'center') {
     return (

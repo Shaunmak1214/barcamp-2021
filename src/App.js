@@ -25,6 +25,13 @@ function App() {
         <BCRoutes
           exact
           header
+          transparency="sticky"
+          path="/dashboard"
+          component={Screens.Dashboard}
+        />
+        <BCRoutes
+          exact
+          header
           transparency="fixed"
           path="/update-profile"
           component={Screens.UpdateProfile}
