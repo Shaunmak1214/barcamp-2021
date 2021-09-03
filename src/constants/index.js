@@ -1,4 +1,3 @@
-// @ts-ignore
 import BlackLoaderData from '../assets/lottie/black-loader.json';
 
 export const BlackLoader = {

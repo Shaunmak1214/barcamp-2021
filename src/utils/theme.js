@@ -5,6 +5,21 @@ const theme = extendTheme({
     heading: '"Poppins", sans-serif',
     body: '"Source Sans Pro", sans-serif',
   },
+  fontSizes: {
+    xs: '0.75rem',
+    sm: '0.875rem',
+    md: '1rem',
+    lg: '1.125rem',
+    xl: '1.25rem',
+    '2xl': '1.5rem',
+    '3xl': '1.875rem',
+    '4xl': '2.25rem',
+    '5xl': '3rem',
+    '6xl': '3.75rem',
+    '7xl': '4.5rem',
+    '8xl': '6rem',
+    '9xl': '8rem',
+  },
   colors: {
     primary: '#EB202B',
     secondary: '#1050A0',
@@ -18,7 +33,7 @@ const theme = extendTheme({
         solid() {
           return {
             _hover: {
-              bg: `#A50009`,
+              bg: `linear-gradient(90deg, #4F0004 0%, #630000 100%)`,
             },
             _active: { bg: `#A50009` },
           };
