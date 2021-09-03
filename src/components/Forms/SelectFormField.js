@@ -2,6 +2,8 @@ import React, { useRef } from 'react';
 import { HStack } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 
+import './selectformfield.css';
+
 const SelectFormField = ({ onSelect, children, ...props }) => {
   const [selected, setSelected] = React.useState(false);
   const selectableRef = useRef(null);
@@ -9,50 +11,24 @@ const SelectFormField = ({ onSelect, children, ...props }) => {
   const handleSelect = () => {
     setSelected(!selected);
     onSelect(!selected);
-    selectableRef.current.style.backgroundColor = '#1050A0';
-    selectableRef.current.style.color = 'white';
-  };
-
-  const selectableHover = (status) => {
-    if (status) {
-      if (selected) {
-        selectableRef.current.style.backgroundColor = '#002857';
-        selectableRef.current.style.color = 'white';
-      } else {
-        selectableRef.current.style.backgroundColor = '#f5f5f5';
-        selectableRef.current.style.color = 'black';
-      }
-    } else {
-      if (selected) {
-        selectableRef.current.style.backgroundColor = '#1050A0';
-        selectableRef.current.style.color = 'white';
-      } else {
-        selectableRef.current.style.backgroundColor = 'transparent';
-        selectableRef.current.style.color = 'black';
-      }
-    }
   };
 
   return (
     <>
       {selected}
       <HStack
+        className="selectable"
         ref={selectableRef}
         w="100%"
         p={4}
         justifyContent="space-between"
         bg={selected ? '#1050A0' : 'transparent'}
+        color={selected ? 'white' : 'black'}
         border="1px solid #E9E9E9;"
         borderRadius="8px"
         mb="5"
         cursor="pointer"
         transition="all 0.1s ease-in-out"
-        onMouseOver={() => {
-          selectableHover(true);
-        }}
-        onMouseLeave={() => {
-          selectableHover(false);
-        }}
         onClick={() => {
           handleSelect();
         }}
