@@ -24,6 +24,7 @@ import { BarcampFullLogo, PlatinumIcon } from '../../assets/';
 const Index = ({ type }) => {
   const sponsorHover = useRef(null);
   const headerSticky = useRef(null);
+  const joinButton = useRef(null);
 
   const handleScroll = (e) => {
     const window = e.currentTarget;
@@ -46,9 +47,15 @@ const Index = ({ type }) => {
 
   const stickyToggle = (status) => {
     if (status) {
+      joinButton.current.style.display = 'flex';
+      joinButton.current.style.transform = 'scaleX(1)';
+
       headerSticky.current.style.top = '0px';
       headerSticky.current.style.background = 'white';
     } else {
+      joinButton.current.style.display = 'none';
+      joinButton.current.style.transform = 'scaleX(0)';
+
       headerSticky.current.style.top = '15px';
       headerSticky.current.style.background = 'none';
     }
@@ -130,15 +137,18 @@ const Index = ({ type }) => {
             spacing="45"
             position="relative"
           >
-            <Link href="/" py="6">
+            <Link href="/" py="5">
+              <Text fontSize="14px">ABOUT</Text>
+            </Link>
+            <Link href="/" py="5">
               <Text fontSize="14px">AGENDA</Text>
             </Link>
-            <Link href="/" py="6">
+            <Link href="/" py="5">
               <Text fontSize="14px">FAQ</Text>
             </Link>
             <Link
               href="/"
-              py="6"
+              py="5"
               onMouseOver={() => {
                 sponsorToggle('in');
               }}
@@ -149,10 +159,12 @@ const Index = ({ type }) => {
               <Text fontSize="14px">SPONSORS</Text>
             </Link>
             <PrimaryButton
+              ref={joinButton}
+              d="none"
+              transform="scaleX(0)"
               onClick={() => {
                 window.location.href = '/login';
               }}
-              px="10"
             >
               Join us now
             </PrimaryButton>
