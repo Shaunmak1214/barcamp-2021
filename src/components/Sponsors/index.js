@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Center } from '@chakra-ui/layout';
 
 import { SectionTitle } from '../SectionTitle';
-import { PrimaryButton } from '../Buttons';
+import { SecondaryButton } from '../Buttons';
 import { SponsorBlockRenderer } from '../Sponsors/utils';
 import BCSpacer from '../Spacer';
 import {
@@ -23,9 +23,9 @@ const Index = () => {
         <SponsorBlockRenderer sponsorData={silverSponsor} />
         <BCSpacer size="sm" />
         <Center w="100%">
-          <PrimaryButton px="70px" py="25px">
+          <SecondaryButton px="70px" py="25px">
             Become a sponsor
-          </PrimaryButton>
+          </SecondaryButton>
         </Center>
         <BCSpacer />
       </Container>

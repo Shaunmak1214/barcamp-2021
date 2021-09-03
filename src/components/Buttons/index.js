@@ -3,16 +3,20 @@ import { Text } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
 
-const PrimaryButton = ({ ...props }) => {
-  let children = props.children;
-  return (
-    <Button bg="#EB202B" borderRadius="4px" {...props}>
-      <Text as="h2" fontSize="16px" color="white">
-        {children}
-      </Text>
-    </Button>
-  );
-};
+const PrimaryButton = React.forwardRef((props, ref) => (
+  <Button
+    bg="linear-gradient(90deg, #A23052 0%, #EB202B 100%)"
+    borderRadius="4px"
+    px="10"
+    py="6"
+    {...props}
+    ref={ref}
+  >
+    <Text as="h2" fontSize="md" color="white">
+      {props.children}
+    </Text>
+  </Button>
+));
 
 const SecondaryButton = ({ ...props }) => {
   let children = props.children;
@@ -21,12 +25,12 @@ const SecondaryButton = ({ ...props }) => {
       variant="secondary"
       bg="#1050A0"
       borderRadius="4px"
-      boxShadow="0px 16px 40px rgba(80, 157, 253, 0.25);"
+      // boxShadow="0px 16px 40px rgba(80, 157, 253, 0.25);"
       px="10"
       py="6"
       {...props}
     >
-      <Text as="h2" fontSize="16px" color="white">
+      <Text as="h2" fontSize="md" color="white">
         {children}
       </Text>
     </Button>
@@ -44,7 +48,7 @@ const RegisterButton = ({ ...props }) => {
       px="10"
       {...props}
     >
-      <Text as="h2" fontSize="18px" color="white">
+      <Text as="h2" fontSize="md" color="white">
         Register Now
       </Text>
     </Button>

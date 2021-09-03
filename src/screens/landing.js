@@ -11,7 +11,7 @@ import { Text } from '@chakra-ui/react';
 import React from 'react';
 import { useRef, useEffect } from 'react';
 import Faq from '../components/Faqs';
-import { SecondaryButton } from '../components/Buttons';
+import { PrimaryButton } from '../components/Buttons';
 import BCSpacer from '../components/Spacer';
 import { SectionTitle } from '../components/SectionTitle';
 import { CountDownBlock } from 'components/Countdown';
@@ -93,13 +93,13 @@ const Index = () => {
               We bring people together to share their passion around technology.
             </Text>
             <BCSpacer size="sm" />
-            <SecondaryButton
+            <PrimaryButton
               onClick={() => {
                 window.location.href = '/login';
               }}
             >
               Join Us Now
-            </SecondaryButton>
+            </PrimaryButton>
           </VStack>
         </Container>
       </HStack>
