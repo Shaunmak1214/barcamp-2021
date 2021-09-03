@@ -80,7 +80,7 @@ const Dashboard = () => {
               h="100%"
               pr={20}
             >
-              <Text as="h1" fontSize="35px" fontWeight="600">
+              <Text as="h1" fontSize="4xl" fontWeight="600">
                 WELCOME TO BARCAMP
               </Text>
               <Text color="#1050A0" mt="0">
@@ -185,7 +185,9 @@ const Dashboard = () => {
           alignItems="flex-start"
           flexDir="column"
         >
-          <SectionTitle type="left">Your Proposed Topic</SectionTitle>
+          <SectionTitle fontSize="2xl" type="left">
+            Your Proposed Topic
+          </SectionTitle>
           <VStack
             mt="50px"
             border="3px solid #EB202B"
@@ -222,7 +224,9 @@ const Dashboard = () => {
           alignItems="flex-start"
           flexDir="column"
         >
-          <SectionTitle type="left">Your Voted Topic</SectionTitle>
+          <SectionTitle fontSize="2xl" type="left">
+            Your Voted Topic
+          </SectionTitle>
 
           <HStack
             justifyContent="center"
@@ -260,7 +264,9 @@ const Dashboard = () => {
           alignItems="flex-start"
           flexDir="column"
         >
-          <SectionTitle type="left">Voting Result</SectionTitle>
+          <SectionTitle fontSize="2xl" type="left">
+            Voting Result
+          </SectionTitle>
           <HStack
             justifyContent="center"
             alignItems="center"
