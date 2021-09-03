@@ -5,7 +5,6 @@ import {
   VStack,
   Center,
   Box,
-  Flex,
   SimpleGrid,
 } from '@chakra-ui/layout';
 import { Text } from '@chakra-ui/react';
@@ -222,11 +221,7 @@ const Index = () => {
         </Container>
 
         <Container maxW="container.md" pt="25px">
-          <Flex
-            flexDir={['column', 'column', 'row']}
-            justifyContent="space-between"
-            alignItems="center"
-          >
+          <SimpleGrid columns={['1', '1', '3']} spacing="15px">
             <VStack mb="35px">
               <Box p="35px" borderRadius="5px" bgImage={IconContainer}>
                 <Image src={ShareIcon} />
@@ -251,7 +246,7 @@ const Index = () => {
                 Inspire
               </Text>
             </VStack>
-          </Flex>
+          </SimpleGrid>
         </Container>
       </Center>
 

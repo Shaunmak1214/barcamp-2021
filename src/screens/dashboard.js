@@ -7,6 +7,7 @@ import {
   HStack,
   Center,
   Box,
+  Flex,
 } from '@chakra-ui/layout';
 import React from 'react';
 import { PrimaryButton } from '../components/Buttons';
@@ -187,13 +188,21 @@ const Dashboard = () => {
           <SectionTitle type="left">Your Proposed Topic</SectionTitle>
           <VStack
             mt="50px"
-            p="45px 30px 45px 80px"
             border="3px solid #EB202B"
             borderRadius="10px"
+            justifyContent="center"
+            alignItems="center"
+            pb="30px"
           >
-            <HStack justifyContent="center" alignItems="center" mb="10px">
+            <Flex
+              justifyContent="center"
+              alignItems="center"
+              p={['30px 0 25px 0', '45px 30px 25px 80px']}
+              textAlign={['center', 'left']}
+              flexDir={['column', 'column', 'row']}
+            >
               <Image src={NoMessageIcon} />
-              <Box p="0 50px">
+              <Box p={['20px 45px', '0 50px']}>
                 <Text>
                   You haven&apos;t proposed any topic yet. If you are
                   volunteering to become a speaker in Barcamp, kindly keep in
@@ -201,7 +210,7 @@ const Dashboard = () => {
                   <span style={{ fontWeight: 'bold' }}> 24 September 2021</span>
                 </Text>
               </Box>
-            </HStack>
+            </Flex>
             <PrimaryButton>Propose a Topic</PrimaryButton>
           </VStack>
         </Container>
@@ -220,7 +229,7 @@ const Dashboard = () => {
             alignItems="center"
             mb="10px"
             mt="50px"
-            p="55px 45px 70px 80px"
+            p={['25px', '55px 45px 70px 80px']}
             borderWidth="3px"
             borderStyle="solid"
             borderRadius="10px"
@@ -229,9 +238,10 @@ const Dashboard = () => {
                 'linear-gradient(90deg, rgba(16, 80, 160, 0.8) 0%, rgba(16, 80, 160, 0.8) 0.01%, rgba(235, 32, 43, 0.8) 100%, rgba(235, 32, 43, 0.8) 100%)',
               borderImageSlice: 1,
             }}
+            flexDir={['column', 'column', 'row']}
           >
-            <Image src={VotingIcon} />
-            <Box p="0 50px">
+            <Image src={VotingIcon} mb={['35px', '0']} />
+            <Box p={['0', '0 50px']}>
               <Text>
                 The voting session will be opening soon. Every participants
                 including speakers are able to vote your desired topics starting
@@ -256,7 +266,7 @@ const Dashboard = () => {
             alignItems="center"
             mb="10px"
             mt="50px"
-            p="55px 45px 70px 80px"
+            p={['25px', '55px 45px 70px 80px']}
             borderWidth="3px"
             borderStyle="solid"
             borderRadius="10px"
@@ -265,9 +275,10 @@ const Dashboard = () => {
                 'linear-gradient(90deg, rgba(16, 80, 160, 0.8) 0%, rgba(16, 80, 160, 0.8) 0.01%, rgba(235, 32, 43, 0.8) 100%, rgba(235, 32, 43, 0.8) 100%)',
               borderImageSlice: 1,
             }}
+            flexDir={['column', 'column', 'row']}
           >
-            <Image src={ResultIcon} />
-            <Box p="0 50px">
+            <Image src={ResultIcon} mb={['35px', '0']} />
+            <Box p={['0', '0 50px']}>
               <Text>
                 The voting result can be viewed strating from
                 <span style={{ fontWeight: 'bold' }}> 25 September 2021 </span>
