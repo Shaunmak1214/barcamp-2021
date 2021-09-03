@@ -21,7 +21,7 @@ import {
 import { PrimaryButton } from '../Buttons';
 import { BarcampFullLogo, PlatinumIcon } from '../../assets/';
 
-const Index = () => {
+const Index = ({ type }) => {
   const sponsorHover = useRef(null);
   const headerSticky = useRef(null);
 
@@ -101,7 +101,7 @@ const Index = () => {
 
   return (
     <Center
-      position="fixed"
+      position={type === 'fixed' ? 'sticky' : ['sticky', 'sticky', 'fixed']}
       zIndex="50"
       w="100%"
       py="5px"
@@ -198,6 +198,9 @@ const Index = () => {
       </Container>
     </Center>
   );
+};
+Index.propTypes = {
+  type: PropTypes.string,
 };
 
 React.memo(Index);

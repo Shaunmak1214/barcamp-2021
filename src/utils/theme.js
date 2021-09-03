@@ -3,7 +3,7 @@ import { extendTheme } from '@chakra-ui/react';
 const theme = extendTheme({
   fonts: {
     heading: '"Poppins", sans-serif',
-    body: '"Source sans pro", sans-serif',
+    body: '"Source Sans Pro", sans-serif',
   },
   colors: {
     primary: '#EB202B',
@@ -34,7 +34,7 @@ const theme = extendTheme({
         register() {
           return {
             _hover: {
-              bg: `#A50009`,
+              bg: `linear-gradient(90deg, #4F0004 0%, #630000 100%)`,
             },
             _active: { bg: `#FF7C83` },
           };
