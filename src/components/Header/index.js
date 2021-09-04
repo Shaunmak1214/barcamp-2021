@@ -117,6 +117,7 @@ const Index = ({ cta, type }) => {
       w="100%"
       py="5px"
       top="15px"
+      mb={['15px', null, null]}
       transition="150ms cubic-bezier(0.215,0.61,0.355,1);"
       ref={headerSticky}
     >
@@ -127,7 +128,7 @@ const Index = ({ cta, type }) => {
               window.location.href = '/';
             }}
             cursor="pointer"
-            width="250px"
+            width="200px"
             height="auto"
             src={BarcampFullLogo}
             alt="Logo"
