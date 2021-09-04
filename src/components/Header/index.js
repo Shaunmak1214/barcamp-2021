@@ -21,7 +21,7 @@ import {
 import { PrimaryButton } from '../Buttons';
 import { BarcampFullLogo, PlatinumIcon } from '../../assets/';
 
-const Index = ({ type }) => {
+const Index = ({ cta, type }) => {
   const sponsorHover = useRef(null);
   const headerSticky = useRef(null);
   const joinButton = useRef(null);
@@ -47,14 +47,18 @@ const Index = ({ type }) => {
 
   const stickyToggle = (status) => {
     if (status) {
-      joinButton.current.style.display = 'flex';
-      joinButton.current.style.transform = 'scaleX(1)';
+      if (cta) {
+        joinButton.current.style.display = 'flex';
+        joinButton.current.style.transform = 'scaleX(1)';
+      }
 
       headerSticky.current.style.top = '0px';
       headerSticky.current.style.background = 'white';
     } else {
-      joinButton.current.style.display = 'none';
-      joinButton.current.style.transform = 'scaleX(0)';
+      if (cta) {
+        joinButton.current.style.display = 'none';
+        joinButton.current.style.transform = 'scaleX(0)';
+      }
 
       headerSticky.current.style.top = '15px';
       headerSticky.current.style.background = 'none';
@@ -158,16 +162,18 @@ const Index = ({ type }) => {
             >
               <Text fontSize="14px">SPONSORS</Text>
             </Link>
-            <PrimaryButton
-              ref={joinButton}
-              d="none"
-              transform="scaleX(0)"
-              onClick={() => {
-                window.location.href = '/login';
-              }}
-            >
-              Join us now
-            </PrimaryButton>
+            {cta && (
+              <PrimaryButton
+                ref={joinButton}
+                d="none"
+                transform="scaleX(0)"
+                onClick={() => {
+                  window.location.href = '/login';
+                }}
+              >
+                Join us now
+              </PrimaryButton>
+            )}
 
             <HStack
               ref={sponsorHover}
@@ -213,6 +219,7 @@ const Index = ({ type }) => {
 };
 Index.propTypes = {
   type: PropTypes.string,
+  cta: PropTypes.bool,
 };
 
 React.memo(Index);
