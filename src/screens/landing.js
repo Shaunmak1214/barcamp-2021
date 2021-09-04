@@ -20,6 +20,7 @@ import Banner from '../components/Banner';
 
 import {
   BarcampLandingImg,
+  BarcampLandingImgMobile,
   ShareIcon,
   IconContainer,
   TrainingIcon,
@@ -69,6 +70,23 @@ const Index = () => {
     }, 1000);
   };
 
+  const LandingImgRenderer = () => {
+    if (window.screen.width < 768) {
+      return (
+        <Image
+          position="absolute"
+          src={BarcampLandingImgMobile}
+          w="100%"
+          h="100%"
+        />
+      );
+    } else {
+      return (
+        <Image position="absolute" src={BarcampLandingImg} w="100%" h="100%" />
+      );
+    }
+  };
+
   useEffect(() => {
     countDownTimer();
 
@@ -86,10 +104,10 @@ const Index = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <Image position="absolute" src={BarcampLandingImg} w="100%" h="100%" />
+        <LandingImgRenderer />
         <Container maxW="container.xl">
-          <VStack w="35%" alignItems="flex-start">
-            <Text fontSize="35px">
+          <VStack w={['100%', '50%', '35%']} alignItems="flex-start">
+            <Text fontSize="4xl">
               We bring people together to share their passion around technology.
             </Text>
             <BCSpacer size="sm" />
@@ -110,7 +128,7 @@ const Index = () => {
           justifyContent="center"
           alignItems="center"
         >
-          <Text textAlign="center" fontSize="32px">
+          <Text textAlign="center" fontSize="4xl">
             We can&apos;t wait to show you what we&apos;ve got prepared
           </Text>
           <Box
@@ -136,13 +154,13 @@ const Index = () => {
             >
               <Text
                 ref={daysRef}
-                fontSize="25px"
+                fontSize="2xl"
                 fontWeight="bold"
                 color="#1050A0"
               >
                 0
               </Text>
-              <Text fontSize="15px" color="#EB202B">
+              <Text fontSize="md" color="#EB202B">
                 Days
               </Text>
             </CountDownBlock>
@@ -153,13 +171,13 @@ const Index = () => {
             >
               <Text
                 ref={hoursRef}
-                fontSize="25px"
+                fontSize="2xl"
                 fontWeight="bold"
                 color="#1050A0"
               >
                 0
               </Text>
-              <Text fontSize="15px" color="#EB202B">
+              <Text fontSize="md" color="#EB202B">
                 Hours
               </Text>
             </CountDownBlock>
@@ -170,13 +188,13 @@ const Index = () => {
             >
               <Text
                 ref={minutesRef}
-                fontSize="25px"
+                fontSize="2xl"
                 fontWeight="bold"
                 color="#1050A0"
               >
                 0
               </Text>
-              <Text fontSize="15px" color="#EB202B">
+              <Text fontSize="md" color="#EB202B">
                 Minutes
               </Text>
             </CountDownBlock>
@@ -187,13 +205,13 @@ const Index = () => {
             >
               <Text
                 ref={secondsRef}
-                fontSize="25px"
+                fontSize="2xl"
                 fontWeight="bold"
                 color="#1050A0"
               >
                 0
               </Text>
-              <Text fontSize="15px" color="#EB202B">
+              <Text fontSize="md" color="#EB202B">
                 Seconds
               </Text>
             </CountDownBlock>
@@ -214,7 +232,7 @@ const Index = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <Text color="#ffffff" textAlign="center" fontSize={['18px', '25px']}>
+          <Text color="#ffffff" textAlign="center" fontSize={['lg', '2xl']}>
             Barcamp Cyberjaya is an annual user-generated unconference with
             topics surrounding technology and entrepreneurships.
           </Text>
@@ -261,7 +279,7 @@ const Index = () => {
           </SectionTitle>
         </Container>
         <Container maxW="container.xl">
-          <SimpleGrid columns={3} spacing={5}>
+          <SimpleGrid columns={[1, 2, 3]} spacing={5}>
             <Box>
               <Image src={SamplePicOne} />
             </Box>

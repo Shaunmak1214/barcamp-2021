@@ -56,10 +56,10 @@ const Login = () => {
               h="100%"
               pr={20}
             >
-              <Text as="h1" fontSize="35px" fontWeight="600">
+              <Text as="h1" fontSize="4xl" fontWeight="600">
                 WELCOME TO BARCAMP
               </Text>
-              <Text as="h2" fontSize="15px" fontWeight="500">
+              <Text as="h2" fontSize="md" fontWeight="500">
                 Please login to continue. By logging in, you agree to our{' '}
                 <Link color="blue">privacy policy</Link> . We only use this
                 authentication to get your email and protect the app from

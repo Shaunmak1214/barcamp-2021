@@ -21,7 +21,7 @@ import {
 import { PrimaryButton } from '../Buttons';
 import { BarcampFullLogo, PlatinumIcon } from '../../assets/';
 
-const Index = ({ type }) => {
+const Index = ({ cta, type }) => {
   const sponsorHover = useRef(null);
   const headerSticky = useRef(null);
   const joinButton = useRef(null);
@@ -47,14 +47,18 @@ const Index = ({ type }) => {
 
   const stickyToggle = (status) => {
     if (status) {
-      joinButton.current.style.display = 'flex';
-      joinButton.current.style.transform = 'scaleX(1)';
+      if (cta) {
+        joinButton.current.style.display = 'flex';
+        joinButton.current.style.transform = 'scaleX(1)';
+      }
 
       headerSticky.current.style.top = '0px';
       headerSticky.current.style.background = 'white';
     } else {
-      joinButton.current.style.display = 'none';
-      joinButton.current.style.transform = 'scaleX(0)';
+      if (cta) {
+        joinButton.current.style.display = 'none';
+        joinButton.current.style.transform = 'scaleX(0)';
+      }
 
       headerSticky.current.style.top = '15px';
       headerSticky.current.style.background = 'none';
@@ -67,7 +71,7 @@ const Index = ({ type }) => {
         <VStack alignItems="flex-start" justifyContent="center">
           <HStack>
             <Image src={PlatinumIcon} height="15px" width="15px" />
-            <Text fontFamily="Poppins" fontSize="18px" fontWeight="600">
+            <Text fontFamily="Poppins" fontSize="lg" fontWeight="600">
               {sponsorData.type}
             </Text>
           </HStack>
@@ -113,6 +117,7 @@ const Index = ({ type }) => {
       w="100%"
       py="5px"
       top="15px"
+      mb={['15px', null, null]}
       transition="150ms cubic-bezier(0.215,0.61,0.355,1);"
       ref={headerSticky}
     >
@@ -123,7 +128,7 @@ const Index = ({ type }) => {
               window.location.href = '/';
             }}
             cursor="pointer"
-            width="250px"
+            width="200px"
             height="auto"
             src={BarcampFullLogo}
             alt="Logo"
@@ -138,13 +143,13 @@ const Index = ({ type }) => {
             position="relative"
           >
             <Link href="/" py="5">
-              <Text fontSize="14px">ABOUT</Text>
+              <Text fontSize="sm">ABOUT</Text>
             </Link>
             <Link href="/" py="5">
-              <Text fontSize="14px">AGENDA</Text>
+              <Text fontSize="sm">AGENDA</Text>
             </Link>
             <Link href="/" py="5">
-              <Text fontSize="14px">FAQ</Text>
+              <Text fontSize="sm">FAQ</Text>
             </Link>
             <Link
               href="/"
@@ -156,18 +161,20 @@ const Index = ({ type }) => {
                 sponsorToggle('out');
               }}
             >
-              <Text fontSize="14px">SPONSORS</Text>
+              <Text fontSize="sm">SPONSORS</Text>
             </Link>
-            <PrimaryButton
-              ref={joinButton}
-              d="none"
-              transform="scaleX(0)"
-              onClick={() => {
-                window.location.href = '/login';
-              }}
-            >
-              Join us now
-            </PrimaryButton>
+            {cta && (
+              <PrimaryButton
+                ref={joinButton}
+                d="none"
+                transform="scaleX(0)"
+                onClick={() => {
+                  window.location.href = '/login';
+                }}
+              >
+                Join us now
+              </PrimaryButton>
+            )}
 
             <HStack
               ref={sponsorHover}
@@ -213,6 +220,7 @@ const Index = ({ type }) => {
 };
 Index.propTypes = {
   type: PropTypes.string,
+  cta: PropTypes.bool,
 };
 
 React.memo(Index);

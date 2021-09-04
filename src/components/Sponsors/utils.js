@@ -38,8 +38,9 @@ const SponsorBlockRenderer = ({ sponsorData, ...props }) => {
       <VStack alignItems="flex-start" justifyContent="center" {...props}>
         <BadgeRender sponsorData={sponsorData} />
         <SimpleGrid
-          columns={sponsorData.level}
+          columns={[`2`, `3`, `${sponsorData.level}`]}
           spacing={5}
+          px={['5', null, null]}
           w="100%"
           flexDir="row"
           flexWrap="wrap"

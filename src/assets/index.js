@@ -1,5 +1,6 @@
 import BarcampFullLogo from './svgs/barcamp-logo.svg';
 import BarcampLandingImg from './jpg-pngs/landing.png';
+import BarcampLandingImgMobile from './jpg-pngs/barcamp-landing-mobile.png';
 import BarcampWhiteLogo from './svgs/barcamp-white-logo.svg';
 import AuronexLogo from './jpg-pngs/auronex.png';
 import PlatinumIcon from './svgs/diamond.svg';
@@ -24,10 +25,14 @@ import GreyCheck from './svgs/check-grey.svg';
 import NoMessageIcon from './jpg-pngs/no-message-icon.png';
 import VotingIcon from './jpg-pngs/voting-icon.png';
 import ResultIcon from './jpg-pngs/result-icon.png';
+import FacebookIcon from './jpg-pngs/facebook-icon.png';
+import InstagramIcon from './jpg-pngs/instagram-icon.png';
+import LinkedinIcon from './jpg-pngs/linkedin-icon.png';
 
 export {
   BarcampFullLogo,
   BarcampLandingImg,
+  BarcampLandingImgMobile,
   BarcampWhiteLogo,
   AuronexLogo,
   PlatinumIcon,
@@ -52,4 +57,7 @@ export {
   NoMessageIcon,
   VotingIcon,
   ResultIcon,
+  FacebookIcon,
+  InstagramIcon,
+  LinkedinIcon,
 };

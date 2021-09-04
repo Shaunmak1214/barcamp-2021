@@ -1,17 +1,20 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { HStack } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 
 import './selectformfield.css';
 
-const SelectFormField = ({ onSelect, children, ...props }) => {
+const SelectFormField = ({ value, onSelect, children, ...props }) => {
   const [selected, setSelected] = React.useState(false);
   const selectableRef = useRef(null);
 
   const handleSelect = () => {
     setSelected(!selected);
-    onSelect(!selected);
   };
+
+  useEffect(() => {
+    onSelect(value, selected);
+  }, [selected]);
 
   return (
     <>
@@ -70,6 +73,7 @@ const SelectFormField = ({ onSelect, children, ...props }) => {
 React.memo(SelectFormField);
 
 SelectFormField.propTypes = {
+  value: PropTypes.string.isRequired,
   selected: PropTypes.bool,
   children: PropTypes.node.isRequired,
   onSelect: PropTypes.func.isRequired,

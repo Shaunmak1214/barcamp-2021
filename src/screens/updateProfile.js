@@ -20,16 +20,24 @@ const schema = yup.object({
 });
 
 const updateProfile = () => {
-  const [select, setSelect] = React.useState(true);
+  const [heard, setHeard] = React.useState([]);
 
   const onSelect = React.useCallback(
-    (value) => {
-      // console.log(select);
-      setSelect(value);
+    (value, selected) => {
+      setHeard((hear) => {
+        if (selected) {
+          if (hear.includes(value)) {
+            return [...hear];
+          } else {
+            return [...hear, value];
+          }
+        } else {
+          return hear.filter((item) => item !== value);
+        }
+      });
     },
-    [setSelect],
+    [setHeard],
   );
-
   return (
     <VStack
       w="100%"
@@ -40,7 +48,7 @@ const updateProfile = () => {
       <BCSpacer size="xs" />
       <BCSpacer size="xs" />
       <Container maxW="container.lg" alignItems="flex-start">
-        <SectionTitle alignItems="flex-start" fontSize="30px" type="left">
+        <SectionTitle alignItems="flex-start" fontSize="4xl" type="left">
           Register as a
           <Text ml="2" color="#1050A0;">
             {' '}
@@ -52,9 +60,16 @@ const updateProfile = () => {
 
         <Formik
           validationSchema={schema}
-          initialValues={{ fullname: '', age: '', contactnumber: '', noc: '' }}
-          onSubmit={() => {
-            console.log('submit');
+          initialValues={{
+            fullname: '',
+            age: '',
+            contactnumber: '',
+            noc: '',
+            heard: [],
+          }}
+          onSubmit={(data) => {
+            console.log(data);
+            console.log(heard);
           }}
         >
           {() => (
@@ -87,25 +102,18 @@ const updateProfile = () => {
                   component={TextFormField}
                 />
                 <VStack w="100%" alignItems="flex-start">
-                  <Text fontFamily="Poppins" fontWeight="600" fontSize="15px">
+                  <Text fontFamily="Poppins" fontWeight="600" fontSize="md">
                     How do you know about Barcamp Cyberjaya
                   </Text>
-                  <Box
-                    w="100%"
-                    h="250px"
-                    py="5"
-                    // p="5"
-                    // border="2px solid #C2C2C2;"
-                    borderRadius="8px"
-                  >
-                    <SelectFormField selected={select} onSelect={onSelect}>
+                  <Box w="100%" h="250px" py="5" borderRadius="8px">
+                    <SelectFormField value="Facebook" onSelect={onSelect}>
                       <Text>Facebook</Text>
                     </SelectFormField>
-                    <SelectFormField selected={select} onSelect={onSelect}>
-                      <Text>Facebook</Text>
+                    <SelectFormField value="Instagram" onSelect={onSelect}>
+                      <Text>Instagram</Text>
                     </SelectFormField>
-                    <SelectFormField selected={select} onSelect={onSelect}>
-                      <Text>Facebook</Text>
+                    <SelectFormField value="MMU" onSelect={onSelect}>
+                      <Text>MMU</Text>
                     </SelectFormField>
                   </Box>
                 </VStack>
@@ -115,8 +123,9 @@ const updateProfile = () => {
                   w={['100%', 'fit-content', 'fit-content']}
                   py="25px"
                   px="75px"
+                  type="submit"
                 >
-                  <Text fontSize="18px">Register</Text>
+                  <Text fontSize="lg">Register</Text>
                 </SecondaryButton>
               </VStack>
             </Form>
