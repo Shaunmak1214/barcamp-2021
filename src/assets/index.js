@@ -24,6 +24,9 @@ import GreyCheck from './svgs/check-grey.svg';
 import NoMessageIcon from './jpg-pngs/no-message-icon.png';
 import VotingIcon from './jpg-pngs/voting-icon.png';
 import ResultIcon from './jpg-pngs/result-icon.png';
+import FacebookIcon from './jpg-pngs/facebook-icon.png';
+import InstagramIcon from './jpg-pngs/instagram-icon.png';
+import LinkedinIcon from './jpg-pngs/linkedin-icon.png';
 
 export {
   BarcampFullLogo,
@@ -52,4 +55,7 @@ export {
   NoMessageIcon,
   VotingIcon,
   ResultIcon,
+  FacebookIcon,
+  InstagramIcon,
+  LinkedinIcon,
 };
