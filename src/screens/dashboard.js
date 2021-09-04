@@ -87,7 +87,7 @@ const Dashboard = () => {
                 You are one of the participants in Barcamp 2021 now!
               </Text>
               <BCSpacer size="sm" />
-              <Text as="h2" fontSize="15px" fontWeight="500">
+              <Text as="h2" fontSize="sm" fontWeight="500">
                 If you are volunteering to become a speaker, feel free to
                 propose an interesting topic for your sharing. A voting session
                 will be conducted to select the speakers for Barcamp.
@@ -126,52 +126,52 @@ const Dashboard = () => {
             <CountDownBlock background="#ffffff" marginBottom={['25px', '0']}>
               <Text
                 ref={daysRef}
-                fontSize="25px"
+                fontSize="2xl"
                 fontWeight="bold"
                 color="#1050A0"
               >
                 0
               </Text>
-              <Text fontSize="15px" color="#EB202B">
+              <Text fontSize="md" color="#EB202B">
                 Days
               </Text>
             </CountDownBlock>
             <CountDownBlock background="#ffffff" marginBottom={['25px', '0']}>
               <Text
                 ref={hoursRef}
-                fontSize="25px"
+                fontSize="2xl"
                 fontWeight="bold"
                 color="#1050A0"
               >
                 0
               </Text>
-              <Text fontSize="15px" color="#EB202B">
+              <Text fontSize="md" color="#EB202B">
                 Hours
               </Text>
             </CountDownBlock>
             <CountDownBlock background="#ffffff" marginBottom={['25px', '0']}>
               <Text
                 ref={minutesRef}
-                fontSize="25px"
+                fontSize="2xl"
                 fontWeight="bold"
                 color="#1050A0"
               >
                 0
               </Text>
-              <Text fontSize="15px" color="#EB202B">
+              <Text fontSize="md" color="#EB202B">
                 Minutes
               </Text>
             </CountDownBlock>
             <CountDownBlock background="#ffffff" marginBottom={['25px', '0']}>
               <Text
                 ref={secondsRef}
-                fontSize="25px"
+                fontSize="2xl"
                 fontWeight="bold"
                 color="#1050A0"
               >
                 0
               </Text>
-              <Text fontSize="15px" color="#EB202B">
+              <Text fontSize="md" color="#EB202B">
                 Seconds
               </Text>
             </CountDownBlock>

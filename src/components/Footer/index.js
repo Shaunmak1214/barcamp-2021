@@ -44,17 +44,17 @@ const Index = () => {
             >
               <Box>
                 <Link href="/" textDecorationLine="underline">
-                  <Text fontSize="20px " pb="10px">
+                  <Text fontSize="xl" pb="10px">
                     AGENDA
                   </Text>
                 </Link>
                 <Link href="/" textDecorationLine="underline">
-                  <Text fontSize="20px" pb="10px">
+                  <Text fontSize="xl" pb="10px">
                     FAQ
                   </Text>
                 </Link>
                 <Link href="/" textDecorationLine="underline">
-                  <Text fontSize="20px" pb="10px">
+                  <Text fontSize="xl" pb="10px">
                     SPONSORS
                   </Text>
                 </Link>

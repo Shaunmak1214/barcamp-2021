@@ -71,7 +71,7 @@ const Index = ({ cta, type }) => {
         <VStack alignItems="flex-start" justifyContent="center">
           <HStack>
             <Image src={PlatinumIcon} height="15px" width="15px" />
-            <Text fontFamily="Poppins" fontSize="18px" fontWeight="600">
+            <Text fontFamily="Poppins" fontSize="lg" fontWeight="600">
               {sponsorData.type}
             </Text>
           </HStack>
@@ -117,6 +117,7 @@ const Index = ({ cta, type }) => {
       w="100%"
       py="5px"
       top="15px"
+      mb={['15px', null, null]}
       transition="150ms cubic-bezier(0.215,0.61,0.355,1);"
       ref={headerSticky}
     >
@@ -127,7 +128,7 @@ const Index = ({ cta, type }) => {
               window.location.href = '/';
             }}
             cursor="pointer"
-            width="250px"
+            width="200px"
             height="auto"
             src={BarcampFullLogo}
             alt="Logo"
@@ -142,13 +143,13 @@ const Index = ({ cta, type }) => {
             position="relative"
           >
             <Link href="/" py="5">
-              <Text fontSize="14px">ABOUT</Text>
+              <Text fontSize="sm">ABOUT</Text>
             </Link>
             <Link href="/" py="5">
-              <Text fontSize="14px">AGENDA</Text>
+              <Text fontSize="sm">AGENDA</Text>
             </Link>
             <Link href="/" py="5">
-              <Text fontSize="14px">FAQ</Text>
+              <Text fontSize="sm">FAQ</Text>
             </Link>
             <Link
               href="/"
@@ -160,7 +161,7 @@ const Index = ({ cta, type }) => {
                 sponsorToggle('out');
               }}
             >
-              <Text fontSize="14px">SPONSORS</Text>
+              <Text fontSize="sm">SPONSORS</Text>
             </Link>
             {cta && (
               <PrimaryButton

@@ -15,8 +15,8 @@ const Index = () => {
   return (
     <Center pt="80px" flexDir="column">
       <Container maxW="container.xl" pt="20">
-        <SectionTitle type="center" mb="20">
-          SPONSORSHIP & PARTNERS
+        <SectionTitle type={['left', 'center', 'center']} mb="20">
+          SPONSORSHIP
         </SectionTitle>
         <SponsorBlockRenderer mb="20" sponsorData={platinumSponsor} />
         <SponsorBlockRenderer mb="20" sponsorData={goldSponsor} />

@@ -1,5 +1,6 @@
 import BarcampFullLogo from './svgs/barcamp-logo.svg';
 import BarcampLandingImg from './jpg-pngs/landing.png';
+import BarcampLandingImgMobile from './jpg-pngs/barcamp-landing-mobile.png';
 import BarcampWhiteLogo from './svgs/barcamp-white-logo.svg';
 import AuronexLogo from './jpg-pngs/auronex.png';
 import PlatinumIcon from './svgs/diamond.svg';
@@ -31,6 +32,7 @@ import LinkedinIcon from './jpg-pngs/linkedin-icon.png';
 export {
   BarcampFullLogo,
   BarcampLandingImg,
+  BarcampLandingImgMobile,
   BarcampWhiteLogo,
   AuronexLogo,
   PlatinumIcon,
