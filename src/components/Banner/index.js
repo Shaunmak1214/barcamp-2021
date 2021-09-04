@@ -10,7 +10,7 @@ const Index = () => {
         <HStack justifyContent="space-between" py="40px">
           <Text
             as="h3"
-            fontSize="35px"
+            fontSize="4xl"
             fontWeight="600"
             textTransform="uppercase"
             bgImage="linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%)"

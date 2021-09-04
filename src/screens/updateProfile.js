@@ -48,7 +48,7 @@ const updateProfile = () => {
       <BCSpacer size="xs" />
       <BCSpacer size="xs" />
       <Container maxW="container.lg" alignItems="flex-start">
-        <SectionTitle alignItems="flex-start" fontSize="30px" type="left">
+        <SectionTitle alignItems="flex-start" fontSize="4xl" type="left">
           Register as a
           <Text ml="2" color="#1050A0;">
             {' '}
@@ -102,7 +102,7 @@ const updateProfile = () => {
                   component={TextFormField}
                 />
                 <VStack w="100%" alignItems="flex-start">
-                  <Text fontFamily="Poppins" fontWeight="600" fontSize="15px">
+                  <Text fontFamily="Poppins" fontWeight="600" fontSize="md">
                     How do you know about Barcamp Cyberjaya
                   </Text>
                   <Box w="100%" h="250px" py="5" borderRadius="8px">
@@ -125,7 +125,7 @@ const updateProfile = () => {
                   px="75px"
                   type="submit"
                 >
-                  <Text fontSize="18px">Register</Text>
+                  <Text fontSize="lg">Register</Text>
                 </SecondaryButton>
               </VStack>
             </Form>

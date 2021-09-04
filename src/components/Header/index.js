@@ -71,7 +71,7 @@ const Index = ({ cta, type }) => {
         <VStack alignItems="flex-start" justifyContent="center">
           <HStack>
             <Image src={PlatinumIcon} height="15px" width="15px" />
-            <Text fontFamily="Poppins" fontSize="18px" fontWeight="600">
+            <Text fontFamily="Poppins" fontSize="lg" fontWeight="600">
               {sponsorData.type}
             </Text>
           </HStack>
@@ -142,13 +142,13 @@ const Index = ({ cta, type }) => {
             position="relative"
           >
             <Link href="/" py="5">
-              <Text fontSize="14px">ABOUT</Text>
+              <Text fontSize="sm">ABOUT</Text>
             </Link>
             <Link href="/" py="5">
-              <Text fontSize="14px">AGENDA</Text>
+              <Text fontSize="sm">AGENDA</Text>
             </Link>
             <Link href="/" py="5">
-              <Text fontSize="14px">FAQ</Text>
+              <Text fontSize="sm">FAQ</Text>
             </Link>
             <Link
               href="/"
@@ -160,7 +160,7 @@ const Index = ({ cta, type }) => {
                 sponsorToggle('out');
               }}
             >
-              <Text fontSize="14px">SPONSORS</Text>
+              <Text fontSize="sm">SPONSORS</Text>
             </Link>
             {cta && (
               <PrimaryButton
