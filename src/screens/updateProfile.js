@@ -7,7 +7,7 @@ import { SecondaryButton } from '../components/Buttons';
 
 import * as yup from 'yup';
 import { Formik, Form, Field } from 'formik';
-import { TextFormField, SelectFormField } from '../components/Forms';
+import { BCTextFilledFormField, SelectFormField } from '../components/Forms';
 
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -48,7 +48,7 @@ const updateProfile = () => {
       <BCSpacer size="xs" />
       <BCSpacer size="xs" />
       <Container maxW="container.lg" alignItems="flex-start">
-        <SectionTitle alignItems="flex-start" fontSize="4xl" type="left">
+        <SectionTitle alignItems="flex-start" fontSize="3xl" type="left">
           Register as a
           <Text ml="2" color="#1050A0;">
             {' '}
@@ -65,7 +65,6 @@ const updateProfile = () => {
             age: '',
             contactnumber: '',
             noc: '',
-            heard: [],
           }}
           onSubmit={(data) => {
             console.log(data);
@@ -80,26 +79,26 @@ const updateProfile = () => {
                     label="Full Name"
                     name="fullname"
                     placeholder="Enter your full name"
-                    component={TextFormField}
+                    component={BCTextFilledFormField}
                   />
                   <Field
                     label="Age"
                     name="age"
                     placeholder="Enter your age"
-                    component={TextFormField}
+                    component={BCTextFilledFormField}
                   />
                 </SimpleGrid>
                 <Field
                   label="Contact Number"
                   name="contactnumber"
                   placeholder="01X-XXXXXXX"
-                  component={TextFormField}
+                  component={BCTextFilledFormField}
                 />
                 <Field
                   label="Name of Company / Name of institution"
                   name="noc"
                   placeholder="Enter your company name or university name"
-                  component={TextFormField}
+                  component={BCTextFilledFormField}
                 />
                 <VStack w="100%" alignItems="flex-start">
                   <Text fontFamily="Poppins" fontWeight="600" fontSize="md">

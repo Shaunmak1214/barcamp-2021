@@ -28,6 +28,7 @@ import ResultIcon from './jpg-pngs/result-icon.png';
 import FacebookIcon from './jpg-pngs/facebook-icon.png';
 import InstagramIcon from './jpg-pngs/instagram-icon.png';
 import LinkedinIcon from './jpg-pngs/linkedin-icon.png';
+import ProposePic from './jpg-pngs/propose.png';
 
 export {
   BarcampFullLogo,
@@ -60,4 +61,5 @@ export {
   FacebookIcon,
   InstagramIcon,
   LinkedinIcon,
+  ProposePic,
 };
