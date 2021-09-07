@@ -1,4 +1,13 @@
-import TextFormField from './TextFormField';
-import SelectFormField from './SelectFormField';
+import BCTextFilledFormField from './BCTextFilledFormField/';
+import SelectFormField from './SelectFormField/';
+import BCTextFormField from './BCTextFormField/';
+import BCTextAreaField from './BCTextareaField/';
+import SelectDropdownFormField from './SelectDropdownFormField/';
 
-export { TextFormField, SelectFormField };
+export {
+  BCTextFilledFormField,
+  SelectFormField,
+  BCTextFormField,
+  BCTextAreaField,
+  SelectDropdownFormField,
+};

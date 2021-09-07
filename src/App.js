@@ -37,6 +37,13 @@ function App() {
           path="/update-profile"
           component={Screens.UpdateProfile}
         />
+        <BCRoutes
+          exact
+          header
+          transparency="sticky"
+          path="/propose-topic"
+          component={Screens.ProposeTopic}
+        />
       </Switch>
       <Comp.Footer />
     </Router>
