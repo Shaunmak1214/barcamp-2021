@@ -15,10 +15,10 @@ import { CloseIcon } from '@chakra-ui/icons';
 
 import { PrimaryButton } from '../Buttons';
 import {
-  BurgerDivIcon,
   MenuIcon,
   LinksIcon,
   CountdownIcon,
+  MobileMenuIcon,
 } from '../../assets/';
 import BCSpacer from 'components/Spacer';
 import { useCountdown } from '../../hooks';
@@ -37,6 +37,7 @@ const MobileMenu = () => {
         alignItems="center"
         justifyContent="space-around"
         cursor="pointer"
+        right="15px"
         position="relative"
         display={['block', 'none']}
         onClick={() => {
@@ -46,7 +47,7 @@ const MobileMenu = () => {
         }}
       >
         <Box>
-          <Image w="24px" h="15px" src={BurgerDivIcon} />
+          <Image w="24px" h="15px" src={MobileMenuIcon} />
         </Box>
       </VStack>
       <VStack

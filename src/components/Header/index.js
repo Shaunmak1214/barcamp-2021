@@ -26,6 +26,7 @@ const Index = ({ cta, type }) => {
   const sponsorHover = useRef(null);
   const headerSticky = useRef(null);
   const joinButton = useRef(null);
+  const mobileSize = window.screen.width <= 768;
 
   const handleScroll = (e) => {
     const window = e.currentTarget;
@@ -61,8 +62,10 @@ const Index = ({ cta, type }) => {
         joinButton.current.style.transform = 'scaleX(0)';
       }
 
-      headerSticky.current.style.top = '15px';
-      headerSticky.current.style.background = 'none';
+      if (!mobileSize) {
+        headerSticky.current.style.top = '15px';
+        headerSticky.current.style.background = 'none';
+      }
     }
   };
 
@@ -117,8 +120,8 @@ const Index = ({ cta, type }) => {
       zIndex="50"
       w="100%"
       py="5px"
-      top="15px"
-      mb={['15px', null, null]}
+      top={mobileSize ? '0px' : '15px'}
+      mb={mobileSize ? null : ['15px', null, null]}
       transition="150ms cubic-bezier(0.215,0.61,0.355,1);"
       ref={headerSticky}
     >
@@ -194,7 +197,6 @@ const Index = ({ cta, type }) => {
               transition="visibility 0.2s ease-in-out, opacity 0.2s ease-in-out"
               zIndex="50"
               cursor="pointer"
-              // overflow="scroll"
               onMouseOver={() => {
                 sponsorToggle('in');
               }}

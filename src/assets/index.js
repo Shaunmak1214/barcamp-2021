@@ -33,6 +33,7 @@ import ProposePic from './jpg-pngs/propose.png';
 import MenuIcon from './svgs/menu.svg';
 import LinksIcon from './svgs/links.svg';
 import CountdownIcon from './svgs/countdown.svg';
+import MobileMenuIcon from './svgs/mobile-menu.svg';
 
 export {
   BarcampFullLogo,
@@ -70,4 +71,5 @@ export {
   MenuIcon,
   LinksIcon,
   CountdownIcon,
+  MobileMenuIcon,
 };
