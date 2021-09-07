@@ -14,7 +14,7 @@ const TextFormField = ({ field, form, label, ...props }) => {
 
   return (
     <FormControl w="100%" id="email" isInvalid={errorText ? true : false}>
-      <FormLabel fontFamily="Poppins" fontWeight="600" fontSize="md">
+      <FormLabel fontFamily="Poppins" fontWeight="500" fontSize="md">
         {label}
       </FormLabel>
       <Input

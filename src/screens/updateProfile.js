@@ -3,7 +3,7 @@ import { Container, SimpleGrid, Text, VStack, Box } from '@chakra-ui/layout';
 import { SectionTitle } from '../components/SectionTitle';
 import BCSpacer from '../components/Spacer';
 
-import { SecondaryButton } from '../components/Buttons';
+import { PrimaryButton } from '../components/Buttons';
 
 import * as yup from 'yup';
 import { Formik, Form, Field } from 'formik';
@@ -46,13 +46,11 @@ const updateProfile = () => {
       alignItems="center"
     >
       <BCSpacer size="xs" />
-      <BCSpacer size="xs" />
       <Container maxW="container.lg" alignItems="flex-start">
         <SectionTitle alignItems="flex-start" fontSize="3xl" type="left">
-          Register as a
-          <Text ml="2" color="#1050A0;">
-            {' '}
-            Barcamp Participant
+          <Text fontSize="2xl">
+            Update your profile to become a {'  '}
+            <span style={{ color: '#1050A0' }}>Barcamp Participant</span>
           </Text>
         </SectionTitle>
 
@@ -101,7 +99,7 @@ const updateProfile = () => {
                   component={BCTextFilledFormField}
                 />
                 <VStack w="100%" alignItems="flex-start">
-                  <Text fontFamily="Poppins" fontWeight="600" fontSize="md">
+                  <Text fontFamily="Poppins" fontWeight="500" fontSize="md">
                     How do you know about Barcamp Cyberjaya
                   </Text>
                   <Box w="100%" h="250px" py="5" borderRadius="8px">
@@ -117,7 +115,7 @@ const updateProfile = () => {
                   </Box>
                 </VStack>
 
-                <SecondaryButton
+                <PrimaryButton
                   alignSelf="flex-end"
                   w={['100%', 'fit-content', 'fit-content']}
                   py="25px"
@@ -125,7 +123,7 @@ const updateProfile = () => {
                   type="submit"
                 >
                   <Text fontSize="lg">Register</Text>
-                </SecondaryButton>
+                </PrimaryButton>
               </VStack>
             </Form>
           )}
