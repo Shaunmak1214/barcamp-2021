@@ -28,7 +28,7 @@ import ResultIcon from './jpg-pngs/result-icon.png';
 import FacebookIcon from './jpg-pngs/facebook-icon.png';
 import InstagramIcon from './jpg-pngs/instagram-icon.png';
 import LinkedinIcon from './jpg-pngs/linkedin-icon.png';
-
+import BurgerDivIcon from './svgs/burger-div.svg';
 export {
   BarcampFullLogo,
   BarcampLandingImg,
@@ -60,4 +60,5 @@ export {
   FacebookIcon,
   InstagramIcon,
   LinkedinIcon,
+  BurgerDivIcon,
 };
