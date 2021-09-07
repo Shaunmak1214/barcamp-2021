@@ -65,7 +65,7 @@ const Index = () => {
       <HStack
         position="relative"
         w="100%"
-        h="100vh"
+        h={['88vh', null, '100vh']}
         justifyContent="center"
         alignItems="center"
       >

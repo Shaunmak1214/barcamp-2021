@@ -40,7 +40,7 @@ const MobileMenu = () => {
         position="relative"
         display={['block', 'none']}
         onClick={() => {
-          isOpen.current.style.transform = 'translate(-52%, -50%); scale(1.00)';
+          isOpen.current.style.transform = 'translate(-52%, -0%) scale(1.00)';
           isOpen.current.style.opacity = '1';
           isOpen.current.style.visibility = 'visible';
         }}
@@ -60,7 +60,7 @@ const MobileMenu = () => {
         position="absolute"
         top="20px"
         left="50%"
-        transform="translate(-52%, -0%); scale(0)"
+        transform="translate(-52%, -0%) scale(0.95)"
         transition="150ms cubic-bezier(0.215,0.61,0.355,1);"
         transformOrigin="100% 0;"
         zIndex="10"
@@ -74,8 +74,9 @@ const MobileMenu = () => {
           py="1rem"
           w="100%"
           h="100%"
+          spacing="3"
           alignItems="flex-start"
-          overflow="scroll"
+          overflow="auto"
         >
           <Box
             d="flex"
@@ -89,46 +90,14 @@ const MobileMenu = () => {
               h="12px"
               onClick={() => {
                 isOpen.current.style.transform =
-                  'translate(-52%, -50%); scale(0.00)';
+                  'translate(-52%, -0%) scale(0.95)';
                 isOpen.current.style.opacity = '0';
                 isOpen.current.style.visibility = 'hidden';
               }}
             />
           </Box>
 
-          <HStack alignItems="center">
-            <Image src={MenuIcon} h="15px" w="15px" />
-            <Text
-              fontSize="lg"
-              fontWeight="600"
-              color="#797979"
-              fontFamily="Montserrat"
-              mt="0px"
-            >
-              Menu
-            </Text>
-          </HStack>
-
           <BCSpacer size="5xs" />
-          <VStack alignItems="flex-start">
-            <Link href="/">
-              <Text fontSize="sm" fontWeight="600">
-                About
-              </Text>
-            </Link>
-            <Link href="/">
-              <Text fontSize="sm" fontWeight="600">
-                Agenda
-              </Text>
-            </Link>
-            <Link href="/">
-              <Text fontSize="sm" fontWeight="600">
-                Faq
-              </Text>
-            </Link>
-          </VStack>
-
-          <BCSpacer size="3xs" />
           <HStack alignItems="center">
             <Image src={CountdownIcon} h="18px" w="18px" />
             <Text
@@ -149,12 +118,55 @@ const MobileMenu = () => {
             justifyContent="center"
             alignItems="center"
           >
-            <Text textAlign="center">
+            <Text fontFamily="Montserrat" fontSize="sm" textAlign="center">
               <span ref={daysRef}>0</span> days : <span ref={hoursRef}>0</span>{' '}
               hours : <span ref={minutesRef}>0</span> minutes{' '}
               <span style={{ display: 'none' }} ref={secondsRef}></span>
             </Text>
           </Container>
+
+          <BCSpacer size="3xs" />
+          <HStack alignItems="center">
+            <Image src={MenuIcon} h="15px" w="15px" />
+            <Text
+              fontSize="lg"
+              fontWeight="600"
+              color="#797979"
+              fontFamily="Montserrat"
+              mt="0px"
+            >
+              Menu
+            </Text>
+          </HStack>
+
+          <BCSpacer size="5xs" />
+          <VStack alignItems="flex-start">
+            <Link href="/">
+              <Text fontSize="sm" fontFamily="Montserrat" fontWeight="600">
+                Home
+              </Text>
+            </Link>
+            <Link href="/#about">
+              <Text fontSize="sm" fontFamily="Montserrat" fontWeight="600">
+                About Us
+              </Text>
+            </Link>
+            <Link href="/#agenda">
+              <Text fontSize="sm" fontFamily="Montserrat" fontWeight="600">
+                Agenda
+              </Text>
+            </Link>
+            <Link href="/#faq">
+              <Text fontSize="sm" fontFamily="Montserrat" fontWeight="600">
+                Faq
+              </Text>
+            </Link>
+            <Link href="/#sponsors">
+              <Text fontSize="sm" fontFamily="Montserrat" fontWeight="600">
+                Sponsors
+              </Text>
+            </Link>
+          </VStack>
 
           <BCSpacer size="3xs" />
           <HStack alignItems="center">
@@ -172,19 +184,19 @@ const MobileMenu = () => {
 
           <BCSpacer size="5xs" />
           <VStack alignItems="flex-start">
-            <Link href="/">
-              <Text fontSize="sm" fontWeight="600">
+            <Link href="/dashbaord">
+              <Text fontSize="sm" fontFamily="Montserrat" fontWeight="600">
+                Participant Dashboard
+              </Text>
+            </Link>
+            <Link href="/propose-topic">
+              <Text fontSize="sm" fontFamily="Montserrat" fontWeight="600">
+                Propose Topic
+              </Text>
+            </Link>
+            <Link href="/vote-topics">
+              <Text fontSize="sm" fontFamily="Montserrat" fontWeight="600">
                 Vote Topics
-              </Text>
-            </Link>
-            <Link href="/">
-              <Text fontSize="sm" fontWeight="600">
-                Propose Topics
-              </Text>
-            </Link>
-            <Link href="/">
-              <Text fontSize="sm" fontWeight="600">
-                Dashboard
               </Text>
             </Link>
           </VStack>
