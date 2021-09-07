@@ -13,6 +13,7 @@ import {
   HStack,
   Center,
   Flex,
+  Box,
 } from '@chakra-ui/layout';
 
 import { PrimaryButton } from '../components/Buttons';
@@ -70,8 +71,10 @@ const voteTopic = () => {
       topicBadge: 'Artificial Intelligence',
     },
   ];
+
   const { scrollToRef, executeScroll } = useScrollTo();
   const [votes, setVotes] = React.useState([]);
+  const voteTopicHeader = React.useRef(null);
 
   const onSelect = React.useCallback(
     (value, selected) => {
@@ -93,6 +96,26 @@ const voteTopic = () => {
   useEffect(() => {
     console.log(votes);
   }, [votes]);
+
+  useEffect(() => {
+    var observer = new IntersectionObserver(
+      function (entries) {
+        // no intersection with screen
+        if (entries[0].intersectionRatio === 0)
+          document
+            .querySelector('.voteTopicHeader')
+            .classList.add('voteTopicHeader-sticky');
+        // fully intersects with screen
+        else if (entries[0].intersectionRatio === 1)
+          document
+            .querySelector('.voteTopicHeader')
+            .classList.remove('voteTopicHeader-sticky');
+      },
+      { threshold: [0, 1] },
+    );
+
+    observer.observe(document.querySelector('.voteTopicHeaderTop'));
+  }, []);
 
   const TopicBadge = ({ topic }) => {
     return (
@@ -201,13 +224,18 @@ const voteTopic = () => {
         h="250px"
       ></Center>
 
+      <BCSpacer size="sm" />
+
+      <Box className="voteTopicHeaderTop" w="100%" h="1px"></Box>
       <Center
         w="100%"
         bg="white"
         position="sticky"
         top="0px"
-        boxShadow="0px 16px 40px rgba(193, 193, 193, 0.25)"
         zIndex={50}
+        p="3"
+        className="voteTopicHeader"
+        ref={voteTopicHeader}
       >
         <Container maxW="container.xl" w="100%" py="0px">
           <Flex
@@ -238,8 +266,6 @@ const voteTopic = () => {
           </Flex>
         </Container>
       </Center>
-
-      <BCSpacer size="sm" />
 
       <Container maxW="container.xl" w="100%" py="50px">
         <Formik
