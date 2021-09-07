@@ -44,6 +44,13 @@ function App() {
           path="/propose-topic"
           component={Screens.ProposeTopic}
         />
+        <BCRoutes
+          exact
+          header
+          transparency="sticky"
+          path="/vote-topic"
+          component={Screens.VoteTopic}
+        />
       </Switch>
       <Comp.Footer />
     </Router>

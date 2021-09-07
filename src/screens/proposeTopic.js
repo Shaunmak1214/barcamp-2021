@@ -111,7 +111,9 @@ const ProposeTopic = () => {
             </Text>
           </Center>
         </Flex>
+
         <BCSpacer size="sm" />
+
         <Formik
           validationSchema={schema}
           initialValues={{
