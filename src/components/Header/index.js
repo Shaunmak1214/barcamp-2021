@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 
 import { Image } from '@chakra-ui/image';
 import {
@@ -8,27 +9,23 @@ import {
   Link,
   SimpleGrid,
   VStack,
-  Box,
 } from '@chakra-ui/layout';
-
 import { Text } from '@chakra-ui/react';
-import { CloseIcon } from '@chakra-ui/icons';
 
-import PropTypes from 'prop-types';
+import { PrimaryButton } from '../Buttons';
+import { BarcampFullLogo, PlatinumIcon } from '../../assets/';
+import MobileMenu from './MobileMenu';
 
 import {
   platinumSponsor,
   goldSponsor,
   silverSponsor,
 } from '../../datas/sponsors';
-import { PrimaryButton } from '../Buttons';
-import { BarcampFullLogo, BurgerDivIcon, PlatinumIcon } from '../../assets/';
 
 const Index = ({ cta, type }) => {
   const sponsorHover = useRef(null);
   const headerSticky = useRef(null);
   const joinButton = useRef(null);
-  const isOpen = useRef(false);
 
   const handleScroll = (e) => {
     const window = e.currentTarget;
@@ -137,59 +134,7 @@ const Index = ({ cta, type }) => {
             src={BarcampFullLogo}
             alt="Logo"
           />
-          <VStack
-            width="25px"
-            height="25px"
-            alignItems="center"
-            justifyContent="space-around"
-            cursor="pointer"
-            position="relative"
-            display={['block', 'none']}
-            onClick={() => {
-              isOpen.current.style.display = 'block';
-            }}
-          >
-            <Box>
-              <Image w="24px" h="15px" src={BurgerDivIcon} />
-            </Box>
-          </VStack>
-          <Center
-            ref={isOpen}
-            display="none"
-            bg="#fff"
-            minW="92vw"
-            h="auto"
-            position="absolute"
-            top="150px"
-            left="50%"
-            transform="translate(-52%, -50%)"
-            zIndex="10"
-            overflow="hidden"
-            boxShadow="0 3rem 5rem rgba(0, 0, 0, 0.3);"
-            borderRadius="8px"
-          >
-            <Container p="2em">
-              <Box d="flex" justifyContent="flex-end">
-                <CloseIcon
-                  w="12px"
-                  h="12px"
-                  onClick={() => (isOpen.current.style.display = 'none')}
-                />
-              </Box>
-
-              <VStack>
-                <Link href="/" py="5">
-                  <Text fontSize="md">ABOUT</Text>
-                </Link>
-                <Link href="/" py="5">
-                  <Text fontSize="md">AGENDA</Text>
-                </Link>
-                <Link href="/" py="5">
-                  <Text fontSize="md">FAQ</Text>
-                </Link>
-              </VStack>
-            </Container>
-          </Center>
+          <MobileMenu />
           <HStack
             d={['none', 'none', 'flex']}
             className="navbar"

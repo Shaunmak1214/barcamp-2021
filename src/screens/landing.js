@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { Image } from '@chakra-ui/image';
 import {
   Container,
@@ -8,8 +10,7 @@ import {
   SimpleGrid,
 } from '@chakra-ui/layout';
 import { Text } from '@chakra-ui/react';
-import React from 'react';
-import { useRef, useEffect } from 'react';
+
 import Faq from '../components/Faqs';
 import { PrimaryButton } from '../components/Buttons';
 import BCSpacer from '../components/Spacer';
@@ -17,6 +18,8 @@ import { SectionTitle } from '../components/SectionTitle';
 import { CountDownBlock } from 'components/Countdown';
 import Sponsor from '../components/Sponsors';
 import Banner from '../components/Banner';
+
+import { useCountdown } from '../hooks';
 
 import {
   BarcampLandingImg,
@@ -36,39 +39,9 @@ import {
 } from '../assets';
 
 const Index = () => {
-  const daysRef = useRef(null);
-  const hoursRef = useRef(null);
-  const minutesRef = useRef(null);
-  const secondsRef = useRef(null);
-
-  let interval = useRef();
-  const countDownTimer = () => {
-    const countDownDate = new Date('September 25, 2021 00:00:00').getTime();
-    //@ts-ignore
-    interval = setInterval(() => {
-      const now = new Date().getTime();
-
-      const distance = countDownDate - now;
-
-      const calDays = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const calHours = Math.floor(
-        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
-      );
-      const calMinutes = Math.floor(
-        (distance % (1000 * 60 * 60)) / (1000 * 60),
-      );
-      const calSeconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      if (distance < 0) {
-        clearInterval(interval.current);
-      } else {
-        daysRef.current.innerText = calDays;
-        hoursRef.current.innerText = calHours;
-        minutesRef.current.innerText = calMinutes;
-        secondsRef.current.innerText = calSeconds;
-      }
-    }, 1000);
-  };
+  const { daysRef, hoursRef, minutesRef, secondsRef } = useCountdown(
+    'September 25, 2021 00:00:00',
+  );
 
   const LandingImgRenderer = () => {
     if (window.screen.width < 768) {
@@ -86,14 +59,6 @@ const Index = () => {
       );
     }
   };
-
-  useEffect(() => {
-    countDownTimer();
-
-    return () => {
-      clearInterval(interval.current);
-    };
-  }, []);
 
   return (
     <>

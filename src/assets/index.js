@@ -30,6 +30,9 @@ import InstagramIcon from './jpg-pngs/instagram-icon.png';
 import LinkedinIcon from './jpg-pngs/linkedin-icon.png';
 import BurgerDivIcon from './svgs/burger-div.svg';
 import ProposePic from './jpg-pngs/propose.png';
+import MenuIcon from './svgs/menu.svg';
+import LinksIcon from './svgs/links.svg';
+import CountdownIcon from './svgs/countdown.svg';
 
 export {
   BarcampFullLogo,
@@ -64,4 +67,7 @@ export {
   LinkedinIcon,
   BurgerDivIcon,
   ProposePic,
+  MenuIcon,
+  LinksIcon,
+  CountdownIcon,
 };
