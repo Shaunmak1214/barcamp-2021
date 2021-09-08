@@ -9,35 +9,34 @@ import BCSpacer from '../components/Spacer';
 import { Splash1 } from '../assets';
 
 const Login = () => {
-  // const handleGoogleLogin = async (googleData) => {
-  //   if (googleData) {
-  //     await axios
-  //       .post(`${API_URL}auth/google`, {
-  //         googleToken: googleData.tokenId,
-  //       })
-  //       .then((res) => {
-  //         if (res.status === 200) {
-  //           dispatch(
-  //             LOGIN({
-  //               access_token: res.data,
-  //             }),
-  //           );
-  //           /* setLoggedIn(true) */
-  //           window.location.href = '/';
-  //         } else {
-  //           setErrorMessage(`Google Log In Failed ${res.data}`);
-  //           setGoogleSignInClicked(false);
-  //         }
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //         setErrorMessage(`Google Log In Failed ${googleData.tokenId}`);
-  //         setGoogleSignInClicked(false);
-  //       });
-  //   } else {
-  //     console.log('error');
-  //   }
-  // };
+  const handleGoogleLogin = async (googleData) => {
+    console.log(googleData);
+    // if (googleData) {
+    //   await axios
+    //     .post(`${process.env.REACT_APP_API_URL}auth/google`, {
+    //       token: googleData.tokenId,
+    //     })
+    //     .then((res) => {
+    //       if (res.status === 201) {
+    //         // dispatch(LOGIN(res.data));
+    //         // history.push("/home");
+    //       }
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //       // toast({
+    //       //   title: "Failed to Load",
+    //       //   description: "Something went wrong on our side!",
+    //       //   status: "error",
+    //       //   duration: 10,
+    //       //   isClosable: false,
+    //       //   position: "top",
+    //       // });
+    //     });
+    // } else {
+    //   console.log("error");
+    // }
+  };
 
   return (
     <>
@@ -67,7 +66,7 @@ const Login = () => {
               </Text>
               <BCSpacer size="sm" />
               <GoogleLogin
-                clientId="202957668239-rkdg4atg2h8n5br8akn5c1k0s4uno6cm.apps.googleusercontent.com"
+                clientId="295011704852-9n96q9tn0r8jmrmdoh0ltrku4sqm9obj.apps.googleusercontent.com"
                 render={(renderProps) => (
                   <PrimaryButton
                     onClick={() => {
@@ -85,8 +84,8 @@ const Login = () => {
                   console.log('Google Login Loaded');
                 }}
                 buttonText="Log in with Google"
-                // onSuccess={handleGoogleLogin}
-                // onFailure={handleGoogleLogin}
+                onSuccess={handleGoogleLogin}
+                onFailure={handleGoogleLogin}
                 cookiePolicy={'single_host_origin'}
               />
             </VStack>
