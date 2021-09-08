@@ -32,7 +32,7 @@ const voteTopic = () => {
       topicId: 1,
       topicName: 'Where its going / What even is it?',
       topicDescription:
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, Ipsum has been the industrys standard dummy text ever since the 1500s,',
+        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s',
       topicBadge: 'Artificial Intelligence',
     },
     {
@@ -183,10 +183,16 @@ const voteTopic = () => {
 
   return (
     <>
-      <VStack w="100%" h="100vh" justifyContent="center" alignItems="center">
+      <VStack
+        w="100%"
+        h="100vh"
+        justifyContent={['flex-start', 'flex-start', 'center']}
+        alignItems="center"
+      >
+        <BCSpacer d={['flex', 'none', 'none']} size="sm" />
         <Container maxW="container.xl">
           <SimpleGrid
-            columns={2}
+            columns={[1, 1, 2]}
             w="100%"
             h="100%"
             justifyContent="center"
@@ -196,7 +202,7 @@ const voteTopic = () => {
               alignItems="flex-start"
               justifyContent="center"
               h="100%"
-              pr={20}
+              pr={[10, 0, 20]}
             >
               <Text as="h1" fontSize="4xl" fontWeight="600">
                 Vote for the topics
@@ -212,7 +218,7 @@ const voteTopic = () => {
                 </PrimaryButton>
               </HStack>
             </VStack>
-            <Image src={VotingPic} alt="Login" />
+            <Image d={['none', 'none', 'block']} src={VotingPic} alt="Login" />
           </SimpleGrid>
         </Container>
       </VStack>
@@ -230,7 +236,7 @@ const voteTopic = () => {
       <Center
         w="100%"
         bg="white"
-        position="sticky"
+        position={['flex', 'flex', 'sticky']}
         top="0px"
         zIndex={50}
         p="3"
@@ -246,10 +252,10 @@ const voteTopic = () => {
             pb="5"
             ref={scrollToRef}
           >
-            <SectionTitle fontSize="2xl" type="left">
+            <SectionTitle fontSize="2xl" type="left" mb={['7', '0', '0']}>
               Pick your choice
             </SectionTitle>
-            <Center>
+            <Center mb={['7', '0', '0']}>
               <Text>{votes.length} / 5 selected</Text>
             </Center>
             <Center
@@ -291,9 +297,14 @@ const voteTopic = () => {
                       value={`${topic.topicId}`}
                       onSelect={(value, selected) => onSelect(value, selected)}
                     >
-                      <HStack spacing={7} py="0.5em" px="0.5em">
+                      <HStack
+                        spacing={7}
+                        py="0.5em"
+                        px={['0rem', '0rem', '0.5em']}
+                      >
                         <Image
                           src={AIIcon}
+                          d={['none', 'none', 'flex']}
                           h="45px"
                           w="45px"
                           alt="Artificial Intelligence"
