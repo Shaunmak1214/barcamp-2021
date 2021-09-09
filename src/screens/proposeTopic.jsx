@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import * as yup from 'yup';
 import { Formik, Form, Field } from 'formik';
@@ -12,6 +12,7 @@ import {
   HStack,
   Center,
   Flex,
+  Box,
 } from '@chakra-ui/layout';
 import { Checkbox } from '@chakra-ui/react';
 import { PrimaryButton } from '../components/Buttons';
@@ -22,8 +23,9 @@ import {
   SelectDropdownFormField,
 } from '../components/Forms';
 import BCSpacer from '../components/Spacer';
-
 import { SectionBg, ProposePic } from '../assets';
+
+import { useScrollTo } from '../hooks';
 
 import '../global.css';
 
@@ -35,22 +37,45 @@ const schema = yup.object({
 });
 
 const ProposeTopic = () => {
-  const scrollToRef = useRef(null);
+  const { scrollToRef, executeScroll } = useScrollTo();
   const [checked, setChecked] = useState(false);
 
   const handleConsentCheck = (e) => {
     setChecked(e.target.checked);
   };
 
-  const executeScroll = () =>
-    scrollToRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  useEffect(() => {
+    var observer = new IntersectionObserver(
+      function (entries) {
+        // no intersection with screen
+        if (entries[0].intersectionRatio === 0)
+          document
+            .querySelector('.voteTopicHeader')
+            .classList.add('voteTopicHeader-sticky');
+        // fully intersects with screen
+        else if (entries[0].intersectionRatio === 1)
+          document
+            .querySelector('.voteTopicHeader')
+            .classList.remove('voteTopicHeader-sticky');
+      },
+      { threshold: [0, 1] },
+    );
+
+    observer.observe(document.querySelector('.voteTopicHeaderTop'));
+  }, []);
 
   return (
     <>
-      <VStack w="100%" h="100vh" justifyContent="center" alignItems="center">
+      <VStack
+        w="100%"
+        h="100vh"
+        justifyContent={['flex-start', 'flex-start', 'center']}
+        alignItems="center"
+      >
+        <BCSpacer d={['flex', 'none', 'none']} size="sm" />
         <Container maxW="container.xl">
           <SimpleGrid
-            columns={2}
+            columns={[1, 1, 2]}
             w="100%"
             h="100%"
             justifyContent="center"
@@ -60,7 +85,7 @@ const ProposeTopic = () => {
               alignItems="flex-start"
               justifyContent="center"
               h="100%"
-              pr={20}
+              pr={[10, 0, 20]}
             >
               <Text as="h1" fontSize="4xl" fontWeight="600">
                 Propose a topic TO BECOME A SPEAKER
@@ -78,7 +103,7 @@ const ProposeTopic = () => {
                 </PrimaryButton>
               </HStack>
             </VStack>
-            <Image src={ProposePic} alt="Login" />
+            <Image d={['none', 'none', 'block']} src={ProposePic} alt="Login" />
           </SimpleGrid>
         </Container>
       </VStack>
@@ -89,31 +114,47 @@ const ProposeTopic = () => {
         w="100%"
         h="250px"
       ></Center>
-      <Container maxW="container.xl" w="100%" py="50px">
-        <Flex
-          flexDir={['column', 'column', 'row']}
-          justifyContent="space-between"
-          alignItems="center"
-          ref={scrollToRef}
-        >
-          <SectionTitle fontSize="2xl" type="left">
-            Propose a topic
-          </SectionTitle>
-          <Center
-            boxShadow="0px 16px 40px rgba(193, 193, 193, 0.25)"
-            borderRadius="8px"
-            px="6"
-            py="3"
+
+      <BCSpacer size="sm" />
+
+      <Box className="voteTopicHeaderTop" w="100%" h="1px"></Box>
+      <Center
+        w="100%"
+        bg="white"
+        position={['flex', 'flex', 'sticky']}
+        top="0px"
+        zIndex={50}
+        p="3"
+        className="voteTopicHeader"
+      >
+        <Container maxW="container.xl" w="100%" py="0px">
+          <Flex
+            flexDir={['column', 'column', 'row']}
+            justifyContent="space-between"
+            alignItems={['flex-start', 'flex-start', 'center']}
+            pt="5"
+            pb="5"
+            ref={scrollToRef}
           >
-            <Text as="h2" fontSize="sm" fontWeight="500">
-              You are allowed to propose{' '}
-              <span className="gradientText">ONE</span> topic only
-            </Text>
-          </Center>
-        </Flex>
+            <SectionTitle fontSize="2xl" type="left" mb={['7', '0', '0']}>
+              Propose a topic
+            </SectionTitle>
+            <Center
+              boxShadow="0px 16px 40px rgba(193, 193, 193, 0.25)"
+              borderRadius="8px"
+              px="6"
+              py="3"
+            >
+              <Text as="h2" fontSize="sm" fontWeight="500">
+                You are allowed to propose{' '}
+                <span className="gradientText">ONE</span> topic only
+              </Text>
+            </Center>
+          </Flex>
+        </Container>
+      </Center>
 
-        <BCSpacer size="sm" />
-
+      <Container maxW="container.xl" w="100%" py="50px">
         <Formik
           validationSchema={schema}
           initialValues={{

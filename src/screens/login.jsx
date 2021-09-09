@@ -40,10 +40,16 @@ const Login = () => {
 
   return (
     <>
-      <VStack w="100%" h="100vh" justifyContent="center" alignItems="center">
+      <VStack
+        w="100%"
+        h="100vh"
+        justifyContent={['flex-start', 'flex-start', 'center']}
+        alignItems="center"
+      >
+        <BCSpacer d={['flex', 'none', 'none']} size="sm" />
         <Container maxW="container.xl">
           <SimpleGrid
-            columns={2}
+            columns={[1, 1, 2]}
             w="100%"
             h="100%"
             justifyContent="center"
@@ -53,7 +59,7 @@ const Login = () => {
               alignItems="flex-start"
               justifyContent="center"
               h="100%"
-              pr={20}
+              pr={[10, 0, 20]}
             >
               <Text as="h1" fontSize="4xl" fontWeight="600">
                 WELCOME TO BARCAMP
@@ -89,7 +95,7 @@ const Login = () => {
                 cookiePolicy={'single_host_origin'}
               />
             </VStack>
-            <Image src={Splash1} alt="Login" />
+            <Image d={['none', 'none', 'block']} src={Splash1} alt="Login" />
           </SimpleGrid>
         </Container>
       </VStack>

@@ -39,6 +39,7 @@ const MobileMenu = () => {
         cursor="pointer"
         right="15px"
         position="relative"
+        zIndex="100"
         display={['block', 'none']}
         onClick={() => {
           isOpen.current.style.transform = 'translate(-52%, -0%) scale(1.00)';
@@ -64,7 +65,7 @@ const MobileMenu = () => {
         transform="translate(-52%, -0%) scale(0.95)"
         transition="150ms cubic-bezier(0.215,0.61,0.355,1);"
         transformOrigin="100% 0;"
-        zIndex="10"
+        zIndex="100"
         overflow="hidden"
         boxShadow="0 3rem 5rem rgba(0, 0, 0, 0.3);"
         borderRadius="8px"
@@ -185,7 +186,7 @@ const MobileMenu = () => {
 
           <BCSpacer size="5xs" />
           <VStack alignItems="flex-start">
-            <Link href="/dashbaord">
+            <Link href="/dashboard">
               <Text fontSize="sm" fontFamily="Montserrat" fontWeight="600">
                 Participant Dashboard
               </Text>
@@ -195,7 +196,7 @@ const MobileMenu = () => {
                 Propose Topic
               </Text>
             </Link>
-            <Link href="/vote-topics">
+            <Link href="/vote-topic">
               <Text fontSize="sm" fontFamily="Montserrat" fontWeight="600">
                 Vote Topics
               </Text>
