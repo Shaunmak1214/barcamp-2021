@@ -1,5 +1,7 @@
 import BlackLoaderData from '../assets/lottie/black-loader.json';
 
+require('dotenv').config();
+
 export const BlackLoader = {
   loop: true,
   autoplay: true,
@@ -9,4 +11,4 @@ export const BlackLoader = {
   },
 };
 
-export const API_URL = 'http://localhost:5000/api';
+export const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';

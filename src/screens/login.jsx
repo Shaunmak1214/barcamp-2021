@@ -1,41 +1,55 @@
+import React from 'react';
+import { GoogleLogin } from 'react-google-login';
+import { useDispatch } from 'react-redux';
+import axios from 'axios';
+import jwt_decode from 'jwt-decode';
+
+import { LOGIN } from '../reducers/authSlice';
+
 import { Image } from '@chakra-ui/image';
 import { Container, Link, SimpleGrid, Text, VStack } from '@chakra-ui/layout';
-import { GoogleLogin } from 'react-google-login';
-import React from 'react';
+
 import { PrimaryButton } from '../components/Buttons';
 import BCSpacer from '../components/Spacer';
-// import Loader from '../components/Loader';
 
 import { Splash1 } from '../assets';
 
+require('dotenv').config();
+
 const Login = () => {
+  const dispatch = useDispatch();
+
   const handleGoogleLogin = async (googleData) => {
-    console.log(googleData);
-    // if (googleData) {
-    //   await axios
-    //     .post(`${process.env.REACT_APP_API_URL}auth/google`, {
-    //       token: googleData.tokenId,
-    //     })
-    //     .then((res) => {
-    //       if (res.status === 201) {
-    //         // dispatch(LOGIN(res.data));
-    //         // history.push("/home");
-    //       }
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //       // toast({
-    //       //   title: "Failed to Load",
-    //       //   description: "Something went wrong on our side!",
-    //       //   status: "error",
-    //       //   duration: 10,
-    //       //   isClosable: false,
-    //       //   position: "top",
-    //       // });
-    //     });
-    // } else {
-    //   console.log("error");
-    // }
+    if (googleData) {
+      await axios
+        .post(`${process.env.REACT_APP_API_URL}auth/`, {
+          googleId: googleData.tokenId,
+        })
+        .then((res) => {
+          if (res.status === 201) {
+            let loginObj = {
+              accessToken: res.data.accessToken,
+              refreshToken: res.data.refreshToken,
+              user: jwt_decode(res.data.accessToken),
+            };
+            dispatch(LOGIN(loginObj));
+            history.push('/dashboard');
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          // toast({
+          //   title: "Failed to Load",
+          //   description: "Something went wrong on our side!",
+          //   status: "error",
+          //   duration: 10,
+          //   isClosable: false,
+          //   position: "top",
+          // });
+        });
+    } else {
+      console.log('error');
+    }
   };
 
   return (
@@ -72,7 +86,7 @@ const Login = () => {
               </Text>
               <BCSpacer size="sm" />
               <GoogleLogin
-                clientId="295011704852-9n96q9tn0r8jmrmdoh0ltrku4sqm9obj.apps.googleusercontent.com"
+                clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`}
                 render={(renderProps) => (
                   <PrimaryButton
                     onClick={() => {

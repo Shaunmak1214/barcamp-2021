@@ -1,4 +1,7 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { LOGOUT } from '../../reducers/authSlice';
+
 import {
   Container,
   VStack,
@@ -9,15 +12,23 @@ import {
   HStack,
 } from '@chakra-ui/layout';
 import { Image } from '@chakra-ui/image';
+import { Text } from '@chakra-ui/react';
+
 import {
   BarcampWhiteLogo,
   FacebookIcon,
   InstagramIcon,
   LinkedinIcon,
 } from '../../assets/';
-import { Text } from '@chakra-ui/react';
 
 const Index = () => {
+  const dispatch = useDispatch();
+
+  const logout = () => {
+    dispatch(LOGOUT());
+    window.location.href = '/login';
+  };
+
   return (
     <>
       <Center bg="linear-gradient(90deg, #1050A0 0%, #EA202C 99.99%, #EB202B 100%, #EB202B 100%)">
@@ -56,6 +67,11 @@ const Index = () => {
                 <Link href="/" textDecorationLine="underline">
                   <Text fontSize="xl" pb="10px">
                     SPONSORS
+                  </Text>
+                </Link>
+                <Link onClick={() => logout()} textDecorationLine="underline">
+                  <Text fontSize="xl" pb="10px">
+                    LOGOUT
                   </Text>
                 </Link>
               </Box>
