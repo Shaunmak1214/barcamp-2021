@@ -35,7 +35,7 @@ import SectionBg from './jpg-pngs/section-bg.png';
 import AuronexLogo from './jpg-pngs/auronex.png';
 import BarcampLandingImg from './jpg-pngs/landing.png';
 import BarcampLandingImgMobile from './jpg-pngs/barcamp-landing-mobile.png';
-
+import LinearBorder from './jpg-pngs/linear-border.png';
 // Pictures (JPG)
 import SamplePicOne from './jpg-pngs/gallery1.jpg';
 import SamplePicTwo from './jpg-pngs/gallery2.jpg';
@@ -87,4 +87,5 @@ export {
   MobileMenuIcon,
   VotingPic,
   AIIcon,
+  LinearBorder,
 };
