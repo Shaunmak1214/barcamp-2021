@@ -11,13 +11,11 @@ const SelectFormField = ({ value, onSelect, children, ...props }) => {
   const selectableRef = useRef(null);
 
   const handleSelect = () => {
-    console.log(selected);
     setSelected(!selected);
-    // onSelect(value, !selected);
   };
 
   useEffect(() => {
-    // onSelect(value, selected);
+    onSelect(value, selected);
   }, [selected]);
 
   return (

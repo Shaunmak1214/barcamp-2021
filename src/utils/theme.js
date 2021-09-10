@@ -2,7 +2,7 @@ import { extendTheme } from '@chakra-ui/react';
 
 const theme = extendTheme({
   fonts: {
-    heading: '"Poppins", sans-serif',
+    heading: '"Montserrat", sans-serif',
     body: '"Source Sans Pro", sans-serif',
   },
   fontSizes: {
@@ -26,6 +26,9 @@ const theme = extendTheme({
     highlight: '#FF7C83',
     warning: '#FFC75F',
     danger: '#C34A36',
+  },
+  sizes: {
+    'container.xl': '1200px',
   },
   components: {
     Button: {

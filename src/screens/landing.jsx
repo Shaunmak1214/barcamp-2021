@@ -8,6 +8,7 @@ import {
   Center,
   Box,
   SimpleGrid,
+  Heading,
 } from '@chakra-ui/layout';
 import { Text } from '@chakra-ui/react';
 
@@ -72,9 +73,9 @@ const Index = () => {
         <LandingImgRenderer />
         <Container maxW="container.xl">
           <VStack w={['100%', '50%', '35%']} alignItems="flex-start">
-            <Text fontSize="4xl">
+            <Heading fontSize="3xl" fontWeight="400" lineHeight="1.5">
               We bring people together to share their passion around technology.
-            </Text>
+            </Heading>
             <BCSpacer size="sm" />
             <PrimaryButton
               onClick={() => {
@@ -93,9 +94,9 @@ const Index = () => {
           justifyContent="center"
           alignItems="center"
         >
-          <Text textAlign="center" fontSize="4xl">
+          <Heading textAlign="center" fontSize="4xl">
             We can&apos;t wait to show you what we&apos;ve got prepared
-          </Text>
+          </Heading>
           <Box
             position="relative"
             d="flex"

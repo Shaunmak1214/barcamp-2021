@@ -39,12 +39,7 @@ const updateProfile = () => {
     [setHeard],
   );
   return (
-    <VStack
-      w="100%"
-      minh="100vh"
-      justifyContent="flex-start"
-      alignItems="center"
-    >
+    <VStack w="100%" justifyContent="flex-start" alignItems="center">
       <BCSpacer size="xs" />
       <Container maxW="container.lg" alignItems="flex-start">
         <SectionTitle alignItems="flex-start" fontSize="3xl" type="left">
@@ -70,8 +65,8 @@ const updateProfile = () => {
           }}
         >
           {() => (
-            <Form>
-              <VStack spacing={10}>
+            <Form h="100%">
+              <VStack spacing={10} h="100%">
                 <SimpleGrid w="100%" spacing={10} columns={[1, 2, 2]}>
                   <Field
                     label="Full Name"
@@ -93,24 +88,33 @@ const updateProfile = () => {
                   component={BCTextFilledFormField}
                 />
                 <Field
-                  label="Name of Company / Name of institution"
+                  label="Name of Company / Name of Institution"
                   name="noc"
                   placeholder="Enter your company name or university name"
                   component={BCTextFilledFormField}
                 />
-                <VStack w="100%" alignItems="flex-start">
+                <VStack w="100%" h="100%" alignItems="flex-start">
                   <Text fontFamily="Poppins" fontWeight="500" fontSize="md">
-                    How do you know about Barcamp Cyberjaya
+                    How do you know about Barcamp Cyberjaya *optional
                   </Text>
-                  <Box w="100%" h="250px" py="5" borderRadius="8px">
+                  <Box w="100%" h="100%" py="5" borderRadius="8px">
                     <SelectFormField value="Facebook" onSelect={onSelect}>
                       <Text>Facebook</Text>
                     </SelectFormField>
                     <SelectFormField value="Instagram" onSelect={onSelect}>
                       <Text>Instagram</Text>
                     </SelectFormField>
+                    <SelectFormField value="LinkedIn" onSelect={onSelect}>
+                      <Text>LinkedIn</Text>
+                    </SelectFormField>
+                    <SelectFormField value="Youtube" onSelect={onSelect}>
+                      <Text>Youtube</Text>
+                    </SelectFormField>
                     <SelectFormField value="MMU" onSelect={onSelect}>
                       <Text>MMU</Text>
+                    </SelectFormField>
+                    <SelectFormField value="other" onSelect={onSelect}>
+                      <Text>Other ... </Text>
                     </SelectFormField>
                   </Box>
                 </VStack>

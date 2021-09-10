@@ -1,21 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
+import { API_URL } from '../constants/';
+
 const useAuthorized = ({ authCheckUrl }) => {
-  const [authorized, setAuthorized] = useState(false);
+  const [authorized, setAuthorized] = useState(true);
 
   const checkAuthorized = async () => {
-    axios.get(`${authCheckUrl}`).then((res) => {
+    axios.get(`${API_URL}${authCheckUrl}`).then((res) => {
       if (res.status === 200) {
         setAuthorized(true);
       }
     });
   };
-
-  useEffect(() => {
-    checkAuthorized();
-  }, []);
 
   return { authorized, checkAuthorized };
 };

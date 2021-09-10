@@ -20,9 +20,12 @@ import { PrimaryButton } from '../components/Buttons';
 import { SectionTitle } from 'components/SectionTitle';
 import { SelectFormFieldClass } from '../components/Forms';
 import BCSpacer from '../components/Spacer';
-import { SectionBg, VotingPic, AIIcon } from '../assets';
+import BCModal from '../components/Modal';
+import useModal from '../components/Modal/useModal';
 
 import { useScrollTo } from '../hooks';
+
+import { SectionBg, VotingPic, AIIcon } from '../assets';
 
 import '../global.css';
 
@@ -73,6 +76,9 @@ const voteTopic = () => {
   ];
 
   const { scrollToRef, executeScroll } = useScrollTo();
+  const { isOpen, onModalClose, onModalOpen } = useModal({
+    initialState: false,
+  });
   const [votes, setVotes] = React.useState([]);
   const voteTopicHeader = React.useRef(null);
 
@@ -183,6 +189,11 @@ const voteTopic = () => {
 
   return (
     <>
+      <BCModal
+        successUrl="/dashboard"
+        modalOpen={isOpen}
+        onClose={onModalClose}
+      />
       <VStack
         w="100%"
         h="100vh"
@@ -263,6 +274,7 @@ const voteTopic = () => {
               borderRadius="8px"
               px="6"
               py="3"
+              onClick={onModalOpen}
             >
               <Text as="h2" fontSize="sm" fontWeight="500">
                 Up to <span className="gradientText">FIVE</span> selections per
