@@ -24,9 +24,9 @@ import {
 } from '../components/Forms';
 import BCSpacer from '../components/Spacer';
 import { SectionBg, ProposePic } from '../assets';
-import axios from 'axios';
+import { useAxios } from './../hooks/useAxios';
 import { useScrollTo } from '../hooks';
-import { API_URL } from './../constants/index';
+import store from './../store/store';
 import '../global.css';
 
 const schema = yup.object({
@@ -39,46 +39,25 @@ const schema = yup.object({
 const ProposeTopic = () => {
   const { scrollToRef, executeScroll } = useScrollTo();
   const [checked, setChecked] = useState(false);
-  const token =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnb29nbGVJZCI6ImV5SmhiR2NpT2lKU1V6STFOaUlzSW10cFpDSTZJams1TVdJd05qTTJZV0ZrWVRNME1XTTFZVEE0WlRCa09HWXlOREEyT1RjeU1EWTBaR000WldRaUxDSjBlWEFpT2lKS1YxUWlmUS5leUpwYzNNaU9pSmhZMk52ZFc1MGN5NW5iMjluYkdVdVkyOXRJaXdpWVhwd0lqb2lNamsxTURFeE56QTBPRFV5TFRsdU9UWnhPWFJ1TUhJNGFtMXliV1J2YURCc2RISnJkVFJ6Y1cwNWIySnFMbUZ3Y0hNdVoyOXZaMnhsZFhObGNtTnZiblJsYm5RdVkyOXRJaXdpWVhWa0lqb2lNamsxTURFeE56QTBPRFV5TFRsdU9UWnhPWFJ1TUhJNGFtMXliV1J2YURCc2RISnJkVFJ6Y1cwNWIySnFMbUZ3Y0hNdVoyOXZaMnhsZFhObGNtTnZiblJsYm5RdVkyOXRJaXdpYzNWaUlqb2lNVEV3TlRnMk1ESXhOelk1TXpreU5USXpOakEySWl3aVpXMWhhV3dpT2lKaWRYTmpiMjF3WVc1NU1USXpRR2R0WVdsc0xtTnZiU0lzSW1WdFlXbHNYM1psY21sbWFXVmtJanAwY25WbExDSmhkRjlvWVhOb0lqb2lSMDh0V21scU1VMWlVbloxVDA1Q2FtZHBaemRNZHlJc0ltNWhiV1VpT2lKQ2RYTWdZMjl0Y0dGdWVTSXNJbkJwWTNSMWNtVWlPaUpvZEhSd2N6b3ZMMnhvTXk1bmIyOW5iR1YxYzJWeVkyOXVkR1Z1ZEM1amIyMHZZUzlCUVZSWVFVcDNUbkJhVVRCeVdWUlNRVk5WU0RnMlIyWnliMVI2Ym5aNWRsbEpXaTFaU1hnMlNVSk5TajF6T1RZdFl5SXNJbWRwZG1WdVgyNWhiV1VpT2lKQ2RYTWlMQ0ptWVcxcGJIbGZibUZ0WlNJNkltTnZiWEJoYm5raUxDSnNiMk5oYkdVaU9pSmxiaUlzSW1saGRDSTZNVFl6TVRJd01EQXpPQ3dpWlhod0lqb3hOak14TWpBek5qTTRMQ0pxZEdraU9pSXdOakE0WXprNE1qWTNOVFl5WlRaa056TXlaRFJrTUdFMlpUTmlaREF3TWpWalpEY3hPREUzSW4wLmVVQjkxbE52ZzFjTi1xMkRScEZBNUZkMW1NSDdkV1g5M1dyTjBvRGM1Q0Z5SFJFOV9MeER3NDFDTXNjSGkyNy1uSVNjQzFwU2U3YkJTWjd4cGtLSnpOMV9KcEdFOFVsY0hiTDM3a2ttck00Zi0tNmJUbzNDNlBZSndiVEFDS0lNVGdNcl9qSG5BTXNUZ1dDOE04OFphVVBXcEVnU3Vwc3VBSzRoX0ZiMTFnTk5CTTVKel9TdUg0Tlh0VTczNFg3cFp2YW9lWDQxM1o4Z1ZrNFhZa0dheWd6SnZOTHd0MHRWaW43RkFWWVlXTjA4ZGhuSk5uYnB0dmh5LXZDZFE0d1BMLW0yMzMwOVIyNmV0UDFuTEVIT0Z3Z3FxWGJJVW9lcEF6X3hjdm1wMFZ4WnZOcWRQQXJlejN0NmNrQUhMNzU0b2FLT21SRC04RHdUc084SGFZbU55QSIsImVtYWlsIjoiYnVzY29tcGFueTEyM0BnbWFpbC5jb20iLCJ1c2VySWQiOiItSVFNVnZwZmkiLCJwZXJtaXNzaW9uRmxhZ3MiOjEsInJlZnJlc2hLZXkiOnsidHlwZSI6IkJ1ZmZlciIsImRhdGEiOlsyNTQsNTEsMTE2LDExNywzOCwyNDgsNiwyNDksMTUsMTMyLDE3OCwyMzcsMjM5LDE5OSwxMDUsMTY3XX0sImlhdCI6MTYzMTIwMDA1NSwiZXhwIjoxNjMxMjM2MDU1fQ.D5Zmt9h8RX5YYFG2ZV_Zrnji74GQrlp5iwxIZe4r2yk';
+  const userState = store.getState().auth.user;
+  const token = store.getState().auth.accessToken;
 
-  const handleConsentCheck = (e) => {
-    setChecked(e.target.checked);
-  };
-
-  const handleTopicAdder = ({ description, topicTheme, topicName }) => {
-    const data = {
-      name: topicName,
-      user: '-IQMVvpfi',
-      theme: topicTheme,
-      description,
-      contact: '-',
-      self_description: '-',
-    };
-    console.log(data);
-
-    const config = {
+  const { response, loading, error, fetch } = useAxios(
+    {
       method: 'post',
-      url: `${API_URL}topics`,
+      url: '/topics',
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
-        // need to put content type?
-        // log in then change footer etc
-        // need to set open button? if the vote topic day arrive
       },
-      data,
-    };
+    },
+    () => {
+      console.log(response, loading, error);
+    },
+  );
 
-    axios(config)
-      .then((res) => {
-        if (res.status === 201) {
-          console.log(res);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const handleConsentCheck = (e) => {
+    setChecked(e.target.checked);
   };
 
   useEffect(() => {
@@ -200,7 +179,16 @@ const ProposeTopic = () => {
             topicName: '',
             topicSummary: '',
           }}
-          onSubmit={(data) => handleTopicAdder(data)}
+          onSubmit={(data) => {
+            fetch({
+              name: data.topicName,
+              user: userState.userId,
+              theme: data.topicTheme,
+              description: data.description,
+              contact: '-',
+              self_description: '-',
+            });
+          }}
         >
           {() => (
             <Form>
