@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 
 import { API_URL } from '../constants/';
@@ -31,9 +32,14 @@ export const useAxios = (axiosParams, onDone) => {
   return { response, error, loading, fetch: fetchData };
 };
 
+useAxios.propTypes = {
+  axiosParams: PropTypes.object.isRequired,
+  onDone: PropTypes.func,
+};
+
 // to use it:
 // const App = () => {
-//   const { response, loading, error } = useAxios({
+//   const { response, loading, error, fetch } = useAxios({
 //       method: 'POST',
 //       url: '/posts',
 //       headers: {
@@ -45,6 +51,7 @@ export const useAxios = (axiosParams, onDone) => {
 //           title: 'title',
 //           body: 'Sample text',
 //       },
+//       cb(fetch())
 //   });
 
 //   return (

@@ -1,0 +1,17 @@
+.modal {
+  transition: all 0.3s ease-in-out;
+  animation: fadeInModal 0.3s ease-in-out;
+  transform-origin: center;
+}
+
+@keyframes fadeInModal {
+  0% {
+    transform: scale(0.65) translate(-50%, -50%);
+  }
+  50% {
+    transform: scale(0.98) translate(-50%, -50%);
+  }
+  100% {
+    transform: scale(1) translate(-50%, -50%);
+  }
+}

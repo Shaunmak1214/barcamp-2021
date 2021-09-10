@@ -168,6 +168,18 @@ const Index = ({ cta, type }) => {
             >
               <Text fontSize="sm">SPONSORS</Text>
             </Link>
+            <Link
+              href="/"
+              py="5"
+              onMouseOver={() => {
+                sponsorToggle('in');
+              }}
+              onMouseLeave={() => {
+                sponsorToggle('out');
+              }}
+            >
+              <Text fontSize="sm">MORE</Text>
+            </Link>
             {cta && (
               <PrimaryButton
                 ref={joinButton}

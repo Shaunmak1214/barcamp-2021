@@ -11,16 +11,19 @@ import { Container, Link, SimpleGrid, Text, VStack } from '@chakra-ui/layout';
 
 import { PrimaryButton } from '../components/Buttons';
 import BCSpacer from '../components/Spacer';
+import Toast from '../components/Toast';
 
 import { Splash1 } from '../assets';
 
 require('dotenv').config();
 
 const Login = () => {
+  const { loginErrToast } = Toast();
   const dispatch = useDispatch();
 
   const handleGoogleLogin = async (googleData) => {
     if (googleData) {
+      loginErrToast();
       console.log(googleData);
       await axios
         .post(`${process.env.REACT_APP_API_URL}auth/`, {
