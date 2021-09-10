@@ -14,7 +14,7 @@ import { PrimaryButton } from '../components/Buttons';
 import BCSpacer from '../components/Spacer';
 // import Loader from '../components/Loader';
 
-import { ResultIcon, Splash1, VotingIcon } from '../assets';
+import { LinearBorder, ResultIcon, Splash1, VotingIcon } from '../assets';
 import { CountDownBlock } from 'components/Countdown';
 import { SectionBg, NoMessageIcon } from '../assets';
 import { SectionTitle } from 'components/SectionTitle';
@@ -204,11 +204,11 @@ const Dashboard = () => {
             p={['25px', '55px 45px 70px 80px']}
             borderWidth="3px"
             borderStyle="solid"
-            borderRadius="10px"
             style={{
-              borderImageSource:
-                'linear-gradient(90deg, rgba(16, 80, 160, 0.8) 0%, rgba(16, 80, 160, 0.8) 0.01%, rgba(235, 32, 43, 0.8) 100%, rgba(235, 32, 43, 0.8) 100%)',
-              borderImageSlice: 1,
+              borderImage: `url(${LinearBorder})`,
+              borderImageSlice: 7,
+              borderImageWidth: '6px',
+              borderImageOutset: 1,
             }}
             flexDir={['column', 'column', 'row']}
           >
@@ -243,11 +243,11 @@ const Dashboard = () => {
             p={['25px', '55px 45px 70px 80px']}
             borderWidth="3px"
             borderStyle="solid"
-            borderRadius="10px"
             style={{
-              borderImageSource:
-                'linear-gradient(90deg, rgba(16, 80, 160, 0.8) 0%, rgba(16, 80, 160, 0.8) 0.01%, rgba(235, 32, 43, 0.8) 100%, rgba(235, 32, 43, 0.8) 100%)',
-              borderImageSlice: 1,
+              borderImage: `url(${LinearBorder})`,
+              borderImageSlice: 7,
+              borderImageWidth: '6px',
+              borderImageOutset: 1,
             }}
             flexDir={['column', 'column', 'row']}
           >

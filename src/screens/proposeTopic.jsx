@@ -24,9 +24,9 @@ import {
 } from '../components/Forms';
 import BCSpacer from '../components/Spacer';
 import { SectionBg, ProposePic } from '../assets';
-
+import { useAxios } from './../hooks/useAxios';
 import { useScrollTo } from '../hooks';
-
+import store from './../store/store';
 import '../global.css';
 
 const schema = yup.object({
@@ -39,6 +39,22 @@ const schema = yup.object({
 const ProposeTopic = () => {
   const { scrollToRef, executeScroll } = useScrollTo();
   const [checked, setChecked] = useState(false);
+  const userState = store.getState().auth.user;
+  const token = store.getState().auth.accessToken;
+
+  const { response, loading, error, fetch } = useAxios(
+    {
+      method: 'post',
+      url: '/topics',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    },
+    () => {
+      console.log(response, loading, error);
+    },
+  );
 
   const handleConsentCheck = (e) => {
     setChecked(e.target.checked);
@@ -164,7 +180,14 @@ const ProposeTopic = () => {
             topicSummary: '',
           }}
           onSubmit={(data) => {
-            console.log(data);
+            fetch({
+              name: data.topicName,
+              user: userState.userId,
+              theme: data.topicTheme,
+              description: data.description,
+              contact: '-',
+              self_description: '-',
+            });
           }}
         >
           {() => (
