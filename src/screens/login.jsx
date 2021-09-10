@@ -21,6 +21,7 @@ const Login = () => {
 
   const handleGoogleLogin = async (googleData) => {
     if (googleData) {
+      console.log(googleData);
       await axios
         .post(`${process.env.REACT_APP_API_URL}auth/`, {
           googleId: googleData.tokenId,
@@ -96,7 +97,7 @@ const Login = () => {
                     px="50"
                     py="6"
                   >
-                    Join us now
+                    Login to barcamp
                   </PrimaryButton>
                 )}
                 autoLoad={false}
