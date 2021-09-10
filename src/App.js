@@ -42,6 +42,7 @@ function App() {
         <BCRoutes
           exact
           header
+          protected
           transparency="sticky"
           path="/propose-topic"
           component={Screens.ProposeTopic}
@@ -49,6 +50,7 @@ function App() {
         <BCRoutes
           exact
           header
+          protected
           transparency="sticky"
           path="/vote-topic"
           component={Screens.VoteTopic}
