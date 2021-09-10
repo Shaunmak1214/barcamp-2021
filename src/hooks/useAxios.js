@@ -8,7 +8,7 @@ axios.defaults.baseURL = API_URL;
 
 export const useAxios = (axiosParams, onDone) => {
   const [response, setResponse] = useState(null);
-  const [error, setError] = useState('');
+  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const fetchData = async (data) => {
@@ -18,14 +18,22 @@ export const useAxios = (axiosParams, onDone) => {
         data,
       })
       .then((res) => {
-        setResponse(res.data);
+        if (res.status === 200 || res.status === 201 || res.status === 203) {
+          setResponse(res.data);
+        } else {
+          setError(res.data);
+        }
       })
       .catch((err) => {
         setError(err);
       })
       .finally(() => {
         setLoading(false);
-        onDone();
+        if (error) {
+          onDone(error);
+        } else {
+          onDone(response);
+        }
       });
   };
 
