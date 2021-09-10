@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
 import { API_URL } from '../constants/';
@@ -10,9 +10,12 @@ export const useAxios = (axiosParams, onDone) => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
 
-  const fetchData = async (params) => {
+  const fetchData = async (data) => {
     axios
-      .request(params)
+      .request({
+        ...axiosParams,
+        data,
+      })
       .then((res) => {
         setResponse(res.data);
       })
@@ -25,11 +28,7 @@ export const useAxios = (axiosParams, onDone) => {
       });
   };
 
-  useEffect(() => {
-    fetchData(axiosParams);
-  }, []);
-
-  return { response, error, loading, fetchData: fetch };
+  return { response, error, loading, fetch: fetchData };
 };
 
 // to use it:
