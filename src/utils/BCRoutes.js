@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import jwt_decode from 'jwt-decode';
 
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -17,6 +18,8 @@ class BCRoutes extends React.Component {
       transparency: PropTypes.string,
       protected: PropTypes.bool,
       isAuthenticated: PropTypes.bool,
+      accessToken: PropTypes.string,
+      protectLevel: PropTypes.number,
       token: PropTypes.string,
     };
   }
@@ -30,24 +33,39 @@ class BCRoutes extends React.Component {
     const Transparency = this.props.transparency;
     const Cta = this.props.cta;
     const isAuthenticated = this.props.isAuthenticated;
+    const permissionLevel = isAuthenticated
+      ? jwt_decode(this.props.accessToken).permissionFlags
+      : 0;
 
     if (this.props.protected === true && !isAuthenticated) {
       return <Redirect to="/login" />;
     } else {
-      return (
-        <>
-          {Header && <Comp.Header cta={Cta} type={Transparency} />}
-          <Component />
-        </>
-      );
+      if (
+        this.props.protected === true &&
+        permissionLevel < this.props.protectLevel
+      ) {
+        return <Redirect to="/update-profile" />;
+      } else {
+        return (
+          <>
+            {Header && <Comp.Header cta={Cta} type={Transparency} />}
+            <Component />
+          </>
+        );
+      }
     }
   }
 }
+
+BCRoutes.defaultProps = {
+  protectLevel: 2,
+};
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
   user: state.auth.user,
   token: state.auth.token,
+  accessToken: state.auth.accessToken,
 });
 
 const mapDispatchToProps = (dispatch) => {

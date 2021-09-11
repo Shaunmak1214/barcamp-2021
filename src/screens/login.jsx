@@ -21,7 +21,7 @@ require('dotenv').config();
 
 const Login = () => {
   const dispatch = useDispatch();
-  const storeState = store.getState();
+  const authStore = store.getState().auth;
   const { authorized, checkAuthorized } = useAuthorized('auth/check');
 
   const handleGoogleLogin = async (googleData) => {
@@ -32,10 +32,11 @@ const Login = () => {
         })
         .then((res) => {
           if (res.status === 201) {
+            let decodedData = jwt_decode(res.data.accessToken);
             let loginObj = {
               accessToken: res.data.accessToken,
               refreshToken: res.data.refreshToken,
-              user: jwt_decode(res.data.accessToken),
+              user: decodedData,
             };
             dispatch(LOGIN(loginObj));
             window.location.href = '/dashboard';
@@ -53,7 +54,7 @@ const Login = () => {
     checkAuthorized();
   }, []);
 
-  if (storeState.auth.isAuthenticated && authorized) {
+  if (authStore.isAuthenticated && authorized) {
     return <Redirect to="/dashboard" />;
   }
 
