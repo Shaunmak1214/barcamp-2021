@@ -15,6 +15,7 @@ import GoldBadge from './svgs/gold-badge.svg';
 import SilverBadge from './svgs/silver-badge.svg';
 import PlatinumIcon from './svgs/diamond.svg';
 import AIIcon from './svgs/AI-icon.svg';
+import DownIcon from './svgs/down.svg';
 
 // Icons (PNG)
 import NoMessageIcon from './jpg-pngs/no-message-icon.png';
@@ -88,4 +89,5 @@ export {
   VotingPic,
   AIIcon,
   LinearBorder,
+  DownIcon,
 };

@@ -15,7 +15,7 @@ export const useAxios = (axiosParams, onDone) => {
     axios
       .request({
         ...axiosParams,
-        data,
+        data: data ? data : null,
       })
       .then((res) => {
         if (res.status === 200 || res.status === 201 || res.status === 203) {

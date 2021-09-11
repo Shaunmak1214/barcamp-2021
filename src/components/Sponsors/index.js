@@ -11,9 +11,9 @@ import {
   silverSponsor,
 } from '../../datas/sponsors';
 
-const Index = () => {
+const Index = ({ ...props }) => {
   return (
-    <Center pt="80px" flexDir="column">
+    <Center {...props} pt="80px" flexDir="column">
       <Container maxW="container.xl" pt="20">
         <SectionTitle type={['left', 'center', 'center']} mb="20">
           SPONSORSHIP
