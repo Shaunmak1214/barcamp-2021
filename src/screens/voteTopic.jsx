@@ -22,7 +22,7 @@ import { SelectFormFieldClass } from '../components/Forms';
 import BCSpacer from '../components/Spacer';
 import BCModal from '../components/Modal';
 import useModal from '../components/Modal/useModal';
-
+import TopicBadge from '../components/TopicBadge';
 import { useScrollTo, useAxios } from '../hooks';
 
 import { SectionBg, VotingPic, AIIcon } from '../assets';
@@ -143,29 +143,6 @@ const voteTopic = () => {
   //   );
   //   observer.observe(document.querySelector('.voteTopicHeaderTop'));
   // }, []);
-
-  const TopicBadge = ({ topic }) => {
-    return (
-      <Flex
-        align="center"
-        justify="center"
-        borderRadius="10px"
-        bg="#C9E1FF"
-        color="gray.800"
-        py={'3px'}
-        px={'12px'}
-        fontSize="xs"
-        fontWeight="500"
-        textTransform="uppercase"
-      >
-        {topic}
-      </Flex>
-    );
-  };
-
-  TopicBadge.propTypes = {
-    topic: PropTypes.string.isRequired,
-  };
 
   const SelectionsRenderer = ({ topicsAvailable }) => {
     return (

@@ -3,18 +3,46 @@ import { Container, SimpleGrid, Text, VStack, Center } from '@chakra-ui/layout';
 import React from 'react';
 import { PrimaryButton } from '../components/Buttons';
 import BCSpacer from '../components/Spacer';
-
+import { useEffect, useState } from 'react';
 import { ResultIcon, Splash1, VotingIcon } from '../assets';
 import { CountDownBlock } from 'components/Countdown';
 import { SectionBg, NoMessageIcon } from '../assets';
 import { SectionTitle } from 'components/SectionTitle';
 import { useCountdown } from '../hooks';
 import InfoBlock from 'components/InfoBlock';
-
+import TopicBlock from 'components/TopicBlock';
+import { useAxios } from '../hooks';
+import store from './../store/store';
 const Dashboard = () => {
   const { daysRef, hoursRef, minutesRef, secondsRef } = useCountdown(
     'September 25, 2021 00:00:00',
   );
+
+  const userId = store.getState().auth.user.userId;
+  const token = store.getState().auth.accessToken;
+  const [userTopic, getUserTopic] = useState([]);
+
+  const { fetch } = useAxios(
+    {
+      method: 'get',
+      url: `/topicsByUser/${userId}`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+    (res, err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        getUserTopic(res);
+        console.log(userTopic);
+      }
+    },
+  );
+
+  useEffect(() => {
+    fetch();
+  }, []);
 
   return (
     <>
@@ -137,6 +165,7 @@ const Dashboard = () => {
           </SimpleGrid>
         </Container>
       </Center>
+
       <VStack py="50px">
         <Container
           maxW="container.xl"
@@ -147,20 +176,24 @@ const Dashboard = () => {
           <SectionTitle fontSize="2xl" type="left">
             Your Proposed Topic
           </SectionTitle>
-          <InfoBlock
-            buttonUrl="/"
-            buttonLabel="Propose a topic"
-            theme="error"
-            content={
-              <Text>
-                You haven&apos;t proposed any topic yet. If you are volunteering
-                to become a speaker in Barcamp, kindly keep in mind that the
-                last day to propose a topic is on
-                <span style={{ fontWeight: 'bold' }}> 24 September 2021</span>
-              </Text>
-            }
-            leadingIcon={NoMessageIcon}
-          />
+          {userTopic ? (
+            <TopicBlock topic={userTopic} />
+          ) : (
+            <InfoBlock
+              buttonUrl="/propose-topic"
+              buttonLabel="Propose a topic"
+              theme="error"
+              content={
+                <Text>
+                  You haven&apos;t proposed any topic yet. If you are
+                  volunteering to become a speaker in Barcamp, kindly keep in
+                  mind that the last day to propose a topic is on
+                  <span style={{ fontWeight: 'bold' }}> 24 September 2021</span>
+                </Text>
+              }
+              leadingIcon={NoMessageIcon}
+            />
+          )}
         </Container>
       </VStack>
       <VStack py="50px">
