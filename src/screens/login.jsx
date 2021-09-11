@@ -21,7 +21,7 @@ require('dotenv').config();
 
 const Login = () => {
   const dispatch = useDispatch();
-  const storeState = store.getState();
+  const authStore = store.getState().auth;
   const { authorized, checkAuthorized } = useAuthorized('auth/check');
 
   const handleGoogleLogin = async (googleData) => {
@@ -53,7 +53,7 @@ const Login = () => {
     checkAuthorized();
   }, []);
 
-  if (storeState.auth.isAuthenticated && authorized) {
+  if (authStore.isAuthenticated && authorized) {
     return <Redirect to="/dashboard" />;
   }
 

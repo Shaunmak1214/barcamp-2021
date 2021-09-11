@@ -7,7 +7,6 @@ import {
   HStack,
   Center,
   Box,
-  Flex,
 } from '@chakra-ui/layout';
 import React from 'react';
 import { PrimaryButton } from '../components/Buttons';
@@ -19,6 +18,7 @@ import { CountDownBlock } from 'components/Countdown';
 import { SectionBg, NoMessageIcon } from '../assets';
 import { SectionTitle } from 'components/SectionTitle';
 import { useCountdown } from '../hooks';
+import InfoBlock from 'components/InfoBlock';
 
 const Dashboard = () => {
   const { daysRef, hoursRef, minutesRef, secondsRef } = useCountdown(
@@ -156,33 +156,20 @@ const Dashboard = () => {
           <SectionTitle fontSize="2xl" type="left">
             Your Proposed Topic
           </SectionTitle>
-          <VStack
-            mt="50px"
-            border="3px solid #EB202B"
-            borderRadius="10px"
-            justifyContent="center"
-            alignItems="center"
-            pb="30px"
-          >
-            <Flex
-              justifyContent="center"
-              alignItems="center"
-              p={['30px 0 25px 0', '45px 30px 25px 80px']}
-              textAlign={['center', 'left']}
-              flexDir={['column', 'column', 'row']}
-            >
-              <Image src={NoMessageIcon} />
-              <Box p={['20px 45px', '0 50px']}>
-                <Text>
-                  You haven&apos;t proposed any topic yet. If you are
-                  volunteering to become a speaker in Barcamp, kindly keep in
-                  mind that the last day to propose a topic is on
-                  <span style={{ fontWeight: 'bold' }}> 24 September 2021</span>
-                </Text>
-              </Box>
-            </Flex>
-            <PrimaryButton>Propose a Topic</PrimaryButton>
-          </VStack>
+          <InfoBlock
+            buttonUrl="/"
+            buttonLabel="Propose a topic"
+            theme="error"
+            content={
+              <Text>
+                You haven&apos;t proposed any topic yet. If you are volunteering
+                to become a speaker in Barcamp, kindly keep in mind that the
+                last day to propose a topic is on
+                <span style={{ fontWeight: 'bold' }}> 24 September 2021</span>
+              </Text>
+            }
+            leadingIcon={NoMessageIcon}
+          />
         </Container>
       </VStack>
       <VStack py="50px">
