@@ -2,12 +2,15 @@ import React from 'react';
 import { Container, SimpleGrid, Text, VStack, Box } from '@chakra-ui/layout';
 import { SectionTitle } from '../components/SectionTitle';
 import BCSpacer from '../components/Spacer';
-
+import store from './../store/store';
 import { PrimaryButton } from '../components/Buttons';
-
+import useAxios from './../hooks/useAxios';
 import * as yup from 'yup';
 import { Formik, Form, Field } from 'formik';
 import { BCTextFilledFormField, SelectFormField } from '../components/Forms';
+import jwt_decode from 'jwt-decode';
+import { useDispatch } from 'react-redux';
+import { LOGIN } from '../reducers/authSlice';
 
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -20,7 +23,36 @@ const schema = yup.object({
 });
 
 const updateProfile = () => {
+  const authState = store.getState().auth;
+  const dispatch = useDispatch();
   const [heard, setHeard] = React.useState([]);
+  const { fetch } = useAxios(
+    {
+      method: 'patch',
+      url: `/users/${authState.user.userId}`,
+      headers: {
+        Authorization: `Bearer ${authState.accessToken}`,
+        'Content-Type': 'application/json',
+      },
+    },
+    (res, err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        if (res) {
+          console.log(res.accessToken);
+          let decodedData = jwt_decode(res.accessToken);
+          let loginObj = {
+            accessToken: res.accessToken,
+            refreshToken: res.accessToken,
+            user: decodedData,
+          };
+          dispatch(LOGIN(loginObj));
+          window.location.href = '/dashboard';
+        }
+      }
+    },
+  );
 
   const onSelect = React.useCallback(
     (value, selected) => {
@@ -60,8 +92,14 @@ const updateProfile = () => {
             noc: '',
           }}
           onSubmit={(data) => {
-            console.log(data);
             console.log(heard);
+
+            fetch({
+              fullName: data.fullname,
+              age: data.age,
+              contactNumber: data.contactnumber,
+              companyOrInstitution: data.noc,
+            });
           }}
         >
           {() => (
