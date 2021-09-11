@@ -15,7 +15,7 @@ import { SectionTitle } from '../SectionTitle';
 import { FaqButton } from '../Buttons';
 import BCSpacer from '../Spacer';
 
-const Index = () => {
+const Index = ({ ...props }) => {
   const [selectedCat, setSelectedCat] = useState('general');
 
   const handleFaqSelect = useCallback(
@@ -104,7 +104,7 @@ const Index = () => {
   };
 
   return (
-    <Center py="20">
+    <Center py="20" {...props}>
       <Container maxW="container.xl">
         <SectionTitle>FAQ</SectionTitle>
         <BCSpacer size="sm" />

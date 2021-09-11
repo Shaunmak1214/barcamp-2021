@@ -184,8 +184,9 @@ const Index = () => {
           </SimpleGrid>
         </Container>
       </Center>
+
       {/* What is Barcamp section */}
-      <Center py="20" bgImage={SectionBg} flexDir="column">
+      <Center id="about" py="20" bgImage={SectionBg} flexDir="column">
         <Container maxW="container.xl">
           <SectionTitle type={'center'} color="#ffffff" alignItems="flex-start">
             What is Barcamp?
@@ -235,7 +236,7 @@ const Index = () => {
       </Center>
 
       {/* FAQs section */}
-      <Faq />
+      <Faq id="faq" />
 
       {/* Gallery Section */}
       <Center pt="80px" bgImage={SectionBg} flexDir="column">
@@ -270,7 +271,7 @@ const Index = () => {
       </Center>
 
       {/* Sponsorship Section */}
-      <Sponsor />
+      <Sponsor id="sponsors" />
 
       {/* Banner */}
       <Banner />

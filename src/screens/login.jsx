@@ -1,60 +1,62 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { GoogleLogin } from 'react-google-login';
+import { Redirect } from 'react-router';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 
 import { LOGIN } from '../reducers/authSlice';
+import store from '../store/store';
 
 import { Image } from '@chakra-ui/image';
 import { Container, Link, SimpleGrid, Text, VStack } from '@chakra-ui/layout';
 
 import { PrimaryButton } from '../components/Buttons';
 import BCSpacer from '../components/Spacer';
-import Toast from '../components/Toast';
+import { useAuthorized } from '../hooks/';
 
 import { Splash1 } from '../assets';
 
 require('dotenv').config();
 
 const Login = () => {
-  const { loginErrToast } = Toast();
   const dispatch = useDispatch();
+  const authStore = store.getState().auth;
+  const { authorized, checkAuthorized } = useAuthorized('auth/check');
 
   const handleGoogleLogin = async (googleData) => {
     if (googleData) {
-      loginErrToast();
-      console.log(googleData);
       await axios
         .post(`${process.env.REACT_APP_API_URL}auth/`, {
           googleId: googleData.tokenId,
         })
         .then((res) => {
           if (res.status === 201) {
+            let decodedData = jwt_decode(res.data.accessToken);
             let loginObj = {
               accessToken: res.data.accessToken,
               refreshToken: res.data.refreshToken,
-              user: jwt_decode(res.data.accessToken),
+              user: decodedData,
             };
             dispatch(LOGIN(loginObj));
-            history.push('/dashboard');
+            window.location.href = '/dashboard';
           }
         })
         .catch((err) => {
           console.log(err);
-          // toast({
-          //   title: "Failed to Load",
-          //   description: "Something went wrong on our side!",
-          //   status: "error",
-          //   duration: 10,
-          //   isClosable: false,
-          //   position: "top",
-          // });
         });
     } else {
       console.log('error');
     }
   };
+
+  useEffect(() => {
+    checkAuthorized();
+  }, []);
+
+  if (authStore.isAuthenticated && authorized) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <>

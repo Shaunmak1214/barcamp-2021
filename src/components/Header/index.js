@@ -13,7 +13,7 @@ import {
 import { Text } from '@chakra-ui/react';
 
 import { PrimaryButton } from '../Buttons';
-import { BarcampFullLogo, PlatinumIcon } from '../../assets/';
+import { BarcampFullLogo, PlatinumIcon, DownIcon } from '../../assets/';
 import MobileMenu from './MobileMenu';
 
 import {
@@ -23,8 +23,9 @@ import {
 } from '../../datas/sponsors';
 
 const Index = ({ cta, type }) => {
-  const sponsorHover = useRef(null);
   const headerSticky = useRef(null);
+  const sponsorHover = useRef(null);
+  const moreHover = useRef(null);
   const joinButton = useRef(null);
   const mobileSize = window.screen.width <= 768;
 
@@ -44,6 +45,16 @@ const Index = ({ cta, type }) => {
     } else if (sponsorHover.current && status === 'out') {
       sponsorHover.current.style.visibility = 'hidden';
       sponsorHover.current.style.opacity = '0';
+    }
+  };
+
+  const moreToggle = (status) => {
+    if (moreHover.current && status === 'in') {
+      moreHover.current.style.visibility = 'visible';
+      moreHover.current.style.opacity = '1';
+    } else if (moreHover.current && status === 'out') {
+      moreHover.current.style.visibility = 'hidden';
+      moreHover.current.style.opacity = '0';
     }
   };
 
@@ -124,6 +135,7 @@ const Index = ({ cta, type }) => {
       mb={mobileSize ? null : ['15px', null, null]}
       transition="150ms cubic-bezier(0.215,0.61,0.355,1);"
       ref={headerSticky}
+      fontFamily="Montserrat"
     >
       <Container maxW="container.xl">
         <HStack w="100%" justifyContent="space-between">
@@ -147,17 +159,17 @@ const Index = ({ cta, type }) => {
             spacing="45"
             position="relative"
           >
-            <Link href="/" py="5">
+            <Link href="/#about" py="5">
               <Text fontSize="sm">ABOUT</Text>
             </Link>
-            <Link href="/" py="5">
+            <Link href="/#agenda" py="5">
               <Text fontSize="sm">AGENDA</Text>
             </Link>
-            <Link href="/" py="5">
+            <Link href="/#faq" py="5">
               <Text fontSize="sm">FAQ</Text>
             </Link>
             <Link
-              href="/"
+              href="#sponsors"
               py="5"
               onMouseOver={() => {
                 sponsorToggle('in');
@@ -169,17 +181,51 @@ const Index = ({ cta, type }) => {
               <Text fontSize="sm">SPONSORS</Text>
             </Link>
             <Link
-              href="/"
+              href="#"
               py="5"
+              position="relative"
               onMouseOver={() => {
-                sponsorToggle('in');
+                moreToggle('in');
               }}
               onMouseLeave={() => {
-                sponsorToggle('out');
+                moreToggle('out');
               }}
             >
-              <Text fontSize="sm">MORE</Text>
+              <Text fontSize="sm" d="flex" alignItems="center">
+                MORE
+                <Image src={DownIcon} height="12px" width="12px" ml="5px" />
+              </Text>
+              <VStack
+                className="more-hover"
+                ref={moreHover}
+                visibility="hidden"
+                opacity="0"
+                position="absolute"
+                top="70px"
+                right="0px"
+                w="150px"
+                bg="rgba(255, 255, 255, 0.98)"
+                boxShadow="0px 16px 40px rgba(165, 165, 165, 0.25)"
+                py="4"
+                px="2"
+                borderRadius="8px"
+                transition="visibility 0.2s ease-in-out, opacity 0.2s ease-in-out"
+                zIndex="50"
+                cursor="pointer"
+              >
+                <Link href="/dashboard" py="3">
+                  <Text fontSize="sm">Dashboard</Text>
+                </Link>
+                <Link href="/vote-topic" py="3">
+                  <Text fontSize="sm">Vote Topics</Text>
+                </Link>
+                <Link href="/propose-topic" py="3">
+                  <Text fontSize="sm">Propose Topic</Text>
+                </Link>
+              </VStack>
             </Link>
+
+            {/* Join us now condition rendering */}
             {cta && (
               <PrimaryButton
                 ref={joinButton}
@@ -194,12 +240,12 @@ const Index = ({ cta, type }) => {
             )}
 
             <HStack
+              className="sponsor-hover"
               ref={sponsorHover}
               visibility="hidden"
               opacity="0"
-              className="sponsor-hover"
               position="absolute"
-              top="80px"
+              top="70px"
               right="0px"
               w="container.xl"
               bg="rgba(255, 255, 255, 0.98)"
