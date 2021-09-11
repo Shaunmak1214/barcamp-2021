@@ -44,10 +44,14 @@ const updateProfile = () => {
       <Container maxW="container.lg" alignItems="flex-start">
         <SectionTitle alignItems="flex-start" fontSize="3xl" type="left">
           <Text fontSize="2xl">
-            Update your profile to become a {'  '}
-            <span style={{ color: '#1050A0' }}>Barcamp Participant</span>
+            Please complete your profile to {'  '}
+            <span style={{ color: '#1050A0' }}>gain access</span>
           </Text>
         </SectionTitle>
+        <BCSpacer size="3xs" />
+        <Text fontSize="lg" color="#797979">
+          To gain access for the rest of barcamp, your information is required.
+        </Text>
 
         <BCSpacer size="md" />
 

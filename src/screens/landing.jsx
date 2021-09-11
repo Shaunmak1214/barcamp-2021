@@ -78,6 +78,7 @@ const Index = () => {
             </Heading>
             <BCSpacer size="sm" />
             <PrimaryButton
+              py="25px"
               onClick={() => {
                 window.location.href = '/login';
               }}

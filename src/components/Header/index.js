@@ -208,7 +208,7 @@ const Index = ({ cta, type }) => {
                 boxShadow="0px 16px 40px rgba(165, 165, 165, 0.25)"
                 py="4"
                 px="2"
-                borderRadius="8px"
+                borderRadius="4px"
                 transition="visibility 0.2s ease-in-out, opacity 0.2s ease-in-out"
                 zIndex="50"
                 cursor="pointer"
@@ -231,6 +231,8 @@ const Index = ({ cta, type }) => {
                 ref={joinButton}
                 d="none"
                 transform="scaleX(0)"
+                py="20px"
+                fontFamily="Source Sans Pro"
                 onClick={() => {
                   window.location.href = '/login';
                 }}

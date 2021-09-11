@@ -59,94 +59,100 @@ const Index = () => {
             w="100%"
           >
             <VStack alignItems="center" justifyContent="center">
-              <Box>
-                <Text fontSize="lg" fontWeight="700" pb="10px">
-                  QUICK LINKS
-                </Text>
-                <Link href="/#agenda">
-                  <Text fontSize="md" pb="10px">
-                    {'> '} AGENDA
+              <VStack w="fit-content" alignItems="flex-start">
+                <Box>
+                  <Text fontSize="lg" fontWeight="700" pb="10px">
+                    QUICK LINKS
                   </Text>
-                </Link>
-                <Link href="/#about">
-                  <Text fontSize="md" pb="10px">
-                    {'> '} ABOUT
-                  </Text>
-                </Link>
-                <Link href="/#faq">
-                  <Text fontSize="md" pb="10px">
-                    {'> '} FAQ
-                  </Text>
-                </Link>
-                <Link href="/#sponsors">
-                  <Text fontSize="md" pb="10px">
-                    {'> '} SPONSORS
-                  </Text>
-                </Link>
-              </Box>
+                  <Link href="/#agenda">
+                    <Text fontSize="md" pb="10px">
+                      {'>'} AGENDA
+                    </Text>
+                  </Link>
+                  <Link href="/#about">
+                    <Text fontSize="md" pb="10px">
+                      {'>'} ABOUT
+                    </Text>
+                  </Link>
+                  <Link href="/#faq">
+                    <Text fontSize="md" pb="10px">
+                      {'>'} FAQ
+                    </Text>
+                  </Link>
+                  <Link href="/#sponsors">
+                    <Text fontSize="md" pb="10px">
+                      {'>'} SPONSORS
+                    </Text>
+                  </Link>
+                </Box>
+              </VStack>
             </VStack>
             <VStack alignItems="center" justifyContent="center">
-              <Box>
-                <Text fontSize="lg" fontWeight="700" pb="10px">
-                  PARTICIPANT
-                </Text>
-                <Link href="/#agenda">
-                  <Text fontSize="md" pb="10px">
-                    {'>'} DASHBOARD
+              <VStack w="fit-content" alignItems="flex-start">
+                <Box>
+                  <Text fontSize="lg" fontWeight="700" pb="10px">
+                    PARTICIPANT
                   </Text>
-                </Link>
-                <Link href="/#about">
-                  <Text fontSize="md" pb="10px">
-                    {'>'} PROPOSE TOPIC
-                  </Text>
-                </Link>
-                <Link href="/#faq">
-                  <Text fontSize="md" pb="10px">
-                    {'>'} VOTE TOPIC
-                  </Text>
-                </Link>
-                <Link onClick={() => logout()}>
-                  <Text fontSize="md" pb="10px">
-                    {'>'} LOGOUT
-                  </Text>
-                </Link>
-              </Box>
+                  <Link href="/#agenda">
+                    <Text fontSize="md" pb="10px">
+                      {'>'} DASHBOARD
+                    </Text>
+                  </Link>
+                  <Link href="/#about">
+                    <Text fontSize="md" pb="10px">
+                      {'>'} PROPOSE TOPIC
+                    </Text>
+                  </Link>
+                  <Link href="/#faq">
+                    <Text fontSize="md" pb="10px">
+                      {'>'} VOTE TOPIC
+                    </Text>
+                  </Link>
+                  <Link onClick={() => logout()}>
+                    <Text fontSize="md" pb="10px">
+                      {'>'} LOGOUT
+                    </Text>
+                  </Link>
+                </Box>
+              </VStack>
             </VStack>
             <VStack alignItems="center" justifyContent="center">
-              <Text fontSize="lg" fontWeight="700" pb="10px">
-                FOLLOW US
-              </Text>
-              <VStack
-                justifyContent="space-between"
-                alignItems="flex-start"
-                spacing="15px"
-              >
-                <Link
-                  href="https://www.facebook.com/ITsocietyMMU/"
-                  d="flex"
-                  alignItems="center"
+              <VStack w="fit-content" alignItems="flex-start">
+                <Text fontSize="lg" fontWeight="700" pb="10px">
+                  FOLLOW US
+                </Text>
+                <VStack
+                  justifyContent="space-between"
+                  alignItems="flex-start"
+                  spacing="15px"
                 >
-                  <Image src={FacebookIcon} h="18px" w="18px" mr="8px" />{' '}
-                  ITSociety MMU Cyberjaya
-                </Link>
+                  <Link
+                    href="https://www.facebook.com/ITsocietyMMU/"
+                    d="flex"
+                    alignItems="center"
+                  >
+                    <Image src={FacebookIcon} h="18px" w="18px" mr="8px" />{' '}
+                    ITSociety MMU Cyberjaya
+                  </Link>
 
-                <Link
-                  href="https://www.instagram.com/itsocietymmu/"
-                  d="flex"
-                  alignItems="center"
-                >
-                  <Image src={InstagramIcon} h="18px" w="18px" mr="8px" />{' '}
-                  itsocietymmu
-                </Link>
+                  <Link
+                    href="https://www.instagram.com/itsocietymmu/"
+                    d="flex"
+                    alignItems="center"
+                  >
+                    <Image src={InstagramIcon} h="18px" w="18px" mr="8px" />{' '}
+                    itsocietymmu
+                  </Link>
 
-                <Link
-                  href="https://www.linkedin.com/in/it-society-mmu-cyberjaya/"
-                  d="flex"
-                  alignItems="center"
-                >
-                  <Image src={LinkedinIcon} h="18px" w="18px" mr="8px" /> IT
-                  Society Cyberjaya
-                </Link>
+                  <Link
+                    href="https://www.linkedin.com/in/it-society-mmu-cyberjaya/"
+                    d="flex"
+                    alignItems="center"
+                  >
+                    <Image src={LinkedinIcon} h="18px" w="18px" mr="8px" /> IT
+                    Society Cyberjaya
+                  </Link>
+                </VStack>
               </VStack>
             </VStack>
           </SimpleGrid>

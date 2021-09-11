@@ -8,7 +8,7 @@ const PrimaryButton = React.forwardRef((props, ref) => (
     bg="linear-gradient(90deg, #A23052 0%, #EB202B 100%)"
     borderRadius="4px"
     px="10"
-    py="6"
+    py="20px"
     {...props}
     ref={ref}
   >
@@ -25,9 +25,8 @@ const SecondaryButton = ({ ...props }) => {
       variant="secondary"
       bg="#1050A0"
       borderRadius="4px"
-      // boxShadow="0px 16px 40px rgba(80, 157, 253, 0.25);"
       px="10"
-      py="6"
+      py="20px"
       {...props}
     >
       <Text as="h2" fontSize="md" color="white">

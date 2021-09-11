@@ -1,7 +1,7 @@
 import { Center, Container, Flex, Text } from '@chakra-ui/layout';
 import React from 'react';
 
-import { RegisterButton } from '../Buttons';
+import { PrimaryButton } from '../Buttons';
 
 const Index = () => {
   return (
@@ -24,12 +24,17 @@ const Index = () => {
           >
             GET YOUR SEATS NOW!
           </Text>
-          <RegisterButton
+          <PrimaryButton
             w={['100%', 'fit-content', 'fit-content']}
+            py="25px"
+            px="45px"
+            fontFamily="Source Sans Pro"
             onClick={() => {
               window.location.href = '/login';
             }}
-          />
+          >
+            Join us now
+          </PrimaryButton>
         </Flex>
       </Container>
     </Center>
