@@ -7,6 +7,9 @@ import { Redirect } from 'react-router-dom';
 import { LOGOUT } from '../reducers/authSlice';
 
 import * as Comp from '../components';
+import axios from 'axios';
+
+import { API_URL } from '../constants/';
 
 class BCRoutes extends React.Component {
   static get propTypes() {
@@ -21,10 +24,31 @@ class BCRoutes extends React.Component {
       accessToken: PropTypes.string,
       protectLevel: PropTypes.number,
       token: PropTypes.string,
+      LOGOUT: PropTypes.func,
     };
   }
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount() {
+    axios
+      .get(`${API_URL}auth/check`, {
+        headers: {
+          Authorization: `Bearer ${this.props.accessToken}`,
+        },
+      })
+      .then((res) => {
+        if (res.status === 200 || res.status === 204 || res.status === 203) {
+          return;
+        } else {
+          this.props.LOGOUT();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        this.props.LOGOUT();
+      });
   }
 
   render() {
