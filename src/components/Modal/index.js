@@ -1,23 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Lottie from 'react-lottie';
 
-import { VStack, Box, Text } from '@chakra-ui/layout';
-import { IconButton, Image } from '@chakra-ui/react';
+import { VStack, Box } from '@chakra-ui/layout';
+import { IconButton } from '@chakra-ui/react';
 import { CloseIcon } from '@chakra-ui/icons';
 
 import BCSpacer from 'components/Spacer';
 import { PrimaryButton } from 'components/Buttons';
 
+import { CompleteLoader, ErrorLoader } from '../../constants';
+
 import './modal.css';
 
-const Modal = ({ successUrl, modalOpen, onClose }) => {
+const Modal = ({ theme, successUrl, content, modalOpen, onClose }) => {
+  let animationData;
   const handleClose = () => {
     onClose();
     window.location.href = successUrl;
   };
 
-  if (!modalOpen) return null;
+  if (theme === 'sucess') {
+    animationData = CompleteLoader;
+  } else if (theme === 'error') {
+    animationData = ErrorLoader;
+  } else {
+    animationData = CompleteLoader;
+  }
 
+  if (!modalOpen) return null;
   return (
     <>
       <Box
@@ -64,28 +75,9 @@ const Modal = ({ successUrl, modalOpen, onClose }) => {
 
         <BCSpacer size="3xs" />
 
-        <Image
-          src={
-            'https://res.cloudinary.com/shaun-storage/image/upload/v1631240228/complete_vdkvie.gif'
-          }
-          h="125"
-          w="125"
-        />
+        <Lottie options={animationData} height={200} width={200} />
 
-        <Text as="h3" fontSize="xl" fontFamily="Poppins" fontWeight="600">
-          Thank you for voting your desired topic!{' '}
-        </Text>
-        <Text
-          as="h3"
-          fontSize="sm"
-          fontFamily="Poppins"
-          fontWeight="400"
-          textAlign="center"
-          px="3"
-        >
-          Final voting result will be announced soon on 28 September 2021. Let’s
-          meet at Barcamp on 2 October 2021.
-        </Text>
+        {content}
 
         <BCSpacer size="4xs" />
 
@@ -98,7 +90,9 @@ const Modal = ({ successUrl, modalOpen, onClose }) => {
 };
 
 Modal.propTypes = {
+  theme: PropTypes.string,
   successUrl: PropTypes.string.isRequired,
+  content: PropTypes.node,
   modalOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
 };

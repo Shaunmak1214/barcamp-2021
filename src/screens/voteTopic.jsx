@@ -191,8 +191,27 @@ const voteTopic = () => {
     <>
       <BCModal
         successUrl="/dashboard"
+        content={
+          <>
+            <Text as="h3" fontSize="xl" fontFamily="Poppins" fontWeight="600">
+              Thank you for voting your desired topic!{' '}
+            </Text>
+            <Text
+              as="h3"
+              fontSize="sm"
+              fontFamily="Poppins"
+              fontWeight="400"
+              textAlign="center"
+              px="3"
+            >
+              Final voting result will be announced soon on 28 September 2021.
+              Let’s meet at Barcamp on 2 October 2021.
+            </Text>
+          </>
+        }
         modalOpen={isOpen}
         onClose={onModalClose}
+        theme="error"
       />
       <VStack
         w="100%"
