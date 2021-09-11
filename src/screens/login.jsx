@@ -32,10 +32,11 @@ const Login = () => {
         })
         .then((res) => {
           if (res.status === 201) {
+            let decodedData = jwt_decode(res.data.accessToken);
             let loginObj = {
               accessToken: res.data.accessToken,
               refreshToken: res.data.refreshToken,
-              user: jwt_decode(res.data.accessToken),
+              user: decodedData,
             };
             dispatch(LOGIN(loginObj));
             window.location.href = '/dashboard';

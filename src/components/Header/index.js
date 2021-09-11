@@ -181,7 +181,7 @@ const Index = ({ cta, type }) => {
               <Text fontSize="sm">SPONSORS</Text>
             </Link>
             <Link
-              href="/"
+              href="#"
               py="5"
               position="relative"
               onMouseOver={() => {

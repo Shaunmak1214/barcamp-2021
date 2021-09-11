@@ -1,19 +1,10 @@
 import { Image } from '@chakra-ui/image';
-import {
-  Container,
-  SimpleGrid,
-  Text,
-  VStack,
-  HStack,
-  Center,
-  Box,
-} from '@chakra-ui/layout';
+import { Container, SimpleGrid, Text, VStack, Center } from '@chakra-ui/layout';
 import React from 'react';
 import { PrimaryButton } from '../components/Buttons';
 import BCSpacer from '../components/Spacer';
-// import Loader from '../components/Loader';
 
-import { LinearBorder, ResultIcon, Splash1, VotingIcon } from '../assets';
+import { ResultIcon, Splash1, VotingIcon } from '../assets';
 import { CountDownBlock } from 'components/Countdown';
 import { SectionBg, NoMessageIcon } from '../assets';
 import { SectionTitle } from 'components/SectionTitle';
@@ -182,25 +173,9 @@ const Dashboard = () => {
           <SectionTitle fontSize="2xl" type="left">
             Your Voted Topic
           </SectionTitle>
-
-          <HStack
-            justifyContent="center"
-            alignItems="center"
-            mb="10px"
-            mt="50px"
-            p={['25px', '55px 45px 70px 80px']}
-            borderWidth="3px"
-            borderStyle="solid"
-            style={{
-              borderImage: `url(${LinearBorder})`,
-              borderImageSlice: 7,
-              borderImageWidth: '6px',
-              borderImageOutset: 1,
-            }}
-            flexDir={['column', 'column', 'row']}
-          >
-            <Image src={VotingIcon} mb={['35px', '0']} />
-            <Box p={['0', '0 50px']}>
+          <InfoBlock
+            theme=""
+            content={
               <Text>
                 The voting session will be opening soon. Every participants
                 including speakers are able to vote your desired topics starting
@@ -208,8 +183,9 @@ const Dashboard = () => {
                 until
                 <span style={{ fontWeight: 'bold' }}> 27 September 2021 </span>
               </Text>
-            </Box>
-          </HStack>
+            }
+            leadingIcon={VotingIcon}
+          />
         </Container>
       </VStack>
       <VStack py="50px">
@@ -222,24 +198,9 @@ const Dashboard = () => {
           <SectionTitle fontSize="2xl" type="left">
             Voting Result
           </SectionTitle>
-          <HStack
-            justifyContent="center"
-            alignItems="center"
-            mb="10px"
-            mt="50px"
-            p={['25px', '55px 45px 70px 80px']}
-            borderWidth="3px"
-            borderStyle="solid"
-            style={{
-              borderImage: `url(${LinearBorder})`,
-              borderImageSlice: 7,
-              borderImageWidth: '6px',
-              borderImageOutset: 1,
-            }}
-            flexDir={['column', 'column', 'row']}
-          >
-            <Image src={ResultIcon} mb={['35px', '0']} />
-            <Box p={['0', '0 50px']}>
+          <InfoBlock
+            theme=""
+            content={
               <Text>
                 The voting result can be viewed strating from
                 <span style={{ fontWeight: 'bold' }}> 25 September 2021 </span>
@@ -248,8 +209,9 @@ const Dashboard = () => {
                 <span style={{ fontWeight: 'bold' }}> 28 October 2021 </span>
                 (One day before the Barcamp event)
               </Text>
-            </Box>
-          </HStack>
+            }
+            leadingIcon={ResultIcon}
+          />
         </Container>
       </VStack>
     </>

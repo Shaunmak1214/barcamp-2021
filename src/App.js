@@ -35,6 +35,7 @@ function App() {
           exact
           header
           protected
+          protectLevel={1}
           transparency="fixed"
           path="/update-profile"
           component={Screens.UpdateProfile}

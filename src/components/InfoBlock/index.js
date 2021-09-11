@@ -69,7 +69,7 @@ InfoBlock.propTypes = {
   buttonUrl: PropTypes.string,
   buttonLabel: PropTypes.string,
   theme: PropTypes.string,
-  content: PropTypes.string,
+  content: PropTypes.object,
   leadingIcon: PropTypes.any,
 };
 
