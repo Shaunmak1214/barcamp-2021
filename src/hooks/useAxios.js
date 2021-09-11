@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
@@ -6,16 +6,17 @@ import { API_URL } from '../constants/';
 
 axios.defaults.baseURL = API_URL;
 
-export const useAxios = (axiosParams, onDone) => {
+const useAxios = (axiosParams, onUpdate) => {
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const fetchData = async (data) => {
+    console.log(data);
     axios
       .request({
         ...axiosParams,
-        data,
+        data: data ? data : null,
       })
       .then((res) => {
         if (res.status === 200 || res.status === 201 || res.status === 203) {
@@ -29,13 +30,12 @@ export const useAxios = (axiosParams, onDone) => {
       })
       .finally(() => {
         setLoading(false);
-        if (error) {
-          onDone(error);
-        } else {
-          onDone(response);
-        }
       });
   };
+
+  useEffect(() => {
+    onUpdate(response, error);
+  }, [response, error]);
 
   return { response, error, loading, fetch: fetchData };
 };
@@ -44,6 +44,8 @@ useAxios.propTypes = {
   axiosParams: PropTypes.object.isRequired,
   onDone: PropTypes.func,
 };
+
+export default useAxios;
 
 // to use it:
 // const App = () => {

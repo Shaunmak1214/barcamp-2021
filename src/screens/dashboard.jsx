@@ -181,7 +181,13 @@ const Dashboard = () => {
                 </Text>
               </Box>
             </Flex>
-            <PrimaryButton>Propose a Topic</PrimaryButton>
+            <PrimaryButton
+              onClick={() => {
+                window.location.href = '/propose-topic';
+              }}
+            >
+              Propose a Topic
+            </PrimaryButton>
           </VStack>
         </Container>
       </VStack>

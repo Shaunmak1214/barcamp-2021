@@ -24,8 +24,7 @@ import {
 } from '../components/Forms';
 import BCSpacer from '../components/Spacer';
 import { SectionBg, ProposePic } from '../assets';
-import { useAxios } from './../hooks/useAxios';
-import { useScrollTo } from '../hooks';
+import { useScrollTo, useAxios } from '../hooks';
 import store from './../store/store';
 import '../global.css';
 
