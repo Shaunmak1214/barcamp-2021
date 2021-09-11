@@ -34,15 +34,13 @@ const Dashboard = () => {
     (res, err) => {
       if (err) {
         console.log(err);
-      } else {
-        getUserTopic(res);
-        console.log(userTopic);
+      } else if (res) {
+        getUserTopic(res.data);
       }
     },
   );
 
   useEffect(() => {
-    console.log(decodedData);
     fetch();
   }, []);
 

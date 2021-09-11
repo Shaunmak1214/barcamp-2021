@@ -17,7 +17,9 @@ const Modal = ({ theme, successUrl, content, modalOpen, onClose }) => {
   let animationData;
   const handleClose = () => {
     onClose();
-    window.location.href = successUrl;
+    if (successUrl) {
+      window.location.href = successUrl;
+    }
   };
 
   if (theme === 'sucess') {
@@ -91,7 +93,7 @@ const Modal = ({ theme, successUrl, content, modalOpen, onClose }) => {
 
 Modal.propTypes = {
   theme: PropTypes.string,
-  successUrl: PropTypes.string.isRequired,
+  successUrl: PropTypes.string,
   content: PropTypes.node,
   modalOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,

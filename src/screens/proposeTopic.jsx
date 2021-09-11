@@ -23,7 +23,9 @@ import {
   SelectDropdownFormField,
 } from '../components/Forms';
 import BCSpacer from '../components/Spacer';
-import { SectionBg, ProposePic } from '../assets';
+import InfoBlock from 'components/InfoBlock';
+
+import { SectionBg, ProposePic, NoMessageIcon } from '../assets';
 import { useScrollTo, useAxios } from '../hooks';
 import store from './../store/store';
 import '../global.css';
@@ -38,6 +40,8 @@ const schema = yup.object({
 const ProposeTopic = () => {
   const { scrollToRef, executeScroll } = useScrollTo();
   const [checked, setChecked] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [userTopic, getUserTopic] = useState(null);
   const authState = store.getState().auth;
 
   const { response, loading, error, fetch } = useAxios(
@@ -54,9 +58,30 @@ const ProposeTopic = () => {
     },
   );
 
+  const { fetch: fetchTopicsByUser } = useAxios(
+    {
+      method: 'get',
+      url: `/topicsByUser/${authState.user.userId}`,
+      headers: {
+        Authorization: `Bearer ${authState.accessToken}`,
+      },
+    },
+    (res, err) => {
+      if (err) {
+        console.log(err);
+      } else if (res) {
+        getUserTopic(res.data);
+      }
+    },
+  );
+
   const handleConsentCheck = (e) => {
     setChecked(e.target.checked);
   };
+
+  useEffect(() => {
+    fetchTopicsByUser();
+  }, []);
 
   useEffect(() => {
     var observer = new IntersectionObserver(
@@ -112,8 +137,13 @@ const ProposeTopic = () => {
               </Text>
               <BCSpacer size="sm" />
               <HStack>
-                <PrimaryButton width="200px" onClick={() => executeScroll()}>
-                  Propose Topic
+                <PrimaryButton
+                  width="200px"
+                  disabled={userTopic ? true : false}
+                  onClick={() => executeScroll()}
+                  variant={userTopic ? 'disabled' : null}
+                >
+                  {userTopic ? 'You already proposed' : 'Propose a topic'}
                 </PrimaryButton>
               </HStack>
             </VStack>
@@ -129,128 +159,146 @@ const ProposeTopic = () => {
         h="250px"
       ></Center>
 
-      <BCSpacer size="sm" />
-
-      <Box className="voteTopicHeaderTop" w="100%" h="1px"></Box>
-      <Center
-        w="100%"
-        bg="white"
-        position={['flex', 'flex', 'sticky']}
-        top="0px"
-        zIndex={50}
-        p="3"
-        className="voteTopicHeader"
-      >
-        <Container maxW="container.xl" w="100%" py="0px">
-          <Flex
-            flexDir={['column', 'column', 'row']}
-            justifyContent="space-between"
-            alignItems={['flex-start', 'flex-start', 'center']}
-            pt="5"
-            pb="5"
-            ref={scrollToRef}
-          >
-            <SectionTitle fontSize="2xl" type="left" mb={['7', '0', '0']}>
-              Propose a topic
-            </SectionTitle>
-            <Center
-              boxShadow="0px 16px 40px rgba(193, 193, 193, 0.25)"
-              borderRadius="8px"
-              px="6"
-              py="3"
-            >
-              <Text as="h2" fontSize="sm" fontWeight="500">
-                You are allowed to propose{' '}
-                <span className="gradientText">ONE</span> topic only
-              </Text>
-            </Center>
-          </Flex>
-        </Container>
-      </Center>
-
-      <Container maxW="container.xl" w="100%" py="50px">
-        <Formik
-          validationSchema={schema}
-          initialValues={{
-            description: '',
-            topicTheme: '',
-            topicName: '',
-            topicSummary: '',
-          }}
-          onSubmit={(data) => {
-            fetch({
-              name: data.topicName,
-              user: authState.user.userId,
-              theme: data.topicTheme,
-              description: data.description,
-              contact: '-',
-              self_description: '-',
-            });
-          }}
+      {userTopic ? (
+        <Center
+          d="flex"
+          flexDir="column"
+          alignItems="center"
+          justifyContent="center"
         >
-          {() => (
-            <Form>
-              <VStack spacing={5} alignItems="flex-start">
-                <Text as="h3" fontSize="xl" textTransform="uppercase">
-                  Speaker Details
-                </Text>
-                <Field
-                  label="A short description of yourself"
-                  name="description"
-                  placeholder="I'm from ... "
-                  maxLength={100}
-                  component={BCTextAreaField}
-                />
+          <InfoBlock
+            theme=""
+            content={<Text>You already propose a topic</Text>}
+            leadingIcon={NoMessageIcon}
+          />
+          <BCSpacer size="xs" />
+        </Center>
+      ) : (
+        <>
+          <BCSpacer size="sm" />
 
-                <BCSpacer size="xs" />
-
-                <Text as="h3" fontSize="xl" textTransform="uppercase">
-                  Topic Details
-                </Text>
-                <Field
-                  label="Theme"
-                  name="topicTheme"
-                  placeholder="Theme of your topic"
-                  component={SelectDropdownFormField}
-                />
-
-                <Field
-                  label="Topic Name"
-                  name="topicName"
-                  placeholder="What if the earth is flat ??!!"
-                  component={BCTextFormField}
-                />
-
-                <Field
-                  label="Topic Summary"
-                  name="topicSummary"
-                  placeholder="We're going to talk about ..."
-                  maxLength={250}
-                  component={BCTextAreaField}
-                />
-
-                <Checkbox size="lg" pl="5" onChange={handleConsentCheck}>
-                  <Text fontSize="sm">
-                    When you propose a topic, you are aware that other users can
-                    view your information as a speaker.{' '}
-                  </Text>
-                </Checkbox>
-
-                <PrimaryButton
-                  alignSelf="flex-end"
-                  w={['100%', 'fit-content', 'fit-content']}
-                  py="25px"
-                  px="75px"
-                  type="submit"
-                  disabled={!checked}
+          <Box className="voteTopicHeaderTop" w="100%" h="1px"></Box>
+          <Center
+            w="100%"
+            bg="white"
+            position={['flex', 'flex', 'sticky']}
+            top="0px"
+            zIndex={50}
+            p="3"
+            className="voteTopicHeader"
+          >
+            <Container maxW="container.xl" w="100%" py="0px">
+              <Flex
+                flexDir={['column', 'column', 'row']}
+                justifyContent="space-between"
+                alignItems={['flex-start', 'flex-start', 'center']}
+                pt="5"
+                pb="5"
+                ref={scrollToRef}
+              >
+                <SectionTitle fontSize="2xl" type="left" mb={['7', '0', '0']}>
+                  Propose a topic
+                </SectionTitle>
+                <Center
+                  boxShadow="0px 16px 40px rgba(193, 193, 193, 0.25)"
+                  borderRadius="8px"
+                  px="6"
+                  py="3"
                 >
-                  <Text fontSize="lg">Propose</Text>
-                </PrimaryButton>
-              </VStack>
-            </Form>
-          )}
-        </Formik>
-      </Container>
+                  <Text as="h2" fontSize="sm" fontWeight="500">
+                    You are allowed to propose{' '}
+                    <span className="gradientText">ONE</span> topic only
+                  </Text>
+                </Center>
+              </Flex>
+            </Container>
+          </Center>
+
+          <Container maxW="container.xl" w="100%" py="50px">
+            <Formik
+              validationSchema={schema}
+              initialValues={{
+                description: '',
+                topicTheme: '',
+                topicName: '',
+                topicSummary: '',
+              }}
+              onSubmit={(data) => {
+                fetch({
+                  name: data.topicName,
+                  user: authState.user.userId,
+                  theme: data.topicTheme,
+                  description: data.description,
+                  contact: '-',
+                  self_description: '-',
+                });
+              }}
+            >
+              {() => (
+                <Form>
+                  <VStack spacing={5} alignItems="flex-start">
+                    <Text as="h3" fontSize="xl" textTransform="uppercase">
+                      Speaker Details
+                    </Text>
+                    <Field
+                      label="A short description of yourself"
+                      name="description"
+                      placeholder="I'm from ... "
+                      maxLength={100}
+                      component={BCTextAreaField}
+                    />
+
+                    <BCSpacer size="xs" />
+
+                    <Text as="h3" fontSize="xl" textTransform="uppercase">
+                      Topic Details
+                    </Text>
+                    <Field
+                      label="Theme"
+                      name="topicTheme"
+                      placeholder="Theme of your topic"
+                      component={SelectDropdownFormField}
+                    />
+
+                    <Field
+                      label="Topic Name"
+                      name="topicName"
+                      placeholder="What if the earth is flat ??!!"
+                      component={BCTextFormField}
+                    />
+
+                    <Field
+                      label="Topic Summary"
+                      name="topicSummary"
+                      placeholder="We're going to talk about ..."
+                      maxLength={250}
+                      component={BCTextAreaField}
+                    />
+
+                    <Checkbox size="lg" pl="5" onChange={handleConsentCheck}>
+                      <Text fontSize="sm">
+                        When you propose a topic, you are aware that other users
+                        can view your information as a speaker.{' '}
+                      </Text>
+                    </Checkbox>
+
+                    <PrimaryButton
+                      alignSelf="flex-end"
+                      w={['100%', 'fit-content', 'fit-content']}
+                      py="25px"
+                      px="75px"
+                      type="submit"
+                      disabled={!checked}
+                    >
+                      <Text fontSize="lg">Propose</Text>
+                    </PrimaryButton>
+                  </VStack>
+                </Form>
+              )}
+            </Formik>
+          </Container>
+        </>
+      )}
     </>
   );
 };

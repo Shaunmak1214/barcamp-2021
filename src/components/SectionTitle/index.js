@@ -72,7 +72,7 @@ const SectionTitle = ({ type, ...props }) => {
 
 SectionTitle.propTypes = {
   children: PropTypes.node,
-  type: PropTypes.string,
+  type: PropTypes.any,
 };
 
 export { SectionTitle };

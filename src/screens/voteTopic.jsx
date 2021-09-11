@@ -20,17 +20,17 @@ import { PrimaryButton } from '../components/Buttons';
 import { SectionTitle } from 'components/SectionTitle';
 import { SelectFormFieldClass } from '../components/Forms';
 import BCSpacer from '../components/Spacer';
-import BCModal from '../components/Modal';
-import useModal from '../components/Modal/useModal';
 import TopicBadge from '../components/TopicBadge';
+import InfoBlock from 'components/InfoBlock';
 import { useScrollTo, useAxios } from '../hooks';
 
-import { SectionBg, VotingPic, AIIcon } from '../assets';
+import { SectionBg, VotingPic, AIIcon, VotingIcon } from '../assets';
 import store from './../store/store';
 import '../global.css';
 
 const voteTopic = () => {
-  // const topicsAvailable = [
+  // eslint-disable-next-line
+  // const topicAvailable = [
   //   {
   //     topicId: 1,
   //     topicName: 'Where its going / What even is it?',
@@ -76,9 +76,6 @@ const voteTopic = () => {
   // ];
 
   const { scrollToRef, executeScroll } = useScrollTo();
-  const { isOpen, onModalClose, onModalOpen } = useModal({
-    initialState: false,
-  });
   const [votes, setVotes] = React.useState([]);
   const [topicAvailable, setTopicAvailable] = React.useState([]);
   const voteTopicHeader = React.useRef(null);
@@ -113,9 +110,8 @@ const voteTopic = () => {
     (res, err) => {
       if (err) {
         console.log(err);
-      } else {
-        console.log(res);
-        setTopicAvailable(res);
+      } else if (res) {
+        setTopicAvailable(res.data);
       }
     },
   );
@@ -124,25 +120,6 @@ const voteTopic = () => {
     console.log(votes);
     fetch();
   }, [votes]);
-
-  // useEffect(() => {
-  //   var observer = new IntersectionObserver(
-  //     function (entries) {
-  //       // no intersection with screen
-  //       if (entries[0].intersectionRatio === 0)
-  //         document
-  //           .querySelector('.voteTopicHeader')
-  //           .classList.add('voteTopicHeader-sticky');
-  //       // fully intersects with screen
-  //       else if (entries[0].intersectionRatio === 1)
-  //         document
-  //           .querySelector('.voteTopicHeader')
-  //           .classList.remove('voteTopicHeader-sticky');
-  //     },
-  //     { threshold: [0, 1] },
-  //   );
-  //   observer.observe(document.querySelector('.voteTopicHeaderTop'));
-  // }, []);
 
   const SelectionsRenderer = ({ topicsAvailable }) => {
     return (
@@ -187,30 +164,6 @@ const voteTopic = () => {
 
   return (
     <>
-      <BCModal
-        successUrl="/dashboard"
-        content={
-          <>
-            <Text as="h3" fontSize="xl" fontFamily="Poppins" fontWeight="600">
-              Thank you for voting your desired topic!{' '}
-            </Text>
-            <Text
-              as="h3"
-              fontSize="sm"
-              fontFamily="Poppins"
-              fontWeight="400"
-              textAlign="center"
-              px="3"
-            >
-              Final voting result will be announced soon on 28 September 2021.
-              Let’s meet at Barcamp on 2 October 2021.
-            </Text>
-          </>
-        }
-        modalOpen={isOpen}
-        onClose={onModalClose}
-        theme="error"
-      />
       <VStack
         w="100%"
         h="100vh"
@@ -258,132 +211,148 @@ const voteTopic = () => {
         h="250px"
       ></Center>
 
-      <BCSpacer size="sm" />
-
-      <Box className="voteTopicHeaderTop" w="100%" h="1px"></Box>
-      <Center
-        w="100%"
-        bg="white"
-        position={['flex', 'flex', 'sticky']}
-        top="0px"
-        zIndex={50}
-        p="3"
-        className="voteTopicHeader"
-        ref={voteTopicHeader}
-      >
-        <Container maxW="container.xl" w="100%" py="0px">
-          <Flex
-            flexDir={['column', 'column', 'row']}
-            justifyContent="space-between"
-            alignItems="center"
-            pt="5"
-            pb="5"
-            ref={scrollToRef}
+      {topicAvailable && topicAvailable.length >= 5 ? (
+        <>
+          <Box className="voteTopicHeaderTop" w="100%" h="1px"></Box>
+          <Center
+            w="100%"
+            bg="white"
+            position={['flex', 'flex', 'sticky']}
+            top="0px"
+            zIndex={50}
+            p="3"
+            className="voteTopicHeader"
+            ref={voteTopicHeader}
           >
-            <SectionTitle fontSize="2xl" type="left" mb={['7', '0', '0']}>
-              Pick your choice
-            </SectionTitle>
-            <Center mb={['7', '0', '0']}>
-              <Text>{votes.length} / 5 selected</Text>
-            </Center>
-            <Center
-              boxShadow="0px 16px 40px rgba(193, 193, 193, 0.25)"
-              borderRadius="8px"
-              px="6"
-              py="3"
-              onClick={onModalOpen}
+            <Container maxW="container.xl" w="100%" py="0px">
+              <Flex
+                flexDir={['column', 'column', 'row']}
+                justifyContent="space-between"
+                alignItems="center"
+                pt="5"
+                pb="5"
+                ref={scrollToRef}
+              >
+                <SectionTitle fontSize="2xl" type="left" mb={['7', '0', '0']}>
+                  Pick your choice
+                </SectionTitle>
+                <Center mb={['7', '0', '0']}>
+                  <Text>{votes.length} / 5 selected</Text>
+                </Center>
+                <Center
+                  boxShadow="0px 16px 40px rgba(193, 193, 193, 0.25)"
+                  borderRadius="8px"
+                  px="6"
+                  py="3"
+                >
+                  <Text as="h2" fontSize="sm" fontWeight="500">
+                    Up to <span className="gradientText">FIVE</span> selections
+                    per participant
+                  </Text>
+                </Center>
+              </Flex>
+            </Container>
+          </Center>
+
+          <Container maxW="container.xl" w="100%" py="50px">
+            {/* wrap formik inside an internary operator, check if got topic or not if not display no topic  // Topic block*/}
+            <Formik
+              // validationSchema={schema}
+              initialValues={{
+                description: '',
+                topicTheme: '',
+                topicName: '',
+                topicSummary: '',
+              }}
+              onSubmit={(data) => {
+                console.log(data);
+                console.log(votes);
+              }}
             >
-              <Text as="h2" fontSize="sm" fontWeight="500">
-                Up to <span className="gradientText">FIVE</span> selections per
-                participant
-              </Text>
-            </Center>
-          </Flex>
-        </Container>
-      </Center>
-
-      <Container maxW="container.xl" w="100%" py="50px">
-        {/* wrap formik inside an internary operator, check if got topic or not if not display no topic  // Topic block*/}
-
-        {topicAvailable && topicAvailable.length > 0 ? (
-          <Formik
-            // validationSchema={schema}
-            initialValues={{
-              description: '',
-              topicTheme: '',
-              topicName: '',
-              topicSummary: '',
-            }}
-            onSubmit={(data) => {
-              console.log(data);
-              console.log(votes);
-            }}
-          >
-            {() => (
-              <Form>
-                <VStack>
-                  <VStack spacing={5} alignItems="flex-start" w="100%">
-                    {topicAvailable.length && topicAvailable.length > 0
-                      ? topicAvailable.map((topic, idx) => (
-                          <SelectFormFieldClass
-                            key={idx}
-                            value={`${topic._id}`}
-                            onSelect={(value, selected) =>
-                              onSelect(value, selected)
-                            }
+              {() => (
+                <Form>
+                  <VStack>
+                    <VStack spacing={5} alignItems="flex-start" w="100%">
+                      {topicAvailable.map((topic, idx) => (
+                        <SelectFormFieldClass
+                          key={idx}
+                          value={`${topic._id}`}
+                          onSelect={(value, selected) =>
+                            onSelect(value, selected)
+                          }
+                        >
+                          <HStack
+                            spacing={7}
+                            py="0.5em"
+                            px={['0rem', '0rem', '0.5em']}
                           >
-                            <HStack
-                              spacing={7}
-                              py="0.5em"
-                              px={['0rem', '0rem', '0.5em']}
-                            >
-                              <Image
-                                src={AIIcon}
-                                d={['none', 'none', 'flex']}
-                                h="45px"
-                                w="45px"
-                                alt="Artificial Intelligence"
-                              />
-                              <VStack spacing={2} align="flex-start">
-                                <TopicBadge topic="testing" />
-                                <Text
-                                  as="h3"
-                                  fontSize="md"
-                                  fontFamily="Poppins"
-                                  fontWeight="600"
-                                >
-                                  {topic.name}
-                                </Text>
-                                <Text as="h6" fontSize="sm" fontWeight="500">
-                                  {topic.description}
-                                </Text>
-                              </VStack>
-                            </HStack>
-                          </SelectFormFieldClass>
-                        ))
-                      : null}
+                            <Image
+                              src={AIIcon}
+                              d={['none', 'none', 'flex']}
+                              h="45px"
+                              w="45px"
+                              alt="Artificial Intelligence"
+                            />
+                            <VStack spacing={2} align="flex-start">
+                              <TopicBadge topic="testing" />
+                              <Text
+                                as="h3"
+                                fontSize="md"
+                                fontFamily="Poppins"
+                                fontWeight="600"
+                              >
+                                {topic.name}
+                              </Text>
+                              <Text as="h6" fontSize="sm" fontWeight="500">
+                                {topic.description}
+                              </Text>
+                            </VStack>
+                          </HStack>
+                        </SelectFormFieldClass>
+                      ))}
+                    </VStack>
+
+                    <BCSpacer size="sm" />
+
+                    <PrimaryButton
+                      alignSelf="flex-end"
+                      w={['100%', 'fit-content', 'fit-content']}
+                      py="25px"
+                      px="75px"
+                      disabled={votes.length < 5}
+                      type="submit"
+                    >
+                      <Text fontSize="lg">Submit Vote</Text>
+                    </PrimaryButton>
                   </VStack>
-
-                  <BCSpacer size="sm" />
-
-                  <PrimaryButton
-                    alignSelf="flex-end"
-                    w={['100%', 'fit-content', 'fit-content']}
-                    py="25px"
-                    px="75px"
-                    disabled={votes.length < 5}
-                    type="submit"
-                  >
-                    <Text fontSize="lg">Submit Vote</Text>
-                  </PrimaryButton>
-                </VStack>
-              </Form>
-            )}
-          </Formik>
-        ) : (
-          <Text textAlign="center">No Topic</Text>
-        )}
-      </Container>
+                </Form>
+              )}
+            </Formik>
+          </Container>
+        </>
+      ) : (
+        <Center
+          d="flex"
+          flexDir="column"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <InfoBlock
+            theme="error"
+            content={
+              <Text>
+                The voting session will be opening soon. Every participants
+                including speakers are able to vote your desired topics starting
+                from <span style={{ fontWeight: 'bold' }}>25 September </span>
+                until
+                <span style={{ fontWeight: 'bold' }}> 27 September 2021 </span>
+              </Text>
+            }
+            leadingIcon={VotingIcon}
+          />
+          <BCSpacer size="xs" />
+        </Center>
+      )}
     </>
   );
 };
