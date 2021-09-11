@@ -2,9 +2,9 @@ import React from 'react';
 import { Container, SimpleGrid, Text, VStack, Box } from '@chakra-ui/layout';
 import { SectionTitle } from '../components/SectionTitle';
 import BCSpacer from '../components/Spacer';
-
+import store from './../store/store';
 import { PrimaryButton } from '../components/Buttons';
-
+import useAxios from './../hooks/useAxios';
 import * as yup from 'yup';
 import { Formik, Form, Field } from 'formik';
 import { BCTextFilledFormField, SelectFormField } from '../components/Forms';
@@ -19,9 +19,27 @@ const schema = yup.object({
   noc: yup.string().required().min(1),
 });
 
+const userId = store.getState().auth.user.userId;
+const token = store.getState().auth.accessToken;
 const updateProfile = () => {
   const [heard, setHeard] = React.useState([]);
-
+  const { fetch } = useAxios(
+    {
+      method: 'patch',
+      url: `/users/${userId}`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    },
+    (res, err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(res);
+      }
+    },
+  );
   const onSelect = React.useCallback(
     (value, selected) => {
       setHeard((hear) => {
@@ -60,8 +78,13 @@ const updateProfile = () => {
             noc: '',
           }}
           onSubmit={(data) => {
-            console.log(data);
             console.log(heard);
+            fetch({
+              fullName: data.fullname,
+              age: data.age,
+              contactNumber: data.contactnumber,
+              companyOrInstitution: data.noc,
+            });
           }}
         >
           {() => (
