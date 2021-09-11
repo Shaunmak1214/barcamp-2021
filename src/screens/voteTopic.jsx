@@ -22,65 +22,68 @@ import { SelectFormFieldClass } from '../components/Forms';
 import BCSpacer from '../components/Spacer';
 import BCModal from '../components/Modal';
 import useModal from '../components/Modal/useModal';
-
-import { useScrollTo } from '../hooks';
+import TopicBadge from '../components/TopicBadge';
+import { useScrollTo, useAxios } from '../hooks';
 
 import { SectionBg, VotingPic, AIIcon } from '../assets';
-
+import store from './../store/store';
 import '../global.css';
 
 const voteTopic = () => {
-  const topicsAvailable = [
-    {
-      topicId: 1,
-      topicName: 'Where its going / What even is it?',
-      topicDescription:
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s',
-      topicBadge: 'Artificial Intelligence',
-    },
-    {
-      topicId: 2,
-      topicName: 'Where its going / What even is it?',
-      topicDescription:
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, Ipsum has been the industrys standard dummy text ever since the 1500s,',
-      topicBadge: 'Artificial Intelligence',
-    },
-    {
-      topicId: 3,
-      topicName: 'Where its going / What even is it?',
-      topicDescription:
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, Ipsum has been the industrys standard dummy text ever since the 1500s,',
-      topicBadge: 'Artificial Intelligence',
-    },
-    {
-      topicId: 4,
-      topicName: 'Where its going / What even is it?',
-      topicDescription:
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, Ipsum has been the industrys standard dummy text ever since the 1500s,',
-      topicBadge: 'Artificial Intelligence',
-    },
-    {
-      topicId: 5,
-      topicName: 'Where its going / What even is it?',
-      topicDescription:
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, Ipsum has been the industrys standard dummy text ever since the 1500s,',
-      topicBadge: 'Artificial Intelligence',
-    },
-    {
-      topicId: 6,
-      topicName: 'Where its going / What even is it?',
-      topicDescription:
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, Ipsum has been the industrys standard dummy text ever since the 1500s,',
-      topicBadge: 'Artificial Intelligence',
-    },
-  ];
+  // const topicsAvailable = [
+  //   {
+  //     topicId: 1,
+  //     topicName: 'Where its going / What even is it?',
+  //     topicDescription:
+  //       'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s',
+  //     topicBadge: 'Artificial Intelligence',
+  //   },
+  //   {
+  //     topicId: 2,
+  //     topicName: 'Where its going / What even is it?',
+  //     topicDescription:
+  //       'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, Ipsum has been the industrys standard dummy text ever since the 1500s,',
+  //     topicBadge: 'Artificial Intelligence',
+  //   },
+  //   {
+  //     topicId: 3,
+  //     topicName: 'Where its going / What even is it?',
+  //     topicDescription:
+  //       'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, Ipsum has been the industrys standard dummy text ever since the 1500s,',
+  //     topicBadge: 'Artificial Intelligence',
+  //   },
+  //   {
+  //     topicId: 4,
+  //     topicName: 'Where its going / What even is it?',
+  //     topicDescription:
+  //       'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, Ipsum has been the industrys standard dummy text ever since the 1500s,',
+  //     topicBadge: 'Artificial Intelligence',
+  //   },
+  //   {
+  //     topicId: 5,
+  //     topicName: 'Where its going / What even is it?',
+  //     topicDescription:
+  //       'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, Ipsum has been the industrys standard dummy text ever since the 1500s,',
+  //     topicBadge: 'Artificial Intelligence',
+  //   },
+  //   {
+  //     topicId: 6,
+  //     topicName: 'Where its going / What even is it?',
+  //     topicDescription:
+  //       'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, Ipsum has been the industrys standard dummy text ever since the 1500s,',
+  //     topicBadge: 'Artificial Intelligence',
+  //   },
+  // ];
 
   const { scrollToRef, executeScroll } = useScrollTo();
   const { isOpen, onModalClose, onModalOpen } = useModal({
     initialState: false,
   });
   const [votes, setVotes] = React.useState([]);
+  const [topicAvailable, setTopicAvailable] = React.useState([]);
   const voteTopicHeader = React.useRef(null);
+
+  const token = store.getState().auth.accessToken;
 
   const onSelect = React.useCallback(
     (value, selected) => {
@@ -99,52 +102,47 @@ const voteTopic = () => {
     [setVotes],
   );
 
+  const { fetch } = useAxios(
+    {
+      method: 'get',
+      url: '/topics',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+    (res, err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(res);
+        setTopicAvailable(res);
+      }
+    },
+  );
+
   useEffect(() => {
     console.log(votes);
+    fetch();
   }, [votes]);
 
-  useEffect(() => {
-    var observer = new IntersectionObserver(
-      function (entries) {
-        // no intersection with screen
-        if (entries[0].intersectionRatio === 0)
-          document
-            .querySelector('.voteTopicHeader')
-            .classList.add('voteTopicHeader-sticky');
-        // fully intersects with screen
-        else if (entries[0].intersectionRatio === 1)
-          document
-            .querySelector('.voteTopicHeader')
-            .classList.remove('voteTopicHeader-sticky');
-      },
-      { threshold: [0, 1] },
-    );
-
-    observer.observe(document.querySelector('.voteTopicHeaderTop'));
-  }, []);
-
-  const TopicBadge = ({ topic }) => {
-    return (
-      <Flex
-        align="center"
-        justify="center"
-        borderRadius="10px"
-        bg="#C9E1FF"
-        color="gray.800"
-        py={'3px'}
-        px={'12px'}
-        fontSize="xs"
-        fontWeight="500"
-        textTransform="uppercase"
-      >
-        {topic}
-      </Flex>
-    );
-  };
-
-  TopicBadge.propTypes = {
-    topic: PropTypes.string.isRequired,
-  };
+  // useEffect(() => {
+  //   var observer = new IntersectionObserver(
+  //     function (entries) {
+  //       // no intersection with screen
+  //       if (entries[0].intersectionRatio === 0)
+  //         document
+  //           .querySelector('.voteTopicHeader')
+  //           .classList.add('voteTopicHeader-sticky');
+  //       // fully intersects with screen
+  //       else if (entries[0].intersectionRatio === 1)
+  //         document
+  //           .querySelector('.voteTopicHeader')
+  //           .classList.remove('voteTopicHeader-sticky');
+  //     },
+  //     { threshold: [0, 1] },
+  //   );
+  //   observer.observe(document.querySelector('.voteTopicHeaderTop'));
+  // }, []);
 
   const SelectionsRenderer = ({ topicsAvailable }) => {
     return (
@@ -305,76 +303,86 @@ const voteTopic = () => {
       </Center>
 
       <Container maxW="container.xl" w="100%" py="50px">
-        <Formik
-          // validationSchema={schema}
-          initialValues={{
-            description: '',
-            topicTheme: '',
-            topicName: '',
-            topicSummary: '',
-          }}
-          onSubmit={(data) => {
-            console.log(data);
-            console.log(votes);
-          }}
-        >
-          {() => (
-            <Form>
-              <VStack>
-                <VStack spacing={5} alignItems="flex-start">
-                  {topicsAvailable.map((topic, idx) => (
-                    <SelectFormFieldClass
-                      key={idx}
-                      value={`${topic.topicId}`}
-                      onSelect={(value, selected) => onSelect(value, selected)}
-                    >
-                      <HStack
-                        spacing={7}
-                        py="0.5em"
-                        px={['0rem', '0rem', '0.5em']}
-                      >
-                        <Image
-                          src={AIIcon}
-                          d={['none', 'none', 'flex']}
-                          h="45px"
-                          w="45px"
-                          alt="Artificial Intelligence"
-                        />
-                        <VStack spacing={2} align="flex-start">
-                          <TopicBadge topic={topic.topicBadge} />
-                          <Text
-                            as="h3"
-                            fontSize="md"
-                            fontFamily="Poppins"
-                            fontWeight="600"
+        {/* wrap formik inside an internary operator, check if got topic or not if not display no topic  // Topic block*/}
+
+        {topicAvailable && topicAvailable.length > 0 ? (
+          <Formik
+            // validationSchema={schema}
+            initialValues={{
+              description: '',
+              topicTheme: '',
+              topicName: '',
+              topicSummary: '',
+            }}
+            onSubmit={(data) => {
+              console.log(data);
+              console.log(votes);
+            }}
+          >
+            {() => (
+              <Form>
+                <VStack>
+                  <VStack spacing={5} alignItems="flex-start" w="100%">
+                    {topicAvailable.length && topicAvailable.length > 0
+                      ? topicAvailable.map((topic, idx) => (
+                          <SelectFormFieldClass
+                            key={idx}
+                            value={`${topic._id}`}
+                            onSelect={(value, selected) =>
+                              onSelect(value, selected)
+                            }
                           >
-                            {topic.topicName}
-                          </Text>
-                          <Text as="h6" fontSize="sm" fontWeight="500">
-                            {topic.topicDescription}
-                          </Text>
-                        </VStack>
-                      </HStack>
-                    </SelectFormFieldClass>
-                  ))}
+                            <HStack
+                              spacing={7}
+                              py="0.5em"
+                              px={['0rem', '0rem', '0.5em']}
+                            >
+                              <Image
+                                src={AIIcon}
+                                d={['none', 'none', 'flex']}
+                                h="45px"
+                                w="45px"
+                                alt="Artificial Intelligence"
+                              />
+                              <VStack spacing={2} align="flex-start">
+                                <TopicBadge topic="testing" />
+                                <Text
+                                  as="h3"
+                                  fontSize="md"
+                                  fontFamily="Poppins"
+                                  fontWeight="600"
+                                >
+                                  {topic.name}
+                                </Text>
+                                <Text as="h6" fontSize="sm" fontWeight="500">
+                                  {topic.description}
+                                </Text>
+                              </VStack>
+                            </HStack>
+                          </SelectFormFieldClass>
+                        ))
+                      : null}
+                  </VStack>
+
+                  <BCSpacer size="sm" />
+
+                  <PrimaryButton
+                    alignSelf="flex-end"
+                    w={['100%', 'fit-content', 'fit-content']}
+                    py="25px"
+                    px="75px"
+                    disabled={votes.length < 5}
+                    type="submit"
+                  >
+                    <Text fontSize="lg">Submit Vote</Text>
+                  </PrimaryButton>
                 </VStack>
-
-                <BCSpacer size="sm" />
-
-                <PrimaryButton
-                  alignSelf="flex-end"
-                  w={['100%', 'fit-content', 'fit-content']}
-                  py="25px"
-                  px="75px"
-                  disabled={votes.length < 5}
-                  type="submit"
-                >
-                  <Text fontSize="lg">Submit Vote</Text>
-                </PrimaryButton>
-              </VStack>
-            </Form>
-          )}
-        </Formik>
+              </Form>
+            )}
+          </Formik>
+        ) : (
+          <Text textAlign="center">No Topic</Text>
+        )}
       </Container>
     </>
   );
