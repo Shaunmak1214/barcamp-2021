@@ -13,21 +13,22 @@ import InfoBlock from 'components/InfoBlock';
 import TopicBlock from 'components/TopicBlock';
 import { useAxios } from '../hooks';
 import store from './../store/store';
+import jwt_decode from 'jwt-decode';
 const Dashboard = () => {
   const { daysRef, hoursRef, minutesRef, secondsRef } = useCountdown(
     'September 25, 2021 00:00:00',
   );
 
-  const userId = store.getState().auth.user.userId;
-  const token = store.getState().auth.accessToken;
+  const authState = store.getState().auth;
+  const decodedData = jwt_decode(authState.accessToken);
   const [userTopic, getUserTopic] = useState([]);
 
   const { fetch } = useAxios(
     {
       method: 'get',
-      url: `/topicsByUser/${userId}`,
+      url: `/topicsByUser/${authState.user.userId}`,
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${authState.accessToken}`,
       },
     },
     (res, err) => {
@@ -41,6 +42,7 @@ const Dashboard = () => {
   );
 
   useEffect(() => {
+    console.log(decodedData);
     fetch();
   }, []);
 
@@ -177,7 +179,7 @@ const Dashboard = () => {
             Your Proposed Topic
           </SectionTitle>
           {userTopic ? (
-            <TopicBlock topic={userTopic} />
+            <TopicBlock topic={userTopic} data={decodedData} />
           ) : (
             <InfoBlock
               buttonUrl="/propose-topic"

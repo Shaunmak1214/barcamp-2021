@@ -38,15 +38,14 @@ const schema = yup.object({
 const ProposeTopic = () => {
   const { scrollToRef, executeScroll } = useScrollTo();
   const [checked, setChecked] = useState(false);
-  const userState = store.getState().auth.user;
-  const token = store.getState().auth.accessToken;
+  const authState = store.getState().auth;
 
   const { response, loading, error, fetch } = useAxios(
     {
       method: 'post',
       url: '/topics',
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${authState.accessToken}`,
         'Content-Type': 'application/json',
       },
     },
@@ -181,7 +180,7 @@ const ProposeTopic = () => {
           onSubmit={(data) => {
             fetch({
               name: data.topicName,
-              user: userState.userId,
+              user: authState.user.userId,
               theme: data.topicTheme,
               description: data.description,
               contact: '-',

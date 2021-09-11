@@ -1,10 +1,10 @@
-import { VStack, HStack, Text, Box } from '@chakra-ui/layout';
+import { VStack, HStack, Text, Box, Flex } from '@chakra-ui/layout';
 import React from 'react';
 import { Image } from '@chakra-ui/image';
 import TopicBadge from './../TopicBadge';
 import PropTypes from 'prop-types';
 
-const TopicBlock = ({ topic }) => {
+const TopicBlock = ({ topic, data }) => {
   return (
     <HStack
       w="100%"
@@ -21,12 +21,22 @@ const TopicBlock = ({ topic }) => {
     >
       <Box width="90%">
         <HStack spacing={7} py="0.3em" px={['0rem', '0rem', '0.5em']}>
-          <Image d={['none', 'none', 'flex']} h="45px" w="45px" />
+          <Image
+            src={data.picture}
+            borderRadius="50%"
+            d={['none', 'none', 'flex']}
+            h="60px"
+            w="60px"
+          />
           <VStack spacing={2} align="flex-start" w="90%">
-            <HStack justifyContent="space-between" w="100%">
+            <Flex
+              justifyContent="space-between"
+              w="95%"
+              flexDir={['column', 'column', 'row']}
+            >
               <TopicBadge topic={topic.theme} />
-              <Text>Prepared By Shaun</Text>
-            </HStack>
+              <Text>Prepared By {data.fullName}</Text>
+            </Flex>
             <Text as="h3" fontSize="md" fontFamily="Poppins" fontWeight="600">
               {topic.name}
             </Text>
@@ -40,7 +50,9 @@ const TopicBlock = ({ topic }) => {
       <VStack spacing={3}>
         <Text>4TH</Text>
         <Box background="#f5f5f5" borderRadius="8px" p="10px">
-          <Text fontSize="sm">241 votes</Text>
+          <Text fontSize="sm">
+            <span bg="#1050A0">241</span> votes
+          </Text>
         </Box>
       </VStack>
     </HStack>
@@ -49,6 +61,7 @@ const TopicBlock = ({ topic }) => {
 
 TopicBlock.propTypes = {
   topic: PropTypes.object,
+  data: PropTypes.object,
 };
 
 export default TopicBlock;
