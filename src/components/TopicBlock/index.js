@@ -37,7 +37,12 @@ const TopicBlock = ({ topic, data }) => {
               <TopicBadge topic={topic.theme} />
               {/* <Text>Prepared By {data.fullName}</Text> */}
             </Flex>
-            <Text as="h3" fontSize="md" fontFamily="Poppins" fontWeight="600">
+            <Text
+              as="h3"
+              fontSize="md"
+              fontFamily="Montserrat"
+              fontWeight="600"
+            >
               {topic.name}
             </Text>
             <Text as="h6" fontSize="sm" fontWeight="500">
