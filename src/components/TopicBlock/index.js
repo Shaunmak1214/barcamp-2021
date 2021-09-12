@@ -4,10 +4,12 @@ import { Image } from '@chakra-ui/image';
 import TopicBadge from './../TopicBadge';
 import PropTypes from 'prop-types';
 
-const TopicBlock = ({ topic }) => {
+const TopicBlock = ({ topic, themeIcon }) => {
   if (!topic || !topic.user) {
     return null;
   }
+
+  const icon = themeIcon ? themeIcon : topic.user.picture;
 
   return (
     <HStack
@@ -26,7 +28,7 @@ const TopicBlock = ({ topic }) => {
       <Box width="90%">
         <HStack spacing={7} py="0.3em" px={['0rem', '0rem', '0.5em']}>
           <Image
-            src={topic.user.picture}
+            src={icon}
             borderRadius="50%"
             d={['none', 'none', 'flex']}
             h="60px"
@@ -70,7 +72,7 @@ const TopicBlock = ({ topic }) => {
 
 TopicBlock.propTypes = {
   topic: PropTypes.object,
-  data: PropTypes.object,
+  themeIcon: PropTypes.any,
 };
 
 export default TopicBlock;
