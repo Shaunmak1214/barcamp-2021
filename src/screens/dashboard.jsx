@@ -238,7 +238,7 @@ const Dashboard = () => {
           <SectionTitle fontSize="2xl" type="left">
             Your Voted Topic
           </SectionTitle>
-          {votedTopics ? (
+          {votedTopics && votedTopics.length > 0 ? (
             votedTopics.map((topic, idx) => (
               <TopicBlock
                 key={idx}
