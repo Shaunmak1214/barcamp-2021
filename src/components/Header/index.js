@@ -87,7 +87,7 @@ const Index = ({ cta, type }) => {
         <VStack alignItems="flex-start" justifyContent="center">
           <HStack>
             <Image src={PlatinumIcon} height="15px" width="15px" />
-            <Text fontFamily="Poppins" fontSize="lg" fontWeight="600">
+            <Text fontFamily="Montserrat" fontSize="lg" fontWeight="600">
               {sponsorData.type}
             </Text>
           </HStack>

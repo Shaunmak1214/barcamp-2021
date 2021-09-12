@@ -15,7 +15,7 @@ const Toast = () => {
           boxShadow="0px 16px 40px rgba(129, 129, 129, 0.25)"
           background="#fff"
         >
-          <Text fontFamily="Poppins" fontSize="md" color="black">
+          <Text fontFamily="Montserrat" fontSize="md" color="black">
             Login failed
           </Text>
         </Box>

@@ -103,13 +103,18 @@ const updateProfile = () => {
         theme="error"
         content={
           <>
-            <Text as="h3" fontSize="xl" fontFamily="Poppins" fontWeight="600">
+            <Text
+              as="h3"
+              fontSize="xl"
+              fontFamily="Montserrat"
+              fontWeight="600"
+            >
               Theres an error updating your profile
             </Text>
             <Text
               as="h3"
               fontSize="sm"
-              fontFamily="Poppins"
+              fontFamily="Montserrat"
               fontWeight="400"
               textAlign="center"
               px="3"
@@ -202,7 +207,11 @@ const updateProfile = () => {
                     component={BCTextFilledFormField}
                   />
                   <VStack w="100%" h="100%" alignItems="flex-start">
-                    <Text fontFamily="Poppins" fontWeight="500" fontSize="md">
+                    <Text
+                      fontFamily="Montserrat"
+                      fontWeight="500"
+                      fontSize="md"
+                    >
                       How do you know about Barcamp Cyberjaya *optional
                     </Text>
                     <Box w="100%" h="100%" py="5" borderRadius="8px">
