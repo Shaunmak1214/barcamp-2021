@@ -30,10 +30,9 @@ const Dashboard = () => {
         Authorization: `Bearer ${authState.accessToken}`,
       },
     },
+    /*eslint-disable */
     (res, err) => {
-      if (err) {
-        console.log(err);
-      } else if (res) {
+      if (res) {
         setUserTopic(res.data);
       }
     },
@@ -47,12 +46,10 @@ const Dashboard = () => {
         Authorization: `Bearer ${authState.accessToken}`,
       },
     },
+    /*eslint-disable */
     (res, err) => {
       if (res) {
-        console.log(res.data);
         setVotedTopics(res.data);
-      } else if (err) {
-        console.log(err);
       }
     },
   );
