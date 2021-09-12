@@ -1,4 +1,6 @@
 import React, { useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { LOGOUT } from '../../reducers/authSlice';
 import PropTypes from 'prop-types';
 
 import { Image } from '@chakra-ui/image';
@@ -16,6 +18,7 @@ import { Text } from '@chakra-ui/react';
 import { PrimaryButton } from '../Buttons';
 import { BarcampFullLogo, PlatinumIcon, DownIcon } from '../../assets/';
 import MobileMenu from './MobileMenu';
+import store from '../../store/store';
 
 import {
   platinumSponsor,
@@ -24,11 +27,23 @@ import {
 } from '../../datas/sponsors';
 
 const Index = ({ cta, type }) => {
+  const dispatch = useDispatch();
+
   const headerSticky = useRef(null);
   const sponsorHover = useRef(null);
   const moreHover = useRef(null);
   const joinButton = useRef(null);
+
+  const authState = store.getState().auth;
+  const user = authState.user;
+  const isAuthenticated = authState.isAuthenticated;
+
   const mobileSize = window.screen.width <= 768;
+
+  const logout = () => {
+    dispatch(LOGOUT());
+    window.location.href = '/login';
+  };
 
   const handleScroll = (e) => {
     const window = e.currentTarget;
@@ -203,25 +218,62 @@ const Index = ({ cta, type }) => {
                 position="absolute"
                 top="70px"
                 right="0px"
-                w="150px"
+                w="215px"
+                alignItems="flex-start"
                 bg="rgba(255, 255, 255, 0.98)"
                 boxShadow="0px 16px 40px rgba(165, 165, 165, 0.25)"
                 py="4"
-                px="2"
+                px="4"
                 borderRadius="4px"
                 transition="visibility 0.2s ease-in-out, opacity 0.2s ease-in-out"
                 zIndex="50"
                 cursor="pointer"
               >
-                <Link href="/dashboard" py="3">
-                  <Text fontSize="sm">Dashboard</Text>
-                </Link>
-                <Link href="/vote-topic" py="3">
-                  <Text fontSize="sm">Vote Topics</Text>
-                </Link>
-                <Link href="/propose-topic" py="3">
-                  <Text fontSize="sm">Propose Topic</Text>
-                </Link>
+                {isAuthenticated ? (
+                  <>
+                    <HStack mb="5px">
+                      <Image
+                        src={user.picture}
+                        height="30px"
+                        width="30px"
+                        borderRadius="50%"
+                      />
+                      <Text
+                        fontSize="xs"
+                        fontWeight="500"
+                        ml="5"
+                        w="80%"
+                        wordBreak="break-word"
+                      >
+                        {user.email}
+                      </Text>
+                    </HStack>
+
+                    <Link href="/dashboard" py="3">
+                      <Text fontSize="sm">Dashboard</Text>
+                    </Link>
+                    <Link href="/vote-topic" py="3">
+                      <Text fontSize="sm">Vote Topics</Text>
+                    </Link>
+                    <Link href="/propose-topic" py="3">
+                      <Text fontSize="sm">Propose Topic</Text>
+                    </Link>
+                    {isAuthenticated && (
+                      <Link
+                        py="3"
+                        onClick={() => {
+                          logout();
+                        }}
+                      >
+                        <Text fontSize="sm">Log Out</Text>
+                      </Link>
+                    )}
+                  </>
+                ) : (
+                  <Link href="/login" py="3">
+                    <Text fontSize="sm">Login to barcamp</Text>
+                  </Link>
+                )}
               </VStack>
             </Box>
 
