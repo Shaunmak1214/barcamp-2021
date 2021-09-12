@@ -13,14 +13,13 @@ import InfoBlock from 'components/InfoBlock';
 import TopicBlock from 'components/TopicBlock';
 import { useAxios } from '../hooks';
 import store from './../store/store';
-import jwt_decode from 'jwt-decode';
+
 const Dashboard = () => {
   const { daysRef, hoursRef, minutesRef, secondsRef } = useCountdown(
     'September 25, 2021 00:00:00',
   );
 
   const authState = store.getState().auth;
-  const decodedData = jwt_decode(authState.accessToken);
   const [userTopic, getUserTopic] = useState({});
 
   const { fetch } = useAxios(
@@ -190,7 +189,7 @@ const Dashboard = () => {
             Your Proposed Topic
           </SectionTitle>
           {userTopic ? (
-            <TopicBlock topic={userTopic} data={decodedData} />
+            <TopicBlock topic={userTopic} />
           ) : (
             <InfoBlock
               buttonUrl="/propose-topic"

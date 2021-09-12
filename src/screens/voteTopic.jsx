@@ -326,20 +326,26 @@ const voteTopic = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <InfoBlock
-            theme="error"
-            content={
-              <Text>
-                The voting session will be opening soon. Every participants
-                including speakers are able to vote your desired topics starting
-                from <span style={{ fontWeight: 'bold' }}>25 September </span>
-                until
-                <span style={{ fontWeight: 'bold' }}> 27 September 2021 </span>
-              </Text>
-            }
-            leadingIcon={VotingIcon}
-          />
-          <BCSpacer size="xs" />
+          <Container maxW="container.xl">
+            <InfoBlock
+              theme="error"
+              content={
+                <Text>
+                  The voting session will be opening soon. Every participants
+                  including speakers are able to vote your desired topics
+                  starting from{' '}
+                  <span style={{ fontWeight: 'bold' }}>25 September </span>
+                  until
+                  <span style={{ fontWeight: 'bold' }}>
+                    {' '}
+                    27 September 2021{' '}
+                  </span>
+                </Text>
+              }
+              leadingIcon={VotingIcon}
+            />
+            <BCSpacer size="xs" />
+          </Container>
         </Center>
       )}
     </>
