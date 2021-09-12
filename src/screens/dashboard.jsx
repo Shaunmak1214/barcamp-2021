@@ -34,15 +34,13 @@ const Dashboard = () => {
     (res, err) => {
       if (err) {
         console.log(err);
-      } else {
-        getUserTopic(res);
-        console.log(userTopic);
+      } else if (res) {
+        getUserTopic(res.data);
       }
     },
   );
 
   useEffect(() => {
-    console.log(decodedData);
     fetch();
   }, []);
 
@@ -91,7 +89,13 @@ const Dashboard = () => {
                 >
                   Propose Topic
                 </PrimaryButton>
-                <PrimaryButton width="250px" backgroundColor="#B1B1B1">
+                <PrimaryButton
+                  width="250px"
+                  backgroundColor="#B1B1B1"
+                  onClick={() => {
+                    window.location.href = '/vote-topic';
+                  }}
+                >
                   Vote Topic (Comming Soon)
                 </PrimaryButton>
               </SimpleGrid>

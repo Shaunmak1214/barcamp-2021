@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Image } from '@chakra-ui/image';
 import {
+  Box,
   Center,
   Container,
   HStack,
@@ -180,8 +181,7 @@ const Index = ({ cta, type }) => {
             >
               <Text fontSize="sm">SPONSORS</Text>
             </Link>
-            <Link
-              href="#"
+            <Box
               py="5"
               position="relative"
               onMouseOver={() => {
@@ -223,7 +223,7 @@ const Index = ({ cta, type }) => {
                   <Text fontSize="sm">Propose Topic</Text>
                 </Link>
               </VStack>
-            </Link>
+            </Box>
 
             {/* Join us now condition rendering */}
             {cta && (

@@ -14,7 +14,14 @@ import {
   Flex,
   Box,
 } from '@chakra-ui/layout';
-import { Checkbox } from '@chakra-ui/react';
+import {
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+  CloseButton,
+  Checkbox,
+} from '@chakra-ui/react';
 import { PrimaryButton } from '../components/Buttons';
 import { SectionTitle } from 'components/SectionTitle';
 import {
@@ -23,7 +30,12 @@ import {
   SelectDropdownFormField,
 } from '../components/Forms';
 import BCSpacer from '../components/Spacer';
-import { SectionBg, ProposePic } from '../assets';
+import InfoBlock from 'components/InfoBlock';
+
+import BCModal from './../components/Modal';
+import useModal from '../components/Modal/useModal';
+
+import { SectionBg, ProposePic, NoMessageIcon } from '../assets';
 import { useScrollTo, useAxios } from '../hooks';
 import store from './../store/store';
 import '../global.css';
@@ -37,10 +49,18 @@ const schema = yup.object({
 
 const ProposeTopic = () => {
   const { scrollToRef, executeScroll } = useScrollTo();
+
+  const { isOpen, onModalClose, onModalOpen } = useModal({
+    initialState: false,
+  });
+
   const [checked, setChecked] = useState(false);
+  const [userTopic, setUserTopic] = useState(null);
+  const [updateErr, setUpdateErr] = React.useState('');
+
   const authState = store.getState().auth;
 
-  const { response, loading, error, fetch } = useAxios(
+  const { fetch: postProposedTopic } = useAxios(
     {
       method: 'post',
       url: '/topics',
@@ -49,14 +69,47 @@ const ProposeTopic = () => {
         'Content-Type': 'application/json',
       },
     },
-    () => {
-      console.log(response, loading, error);
+    (res, err) => {
+      if (res) {
+        console.log(res.status);
+        let resData = res.data;
+        if (res.status === 200 || res.status === 201 || res.status === 203) {
+          window.location.href = '/dashboard';
+        } else {
+          setUpdateErr(' ' + resData.data.error);
+          onModalOpen();
+        }
+      } else if (err) {
+        setUpdateErr(' ' + err);
+        onModalOpen();
+      }
+    },
+  );
+
+  const { fetch: fetchTopicsByUser } = useAxios(
+    {
+      method: 'get',
+      url: `/topicsByUser/${authState.user.userId}`,
+      headers: {
+        Authorization: `Bearer ${authState.accessToken}`,
+      },
+    },
+    (res, err) => {
+      if (err) {
+        setUpdateErr(' ' + err);
+      } else if (res) {
+        setUserTopic(res.data);
+      }
     },
   );
 
   const handleConsentCheck = (e) => {
     setChecked(e.target.checked);
   };
+
+  useEffect(() => {
+    fetchTopicsByUser();
+  }, []);
 
   useEffect(() => {
     var observer = new IntersectionObserver(
@@ -80,6 +133,33 @@ const ProposeTopic = () => {
 
   return (
     <>
+      <BCModal
+        theme="error"
+        content={
+          <>
+            <Text
+              as="h3"
+              fontSize="xl"
+              fontFamily="Montserrat"
+              fontWeight="600"
+            >
+              Theres an error updating your profile
+            </Text>
+            <Text
+              as="h3"
+              fontSize="sm"
+              fontFamily="Montserrat"
+              fontWeight="400"
+              textAlign="center"
+              px="3"
+            >
+              Please try again later
+            </Text>
+          </>
+        }
+        modalOpen={isOpen}
+        onClose={onModalClose}
+      />
       <VStack
         w="100%"
         h="100vh"
@@ -112,8 +192,13 @@ const ProposeTopic = () => {
               </Text>
               <BCSpacer size="sm" />
               <HStack>
-                <PrimaryButton width="200px" onClick={() => executeScroll()}>
-                  Propose Topic
+                <PrimaryButton
+                  width="200px"
+                  disabled={userTopic ? true : false}
+                  onClick={() => executeScroll()}
+                  variant={userTopic ? 'disabled' : null}
+                >
+                  {userTopic ? 'You already proposed' : 'Propose a topic'}
                 </PrimaryButton>
               </HStack>
             </VStack>
@@ -129,128 +214,162 @@ const ProposeTopic = () => {
         h="250px"
       ></Center>
 
-      <BCSpacer size="sm" />
-
-      <Box className="voteTopicHeaderTop" w="100%" h="1px"></Box>
-      <Center
-        w="100%"
-        bg="white"
-        position={['flex', 'flex', 'sticky']}
-        top="0px"
-        zIndex={50}
-        p="3"
-        className="voteTopicHeader"
-      >
-        <Container maxW="container.xl" w="100%" py="0px">
-          <Flex
-            flexDir={['column', 'column', 'row']}
-            justifyContent="space-between"
-            alignItems={['flex-start', 'flex-start', 'center']}
-            pt="5"
-            pb="5"
-            ref={scrollToRef}
-          >
-            <SectionTitle fontSize="2xl" type="left" mb={['7', '0', '0']}>
-              Propose a topic
-            </SectionTitle>
-            <Center
-              boxShadow="0px 16px 40px rgba(193, 193, 193, 0.25)"
-              borderRadius="8px"
-              px="6"
-              py="3"
-            >
-              <Text as="h2" fontSize="sm" fontWeight="500">
-                You are allowed to propose{' '}
-                <span className="gradientText">ONE</span> topic only
-              </Text>
-            </Center>
-          </Flex>
-        </Container>
-      </Center>
-
-      <Container maxW="container.xl" w="100%" py="50px">
-        <Formik
-          validationSchema={schema}
-          initialValues={{
-            description: '',
-            topicTheme: '',
-            topicName: '',
-            topicSummary: '',
-          }}
-          onSubmit={(data) => {
-            fetch({
-              name: data.topicName,
-              user: authState.user.userId,
-              theme: data.topicTheme,
-              description: data.description,
-              contact: '-',
-              self_description: '-',
-            });
-          }}
+      {userTopic ? (
+        <Center
+          w="100%"
+          d="flex"
+          flexDir="column"
+          alignItems="center"
+          justifyContent="center"
         >
-          {() => (
-            <Form>
-              <VStack spacing={5} alignItems="flex-start">
-                <Text as="h3" fontSize="xl" textTransform="uppercase">
-                  Speaker Details
-                </Text>
-                <Field
-                  label="A short description of yourself"
-                  name="description"
-                  placeholder="I'm from ... "
-                  maxLength={100}
-                  component={BCTextAreaField}
-                />
+          <Container maxW="container.xl">
+            <InfoBlock
+              theme=""
+              content={<Text>You already propose a topic</Text>}
+              leadingIcon={NoMessageIcon}
+            />
+          </Container>
+          <BCSpacer size="xs" />
+        </Center>
+      ) : (
+        <>
+          <BCSpacer size="sm" />
 
-                <BCSpacer size="xs" />
-
-                <Text as="h3" fontSize="xl" textTransform="uppercase">
-                  Topic Details
-                </Text>
-                <Field
-                  label="Theme"
-                  name="topicTheme"
-                  placeholder="Theme of your topic"
-                  component={SelectDropdownFormField}
-                />
-
-                <Field
-                  label="Topic Name"
-                  name="topicName"
-                  placeholder="What if the earth is flat ??!!"
-                  component={BCTextFormField}
-                />
-
-                <Field
-                  label="Topic Summary"
-                  name="topicSummary"
-                  placeholder="We're going to talk about ..."
-                  maxLength={250}
-                  component={BCTextAreaField}
-                />
-
-                <Checkbox size="lg" pl="5" onChange={handleConsentCheck}>
-                  <Text fontSize="sm">
-                    When you propose a topic, you are aware that other users can
-                    view your information as a speaker.{' '}
-                  </Text>
-                </Checkbox>
-
-                <PrimaryButton
-                  alignSelf="flex-end"
-                  w={['100%', 'fit-content', 'fit-content']}
-                  py="25px"
-                  px="75px"
-                  type="submit"
-                  disabled={!checked}
+          <Box className="voteTopicHeaderTop" w="100%" h="1px"></Box>
+          <Center
+            w="100%"
+            bg="white"
+            position={['flex', 'flex', 'sticky']}
+            top="0px"
+            zIndex={50}
+            p="3"
+            className="voteTopicHeader"
+          >
+            <Container maxW="container.xl" w="100%" py="0px">
+              <Flex
+                flexDir={['column', 'column', 'row']}
+                justifyContent="space-between"
+                alignItems={['flex-start', 'flex-start', 'center']}
+                pt="5"
+                pb="5"
+                ref={scrollToRef}
+              >
+                <SectionTitle fontSize="2xl" type="left" mb={['7', '0', '0']}>
+                  Propose a topic
+                </SectionTitle>
+                <Center
+                  boxShadow="0px 16px 40px rgba(193, 193, 193, 0.25)"
+                  borderRadius="8px"
+                  px="6"
+                  py="3"
                 >
-                  <Text fontSize="lg">Propose</Text>
-                </PrimaryButton>
-              </VStack>
-            </Form>
-          )}
-        </Formik>
-      </Container>
+                  <Text as="h2" fontSize="sm" fontWeight="500">
+                    You are allowed to propose{' '}
+                    <span className="gradientText">ONE</span> topic only
+                  </Text>
+                </Center>
+              </Flex>
+            </Container>
+          </Center>
+
+          {updateErr ? (
+            <Alert status="error">
+              <AlertIcon />
+              <Box flex="1">
+                <AlertTitle>{updateErr}</AlertTitle>
+                <AlertDescription display="block">
+                  There is some error updating your profile. Please try again.
+                </AlertDescription>
+              </Box>
+              <CloseButton position="absolute" right="8px" top="8px" />
+            </Alert>
+          ) : null}
+
+          <Container maxW="container.xl" w="100%" py="50px">
+            <Formik
+              validationSchema={schema}
+              initialValues={{
+                description: '',
+                topicTheme: '',
+                topicName: '',
+                topicSummary: '',
+              }}
+              onSubmit={(data) => {
+                postProposedTopic({
+                  name: data.topicName,
+                  user: authState.user.userId,
+                  theme: data.topicTheme,
+                  description: data.description,
+                  contact: '-',
+                  self_description: '-',
+                });
+              }}
+            >
+              {() => (
+                <Form>
+                  <VStack spacing={5} alignItems="flex-start">
+                    <Text as="h3" fontSize="xl" textTransform="uppercase">
+                      Speaker Details
+                    </Text>
+                    <Field
+                      label="A short description of yourself"
+                      name="description"
+                      placeholder="I'm from ... "
+                      maxLength={100}
+                      component={BCTextAreaField}
+                    />
+
+                    <BCSpacer size="xs" />
+
+                    <Text as="h3" fontSize="xl" textTransform="uppercase">
+                      Topic Details
+                    </Text>
+                    <Field
+                      label="Theme"
+                      name="topicTheme"
+                      placeholder="Theme of your topic"
+                      component={SelectDropdownFormField}
+                    />
+
+                    <Field
+                      label="Topic Name"
+                      name="topicName"
+                      placeholder="What if the earth is flat ??!!"
+                      component={BCTextFormField}
+                    />
+
+                    <Field
+                      label="Topic Summary"
+                      name="topicSummary"
+                      placeholder="We're going to talk about ..."
+                      maxLength={250}
+                      component={BCTextAreaField}
+                    />
+
+                    <Checkbox size="lg" pl="5" onChange={handleConsentCheck}>
+                      <Text fontSize="sm">
+                        When you propose a topic, you are aware that other users
+                        can view your information as a speaker.{' '}
+                      </Text>
+                    </Checkbox>
+
+                    <PrimaryButton
+                      alignSelf="flex-end"
+                      w={['100%', 'fit-content', 'fit-content']}
+                      py="25px"
+                      px="75px"
+                      type="submit"
+                      disabled={!checked}
+                    >
+                      <Text fontSize="lg">Propose</Text>
+                    </PrimaryButton>
+                  </VStack>
+                </Form>
+              )}
+            </Formik>
+          </Container>
+        </>
+      )}
     </>
   );
 };

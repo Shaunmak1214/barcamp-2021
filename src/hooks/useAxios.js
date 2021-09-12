@@ -12,7 +12,6 @@ const useAxios = (axiosParams, onUpdate) => {
   const [loading, setLoading] = useState(true);
 
   const fetchData = async (data) => {
-    console.log(data);
     axios
       .request({
         ...axiosParams,
@@ -20,9 +19,9 @@ const useAxios = (axiosParams, onUpdate) => {
       })
       .then((res) => {
         if (res.status === 200 || res.status === 201 || res.status === 203) {
-          setResponse(res.data);
+          setResponse(res);
         } else {
-          setError(res.data);
+          setError(res);
         }
       })
       .catch((err) => {
