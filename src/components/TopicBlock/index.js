@@ -35,7 +35,7 @@ const TopicBlock = ({ topic, data }) => {
               flexDir={['column', 'column', 'row']}
             >
               <TopicBadge topic={topic.theme} />
-              <Text>Prepared By {data.fullName}</Text>
+              {/* <Text>Prepared By {data.fullName}</Text> */}
             </Flex>
             <Text as="h3" fontSize="md" fontFamily="Poppins" fontWeight="600">
               {topic.name}
@@ -60,7 +60,7 @@ const TopicBlock = ({ topic, data }) => {
 };
 
 TopicBlock.propTypes = {
-  topic: PropTypes.array,
+  topic: PropTypes.object,
   data: PropTypes.object,
 };
 

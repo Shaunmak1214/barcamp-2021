@@ -56,11 +56,8 @@ const updateProfile = () => {
     },
     (res, err) => {
       if (res) {
-        console.log(res.status);
         let resData = res.data;
         if (res.status === 200 || res.status === 201 || res.status === 203) {
-          console.log('hey');
-
           let decodedData = jwt_decode(resData.accessToken);
           let loginObj = {
             accessToken: resData.accessToken,
@@ -162,13 +159,12 @@ const updateProfile = () => {
               noc: '',
             }}
             onSubmit={(data) => {
-              console.log(heard);
-
               fetch({
                 fullName: data.fullname,
                 age: data.age,
                 contactNumber: data.contactnumber,
                 companyOrInstitution: data.noc,
+                heard: heard,
               });
             }}
           >

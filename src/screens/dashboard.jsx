@@ -21,7 +21,7 @@ const Dashboard = () => {
 
   const authState = store.getState().auth;
   const decodedData = jwt_decode(authState.accessToken);
-  const [userTopic, getUserTopic] = useState([]);
+  const [userTopic, getUserTopic] = useState({});
 
   const { fetch } = useAxios(
     {
@@ -80,7 +80,7 @@ const Dashboard = () => {
                 will be conducted to select the speakers for Barcamp.
               </Text>
               <BCSpacer size="sm" />
-              <SimpleGrid spacing={5} columns={[1, 1, 2]}>
+              <SimpleGrid columns={[1, 1, 2]}>
                 <PrimaryButton
                   width="200px"
                   onClick={() => {

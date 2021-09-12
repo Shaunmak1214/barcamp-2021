@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 
-// import * as yup from 'yup';
 import { Formik, Form } from 'formik';
 
 import { Image } from '@chakra-ui/image';
@@ -15,6 +13,13 @@ import {
   Flex,
   Box,
 } from '@chakra-ui/layout';
+import {
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+  CloseButton,
+} from '@chakra-ui/react';
 
 import { PrimaryButton } from '../components/Buttons';
 import { SectionTitle } from 'components/SectionTitle';
@@ -24,82 +29,47 @@ import TopicBadge from '../components/TopicBadge';
 import InfoBlock from 'components/InfoBlock';
 import { useScrollTo, useAxios } from '../hooks';
 
+import BCModal from './../components/Modal';
+import useModal from '../components/Modal/useModal';
+
 import { SectionBg, VotingPic, AIIcon, VotingIcon } from '../assets';
 import store from './../store/store';
 import '../global.css';
 
 const voteTopic = () => {
-  // eslint-disable-next-line
-  // const topicAvailable = [
-  //   {
-  //     topicId: 1,
-  //     topicName: 'Where its going / What even is it?',
-  //     topicDescription:
-  //       'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s',
-  //     topicBadge: 'Artificial Intelligence',
-  //   },
-  //   {
-  //     topicId: 2,
-  //     topicName: 'Where its going / What even is it?',
-  //     topicDescription:
-  //       'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, Ipsum has been the industrys standard dummy text ever since the 1500s,',
-  //     topicBadge: 'Artificial Intelligence',
-  //   },
-  //   {
-  //     topicId: 3,
-  //     topicName: 'Where its going / What even is it?',
-  //     topicDescription:
-  //       'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, Ipsum has been the industrys standard dummy text ever since the 1500s,',
-  //     topicBadge: 'Artificial Intelligence',
-  //   },
-  //   {
-  //     topicId: 4,
-  //     topicName: 'Where its going / What even is it?',
-  //     topicDescription:
-  //       'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, Ipsum has been the industrys standard dummy text ever since the 1500s,',
-  //     topicBadge: 'Artificial Intelligence',
-  //   },
-  //   {
-  //     topicId: 5,
-  //     topicName: 'Where its going / What even is it?',
-  //     topicDescription:
-  //       'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, Ipsum has been the industrys standard dummy text ever since the 1500s,',
-  //     topicBadge: 'Artificial Intelligence',
-  //   },
-  //   {
-  //     topicId: 6,
-  //     topicName: 'Where its going / What even is it?',
-  //     topicDescription:
-  //       'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, Ipsum has been the industrys standard dummy text ever since the 1500s,',
-  //     topicBadge: 'Artificial Intelligence',
-  //   },
-  // ];
+  const token = store.getState().auth.accessToken;
 
   const { scrollToRef, executeScroll } = useScrollTo();
-  const [votes, setVotes] = React.useState([]);
-  const [topicAvailable, setTopicAvailable] = React.useState([]);
+  const { isOpen, onModalClose, onModalOpen } = useModal({
+    initialState: false,
+  });
+
   const voteTopicHeader = React.useRef(null);
 
-  const token = store.getState().auth.accessToken;
+  const [topicAvailable, setTopicAvailable] = React.useState([]);
+  const [votes, setVotes] = React.useState([]);
+  const [voteErr, setVoteErr] = React.useState('');
+
+  const authState = store.getState().auth;
 
   const onSelect = React.useCallback(
     (value, selected) => {
-      setVotes((hear) => {
+      setVotes((votes) => {
         if (selected) {
-          if (hear.includes(value)) {
-            return [...hear];
+          if (votes.includes(value)) {
+            return [...votes];
           } else {
-            return [...hear, value];
+            return [...votes, value];
           }
         } else {
-          return hear.filter((item) => item !== value);
+          return votes.filter((item) => item !== value);
         }
       });
     },
     [setVotes],
   );
 
-  const { fetch } = useAxios(
+  const { fetch: fetchTopics } = useAxios(
     {
       method: 'get',
       url: '/topics',
@@ -116,54 +86,61 @@ const voteTopic = () => {
     },
   );
 
+  // eslint-disable-next-line
+  const { fetch: postVoteTopic } = useAxios(
+    {
+      method: 'post',
+      url: '/votes',
+      headers: {
+        Authorization: `Bearer ${authState.accessToken}`,
+        'Content-Type': 'application/json',
+      },
+    },
+    (res, err) => {
+      if (res) {
+        let resData = res.data;
+        console.log(res);
+        if (res.status === 200 || res.status === 201 || res.status === 203) {
+          window.location.href = '/dashboard';
+        } else {
+          setVoteErr(' ' + resData);
+          onModalOpen();
+        }
+      } else if (err) {
+        setVoteErr(' ' + err);
+        onModalOpen();
+      }
+    },
+  );
+
   useEffect(() => {
-    console.log(votes);
-    fetch();
-  }, [votes]);
-
-  const SelectionsRenderer = ({ topicsAvailable }) => {
-    return (
-      <VStack spacing={5} alignItems="flex-start">
-        {topicsAvailable.map((topic, idx) => (
-          <SelectFormFieldClass
-            key={idx}
-            value="Facebook"
-            onSelect={() => onSelect()}
-          >
-            <HStack spacing={7} py="0.5em" px="0.5em">
-              <Image
-                src={AIIcon}
-                h="45px"
-                w="45px"
-                alt="Artificial Intelligence"
-              />
-              <VStack spacing={2} align="flex-start">
-                <TopicBadge topic={topic.topicBadge} />
-                <Text
-                  as="h3"
-                  fontSize="md"
-                  fontFamily="Poppins"
-                  fontWeight="600"
-                >
-                  {topic.topicName}
-                </Text>
-                <Text as="h6" fontSize="sm" fontWeight="500">
-                  {topic.topicDescription}
-                </Text>
-              </VStack>
-            </HStack>
-          </SelectFormFieldClass>
-        ))}
-      </VStack>
-    );
-  };
-
-  SelectionsRenderer.propTypes = {
-    topicsAvailable: PropTypes.array.isRequired,
-  };
+    fetchTopics();
+  }, []);
 
   return (
     <>
+      <BCModal
+        theme="error"
+        content={
+          <>
+            <Text as="h3" fontSize="xl" fontFamily="Poppins" fontWeight="600">
+              Theres an error updating your profile
+            </Text>
+            <Text
+              as="h3"
+              fontSize="sm"
+              fontFamily="Poppins"
+              fontWeight="400"
+              textAlign="center"
+              px="3"
+            >
+              Please try again later
+            </Text>
+          </>
+        }
+        modalOpen={isOpen}
+        onClose={onModalClose}
+      />
       <VStack
         w="100%"
         h="100vh"
@@ -254,19 +231,31 @@ const voteTopic = () => {
             </Container>
           </Center>
 
+          {voteErr ? (
+            <Alert status="error">
+              <AlertIcon />
+              <Box flex="1">
+                <AlertTitle>{voteErr}</AlertTitle>
+                <AlertDescription display="block">
+                  There is some error updating your profile. Please try again.
+                </AlertDescription>
+              </Box>
+              <CloseButton position="absolute" right="8px" top="8px" />
+            </Alert>
+          ) : null}
+
           <Container maxW="container.xl" w="100%" py="50px">
             {/* wrap formik inside an internary operator, check if got topic or not if not display no topic  // Topic block*/}
             <Formik
-              // validationSchema={schema}
               initialValues={{
-                description: '',
-                topicTheme: '',
-                topicName: '',
-                topicSummary: '',
+                topic: '',
               }}
-              onSubmit={(data) => {
-                console.log(data);
-                console.log(votes);
+              onSubmit={() => {
+                postVoteTopic({
+                  userId: authState.user.userId,
+                  topicId: votes,
+                  vote: 'topic',
+                });
               }}
             >
               {() => (
