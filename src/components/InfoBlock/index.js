@@ -22,7 +22,7 @@ const InfoBlock = ({ buttonUrl, buttonLabel, theme, content, leadingIcon }) => {
       mb="10px"
       mt="50px"
       p={['25px', '30px 45px 30px 80px']}
-      w="90%"
+      w="100%"
       border={border}
       borderRadius="10px"
       borderWidth="3px"

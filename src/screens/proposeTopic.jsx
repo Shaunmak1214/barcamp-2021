@@ -14,7 +14,14 @@ import {
   Flex,
   Box,
 } from '@chakra-ui/layout';
-import { Checkbox } from '@chakra-ui/react';
+import {
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+  CloseButton,
+  Checkbox,
+} from '@chakra-ui/react';
 import { PrimaryButton } from '../components/Buttons';
 import { SectionTitle } from 'components/SectionTitle';
 import {
@@ -24,6 +31,9 @@ import {
 } from '../components/Forms';
 import BCSpacer from '../components/Spacer';
 import InfoBlock from 'components/InfoBlock';
+
+import BCModal from './../components/Modal';
+import useModal from '../components/Modal/useModal';
 
 import { SectionBg, ProposePic, NoMessageIcon } from '../assets';
 import { useScrollTo, useAxios } from '../hooks';
@@ -39,12 +49,18 @@ const schema = yup.object({
 
 const ProposeTopic = () => {
   const { scrollToRef, executeScroll } = useScrollTo();
+
+  const { isOpen, onModalClose, onModalOpen } = useModal({
+    initialState: false,
+  });
+
   const [checked, setChecked] = useState(false);
-  // eslint-disable-next-line no-unused-vars
-  const [userTopic, getUserTopic] = useState(null);
+  const [userTopic, setUserTopic] = useState(null);
+  const [updateErr, setUpdateErr] = React.useState('');
+
   const authState = store.getState().auth;
 
-  const { response, loading, error, fetch } = useAxios(
+  const { fetch: postProposedTopic } = useAxios(
     {
       method: 'post',
       url: '/topics',
@@ -53,8 +69,20 @@ const ProposeTopic = () => {
         'Content-Type': 'application/json',
       },
     },
-    () => {
-      console.log(response, loading, error);
+    (res, err) => {
+      if (res) {
+        console.log(res.status);
+        let resData = res.data;
+        if (res.status === 200 || res.status === 201 || res.status === 203) {
+          window.location.href = '/dashboard';
+        } else {
+          setUpdateErr(' ' + resData.data.error);
+          onModalOpen();
+        }
+      } else if (err) {
+        setUpdateErr(' ' + err);
+        onModalOpen();
+      }
     },
   );
 
@@ -68,9 +96,9 @@ const ProposeTopic = () => {
     },
     (res, err) => {
       if (err) {
-        console.log(err);
+        setUpdateErr(' ' + err);
       } else if (res) {
-        getUserTopic(res.data);
+        setUserTopic(res.data);
       }
     },
   );
@@ -105,6 +133,28 @@ const ProposeTopic = () => {
 
   return (
     <>
+      <BCModal
+        theme="error"
+        content={
+          <>
+            <Text as="h3" fontSize="xl" fontFamily="Poppins" fontWeight="600">
+              Theres an error updating your profile
+            </Text>
+            <Text
+              as="h3"
+              fontSize="sm"
+              fontFamily="Poppins"
+              fontWeight="400"
+              textAlign="center"
+              px="3"
+            >
+              Please try again later
+            </Text>
+          </>
+        }
+        modalOpen={isOpen}
+        onClose={onModalClose}
+      />
       <VStack
         w="100%"
         h="100vh"
@@ -161,16 +211,19 @@ const ProposeTopic = () => {
 
       {userTopic ? (
         <Center
+          w="100%"
           d="flex"
           flexDir="column"
           alignItems="center"
           justifyContent="center"
         >
-          <InfoBlock
-            theme=""
-            content={<Text>You already propose a topic</Text>}
-            leadingIcon={NoMessageIcon}
-          />
+          <Container maxW="container.xl">
+            <InfoBlock
+              theme=""
+              content={<Text>You already propose a topic</Text>}
+              leadingIcon={NoMessageIcon}
+            />
+          </Container>
           <BCSpacer size="xs" />
         </Center>
       ) : (
@@ -214,6 +267,19 @@ const ProposeTopic = () => {
             </Container>
           </Center>
 
+          {updateErr ? (
+            <Alert status="error">
+              <AlertIcon />
+              <Box flex="1">
+                <AlertTitle>{updateErr}</AlertTitle>
+                <AlertDescription display="block">
+                  There is some error updating your profile. Please try again.
+                </AlertDescription>
+              </Box>
+              <CloseButton position="absolute" right="8px" top="8px" />
+            </Alert>
+          ) : null}
+
           <Container maxW="container.xl" w="100%" py="50px">
             <Formik
               validationSchema={schema}
@@ -224,7 +290,7 @@ const ProposeTopic = () => {
                 topicSummary: '',
               }}
               onSubmit={(data) => {
-                fetch({
+                postProposedTopic({
                   name: data.topicName,
                   user: authState.user.userId,
                   theme: data.topicTheme,
