@@ -5,3 +5,8 @@
   -webkit-text-fill-color: transparent;
   font-weight: 600;
 }
+
+.voteTopicHeader-sticky {
+  box-shadow: 0px 16px 40px rgba(193, 193, 193, 0.25);
+  transition: all 0.2s ease-in-out;
+}

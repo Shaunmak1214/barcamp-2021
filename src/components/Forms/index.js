@@ -3,6 +3,7 @@ import SelectFormField from './SelectFormField/';
 import BCTextFormField from './BCTextFormField/';
 import BCTextAreaField from './BCTextareaField/';
 import SelectDropdownFormField from './SelectDropdownFormField/';
+import SelectFormFieldClass from './SelectFormFieldClass/';
 
 export {
   BCTextFilledFormField,
@@ -10,4 +11,5 @@ export {
   BCTextFormField,
   BCTextAreaField,
   SelectDropdownFormField,
+  SelectFormFieldClass,
 };

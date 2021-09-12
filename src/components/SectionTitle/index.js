@@ -16,7 +16,7 @@ const SectionTitle = ({ type, ...props }) => {
         {children}
         <Box
           position="absolute"
-          bottom="-15px"
+          bottom="-8px"
           left="0px"
           h="3px"
           w="90px"
@@ -58,7 +58,7 @@ const SectionTitle = ({ type, ...props }) => {
           {children}
           <Box
             position="absolute"
-            bottom="-15px"
+            bottom="-5px"
             h="3px"
             w="90px"
             bg="linear-gradient(90deg, #5BA4FF 0%, #FF5E66 100%)"
@@ -72,7 +72,7 @@ const SectionTitle = ({ type, ...props }) => {
 
 SectionTitle.propTypes = {
   children: PropTypes.node,
-  type: PropTypes.string,
+  type: PropTypes.any,
 };
 
 export { SectionTitle };

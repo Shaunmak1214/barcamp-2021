@@ -25,8 +25,8 @@ const BCTextareaField = ({ field, form, label, maxLength, ...props }) => {
     <VStack
       className="bc-input-wrapper"
       w="100%"
-      px="35px"
-      py="25px"
+      px="30px"
+      py="20px"
       border="2px solid #C2C2C2"
       borderRadius="8px"
       bg="#FFFFFF"
@@ -34,15 +34,22 @@ const BCTextareaField = ({ field, form, label, maxLength, ...props }) => {
     >
       <Text position="absolute" right="40px" ref={lengthLeftText}></Text>
       <FormControl w="100%" id="email" isInvalid={errorText ? true : false}>
-        <FormLabel fontFamily="Poppins" fontWeight="500" fontSize="sm">
+        <FormLabel
+          fontFamily="Montserrat"
+          fontWeight="500"
+          fontSize="sm"
+          color="#797979"
+        >
           {label}
         </FormLabel>
         <Textarea
           fontFamily="Source Sans Pro"
+          fontSize="xl"
           variant="unstyled"
           w="100%"
           size="lg"
-          fontWeight="600"
+          fontWeight="400"
+          color="#000000"
           paddingY="5px"
           paddingLeft="0px"
           rows="2"

@@ -26,6 +26,7 @@ function App() {
         <BCRoutes
           exact
           header
+          protected
           transparency="sticky"
           path="/dashboard"
           component={Screens.Dashboard}
@@ -33,6 +34,8 @@ function App() {
         <BCRoutes
           exact
           header
+          protected
+          protectLevel={1}
           transparency="fixed"
           path="/update-profile"
           component={Screens.UpdateProfile}
@@ -40,9 +43,18 @@ function App() {
         <BCRoutes
           exact
           header
+          protected
           transparency="sticky"
           path="/propose-topic"
           component={Screens.ProposeTopic}
+        />
+        <BCRoutes
+          exact
+          header
+          protected
+          transparency="sticky"
+          path="/vote-topic"
+          component={Screens.VoteTopic}
         />
       </Switch>
       <Comp.Footer />

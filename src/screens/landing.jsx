@@ -8,6 +8,7 @@ import {
   Center,
   Box,
   SimpleGrid,
+  Heading,
 } from '@chakra-ui/layout';
 import { Text } from '@chakra-ui/react';
 
@@ -72,11 +73,12 @@ const Index = () => {
         <LandingImgRenderer />
         <Container maxW="container.xl">
           <VStack w={['100%', '50%', '35%']} alignItems="flex-start">
-            <Text fontSize="4xl">
+            <Heading fontSize="3xl" fontWeight="400" lineHeight="1.5">
               We bring people together to share their passion around technology.
-            </Text>
+            </Heading>
             <BCSpacer size="sm" />
             <PrimaryButton
+              py="25px"
               onClick={() => {
                 window.location.href = '/login';
               }}
@@ -93,9 +95,9 @@ const Index = () => {
           justifyContent="center"
           alignItems="center"
         >
-          <Text textAlign="center" fontSize="4xl">
+          <Heading textAlign="center" fontSize="4xl">
             We can&apos;t wait to show you what we&apos;ve got prepared
-          </Text>
+          </Heading>
           <Box
             position="relative"
             d="flex"
@@ -183,10 +185,11 @@ const Index = () => {
           </SimpleGrid>
         </Container>
       </Center>
+
       {/* What is Barcamp section */}
-      <Center py="20" bgImage={SectionBg} flexDir="column">
+      <Center id="about" py="20" bgImage={SectionBg} flexDir="column">
         <Container maxW="container.xl">
-          <SectionTitle type={'center'} color="#ffffff" alignItems="flex-start">
+          <SectionTitle type="center" color="#ffffff" alignItems="flex-start">
             What is Barcamp?
           </SectionTitle>
         </Container>
@@ -234,7 +237,7 @@ const Index = () => {
       </Center>
 
       {/* FAQs section */}
-      <Faq />
+      <Faq id="faq" />
 
       {/* Gallery Section */}
       <Center pt="80px" bgImage={SectionBg} flexDir="column">
@@ -269,7 +272,7 @@ const Index = () => {
       </Center>
 
       {/* Sponsorship Section */}
-      <Sponsor />
+      <Sponsor id="sponsors" />
 
       {/* Banner */}
       <Banner />
