@@ -9,7 +9,6 @@ export const authSlice = createSlice({
     isAuthenticated: cookie.get('accessToken') ? true : false,
     accessToken: cookie.get('accessToken') ? cookie.get('accessToken') : '',
   },
-  // fix all this
   reducers: {
     LOGIN: (state, action) => {
       state.user = action.payload.user;

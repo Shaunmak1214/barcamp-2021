@@ -14,6 +14,7 @@ export class Index extends Component {
       onSelect: PropTypes.func,
       children: PropTypes.node,
       props: PropTypes.object,
+      disabledSelect: PropTypes.bool,
     };
   }
 
@@ -25,9 +26,19 @@ export class Index extends Component {
   }
 
   handleSelect() {
-    this.setState({ selected: !this.state.selected }, () => {
-      this.props.onSelect(this.props.value, this.state.selected);
-    });
+    if (this.props.disabledSelect) {
+      if (this.state.selected) {
+        this.setState({ selected: !this.state.selected }, () => {
+          this.props.onSelect(this.props.value, this.state.selected);
+        });
+      } else {
+        return;
+      }
+    } else {
+      this.setState({ selected: !this.state.selected }, () => {
+        this.props.onSelect(this.props.value, this.state.selected);
+      });
+    }
   }
 
   render() {

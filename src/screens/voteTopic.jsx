@@ -245,7 +245,6 @@ const voteTopic = () => {
           ) : null}
 
           <Container maxW="container.xl" w="100%" py="50px">
-            {/* wrap formik inside an internary operator, check if got topic or not if not display no topic  // Topic block*/}
             <Formik
               initialValues={{
                 topic: '',
@@ -269,6 +268,7 @@ const voteTopic = () => {
                           onSelect={(value, selected) =>
                             onSelect(value, selected)
                           }
+                          disabledSelect={votes.length >= 4 ? true : false}
                         >
                           <HStack
                             spacing={7}
@@ -283,7 +283,7 @@ const voteTopic = () => {
                               alt="Artificial Intelligence"
                             />
                             <VStack spacing={2} align="flex-start">
-                              <TopicBadge topic="testing" />
+                              <TopicBadge topic={topic.theme} />
                               <Text
                                 as="h3"
                                 fontSize="md"
