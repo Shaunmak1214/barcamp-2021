@@ -60,7 +60,7 @@ const TopicBlock = ({ topic, data }) => {
 };
 
 TopicBlock.propTypes = {
-  topic: PropTypes.object,
+  topic: PropTypes.array,
   data: PropTypes.object,
 };
 

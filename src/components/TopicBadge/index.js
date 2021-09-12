@@ -22,7 +22,7 @@ const TopicBadge = ({ topic }) => {
 };
 
 TopicBadge.propTypes = {
-  topic: PropTypes.string.isRequired,
+  topic: PropTypes.string,
 };
 
 export default TopicBadge;

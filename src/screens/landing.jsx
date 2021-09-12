@@ -189,7 +189,7 @@ const Index = () => {
       {/* What is Barcamp section */}
       <Center id="about" py="20" bgImage={SectionBg} flexDir="column">
         <Container maxW="container.xl">
-          <SectionTitle type={'center'} color="#ffffff" alignItems="flex-start">
+          <SectionTitle type="center" color="#ffffff" alignItems="flex-start">
             What is Barcamp?
           </SectionTitle>
         </Container>
