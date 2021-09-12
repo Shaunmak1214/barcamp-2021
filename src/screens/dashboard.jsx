@@ -4,7 +4,7 @@ import React from 'react';
 import { PrimaryButton } from '../components/Buttons';
 import BCSpacer from '../components/Spacer';
 import { useEffect, useState } from 'react';
-import { ResultIcon, Splash1, VotingIcon } from '../assets';
+import { AIIcon, ResultIcon, Splash1, VotingIcon } from '../assets';
 import { CountDownBlock } from 'components/Countdown';
 import { SectionBg, NoMessageIcon } from '../assets';
 import { SectionTitle } from 'components/SectionTitle';
@@ -20,8 +20,8 @@ const Dashboard = () => {
   );
 
   const authState = store.getState().auth;
-  const [userTopic, getUserTopic] = useState({});
-
+  const [userTopic, setUserTopic] = useState({});
+  const [votedTopics, setVotedTopics] = useState([]);
   const { fetch } = useAxios(
     {
       method: 'get',
@@ -34,12 +34,32 @@ const Dashboard = () => {
       if (err) {
         console.log(err);
       } else if (res) {
-        getUserTopic(res.data);
+        setUserTopic(res.data);
+      }
+    },
+  );
+
+  const { fetch: getUserVotes } = useAxios(
+    {
+      method: 'get',
+      url: `/votes/${authState.user.userId}`,
+      headers: {
+        Authorization: `Bearer ${authState.accessToken}`,
+      },
+    },
+    (res, err) => {
+      if (res) {
+        console.log(res.data);
+        setVotedTopics(res.data);
+      } else if (err) {
+        console.log(err);
       }
     },
   );
 
   useEffect(() => {
+    getUserVotes();
+
     fetch();
   }, []);
 
@@ -218,19 +238,34 @@ const Dashboard = () => {
           <SectionTitle fontSize="2xl" type="left">
             Your Voted Topic
           </SectionTitle>
-          <InfoBlock
-            theme=""
-            content={
-              <Text>
-                The voting session will be opening soon. Every participants
-                including speakers are able to vote your desired topics starting
-                from <span style={{ fontWeight: 'bold' }}>25 September </span>
-                until
-                <span style={{ fontWeight: 'bold' }}> 27 September 2021 </span>
-              </Text>
-            }
-            leadingIcon={VotingIcon}
-          />
+          {votedTopics ? (
+            votedTopics.map((topic, idx) => (
+              <TopicBlock
+                key={idx}
+                value={topic.topicId._id}
+                topic={topic.topicId}
+                themeIcon={AIIcon}
+              />
+            ))
+          ) : (
+            <InfoBlock
+              theme=""
+              content={
+                <Text>
+                  The voting session will be opening soon. Every participants
+                  including speakers are able to vote your desired topics
+                  starting from{' '}
+                  <span style={{ fontWeight: 'bold' }}>25 September </span>
+                  until
+                  <span style={{ fontWeight: 'bold' }}>
+                    {' '}
+                    27 September 2021{' '}
+                  </span>
+                </Text>
+              }
+              leadingIcon={VotingIcon}
+            />
+          )}
         </Container>
       </VStack>
       <VStack py="50px">
