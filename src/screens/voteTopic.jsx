@@ -165,7 +165,7 @@ const voteTopic = () => {
                 <Text
                   as="h3"
                   fontSize="md"
-                  fontFamily="Poppins"
+                  fontFamily="Montserrat"
                   fontWeight="600"
                 >
                   {topic.topicName}
@@ -330,7 +330,7 @@ const voteTopic = () => {
                                 <Text
                                   as="h3"
                                   fontSize="md"
-                                  fontFamily="Poppins"
+                                  fontFamily="Montserrat"
                                   fontWeight="600"
                                 >
                                   {topic.name}

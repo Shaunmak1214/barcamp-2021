@@ -72,13 +72,13 @@ const Modal = ({ successUrl, modalOpen, onClose }) => {
           w="125"
         />
 
-        <Text as="h3" fontSize="xl" fontFamily="Poppins" fontWeight="600">
+        <Text as="h3" fontSize="xl" fontFamily="Montserrat" fontWeight="600">
           Thank you for voting your desired topic!{' '}
         </Text>
         <Text
           as="h3"
           fontSize="sm"
-          fontFamily="Poppins"
+          fontFamily="Montserrat"
           fontWeight="400"
           textAlign="center"
           px="3"

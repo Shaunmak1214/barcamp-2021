@@ -136,7 +136,7 @@ const updateProfile = () => {
                   component={BCTextFilledFormField}
                 />
                 <VStack w="100%" h="100%" alignItems="flex-start">
-                  <Text fontFamily="Poppins" fontWeight="500" fontSize="md">
+                  <Text fontFamily="Montserrat" fontWeight="500" fontSize="md">
                     How do you know about Barcamp Cyberjaya *optional
                   </Text>
                   <Box w="100%" h="100%" py="5" borderRadius="8px">
