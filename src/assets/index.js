@@ -1,3 +1,6 @@
+// PDF
+import SponsorshipProposal from './pdfs/Barcamp Cyberjaya 2021 Sponsorship Proposal.pdf';
+
 // GIF
 import CountDownGif from './gif/countdown.gif';
 
@@ -54,6 +57,7 @@ import BarcampWhiteLogo from './svgs/barcamp-white-logo.svg';
 import BarcampFullLogo from './svgs/barcamp-logo.svg';
 
 export {
+  SponsorshipProposal,
   BarcampFullLogo,
   BarcampLandingImg,
   BarcampLandingImgMobile,
