@@ -16,7 +16,7 @@ import {
 import { Text } from '@chakra-ui/react';
 
 import { PrimaryButton } from '../Buttons';
-import { BarcampFullLogo, PlatinumIcon, DownIcon } from '../../assets/';
+import { BarcampFullLogo, DownIcon, PlatinumIcon } from '../../assets/';
 import MobileMenu from './MobileMenu';
 import store from '../../store/store';
 

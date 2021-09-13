@@ -35,6 +35,10 @@ const goldSponsor = {
       idx: 3,
       imageSrc: BarcampFullLogo,
     },
+    {
+      idx: 4,
+      imageSrc: BarcampFullLogo,
+    },
   ],
 };
 
@@ -60,10 +64,6 @@ const silverSponsor = {
     },
     {
       idx: 6,
-      imageSrc: BarcampFullLogo,
-    },
-    {
-      idx: 7,
       imageSrc: BarcampFullLogo,
     },
   ],
