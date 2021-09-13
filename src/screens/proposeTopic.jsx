@@ -302,7 +302,6 @@ const ProposeTopic = () => {
                   user: authState.user.userId,
                   theme: data.topicTheme,
                   description: data.topicSummary,
-                  contact: '-',
                   self_description: data.description,
                 });
               }}

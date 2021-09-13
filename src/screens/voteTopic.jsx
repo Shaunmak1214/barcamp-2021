@@ -306,7 +306,7 @@ const voteTopic = () => {
                           onSelect={(value, selected) =>
                             onSelect(value, selected)
                           }
-                          disabledSelect={votes.length >= 5 ? true : false}
+                          disabledSelect={votes.length >= 4 ? true : false}
                         >
                           <HStack
                             spacing={7}
@@ -320,7 +320,11 @@ const voteTopic = () => {
                               w="45px"
                               alt="Artificial Intelligence"
                             />
-                            <VStack spacing={2} align="flex-start">
+                            <VStack
+                              spacing={2}
+                              align="flex-start"
+                              wordBreak="break-all"
+                            >
                               <TopicBadge topic={topic.theme} />
                               <Text
                                 as="h3"
