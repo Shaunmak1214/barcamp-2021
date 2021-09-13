@@ -146,7 +146,7 @@ const ProposeTopic = () => {
               fontFamily="Montserrat"
               fontWeight="600"
             >
-              Theres an error updating your profile
+              There is an error when updating your profile.
             </Text>
             <Text
               as="h3"
@@ -156,7 +156,7 @@ const ProposeTopic = () => {
               textAlign="center"
               px="3"
             >
-              Please try again later
+              Please try again.
             </Text>
           </>
         }
@@ -185,13 +185,13 @@ const ProposeTopic = () => {
               pr={[10, 0, 20]}
             >
               <Text as="h1" fontSize="4xl" fontWeight="600">
-                Propose a topic TO BECOME A SPEAKER
+                PROPOSE A TOPIC TO SHARE
               </Text>
-              <Text as="h2" fontSize="sm" fontWeight="500">
-                Let’s brings people together to share their passion around
-                technology. There is no preset of speakers for BarCamp like
-                usual conferences. Propose an interesting topic for the voting
-                session later.
+              <Text as="h2" fontSize="xl" fontWeight="300" py="1">
+                Let’s brings people together to share their passion with topics
+                surrounding tech, non-tech and nonsense. There is no preset
+                sharing for Barcamp like usual conferences. Feel free to propose
+                anything to share your thought below.
               </Text>
               <BCSpacer size="sm" />
               <HStack>
@@ -228,7 +228,7 @@ const ProposeTopic = () => {
           <Container maxW="container.xl">
             <InfoBlock
               theme=""
-              content={<Text>You already propose a topic</Text>}
+              content={<Text>You already propose a topic.</Text>}
               leadingIcon={NoMessageIcon}
             />
           </Container>
@@ -266,7 +266,7 @@ const ProposeTopic = () => {
                   px="6"
                   py="3"
                 >
-                  <Text as="h2" fontSize="sm" fontWeight="500">
+                  <Text as="h2" fontSize="md" fontWeight="400">
                     You are allowed to propose{' '}
                     <span className="gradientText">ONE</span> topic only
                   </Text>
@@ -282,7 +282,8 @@ const ProposeTopic = () => {
                 <Box flex="1">
                   <AlertTitle>{updateErr}</AlertTitle>
                   <AlertDescription display="block">
-                    There is some error updating your profile. Please try again.
+                    There is an error when updating your profile. Please try
+                    again.
                   </AlertDescription>
                 </Box>
                 <CloseButton position="absolute" right="8px" top="8px" />
@@ -310,7 +311,7 @@ const ProposeTopic = () => {
                 <Form>
                   <VStack spacing={5} alignItems="flex-start">
                     <Text as="h3" fontSize="xl" textTransform="uppercase">
-                      Speaker Details
+                      Speaker Detail
                     </Text>
                     <Field
                       label="A short description of yourself"
