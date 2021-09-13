@@ -59,10 +59,12 @@ const TopicBlock = ({ topic, themeIcon }) => {
       </Box>
 
       <VStack spacing={3}>
-        <Text>4TH</Text>
-        <Box background="#f5f5f5" borderRadius="8px" p="10px">
+        <Text pb="8px" fontSize="lg">
+          4TH
+        </Text>
+        <Box background="#f5f5f5" borderRadius="12px" p="6px 20px">
           <Text fontSize="sm">
-            <span bg="#1050A0">241</span> votes
+            <span className="gradientText">241</span> votes
           </Text>
         </Box>
       </VStack>
