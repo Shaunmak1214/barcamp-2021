@@ -102,6 +102,7 @@ const Dashboard = () => {
                   onClick={() => {
                     window.location.href = '/propose-topic';
                   }}
+                  mb={['12px', '12px', '0']}
                 >
                   Propose Topic
                 </PrimaryButton>

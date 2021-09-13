@@ -32,7 +32,13 @@ import { useScrollTo, useAxios } from '../hooks';
 import BCModal from './../components/Modal';
 import useModal from '../components/Modal/useModal';
 
-import { SectionBg, VotingPic, AIIcon, VotingIcon } from '../assets';
+import {
+  SectionBg,
+  VotingPic,
+  AIIcon,
+  VotingIcon,
+  NoMessageIcon,
+} from '../assets';
 import store from './../store/store';
 import '../global.css';
 
@@ -314,7 +320,11 @@ const voteTopic = () => {
                               w="45px"
                               alt="Artificial Intelligence"
                             />
-                            <VStack spacing={2} align="flex-start">
+                            <VStack
+                              spacing={2}
+                              align="flex-start"
+                              wordBreak="break-all"
+                            >
                               <TopicBadge topic={topic.theme} />
                               <Text
                                 as="h3"
@@ -351,6 +361,22 @@ const voteTopic = () => {
             </Formik>
           </Container>
         </>
+      ) : topicAvailable.length < 5 ? (
+        <Center
+          d="flex"
+          flexDir="column"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Container maxW="container.xl">
+            <InfoBlock
+              theme="error"
+              content={<Text>Not enough topic</Text>}
+              leadingIcon={NoMessageIcon}
+            />
+            <BCSpacer size="xs" />
+          </Container>
+        </Center>
       ) : (
         <Center
           d="flex"
