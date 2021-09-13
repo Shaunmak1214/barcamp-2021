@@ -34,7 +34,7 @@ const TopicBlock = ({ topic, themeIcon }) => {
             h="60px"
             w="60px"
           />
-          <VStack spacing={2} align="flex-start" w="90%" wordBreak="break-all">
+          <VStack spacing={2} align="flex-start" w="85%" wordBreak="break-all">
             <Flex
               justifyContent="space-between"
               w="95%"
