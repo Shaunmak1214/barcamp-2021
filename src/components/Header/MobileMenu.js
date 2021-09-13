@@ -25,7 +25,7 @@ import { useCountdown } from '../../hooks';
 
 const MobileMenu = () => {
   const { daysRef, hoursRef, minutesRef, secondsRef } = useCountdown(
-    'September 25, 2021 00:00:00',
+    'October 2, 2021 00:00:00',
   );
   const isOpen = useRef(false);
 

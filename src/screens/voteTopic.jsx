@@ -46,6 +46,7 @@ const voteTopic = () => {
 
   const voteTopicHeader = React.useRef(null);
 
+  const [alreadyVoted, setAlreadyVoted] = React.useState(false);
   const [topicAvailable, setTopicAvailable] = React.useState([]);
   const [votes, setVotes] = React.useState([]);
   const [voteErr, setVoteErr] = React.useState('');
@@ -86,6 +87,27 @@ const voteTopic = () => {
     },
   );
 
+  const { fetch: fetchVoteByUser } = useAxios(
+    {
+      method: 'get',
+      url: `/votes/${authState.user.userId}`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+    (res, err) => {
+      if (err) {
+        setAlreadyVoted(false);
+      } else if (res) {
+        if (res.data.length > 0) {
+          setAlreadyVoted(true);
+        } else {
+          setAlreadyVoted(false);
+        }
+      }
+    },
+  );
+
   // eslint-disable-next-line
   const { fetch: postVoteTopic } = useAxios(
     {
@@ -99,7 +121,6 @@ const voteTopic = () => {
     (res, err) => {
       if (res) {
         let resData = res.data;
-        console.log(res);
         if (res.status === 200 || res.status === 201 || res.status === 203) {
           window.location.href = '/dashboard';
         } else {
@@ -107,13 +128,19 @@ const voteTopic = () => {
           onModalOpen();
         }
       } else if (err) {
-        setVoteErr(' ' + err);
+        if (err.error) {
+          setVoteErr(' ' + err.error);
+        } else {
+          setVoteErr(' ' + err);
+        }
         onModalOpen();
+        executeScroll();
       }
     },
   );
 
   useEffect(() => {
+    fetchVoteByUser();
     fetchTopics();
   }, []);
 
@@ -171,8 +198,13 @@ const voteTopic = () => {
               </Text>
               <BCSpacer size="sm" />
               <HStack>
-                <PrimaryButton width="200px" onClick={() => executeScroll()}>
-                  Start Voting !
+                <PrimaryButton
+                  width="200px"
+                  disabled={alreadyVoted ? true : false}
+                  variant={alreadyVoted ? 'disabled' : null}
+                  onClick={() => executeScroll()}
+                >
+                  {alreadyVoted ? 'You already voted' : 'Start Voting !'}
                 </PrimaryButton>
               </HStack>
             </VStack>
@@ -188,7 +220,7 @@ const voteTopic = () => {
         h="250px"
       ></Center>
 
-      {topicAvailable && topicAvailable.length >= 5 ? (
+      {topicAvailable && topicAvailable.length >= 5 && !alreadyVoted ? (
         <>
           <Box className="voteTopicHeaderTop" w="100%" h="1px"></Box>
           <Center
@@ -231,20 +263,20 @@ const voteTopic = () => {
             </Container>
           </Center>
 
-          {voteErr ? (
-            <Alert status="error">
-              <AlertIcon />
-              <Box flex="1">
-                <AlertTitle>{voteErr}</AlertTitle>
-                <AlertDescription display="block">
-                  There is some error updating your profile. Please try again.
-                </AlertDescription>
-              </Box>
-              <CloseButton position="absolute" right="8px" top="8px" />
-            </Alert>
-          ) : null}
-
           <Container maxW="container.xl" w="100%" py="50px">
+            {voteErr ? (
+              <Alert mb="10" status="error">
+                <AlertIcon />
+                <Box flex="1">
+                  <AlertTitle>{voteErr}</AlertTitle>
+                  <AlertDescription display="block">
+                    There is some error processing your request, please try
+                    again.
+                  </AlertDescription>
+                </Box>
+                <CloseButton position="absolute" right="8px" top="8px" />
+              </Alert>
+            ) : null}
             <Formik
               initialValues={{
                 topic: '',
@@ -268,7 +300,7 @@ const voteTopic = () => {
                           onSelect={(value, selected) =>
                             onSelect(value, selected)
                           }
-                          disabledSelect={votes.length >= 4 ? true : false}
+                          disabledSelect={votes.length >= 5 ? true : false}
                         >
                           <HStack
                             spacing={7}
@@ -329,19 +361,7 @@ const voteTopic = () => {
           <Container maxW="container.xl">
             <InfoBlock
               theme="error"
-              content={
-                <Text>
-                  The voting session will be opening soon. Every participants
-                  including speakers are able to vote your desired topics
-                  starting from{' '}
-                  <span style={{ fontWeight: 'bold' }}>25 September </span>
-                  until
-                  <span style={{ fontWeight: 'bold' }}>
-                    {' '}
-                    27 September 2021{' '}
-                  </span>
-                </Text>
-              }
+              content={<Text>Already voted</Text>}
               leadingIcon={VotingIcon}
             />
             <BCSpacer size="xs" />
