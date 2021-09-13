@@ -1,6 +1,6 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { LOGOUT } from '../../reducers/authSlice';
+// import { useDispatch } from 'react-redux';
+// import { LOGOUT } from '../../reducers/authSlice';
 
 import {
   VStack,
@@ -22,12 +22,12 @@ import {
 } from '../../assets/';
 
 const Index = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const logout = () => {
-    dispatch(LOGOUT());
-    window.location.href = '/login';
-  };
+  // const logout = () => {
+  //   dispatch(LOGOUT());
+  //   window.location.href = '/login';
+  // };
 
   return (
     <>
@@ -52,7 +52,7 @@ const Index = () => {
             />
           </VStack>
           <SimpleGrid
-            columns={[1, 1, 3]}
+            columns={[1, 1, 2]}
             spacing={['40px', '40px', '0px']}
             p="25px 0px"
             alignItems={['center', 'center', 'flex-start']}
@@ -87,7 +87,7 @@ const Index = () => {
                 </Box>
               </VStack>
             </VStack>
-            <VStack alignItems="center" justifyContent="center">
+            {/* <VStack alignItems="center" justifyContent="center">
               <VStack w="fit-content" alignItems="flex-start">
                 <Box>
                   <Text fontSize="lg" fontWeight="700" pb="10px">
@@ -115,7 +115,7 @@ const Index = () => {
                   </Link>
                 </Box>
               </VStack>
-            </VStack>
+            </VStack> */}
             <VStack alignItems="center" justifyContent="center">
               <VStack w="fit-content" alignItems="flex-start">
                 <Text fontSize="lg" fontWeight="700" pb="10px">
