@@ -22,12 +22,13 @@ import {
 } from '../../assets/';
 import BCSpacer from 'components/Spacer';
 import { useCountdown } from '../../hooks';
-
+import store from '../../store/store';
 const MobileMenu = () => {
   const { daysRef, hoursRef, minutesRef, secondsRef } = useCountdown(
     'October 2, 2021 00:00:00',
   );
   const isOpen = useRef(false);
+  const authState = store.getState().auth;
 
   return (
     <>
@@ -170,38 +171,44 @@ const MobileMenu = () => {
             </Link>
           </VStack>
 
-          <BCSpacer size="3xs" />
-          <HStack alignItems="center">
-            <Image src={LinksIcon} h="15px" w="15px" />
-            <Text
-              fontSize="lg"
-              fontWeight="600"
-              color="#797979"
-              fontFamily="Montserrat"
-              mt="0px"
-            >
-              Quick Links
-            </Text>
-          </HStack>
+          {authState.isAuthenticated ? (
+            <>
+              <BCSpacer size="3xs" />
+              <HStack alignItems="center">
+                <Image src={LinksIcon} h="15px" w="15px" />
+                <Text
+                  fontSize="lg"
+                  fontWeight="600"
+                  color="#797979"
+                  fontFamily="Montserrat"
+                  mt="0px"
+                >
+                  Quick Links
+                </Text>
+              </HStack>
 
-          <BCSpacer size="5xs" />
-          <VStack alignItems="flex-start">
-            <Link href="/dashboard">
-              <Text fontSize="sm" fontFamily="Montserrat" fontWeight="600">
-                Participant Dashboard
-              </Text>
-            </Link>
-            <Link href="/propose-topic">
-              <Text fontSize="sm" fontFamily="Montserrat" fontWeight="600">
-                Propose Topic
-              </Text>
-            </Link>
-            <Link href="/vote-topic">
-              <Text fontSize="sm" fontFamily="Montserrat" fontWeight="600">
-                Vote Topics
-              </Text>
-            </Link>
-          </VStack>
+              <BCSpacer size="5xs" />
+              <VStack alignItems="flex-start">
+                <Link href="/dashboard">
+                  <Text fontSize="sm" fontFamily="Montserrat" fontWeight="600">
+                    Participant Dashboard
+                  </Text>
+                </Link>
+                <Link href="/propose-topic">
+                  <Text fontSize="sm" fontFamily="Montserrat" fontWeight="600">
+                    Propose Topic
+                  </Text>
+                </Link>
+                <Link href="/vote-topic">
+                  <Text fontSize="sm" fontFamily="Montserrat" fontWeight="600">
+                    Vote Topics
+                  </Text>
+                </Link>
+              </VStack>
+            </>
+          ) : (
+            'none'
+          )}
         </VStack>
         <Center w="100%" p="2em" alignItems="flex-end">
           <PrimaryButton w="100%" py="0px">

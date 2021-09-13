@@ -30,7 +30,13 @@ import Loader from '../components/Loader';
 import { useScrollTo, useAxios } from '../hooks';
 import useModal from '../components/Modal/useModal';
 
-import { SectionBg, VotingPic, AIIcon, VotingIcon } from '../assets';
+import {
+  SectionBg,
+  VotingPic,
+  AIIcon,
+  VotingIcon,
+  NoMessageIcon,
+} from '../assets';
 import store from './../store/store';
 import '../global.css';
 
@@ -44,7 +50,10 @@ const voteTopic = () => {
 
   const voteTopicHeader = React.useRef(null);
 
+  // loading state
   const [isFetchVotesLoading, setIsFetchVotesLoading] = useState(true);
+  const [isFetchTopicsLoading, setIsFetchTopicsLoading] = useState(true);
+
   const [alreadyVoted, setAlreadyVoted] = useState(false);
   const [topicAvailable, setTopicAvailable] = useState([]);
   const [votes, setVotes] = useState([]);
@@ -80,8 +89,10 @@ const voteTopic = () => {
     (res, err) => {
       if (err) {
         console.log(err);
+        setIsFetchTopicsLoading(false);
       } else if (res) {
         setTopicAvailable(res.data);
+        setIsFetchTopicsLoading(false);
       }
     },
   );
@@ -141,8 +152,13 @@ const voteTopic = () => {
   );
 
   useEffect(() => {
-    fetchVoteByUser();
-    fetchTopics();
+    setTimeout(() => {
+      fetchVoteByUser();
+    }, 1000);
+
+    setTimeout(() => {
+      fetchTopics();
+    }, 4000);
   }, []);
 
   if (isFetchVotesLoading) {
@@ -228,7 +244,9 @@ const voteTopic = () => {
           h="250px"
         ></Center>
 
-        {topicAvailable && topicAvailable.length >= 5 && !alreadyVoted ? (
+        {isFetchTopicsLoading ? (
+          <Loader type="full-page-loader" />
+        ) : topicAvailable && topicAvailable.length >= 5 && !alreadyVoted ? (
           <>
             <Box className="voteTopicHeaderTop" w="100%" h="1px"></Box>
             <Center
@@ -359,6 +377,22 @@ const voteTopic = () => {
               </Formik>
             </Container>
           </>
+        ) : topicAvailable.length < 5 ? (
+          <Center
+            d="flex"
+            flexDir="column"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Container maxW="container.xl">
+              <InfoBlock
+                theme="error"
+                content={<Text>Not enough topic</Text>}
+                leadingIcon={NoMessageIcon}
+              />
+              <BCSpacer size="xs" />
+            </Container>
+          </Center>
         ) : (
           <Center
             d="flex"

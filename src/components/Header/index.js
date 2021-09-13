@@ -165,7 +165,8 @@ const Index = ({ cta, type }) => {
             src={BarcampFullLogo}
             alt="Logo"
           />
-          <MobileMenu />
+          {mobileSize && <MobileMenu />}
+
           <HStack
             d={['none', 'none', 'flex']}
             className="navbar"

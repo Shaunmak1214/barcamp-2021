@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/layout';
 import { Image } from '@chakra-ui/image';
 import { Text } from '@chakra-ui/react';
-
+import store from '../../store/store';
 import {
   BarcampWhiteLogo,
   FacebookIcon,
@@ -23,6 +23,7 @@ import {
 
 const Index = () => {
   const dispatch = useDispatch();
+  const authState = store.getState().auth;
 
   const logout = () => {
     dispatch(LOGOUT());
@@ -52,13 +53,17 @@ const Index = () => {
             />
           </VStack>
           <SimpleGrid
-            columns={[1, 1, 3]}
+            columns={[1, 1, authState.isAuthenticated ? 3 : 2]}
             spacing={['40px', '40px', '0px']}
             p="25px 0px"
             alignItems={['center', 'center', 'flex-start']}
             w="100%"
           >
-            <VStack alignItems="center" justifyContent="center">
+            <VStack
+              alignItems={['flex-start', 'flex-start', 'center']}
+              justifyItems={['flex-start', 'flex-start', 'center']}
+              pl="20px"
+            >
               <VStack w="fit-content" alignItems="flex-start">
                 <Box>
                   <Text fontSize="lg" fontWeight="700" pb="10px">
@@ -87,23 +92,28 @@ const Index = () => {
                 </Box>
               </VStack>
             </VStack>
-            <VStack alignItems="center" justifyContent="center">
+            <VStack
+              d={authState.isAuthenticated ? 'flex' : 'none'}
+              alignItems={['flex-start', 'flex-start', 'center']}
+              justifyItems={['flex-start', 'flex-start', 'center']}
+              pl="20px"
+            >
               <VStack w="fit-content" alignItems="flex-start">
                 <Box>
                   <Text fontSize="lg" fontWeight="700" pb="10px">
                     PARTICIPANT
                   </Text>
-                  <Link href="/#agenda">
+                  <Link href="/dashboard">
                     <Text fontSize="md" pb="10px">
                       {'>'} DASHBOARD
                     </Text>
                   </Link>
-                  <Link href="/#about">
+                  <Link href="/propose-topic">
                     <Text fontSize="md" pb="10px">
                       {'>'} PROPOSE TOPIC
                     </Text>
                   </Link>
-                  <Link href="/#faq">
+                  <Link href="/vote-topic">
                     <Text fontSize="md" pb="10px">
                       {'>'} VOTE TOPIC
                     </Text>
@@ -116,7 +126,11 @@ const Index = () => {
                 </Box>
               </VStack>
             </VStack>
-            <VStack alignItems="center" justifyContent="center">
+            <VStack
+              alignItems={['flex-start', 'flex-start', 'center']}
+              justifyItems={['flex-start', 'flex-start', 'center']}
+              pl="20px"
+            >
               <VStack w="fit-content" alignItems="flex-start">
                 <Text fontSize="lg" fontWeight="700" pb="10px">
                   FOLLOW US

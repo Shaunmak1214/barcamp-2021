@@ -37,7 +37,7 @@ const InfoBlock = ({ buttonUrl, buttonLabel, theme, content, leadingIcon }) => {
       })}
     >
       <HStack alignItems="center">
-        {leadingIcon && <Image src={leadingIcon} mb={['35px', '0']} />}
+        {leadingIcon && <Image src={leadingIcon} />}
 
         <Flex flexDir="column" alignItems="center" justifyContent="center">
           <Box w="100%" p={['0', '0 50px']}>

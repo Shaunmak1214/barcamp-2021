@@ -116,7 +116,7 @@ const ProposeTopic = () => {
   useEffect(() => {
     setTimeout(() => {
       fetchTopicsByUser();
-    }, 5000);
+    }, 2000);
   }, []);
 
   // useEffect(() => {

@@ -26,7 +26,7 @@ const TopicBlock = ({ rounded, topic, themeIcon }) => {
       boxShadow="0px 16px 40px rgba(147, 147, 147, 0.25)"
     >
       <Box width="90%">
-        <HStack spacing={7} py="0.3em" px={['0rem', '0rem', '0.5em']}>
+        <HStack spacing={[0, 0, 7]} py="0.3em" px={['0rem', '0rem', '0.5em']}>
           <Image
             src={icon}
             borderRadius={rounded ? '50%' : '0'}
@@ -34,7 +34,7 @@ const TopicBlock = ({ rounded, topic, themeIcon }) => {
             h="60px"
             w="60px"
           />
-          <VStack spacing={2} align="flex-start" w="90%">
+          <VStack align="flex-start" w="85%" wordBreak="break-all">
             <Flex
               justifyContent="space-between"
               w="95%"

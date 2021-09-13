@@ -162,7 +162,11 @@ const Index = ({ ...props }) => {
   const FaqButtonRenderer = () => {
     return (
       <SimpleGrid
-        columns={FaqCategories.length < 4 ? FaqCategories.length : '4'}
+        columns={[
+          '1',
+          '1',
+          FaqCategories.length < 4 ? FaqCategories.length : '4',
+        ]}
         spacing={10}
         spacingY={4}
       >
