@@ -71,16 +71,19 @@ const ProposeTopic = () => {
     },
     (res, err) => {
       if (res) {
-        console.log(res.status);
         let resData = res.data;
         if (res.status === 200 || res.status === 201 || res.status === 203) {
           window.location.href = '/dashboard';
         } else {
-          setUpdateErr(' ' + resData.data.error);
+          setUpdateErr(' ' + resData);
           onModalOpen();
         }
       } else if (err) {
-        setUpdateErr(' ' + err);
+        if (err.error) {
+          setUpdateErr(' ' + err.error);
+        } else {
+          setUpdateErr(' ' + err);
+        }
         onModalOpen();
       }
     },
@@ -272,20 +275,19 @@ const ProposeTopic = () => {
             </Container>
           </Center>
 
-          {updateErr ? (
-            <Alert status="error">
-              <AlertIcon />
-              <Box flex="1">
-                <AlertTitle>{updateErr}</AlertTitle>
-                <AlertDescription display="block">
-                  There is some error updating your profile. Please try again.
-                </AlertDescription>
-              </Box>
-              <CloseButton position="absolute" right="8px" top="8px" />
-            </Alert>
-          ) : null}
-
           <Container maxW="container.xl" w="100%" py="50px">
+            {updateErr ? (
+              <Alert mb="10" status="error">
+                <AlertIcon />
+                <Box flex="1">
+                  <AlertTitle>{updateErr}</AlertTitle>
+                  <AlertDescription display="block">
+                    There is some error updating your profile. Please try again.
+                  </AlertDescription>
+                </Box>
+                <CloseButton position="absolute" right="8px" top="8px" />
+              </Alert>
+            ) : null}
             <Formik
               validationSchema={schema}
               initialValues={{

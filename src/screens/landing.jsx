@@ -11,6 +11,7 @@ import {
   Heading,
 } from '@chakra-ui/layout';
 import { Text } from '@chakra-ui/react';
+import Lottie from 'react-lottie';
 
 import Faq from '../components/Faqs';
 import { PrimaryButton } from '../components/Buttons';
@@ -37,9 +38,10 @@ import {
   SamplePicFour,
   SamplePicFive,
   SamplePicSix,
-  CountDownGif,
   Agenda,
 } from '../assets';
+
+import { Countdown } from '../constants';
 
 const Index = () => {
   const { daysRef, hoursRef, minutesRef, secondsRef } = useCountdown(
@@ -105,8 +107,12 @@ const Index = () => {
             d="flex"
             justifyContent="center"
             alignItems="center"
+            h="50%"
+            w="50%"
+            margin="0 auto"
           >
-            <Image src={CountDownGif} />
+            {/* <Image src={CountDownGif} /> */}
+            <Lottie options={Countdown} />
           </Box>
 
           <SimpleGrid
