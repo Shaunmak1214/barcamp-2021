@@ -20,6 +20,9 @@ import DownIcon from './svgs/down.svg';
 import TechIcon from './svgs/tech.svg';
 import NonTechIcon from './svgs/nontech.svg';
 import NonsenseIcon from './svgs/nonsense.svg';
+import ChampionIcon from './svgs/champion.svg';
+import SilverIcon from './svgs/silver.svg';
+import BronzeIcon from './svgs/bronze.svg';
 
 // Icons (PNG)
 import NoMessageIcon from './jpg-pngs/no-message-icon.png';
@@ -103,4 +106,7 @@ export {
   TechIcon,
   NonTechIcon,
   NonsenseIcon,
+  ChampionIcon,
+  SilverIcon,
+  BronzeIcon,
 };

@@ -54,8 +54,12 @@ const ProposeTopic = () => {
     initialState: false,
   });
 
-  const [checked, setChecked] = useState(false);
+  // loading state
   const [isFetchTopicsLoading, setIsFetchTopicsLoading] = useState(true);
+  const [isPosting, setIsPosting] = useState(false);
+
+  const [checked, setChecked] = useState(false);
+
   const [userTopic, setUserTopic] = useState(null);
   const [updateErr, setUpdateErr] = React.useState('');
 
@@ -78,6 +82,7 @@ const ProposeTopic = () => {
         } else {
           setUpdateErr(' ' + resData);
           onModalOpen();
+          setIsPosting(false);
         }
       } else if (err) {
         if (err.error) {
@@ -86,6 +91,7 @@ const ProposeTopic = () => {
           setUpdateErr(' ' + err);
         }
         onModalOpen();
+        setIsPosting(false);
       }
     },
   );
@@ -318,6 +324,7 @@ const ProposeTopic = () => {
                     contact: '-',
                     self_description: '-',
                   });
+                  setIsPosting(true);
                 }}
               >
                 {() => (
@@ -374,9 +381,13 @@ const ProposeTopic = () => {
                         py="25px"
                         px="75px"
                         type="submit"
-                        disabled={!checked}
+                        disabled={isPosting || !checked}
                       >
-                        <Text fontSize="lg">Propose</Text>
+                        {isPosting ? (
+                          <Loader type="" size="md" />
+                        ) : (
+                          <Text fontSize="lg">Propose</Text>
+                        )}
                       </PrimaryButton>
                     </VStack>
                   </Form>

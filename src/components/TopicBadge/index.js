@@ -7,7 +7,7 @@ const TopicBadge = ({ topic }) => {
     <Flex
       align="center"
       justify="center"
-      borderRadius="10px"
+      borderRadius="4px"
       bg="#C9E1FF"
       color="gray.800"
       py={'3px'}

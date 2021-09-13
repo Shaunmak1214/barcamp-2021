@@ -227,7 +227,7 @@ const Index = ({ cta, type }) => {
                 px="4"
                 borderRadius="4px"
                 transition="visibility 0.2s ease-in-out, opacity 0.2s ease-in-out"
-                zIndex="50"
+                zIndex="1001"
                 cursor="pointer"
               >
                 {isAuthenticated ? (

@@ -1,32 +1,35 @@
+import React, { useEffect, useState } from 'react';
+
 import { Image } from '@chakra-ui/image';
 import { Container, SimpleGrid, Text, VStack, Center } from '@chakra-ui/layout';
-import React from 'react';
+
 import { PrimaryButton } from '../components/Buttons';
 import BCSpacer from '../components/Spacer';
-import { useEffect, useState } from 'react';
+import { SectionTitle } from 'components/SectionTitle';
+import InfoBlock from 'components/InfoBlock';
+import TopicBlock from 'components/TopicBlock';
+import Loader from '../components/Loader';
+
+import { useAxios } from '../hooks';
+import store from './../store/store';
+
 import {
   ResultIcon,
   Splash1,
   VotingIcon,
-  TechIcon,
-  NonTechIcon,
-  NonsenseIcon,
+  SectionBg,
+  NoMessageIcon,
 } from '../assets';
-import { CountDownBlock } from 'components/Countdown';
-import { SectionBg, NoMessageIcon } from '../assets';
-import { SectionTitle } from 'components/SectionTitle';
-import { useCountdown } from '../hooks';
-import InfoBlock from 'components/InfoBlock';
-import TopicBlock from 'components/TopicBlock';
-import { useAxios } from '../hooks';
-import store from './../store/store';
 
 const Dashboard = () => {
-  const { daysRef, hoursRef, minutesRef, secondsRef } = useCountdown(
-    'September 25, 2021 00:00:00',
-  );
-
   const authState = store.getState().auth;
+
+  // loading state
+  const [proposedLoading, setProposedLoading] = useState(true);
+  const [votedLoading, setVotedLoading] = useState(true);
+  const [leaderboardLoading, setLeaderboardLoading] = useState(true);
+
+  // data state
   const [userTopic, setUserTopic] = useState({});
   const [votedTopics, setVotedTopics] = useState([]);
   const [leaderboard, setLeaderboard] = useState([]);
@@ -43,6 +46,9 @@ const Dashboard = () => {
     (res, err) => {
       if (res) {
         setUserTopic(res.data);
+        setProposedLoading(false);
+      } else if (err) {
+        setProposedLoading(false);
       }
     },
   );
@@ -59,6 +65,9 @@ const Dashboard = () => {
     (res, err) => {
       if (res) {
         setVotedTopics(res.data);
+        setVotedLoading(false);
+      } else if (err) {
+        setVotedLoading(false);
       }
     },
   );
@@ -75,26 +84,20 @@ const Dashboard = () => {
     (res, err) => {
       if (res) {
         setLeaderboard(res.data);
-      } else {
+        setLeaderboardLoading(false);
+      } else if (err) {
         console.log(err);
+        setLeaderboardLoading(false);
       }
     },
   );
 
-  const ThemeIconRenderer = (theme) => {
-    if (theme === 'tech') {
-      return TechIcon;
-    } else if (theme === 'nonTech') {
-      return NonTechIcon;
-    } else {
-      return NonsenseIcon;
-    }
-  };
-
   useEffect(() => {
-    getUserVotes();
-    getTopicsByUser();
-    getLeaderboard();
+    setTimeout(() => {
+      getUserVotes();
+      getTopicsByUser();
+      getLeaderboard();
+    }, 3000);
   }, []);
 
   return (
@@ -163,75 +166,9 @@ const Dashboard = () => {
         bgImg={SectionBg}
         alignItems="center"
         justifyContent="center"
-      >
-        <Container
-          maxW="container.xl"
-          py={['50px', '50px']}
-          justifyContent="center"
-          alignItems="center"
-        >
-          <SimpleGrid
-            columns={[1, 1, 4]}
-            spacing={2}
-            textAlign="center"
-            justifyItems="center"
-            alignItems="center"
-          >
-            <CountDownBlock background="#ffffff" marginBottom={['25px', '0']}>
-              <Text
-                ref={daysRef}
-                fontSize="2xl"
-                fontWeight="bold"
-                color="#1050A0"
-              >
-                0
-              </Text>
-              <Text fontSize="md" color="#EB202B">
-                Days
-              </Text>
-            </CountDownBlock>
-            <CountDownBlock background="#ffffff" marginBottom={['25px', '0']}>
-              <Text
-                ref={hoursRef}
-                fontSize="2xl"
-                fontWeight="bold"
-                color="#1050A0"
-              >
-                0
-              </Text>
-              <Text fontSize="md" color="#EB202B">
-                Hours
-              </Text>
-            </CountDownBlock>
-            <CountDownBlock background="#ffffff" marginBottom={['25px', '0']}>
-              <Text
-                ref={minutesRef}
-                fontSize="2xl"
-                fontWeight="bold"
-                color="#1050A0"
-              >
-                0
-              </Text>
-              <Text fontSize="md" color="#EB202B">
-                Minutes
-              </Text>
-            </CountDownBlock>
-            <CountDownBlock background="#ffffff" marginBottom={['25px', '0']}>
-              <Text
-                ref={secondsRef}
-                fontSize="2xl"
-                fontWeight="bold"
-                color="#1050A0"
-              >
-                0
-              </Text>
-              <Text fontSize="md" color="#EB202B">
-                Seconds
-              </Text>
-            </CountDownBlock>
-          </SimpleGrid>
-        </Container>
-      </Center>
+        w="100%"
+        h="250px"
+      ></Center>
 
       <VStack py="50px">
         <Container
@@ -240,10 +177,12 @@ const Dashboard = () => {
           alignItems="flex-start"
           flexDir="column"
         >
-          <SectionTitle fontSize="2xl" type="left">
+          <SectionTitle fontSize="2xl" type="left" mb="5">
             Your Proposed Topic
           </SectionTitle>
-          {userTopic ? (
+          {proposedLoading ? (
+            <Loader type="block-loader" />
+          ) : userTopic ? (
             <TopicBlock rounded topic={userTopic} />
           ) : (
             <InfoBlock
@@ -270,16 +209,19 @@ const Dashboard = () => {
           alignItems="flex-start"
           flexDir="column"
         >
-          <SectionTitle fontSize="2xl" type="left">
+          <SectionTitle fontSize="2xl" type="left" mb="5">
             Your Voted Topic
           </SectionTitle>
-          {votedTopics && votedTopics.length > 0 ? (
+          {votedLoading ? (
+            <Loader type="block-loader" />
+          ) : votedTopics && votedTopics.length > 0 ? (
             votedTopics.map((topic, idx) => (
               <TopicBlock
+                rounded
                 key={idx}
-                value={topic.topicId._id}
-                topic={topic.topicId}
-                themeIcon={ThemeIconRenderer(topic.topicId.theme)}
+                value={topic.topic._id}
+                topic={topic.topic}
+                themeIcon={topic.speaker.picture}
               />
             ))
           ) : (
@@ -310,16 +252,22 @@ const Dashboard = () => {
           alignItems="flex-start"
           flexDir="column"
         >
-          <SectionTitle fontSize="2xl" type="left">
+          <SectionTitle fontSize="2xl" type="left" mb="5">
             Voting Result
           </SectionTitle>
-          {leaderboard && leaderboard.length > 0 ? (
+          {leaderboardLoading ? (
+            <Loader type="block-loader" />
+          ) : leaderboard && leaderboard.length > 0 ? (
             leaderboard.map((vote, idx) => (
               <TopicBlock
+                rounded
                 key={idx}
+                lead={idx}
                 value={vote.topic._id}
                 topic={vote.topic}
-                themeIcon={ThemeIconRenderer(vote.topic.theme)}
+                themeIcon={vote.user.picture}
+                count={vote.count}
+                leaderboard={true}
               />
             ))
           ) : (
