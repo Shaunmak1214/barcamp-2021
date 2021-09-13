@@ -2,6 +2,7 @@
 import CountDownGif from './gif/countdown.gif';
 
 // Icons (SVG)
+import BarcampFavicon from './svgs/barcamp-favicon.svg';
 import BurgerDivIcon from './svgs/burger-div.svg';
 import ProposePic from './jpg-pngs/propose.png';
 import MenuIcon from './svgs/menu.svg';
@@ -37,13 +38,16 @@ import AuronexLogo from './jpg-pngs/auronex.png';
 import BarcampLandingImg from './jpg-pngs/landing.png';
 import BarcampLandingImgMobile from './jpg-pngs/barcamp-landing-mobile.png';
 import LinearBorder from './jpg-pngs/linear-border.png';
+import SamplePicOne from './jpg-pngs/gallery1.png';
+import SamplePicTwo from './jpg-pngs/gallery2.png';
+import SamplePicThree from './jpg-pngs/gallery3.png';
+import SamplePicFour from './jpg-pngs/gallery4.png';
+import SamplePicFive from './jpg-pngs/gallery5.png';
+import SamplePicSix from './jpg-pngs/gallery6.png';
+import Agenda from './jpg-pngs/barcamp-agenda.png';
+
 // Pictures (JPG)
-import SamplePicOne from './jpg-pngs/gallery1.jpg';
-import SamplePicTwo from './jpg-pngs/gallery2.jpg';
-import SamplePicThree from './jpg-pngs/gallery3.jpg';
-import SamplePicFour from './jpg-pngs/gallery4.jpg';
-import SamplePicFive from './jpg-pngs/gallery5.jpg';
-import SamplePicSix from './jpg-pngs/gallery6.jpg';
+import SectionBgTwo from './jpg-pngs/section-bg2.jpg';
 
 // Pictures (SVG)
 import BarcampWhiteLogo from './svgs/barcamp-white-logo.svg';
@@ -54,9 +58,11 @@ export {
   BarcampLandingImg,
   BarcampLandingImgMobile,
   BarcampWhiteLogo,
+  BarcampFavicon,
   AuronexLogo,
   PlatinumIcon,
   SectionBg,
+  SectionBgTwo,
   ShareIcon,
   IconContainer,
   LightIcon,
@@ -67,6 +73,7 @@ export {
   SamplePicFour,
   SamplePicFive,
   SamplePicSix,
+  Agenda,
   PlatinumBadge,
   GoldBadge,
   SilverBadge,

@@ -30,6 +30,7 @@ import {
   TrainingIcon,
   LightIcon,
   SectionBg,
+  SectionBgTwo,
   SamplePicOne,
   SamplePicTwo,
   SamplePicThree,
@@ -37,6 +38,7 @@ import {
   SamplePicFive,
   SamplePicSix,
   CountDownGif,
+  Agenda,
 } from '../assets';
 
 const Index = () => {
@@ -95,7 +97,7 @@ const Index = () => {
           justifyContent="center"
           alignItems="center"
         >
-          <Heading textAlign="center" fontSize="4xl">
+          <Heading textAlign="center" fontSize="3xl">
             We can&apos;t wait to show you what we&apos;ve got prepared
           </Heading>
           <Box
@@ -121,8 +123,8 @@ const Index = () => {
             >
               <Text
                 ref={daysRef}
-                fontSize="2xl"
-                fontWeight="bold"
+                fontSize="3xl"
+                fontWeight="600"
                 color="#1050A0"
               >
                 0
@@ -138,8 +140,8 @@ const Index = () => {
             >
               <Text
                 ref={hoursRef}
-                fontSize="2xl"
-                fontWeight="bold"
+                fontSize="3xl"
+                fontWeight="600"
                 color="#1050A0"
               >
                 0
@@ -155,8 +157,8 @@ const Index = () => {
             >
               <Text
                 ref={minutesRef}
-                fontSize="2xl"
-                fontWeight="bold"
+                fontSize="3xl"
+                fontWeight="600"
                 color="#1050A0"
               >
                 0
@@ -172,8 +174,8 @@ const Index = () => {
             >
               <Text
                 ref={secondsRef}
-                fontSize="2xl"
-                fontWeight="bold"
+                fontSize="3xl"
+                fontWeight="600"
                 color="#1050A0"
               >
                 0
@@ -236,11 +238,31 @@ const Index = () => {
         </Container>
       </Center>
 
+      {/* video section */}
+      <Center py="20" flexDir="column">
+        <Container maxW="container.xl">
+          <iframe
+            width="100%"
+            height="670"
+            src="https://www.youtube.com/embed/V4yuHoLQpck"
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          ></iframe>
+        </Container>
+      </Center>
+
+      {/* Agenda section */}
+      <Center id="agenda" py="0" bgImage={SectionBgTwo} flexDir="column">
+        <Container maxW="container.xl">
+          <Image src={Agenda} />
+        </Container>
+      </Center>
+
       {/* FAQs section */}
       <Faq id="faq" />
 
       {/* Gallery Section */}
-      <Center pt="80px" bgImage={SectionBg} flexDir="column">
+      <Center pt="80px" pb="30px" bgImage={SectionBg} flexDir="column">
         <Container pb="50px" maxW="container.xl">
           <SectionTitle type="center" color="#ffffff">
             GALLERY
