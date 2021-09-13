@@ -25,7 +25,11 @@ const useAxios = (axiosParams, onUpdate) => {
         }
       })
       .catch((err) => {
-        setError(err);
+        if (err.response.data) {
+          setError(err.response.data);
+        } else {
+          setError(err);
+        }
       })
       .finally(() => {
         setLoading(false);
