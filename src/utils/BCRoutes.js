@@ -20,9 +20,10 @@ class BCRoutes extends React.Component {
       header: PropTypes.bool,
       transparency: PropTypes.string,
       protected: PropTypes.bool,
+      accessDateRange: PropTypes.array,
+      protectLevel: PropTypes.number,
       isAuthenticated: PropTypes.bool,
       accessToken: PropTypes.string,
-      protectLevel: PropTypes.number,
       token: PropTypes.string,
       LOGOUT: PropTypes.func,
     };
@@ -60,6 +61,18 @@ class BCRoutes extends React.Component {
     const permissionLevel = isAuthenticated
       ? jwt_decode(this.props.accessToken).permissionFlags
       : 0;
+    var dateNow = new Date().getTime();
+    var from = new Date(this.props.accessDateRange[0]).getTime();
+    var to = new Date(this.props.accessDateRange[1]).getTime();
+
+    if (
+      this.props.accessDateRange[0] !== '' &&
+      this.props.accessDateRange[1] !== ''
+    ) {
+      if (!(dateNow >= from && dateNow <= to)) {
+        return <Redirect to="/" />;
+      }
+    }
 
     if (this.props.protected === true && !isAuthenticated) {
       return <Redirect to="/login" />;
@@ -83,6 +96,7 @@ class BCRoutes extends React.Component {
 
 BCRoutes.defaultProps = {
   protectLevel: 2,
+  accessDateRange: ['', ''],
 };
 
 const mapStateToProps = (state) => ({

@@ -20,6 +20,7 @@ function App() {
           exact
           header
           transparency="sticky"
+          accessDateRange={[new Date(2021, 9, 1), new Date(2021, 12, 31)]}
           path="/login"
           component={Screens.Login}
         />
@@ -28,6 +29,7 @@ function App() {
           header
           protected
           transparency="sticky"
+          accessDateRange={[new Date(2021, 9, 1), new Date(2021, 12, 31)]}
           path="/dashboard"
           component={Screens.Dashboard}
         />
@@ -37,6 +39,7 @@ function App() {
           protected
           protectLevel={1}
           transparency="fixed"
+          accessDateRange={[new Date(2021, 9, 1), new Date(2021, 12, 31)]}
           path="/update-profile"
           component={Screens.UpdateProfile}
         />
@@ -45,6 +48,7 @@ function App() {
           header
           protected
           transparency="sticky"
+          accessDateRange={[new Date(2021, 9, 1), new Date(2021, 12, 31)]}
           path="/propose-topic"
           component={Screens.ProposeTopic}
         />
@@ -53,6 +57,7 @@ function App() {
           header
           protected
           transparency="sticky"
+          accessDateRange={[new Date(2021, 9, 1), new Date(2021, 12, 31)]}
           path="/vote-topic"
           component={Screens.VoteTopic}
         />
