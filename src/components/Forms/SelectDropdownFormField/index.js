@@ -46,7 +46,7 @@ const Index = ({ field, form, label, ...props }) => {
           {...props}
         >
           <option value="tech">Tech</option>
-          <option value="nontech">Non-Tech</option>
+          <option value="non-tech">Non-Tech</option>
           <option value="nonsense">Nonsense</option>
         </Select>
         <FormErrorMessage fontFamily="Source Sans Pro" fontSize="sm">
