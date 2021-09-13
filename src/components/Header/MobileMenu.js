@@ -16,7 +16,7 @@ import { CloseIcon } from '@chakra-ui/icons';
 import { PrimaryButton } from '../Buttons';
 import {
   MenuIcon,
-  LinksIcon,
+  // LinksIcon,
   CountdownIcon,
   MobileMenuIcon,
 } from '../../assets/';
@@ -170,7 +170,7 @@ const MobileMenu = () => {
             </Link>
           </VStack>
 
-          <BCSpacer size="3xs" />
+          {/* <BCSpacer size="3xs" />
           <HStack alignItems="center">
             <Image src={LinksIcon} h="15px" w="15px" />
             <Text
@@ -201,7 +201,7 @@ const MobileMenu = () => {
                 Vote Topics
               </Text>
             </Link>
-          </VStack>
+          </VStack> */}
         </VStack>
         <Center w="100%" p="2em" alignItems="flex-end">
           <PrimaryButton w="100%" py="0px">

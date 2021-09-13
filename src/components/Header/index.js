@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
-import { LOGOUT } from '../../reducers/authSlice';
+// import { useDispatch } from 'react-redux';
+// import { LOGOUT } from '../../reducers/authSlice';
 import PropTypes from 'prop-types';
 
 import { Image } from '@chakra-ui/image';
 import {
-  Box,
+  // Box,
   Center,
   Container,
   HStack,
@@ -16,9 +16,9 @@ import {
 import { Text } from '@chakra-ui/react';
 
 import { PrimaryButton } from '../Buttons';
-import { BarcampFullLogo, DownIcon, PlatinumIcon } from '../../assets/';
+import { BarcampFullLogo, PlatinumIcon } from '../../assets/';
 import MobileMenu from './MobileMenu';
-import store from '../../store/store';
+// import store from '../../store/store';
 
 import {
   platinumSponsor,
@@ -27,23 +27,23 @@ import {
 } from '../../datas/sponsors';
 
 const Index = ({ cta, type }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const headerSticky = useRef(null);
   const sponsorHover = useRef(null);
-  const moreHover = useRef(null);
+  // const moreHover = useRef(null);
   const joinButton = useRef(null);
 
-  const authState = store.getState().auth;
-  const user = authState.user;
-  const isAuthenticated = authState.isAuthenticated;
+  // const authState = store.getState().auth;
+  // const user = authState.user;
+  // const isAuthenticated = authState.isAuthenticated;
 
   const mobileSize = window.screen.width <= 768;
 
-  const logout = () => {
-    dispatch(LOGOUT());
-    window.location.href = '/login';
-  };
+  // const logout = () => {
+  //   dispatch(LOGOUT());
+  //   window.location.href = '/login';
+  // };
 
   const handleScroll = (e) => {
     const window = e.currentTarget;
@@ -64,15 +64,15 @@ const Index = ({ cta, type }) => {
     }
   };
 
-  const moreToggle = (status) => {
-    if (moreHover.current && status === 'in') {
-      moreHover.current.style.visibility = 'visible';
-      moreHover.current.style.opacity = '1';
-    } else if (moreHover.current && status === 'out') {
-      moreHover.current.style.visibility = 'hidden';
-      moreHover.current.style.opacity = '0';
-    }
-  };
+  // const moreToggle = (status) => {
+  //   if (moreHover.current && status === 'in') {
+  //     moreHover.current.style.visibility = 'visible';
+  //     moreHover.current.style.opacity = '1';
+  //   } else if (moreHover.current && status === 'out') {
+  //     moreHover.current.style.visibility = 'hidden';
+  //     moreHover.current.style.opacity = '0';
+  //   }
+  // };
 
   const stickyToggle = (status) => {
     if (status) {
@@ -196,7 +196,7 @@ const Index = ({ cta, type }) => {
             >
               <Text fontSize="sm">SPONSORS</Text>
             </Link>
-            <Box
+            {/* <Box
               py="5"
               position="relative"
               onMouseOver={() => {
@@ -275,7 +275,7 @@ const Index = ({ cta, type }) => {
                   </Link>
                 )}
               </VStack>
-            </Box>
+            </Box> */}
 
             {/* Join us now condition rendering */}
             {cta && (
