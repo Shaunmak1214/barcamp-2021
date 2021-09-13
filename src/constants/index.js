@@ -24,7 +24,7 @@ export const CompleteLoader = {
 };
 
 export const Countdown = {
-  loop: false,
+  loop: true,
   autoplay: true,
   animationData: CountdownGifData,
   rendererSettings: {
