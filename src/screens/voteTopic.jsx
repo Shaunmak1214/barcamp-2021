@@ -306,7 +306,7 @@ const voteTopic = () => {
                           onSelect={(value, selected) =>
                             onSelect(value, selected)
                           }
-                          disabledSelect={votes.length >= 4 ? true : false}
+                          disabledSelect={votes.length >= 5 ? true : false}
                         >
                           <HStack
                             spacing={7}
