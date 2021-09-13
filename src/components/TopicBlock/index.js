@@ -4,7 +4,7 @@ import { Image } from '@chakra-ui/image';
 import TopicBadge from './../TopicBadge';
 import PropTypes from 'prop-types';
 
-const TopicBlock = ({ topic, themeIcon }) => {
+const TopicBlock = ({ rounded, topic, themeIcon }) => {
   if (!topic || !topic.user) {
     return null;
   }
@@ -29,7 +29,7 @@ const TopicBlock = ({ topic, themeIcon }) => {
         <HStack spacing={7} py="0.3em" px={['0rem', '0rem', '0.5em']}>
           <Image
             src={icon}
-            borderRadius="50%"
+            borderRadius={rounded ? '50%' : '0'}
             d={['none', 'none', 'flex']}
             h="60px"
             w="60px"
@@ -41,7 +41,6 @@ const TopicBlock = ({ topic, themeIcon }) => {
               flexDir={['column', 'column', 'row']}
             >
               <TopicBadge topic={topic.theme} />
-              {/* <Text>Prepared By {topic.user.fullName}</Text> */}
             </Flex>
             <Text
               as="h3"
@@ -71,6 +70,7 @@ const TopicBlock = ({ topic, themeIcon }) => {
 };
 
 TopicBlock.propTypes = {
+  rounded: PropTypes.bool,
   topic: PropTypes.object,
   themeIcon: PropTypes.any,
 };

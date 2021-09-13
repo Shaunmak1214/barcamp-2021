@@ -4,7 +4,14 @@ import React from 'react';
 import { PrimaryButton } from '../components/Buttons';
 import BCSpacer from '../components/Spacer';
 import { useEffect, useState } from 'react';
-import { AIIcon, ResultIcon, Splash1, VotingIcon } from '../assets';
+import {
+  ResultIcon,
+  Splash1,
+  VotingIcon,
+  TechIcon,
+  NonTechIcon,
+  NonsenseIcon,
+} from '../assets';
 import { CountDownBlock } from 'components/Countdown';
 import { SectionBg, NoMessageIcon } from '../assets';
 import { SectionTitle } from 'components/SectionTitle';
@@ -22,7 +29,9 @@ const Dashboard = () => {
   const authState = store.getState().auth;
   const [userTopic, setUserTopic] = useState({});
   const [votedTopics, setVotedTopics] = useState([]);
-  const { fetch } = useAxios(
+  const [leaderboard, setLeaderboard] = useState([]);
+
+  const { fetch: getTopicsByUser } = useAxios(
     {
       method: 'get',
       url: `/topicsByUser/${authState.user.userId}`,
@@ -54,10 +63,38 @@ const Dashboard = () => {
     },
   );
 
+  const { fetch: getLeaderboard } = useAxios(
+    {
+      method: 'get',
+      url: `/votes/leaderboard`,
+      headers: {
+        Authorization: `Bearer ${authState.accessToken}`,
+      },
+    },
+    /*eslint-disable */
+    (res, err) => {
+      if (res) {
+        setLeaderboard(res.data);
+      } else {
+        console.log(err);
+      }
+    },
+  );
+
+  const ThemeIconRenderer = (theme) => {
+    if (theme === 'tech') {
+      return TechIcon;
+    } else if (theme === 'nonTech') {
+      return NonTechIcon;
+    } else {
+      return NonsenseIcon;
+    }
+  };
+
   useEffect(() => {
     getUserVotes();
-
-    fetch();
+    getTopicsByUser();
+    getLeaderboard();
   }, []);
 
   return (
@@ -206,7 +243,7 @@ const Dashboard = () => {
             Your Proposed Topic
           </SectionTitle>
           {userTopic ? (
-            <TopicBlock topic={userTopic} />
+            <TopicBlock rounded topic={userTopic} />
           ) : (
             <InfoBlock
               buttonUrl="/propose-topic"
@@ -241,7 +278,7 @@ const Dashboard = () => {
                 key={idx}
                 value={topic.topicId._id}
                 topic={topic.topicId}
-                themeIcon={AIIcon}
+                themeIcon={ThemeIconRenderer(topic.topicId.theme)}
               />
             ))
           ) : (
@@ -275,20 +312,34 @@ const Dashboard = () => {
           <SectionTitle fontSize="2xl" type="left">
             Voting Result
           </SectionTitle>
-          <InfoBlock
-            theme=""
-            content={
-              <Text>
-                The voting result can be viewed strating from
-                <span style={{ fontWeight: 'bold' }}> 25 September 2021 </span>
-                which when the voting session is opened. However, the
-                announcement for a finalized list of speakers will be made on
-                <span style={{ fontWeight: 'bold' }}> 28 October 2021 </span>
-                (One day before the Barcamp event)
-              </Text>
-            }
-            leadingIcon={ResultIcon}
-          />
+          {leaderboard && leaderboard.length > 0 ? (
+            leaderboard.map((vote, idx) => (
+              <TopicBlock
+                key={idx}
+                value={vote.topic._id}
+                topic={vote.topic}
+                themeIcon={ThemeIconRenderer(vote.topic.theme)}
+              />
+            ))
+          ) : (
+            <InfoBlock
+              theme=""
+              content={
+                <Text>
+                  The voting result can be viewed strating from
+                  <span style={{ fontWeight: 'bold' }}>
+                    {' '}
+                    25 September 2021{' '}
+                  </span>
+                  which when the voting session is opened. However, the
+                  announcement for a finalized list of speakers will be made on
+                  <span style={{ fontWeight: 'bold' }}> 28 October 2021 </span>
+                  (One day before the Barcamp event)
+                </Text>
+              }
+              leadingIcon={ResultIcon}
+            />
+          )}
         </Container>
       </VStack>
     </>
