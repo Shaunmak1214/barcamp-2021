@@ -54,14 +54,15 @@ const ProposeTopic = () => {
     initialState: false,
   });
 
+  // loading state
   const [checked, setChecked] = useState(false);
-  const [isFetchTopicsLoading, setIsFetchTopicsLoading] = useState(true);
+
   const [userTopic, setUserTopic] = useState(null);
   const [updateErr, setUpdateErr] = React.useState('');
 
   const authState = store.getState().auth;
 
-  const { fetch: postProposedTopic } = useAxios(
+  const { loading: isPosting, fetch: postProposedTopic } = useAxios(
     {
       method: 'post',
       url: '/topics',
@@ -70,27 +71,21 @@ const ProposeTopic = () => {
         'Content-Type': 'application/json',
       },
     },
-    (res, err) => {
-      if (res) {
-        let resData = res.data;
-        if (res.status === 200 || res.status === 201 || res.status === 203) {
-          window.location.href = '/dashboard';
-        } else {
-          setUpdateErr(' ' + resData);
-          onModalOpen();
-        }
-      } else if (err) {
-        if (err.error) {
+    (err, res) => {
+      if (err) {
+        if (err.data.error) {
           setUpdateErr(' ' + err.error);
         } else {
           setUpdateErr(' ' + err);
         }
         onModalOpen();
+      } else if (res) {
+        window.location.href = '/dashboard';
       }
     },
   );
 
-  const { fetch: fetchTopicsByUser } = useAxios(
+  const { loading: isFetchTopicsLoading, fetch: fetchTopicsByUser } = useAxios(
     {
       method: 'get',
       url: `/topicsByUser/${authState.user.userId}`,
@@ -98,13 +93,11 @@ const ProposeTopic = () => {
         Authorization: `Bearer ${authState.accessToken}`,
       },
     },
-    (res, err) => {
+    (err, res) => {
       if (err) {
-        setUpdateErr(' ' + err);
-        setIsFetchTopicsLoading(false);
+        setUpdateErr(' ' + err.data.error);
       } else if (res) {
         setUserTopic(res.data);
-        setIsFetchTopicsLoading(false);
       }
     },
   );
@@ -114,9 +107,7 @@ const ProposeTopic = () => {
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      fetchTopicsByUser();
-    }, 5000);
+    fetchTopicsByUser();
   }, []);
 
   // useEffect(() => {
@@ -154,7 +145,7 @@ const ProposeTopic = () => {
                 fontFamily="Montserrat"
                 fontWeight="600"
               >
-                Theres an error updating your profile
+                Theres an error with your request.
               </Text>
               <Text
                 as="h3"
@@ -374,9 +365,13 @@ const ProposeTopic = () => {
                         py="25px"
                         px="75px"
                         type="submit"
-                        disabled={!checked}
+                        disabled={isPosting || !checked}
                       >
-                        <Text fontSize="lg">Propose</Text>
+                        {isPosting ? (
+                          <Loader type="" size="md" />
+                        ) : (
+                          <Text fontSize="lg">Propose</Text>
+                        )}
                       </PrimaryButton>
                     </VStack>
                   </Form>

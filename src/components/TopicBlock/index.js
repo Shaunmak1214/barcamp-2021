@@ -1,40 +1,70 @@
-import { VStack, HStack, Text, Box, Flex } from '@chakra-ui/layout';
 import React from 'react';
-import { Image } from '@chakra-ui/image';
-import TopicBadge from './../TopicBadge';
 import PropTypes from 'prop-types';
 
-const TopicBlock = ({ rounded, topic, themeIcon }) => {
+import { VStack, HStack, Text, Box, Flex } from '@chakra-ui/layout';
+import { Image } from '@chakra-ui/image';
+
+import TopicBadge from './../TopicBadge';
+
+import { ChampionIcon, SilverIcon, BronzeIcon } from '../../assets';
+
+const TopicBlock = ({
+  rounded,
+  topic,
+  lead,
+  themeIcon,
+  count,
+  leaderboard,
+}) => {
   if (!topic || !topic.user) {
     return null;
   }
 
   const icon = themeIcon ? themeIcon : topic.user.picture;
 
+  const MedalRenderer = ({ medal }) => {
+    switch (medal) {
+      case 0:
+        return <Image h="80px" w="80px" src={ChampionIcon} alt="champion" />;
+
+      case 1:
+        return <Image h="80px" w="80px" src={SilverIcon} alt="silver" />;
+
+      case 2:
+        return <Image h="80px" w="80px" src={BronzeIcon} alt="bronze" />;
+      default:
+        return <> </>;
+    }
+  };
+
+  MedalRenderer.propTypes = {
+    medal: PropTypes.number,
+  };
+
   return (
     <HStack
       w="100%"
-      p="30px 16px "
+      p="15px 25px"
       border="1px solid #E9E9E9;"
       borderRadius="8px"
-      mb="3"
-      mt="45px"
+      mb="2"
+      mt="8px"
       cursor="pointer"
       transition="all 0.1s ease-in-out"
-      justifyContent="center"
+      justifyContent="space-between"
       alignItems="center"
-      boxShadow="0px 16px 40px rgba(147, 147, 147, 0.25)"
+      boxShadow="0px 16px 40px rgba(195, 195, 195, 0.25)"
     >
       <Box width="90%">
-        <HStack spacing={7} py="0.3em" px={['0rem', '0rem', '0.5em']}>
+        <HStack spacing={[0, 0, 7]} py="0.3em" px={['0rem', '0rem', '0.5em']}>
           <Image
             src={icon}
             borderRadius={rounded ? '50%' : '0'}
             d={['none', 'none', 'flex']}
-            h="60px"
-            w="60px"
+            h="52px"
+            w="52px"
           />
-          <VStack spacing={2} align="flex-start" w="90%">
+          <VStack align="flex-start" w="85%" wordBreak="break-all">
             <Flex
               justifyContent="space-between"
               w="95%"
@@ -57,22 +87,28 @@ const TopicBlock = ({ rounded, topic, themeIcon }) => {
         </HStack>
       </Box>
 
-      <VStack spacing={3}>
-        <Text>4TH</Text>
-        <Box background="#f5f5f5" borderRadius="8px" p="10px">
-          <Text fontSize="sm">
-            <span bg="#1050A0">241</span> votes
-          </Text>
-        </Box>
-      </VStack>
+      {leaderboard && (
+        <VStack spacing={3}>
+          <MedalRenderer medal={lead} />
+          <Box background="#f5f5f5" borderRadius="8px" p="10px">
+            <Text fontSize="sm">
+              <span className="gradientText">{count}</span> votes
+            </Text>
+          </Box>
+        </VStack>
+      )}
     </HStack>
   );
 };
 
 TopicBlock.propTypes = {
+  idx: PropTypes.number,
   rounded: PropTypes.bool,
   topic: PropTypes.object,
   themeIcon: PropTypes.any,
+  count: PropTypes.number,
+  leaderboard: PropTypes.bool,
+  lead: PropTypes.number,
 };
 
 export default TopicBlock;

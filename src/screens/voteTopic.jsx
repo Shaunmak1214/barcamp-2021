@@ -30,7 +30,15 @@ import Loader from '../components/Loader';
 import { useScrollTo, useAxios } from '../hooks';
 import useModal from '../components/Modal/useModal';
 
-import { SectionBg, VotingPic, AIIcon, VotingIcon } from '../assets';
+import {
+  SectionBg,
+  VotingPic,
+  VotingIcon,
+  NoMessageIcon,
+  TechIcon,
+  NonTechIcon,
+  NonsenseIcon,
+} from '../assets';
 import store from './../store/store';
 import '../global.css';
 
@@ -44,7 +52,11 @@ const voteTopic = () => {
 
   const voteTopicHeader = React.useRef(null);
 
+  // loading state
   const [isFetchVotesLoading, setIsFetchVotesLoading] = useState(true);
+  const [isFetchTopicsLoading, setIsFetchTopicsLoading] = useState(true);
+  const [isPosting, setIsPosting] = useState(false);
+
   const [alreadyVoted, setAlreadyVoted] = useState(false);
   const [topicAvailable, setTopicAvailable] = useState([]);
   const [votes, setVotes] = useState([]);
@@ -77,11 +89,15 @@ const voteTopic = () => {
         Authorization: `Bearer ${token}`,
       },
     },
-    (res, err) => {
+    (err, res) => {
       if (err) {
-        console.log(err);
+        if (err.status === 425) {
+          console.log('date range wrong');
+        }
+        setIsFetchTopicsLoading(false);
       } else if (res) {
         setTopicAvailable(res.data);
+        setIsFetchTopicsLoading(false);
       }
     },
   );
@@ -94,7 +110,7 @@ const voteTopic = () => {
         Authorization: `Bearer ${token}`,
       },
     },
-    (res, err) => {
+    (err, res) => {
       if (err) {
         setAlreadyVoted(false);
         setIsFetchVotesLoading(false);
@@ -109,7 +125,6 @@ const voteTopic = () => {
     },
   );
 
-  // eslint-disable-next-line
   const { fetch: postVoteTopic } = useAxios(
     {
       method: 'post',
@@ -119,33 +134,38 @@ const voteTopic = () => {
         'Content-Type': 'application/json',
       },
     },
-    (res, err) => {
-      if (res) {
-        let resData = res.data;
-        if (res.status === 200 || res.status === 201 || res.status === 203) {
-          window.location.href = '/dashboard';
-        } else {
-          setVoteErr(' ' + resData);
-          onModalOpen();
-        }
-      } else if (err) {
-        if (err.error) {
+    (err, res) => {
+      if (err) {
+        if (err.data.error) {
           setVoteErr(' ' + err.error);
         } else {
           setVoteErr(' ' + err);
         }
         onModalOpen();
         executeScroll();
+        setIsPosting(false);
+      } else if (res) {
+        window.location.href = '/dashboard';
       }
     },
   );
+
+  const TopicIconRenderer = (theme) => {
+    if (theme === 'tech') {
+      return TechIcon;
+    } else if (theme === 'non-tech') {
+      return NonTechIcon;
+    } else {
+      return NonsenseIcon;
+    }
+  };
 
   useEffect(() => {
     fetchVoteByUser();
     fetchTopics();
   }, []);
 
-  if (isFetchVotesLoading) {
+  if (isFetchVotesLoading || isFetchTopicsLoading) {
     return <Loader type="full-page-loader" />;
   } else {
     return (
@@ -228,7 +248,9 @@ const voteTopic = () => {
           h="250px"
         ></Center>
 
-        {topicAvailable && topicAvailable.length >= 5 && !alreadyVoted ? (
+        {isFetchTopicsLoading ? (
+          <Loader type="full-page-loader" />
+        ) : topicAvailable && topicAvailable.length >= 5 && !alreadyVoted ? (
           <>
             <Box className="voteTopicHeaderTop" w="100%" h="1px"></Box>
             <Center
@@ -253,18 +275,25 @@ const voteTopic = () => {
                   <SectionTitle fontSize="2xl" type="left" mb={['7', '0', '0']}>
                     Pick your choice
                   </SectionTitle>
-                  <Center mb={['7', '0', '0']}>
-                    <Text>{votes.length} / 5 selected</Text>
-                  </Center>
                   <Center
                     boxShadow="0px 16px 40px rgba(193, 193, 193, 0.25)"
                     borderRadius="8px"
-                    px="6"
+                    px="4"
                     py="3"
                   >
+                    <Center
+                      borderRadius="8px"
+                      px="5"
+                      py="1"
+                      bgColor={votes.length === 5 ? '#C9E1FF' : '#FFDADA'}
+                      transition="background-color 0.3s ease-in-out"
+                      mr="5"
+                    >
+                      <Text>{votes.length} / 5 selected</Text>
+                    </Center>
                     <Text as="h2" fontSize="sm" fontWeight="500">
-                      Up to <span className="gradientText">FIVE</span>{' '}
-                      selections per participant
+                      Only <span className="gradientText">FIVE</span> selections
+                      per participant
                     </Text>
                   </Center>
                 </Flex>
@@ -295,6 +324,7 @@ const voteTopic = () => {
                     topicId: votes,
                     vote: 'topic',
                   });
+                  setIsPosting(true);
                 }}
               >
                 {() => (
@@ -316,7 +346,7 @@ const voteTopic = () => {
                               px={['0rem', '0rem', '0.5em']}
                             >
                               <Image
-                                src={AIIcon}
+                                src={TopicIconRenderer(topic.theme)}
                                 d={['none', 'none', 'flex']}
                                 h="45px"
                                 w="45px"
@@ -348,10 +378,14 @@ const voteTopic = () => {
                         w={['100%', 'fit-content', 'fit-content']}
                         py="25px"
                         px="75px"
-                        disabled={votes.length < 5}
+                        disabled={isPosting || votes.length < 5}
                         type="submit"
                       >
-                        <Text fontSize="lg">Submit Vote</Text>
+                        {isPosting ? (
+                          <Loader type="" size="md" />
+                        ) : (
+                          <Text fontSize="lg">Submit Vote</Text>
+                        )}
                       </PrimaryButton>
                     </VStack>
                   </Form>
@@ -359,6 +393,22 @@ const voteTopic = () => {
               </Formik>
             </Container>
           </>
+        ) : topicAvailable.length < 5 ? (
+          <Center
+            d="flex"
+            flexDir="column"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Container maxW="container.xl">
+              <InfoBlock
+                theme="error"
+                content={<Text>Not enough topic</Text>}
+                leadingIcon={NoMessageIcon}
+              />
+              <BCSpacer size="xs" />
+            </Container>
+          </Center>
         ) : (
           <Center
             d="flex"

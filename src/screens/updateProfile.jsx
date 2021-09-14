@@ -1,24 +1,33 @@
-import React from 'react';
-import { Container, SimpleGrid, Text, VStack, Box } from '@chakra-ui/layout';
+import React, { useState } from 'react';
+import jwt_decode from 'jwt-decode';
+import { useDispatch } from 'react-redux';
+import { LOGIN } from '../reducers/authSlice';
+
 import {
   Alert,
   AlertIcon,
   AlertTitle,
   AlertDescription,
   CloseButton,
+  Container,
+  SimpleGrid,
+  Text,
+  VStack,
+  Box,
 } from '@chakra-ui/react';
+
 import { SectionTitle } from '../components/SectionTitle';
-import BCSpacer from '../components/Spacer';
-import store from './../store/store';
 import { PrimaryButton } from '../components/Buttons';
-import useAxios from './../hooks/useAxios';
+import BCSpacer from '../components/Spacer';
+import BCModal from './../components/Modal';
+import Loader from '../components/Loader';
+
 import * as yup from 'yup';
 import { Formik, Form, Field } from 'formik';
 import { BCTextFilledFormField, SelectFormField } from '../components/Forms';
-import jwt_decode from 'jwt-decode';
-import { useDispatch } from 'react-redux';
-import { LOGIN } from '../reducers/authSlice';
-import BCModal from './../components/Modal';
+
+import store from './../store/store';
+import useAxios from './../hooks/useAxios';
 import useModal from '../components/Modal/useModal';
 
 const phoneRegExp =
@@ -37,8 +46,11 @@ const schema = yup.object({
 const updateProfile = () => {
   const authState = store.getState().auth;
 
-  const [heard, setHeard] = React.useState([]);
-  const [updateErr, setUpdateErr] = React.useState('');
+  // loading state
+  const [isPosting, setIsPosting] = useState(false);
+
+  const [heard, setHeard] = useState([]);
+  const [updateErr, setUpdateErr] = useState('');
 
   const { isOpen, onModalClose, onModalOpen } = useModal({
     initialState: false,
@@ -55,7 +67,9 @@ const updateProfile = () => {
       },
     },
     (res, err) => {
+      setIsPosting(false);
       if (res) {
+        window.location.href = '/dashboard';
         let resData = res.data;
         if (res.status === 200 || res.status === 201 || res.status === 203) {
           let decodedData = jwt_decode(resData.accessToken);
@@ -65,12 +79,12 @@ const updateProfile = () => {
             user: decodedData,
           };
           dispatch(LOGIN(loginObj));
-          window.location.href = '/dashboard';
         } else {
           setUpdateErr(' ' + resData.data.error);
           onModalOpen();
         }
       } else if (err) {
+        window.location.href = '/dashboard';
         setUpdateErr(' ' + err);
         onModalOpen();
       }
@@ -171,6 +185,7 @@ const updateProfile = () => {
                 companyOrInstitution: data.noc,
                 heard: heard,
               });
+              setIsPosting(true);
             }}
           >
             {() => (
@@ -238,11 +253,12 @@ const updateProfile = () => {
                     py="25px"
                     px="75px"
                     type="submit"
-                    onClick={() => {
-                      window.location.href = '#';
-                    }}
                   >
-                    <Text fontSize="lg">Register</Text>
+                    {isPosting ? (
+                      <Loader type="" size="md" />
+                    ) : (
+                      <Text fontSize="lg">Update Profile</Text>
+                    )}
                   </PrimaryButton>
                 </VStack>
               </Form>

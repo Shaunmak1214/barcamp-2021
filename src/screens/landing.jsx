@@ -107,11 +107,10 @@ const Index = () => {
             d="flex"
             justifyContent="center"
             alignItems="center"
-            h="50%"
-            w="50%"
-            margin="0 auto"
+            w={['100%', '100%', '50%']}
+            h={['100%', '100%', '50%']}
+            margin={['20px auto', '20px auto', '0 auto']}
           >
-            {/* <Image src={CountDownGif} /> */}
             <Lottie options={Countdown} />
           </Box>
 
@@ -123,9 +122,9 @@ const Index = () => {
             alignItems="center"
           >
             <CountDownBlock
-              marginTop="-150px"
+              marginTop="-55px"
               background="rgba(255, 255, 255, 0.8)"
-              marginBottom={['180px', '0']}
+              marginBottom={['95px', '0']}
             >
               <Text
                 ref={daysRef}
@@ -140,9 +139,9 @@ const Index = () => {
               </Text>
             </CountDownBlock>
             <CountDownBlock
-              marginTop="-150px"
+              marginTop="-55px"
               background="rgba(255, 255, 255, 0.8)"
-              marginBottom={['180px', '0']}
+              marginBottom={['95px', '0']}
             >
               <Text
                 ref={hoursRef}
@@ -157,9 +156,9 @@ const Index = () => {
               </Text>
             </CountDownBlock>
             <CountDownBlock
-              marginTop="-150px"
+              marginTop="-55px"
               background="rgba(255, 255, 255, 0.8)"
-              marginBottom={['180px', '0']}
+              marginBottom={['95px', '0']}
             >
               <Text
                 ref={minutesRef}
@@ -174,9 +173,9 @@ const Index = () => {
               </Text>
             </CountDownBlock>
             <CountDownBlock
-              marginTop="-150px"
+              marginTop="-55px"
               background="rgba(255, 255, 255, 0.8)"
-              marginBottom={['180px', '0']}
+              marginBottom={['95px', '0']}
             >
               <Text
                 ref={secondsRef}
