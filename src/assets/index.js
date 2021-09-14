@@ -17,6 +17,12 @@ import SilverBadge from './svgs/silver-badge.svg';
 import PlatinumIcon from './svgs/diamond.svg';
 import AIIcon from './svgs/AI-icon.svg';
 import DownIcon from './svgs/down.svg';
+import TechIcon from './svgs/tech.svg';
+import NonTechIcon from './svgs/nontech.svg';
+import NonsenseIcon from './svgs/nonsense.svg';
+import ChampionIcon from './svgs/champion.svg';
+import SilverIcon from './svgs/silver.svg';
+import BronzeIcon from './svgs/bronze.svg';
 
 // Icons (PNG)
 import NoMessageIcon from './jpg-pngs/no-message-icon.png';
@@ -97,4 +103,10 @@ export {
   AIIcon,
   LinearBorder,
   DownIcon,
+  TechIcon,
+  NonTechIcon,
+  NonsenseIcon,
+  ChampionIcon,
+  SilverIcon,
+  BronzeIcon,
 };

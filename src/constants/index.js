@@ -1,7 +1,9 @@
 import BlackLoaderData from '../assets/lottie/black-loader.json';
+import WhiteLoaderData from '../assets/lottie/white-loader.json';
 import CompleteGifData from '../assets/lottie/complete-gif.json';
 import CountdownGifData from '../assets/lottie/countdown-gif.json';
 import ErrorGifData from '../assets/lottie/error-gif.json';
+import BCLoadingData from '../assets/lottie/bc-loading.json';
 
 require('dotenv').config();
 
@@ -9,6 +11,15 @@ export const BlackLoader = {
   loop: true,
   autoplay: true,
   animationData: BlackLoaderData,
+  rendererSettings: {
+    preserveAspectRatio: 'xMidYMid slice',
+  },
+};
+
+export const WhiteLoader = {
+  loop: true,
+  autoplay: true,
+  animationData: WhiteLoaderData,
   rendererSettings: {
     preserveAspectRatio: 'xMidYMid slice',
   },
@@ -37,6 +48,16 @@ export const ErrorLoader = {
   autoplay: true,
   speed: 3,
   animationData: ErrorGifData,
+  rendererSettings: {
+    preserveAspectRatio: 'xMidYMid slice',
+  },
+};
+
+export const BCLoader = {
+  loop: true,
+  autoplay: true,
+  speed: 10,
+  animationData: BCLoadingData,
   rendererSettings: {
     preserveAspectRatio: 'xMidYMid slice',
   },
