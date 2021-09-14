@@ -165,6 +165,59 @@ const voteTopic = () => {
     fetchTopics();
   }, []);
 
+  // useEffect(() => {
+  //   var observer = new IntersectionObserver(
+  //     function (entries) {
+  //       // no intersection with screen
+  //       if (entries[0].intersectionRatio === 0)
+  //         document
+  //           .querySelector('.voteTopicHeader')
+  //           .classList.add('voteTopicHeader-sticky');
+  //       // fully intersects with screen
+  //       else if (entries[0].intersectionRatio === 1)
+  //         document
+  //           .querySelector('.voteTopicHeader')
+  //           .classList.remove('voteTopicHeader-sticky');
+  //     },
+  //     { threshold: [0, 1] },
+  //   );
+
+  //   observer.observe(document.querySelector('.voteTopicHeaderTop'));
+  // }, []);
+
+  const initiateObserver = () => {
+    var observer = new IntersectionObserver(
+      function (entries) {
+        // no intersection with screen
+        if (entries[0].intersectionRatio === 0) {
+          console.log('intersects');
+          document
+            .querySelector('.voteTopicHeader')
+            .classList.add('voteTopicHeader-sticky');
+        }
+
+        // fully intersects with screen
+        else if (entries[0].intersectionRatio === 1) {
+          console.log('fully intersects');
+          document
+            .querySelector('.voteTopicHeader')
+            .classList.remove('voteTopicHeader-sticky');
+        }
+      },
+      { threshold: [0, 1] },
+    );
+
+    observer.observe(document.querySelector('.voteTopicHeaderTop'));
+  };
+
+  useEffect(() => {
+    if (isFetchVotesLoading || isFetchTopicsLoading) {
+      return;
+    } else {
+      initiateObserver();
+    }
+  }, [isFetchVotesLoading, isFetchTopicsLoading]);
+
   if (isFetchVotesLoading || isFetchTopicsLoading) {
     return <Loader type="full-page-loader" />;
   } else {
@@ -257,8 +310,6 @@ const voteTopic = () => {
             <Center
               w="100%"
               bg="white"
-              position={['flex', 'flex', 'sticky']}
-              top="0px"
               zIndex={50}
               p="3"
               className="voteTopicHeader"
@@ -268,15 +319,22 @@ const voteTopic = () => {
                 <Flex
                   flexDir={['column', 'column', 'row']}
                   justifyContent="space-between"
-                  alignItems="center"
+                  alignItems={['flex-start', 'flex-start', 'center']}
+                  w={['100%', '100%', null]}
                   pt="5"
                   pb="5"
                   ref={scrollToRef}
                 >
-                  <SectionTitle fontSize="2xl" type="left" mb={['7', '0', '0']}>
+                  <SectionTitle
+                    fontSize="2xl"
+                    type="left"
+                    mb={['10', '0', '0']}
+                  >
                     Pick your choice
                   </SectionTitle>
-                  <Center
+                  <Flex
+                    flexDirection={['column', 'column', 'row']}
+                    w={['100%', '100%', 'auto']}
                     boxShadow="0px 16px 40px rgba(193, 193, 193, 0.25)"
                     borderRadius="8px"
                     px="4"
@@ -289,6 +347,7 @@ const voteTopic = () => {
                       bgColor={votes.length === 5 ? '#C9E1FF' : '#FFDADA'}
                       transition="background-color 0.3s ease-in-out"
                       mr="5"
+                      mb={[3, 0, 0]}
                     >
                       <Text>{votes.length} / 5 selected</Text>
                     </Center>
@@ -296,7 +355,7 @@ const voteTopic = () => {
                       Only <span className="gradientText">FIVE</span> selections
                       per participant
                     </Text>
-                  </Center>
+                  </Flex>
                 </Flex>
               </Container>
             </Center>
@@ -342,7 +401,7 @@ const voteTopic = () => {
                             disabledSelect={votes.length >= 5 ? true : false}
                           >
                             <HStack
-                              spacing={7}
+                              spacing={[0, 0, 7]}
                               py="0.5em"
                               px={['0rem', '0rem', '0.5em']}
                             >
@@ -363,7 +422,12 @@ const voteTopic = () => {
                                 >
                                   {topic.name}
                                 </Text>
-                                <Text as="h6" fontSize="sm" fontWeight="500">
+                                <Text
+                                  as="h6"
+                                  fontSize="sm"
+                                  fontWeight="500"
+                                  wordBreak="break-all"
+                                >
                                   {topic.description}
                                 </Text>
                               </VStack>
