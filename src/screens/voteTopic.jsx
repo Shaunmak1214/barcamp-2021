@@ -107,7 +107,11 @@ const voteTopic = () => {
     },
     (err, res) => {
       if (err) {
-        setAlreadyVoted(false);
+        if (err.status === 425) {
+          setAlreadyVoted(true);
+        } else {
+          setAlreadyVoted(false);
+        }
       } else if (res) {
         if (res.data.length > 0) {
           setAlreadyVoted(true);
