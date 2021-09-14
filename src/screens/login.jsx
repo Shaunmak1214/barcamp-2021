@@ -33,7 +33,6 @@ const Login = () => {
         .then((res) => {
           if (res.status === 201) {
             let decodedData = jwt_decode(res.data.accessToken);
-            console.log(res.data.refreshToken);
             let loginObj = {
               accessToken: res.data.accessToken,
               refreshToken: res.data.refreshToken,
