@@ -113,11 +113,11 @@ const Index = () => {
                       {'>'} PROPOSE TOPIC
                     </Text>
                   </Link>
-                  <Link href="/vote-topic">
+                  {/* <Link href="/vote-topic">
                     <Text fontSize="md" pb="10px">
                       {'>'} VOTE TOPIC
                     </Text>
-                  </Link>
+                  </Link> */}
                   <Link onClick={() => logout()}>
                     <Text fontSize="md" pb="10px">
                       {'>'} LOGOUT

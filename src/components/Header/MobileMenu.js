@@ -199,11 +199,11 @@ const MobileMenu = () => {
                     Propose Topic
                   </Text>
                 </Link>
-                <Link href="/vote-topic">
+                {/* <Link href="/vote-topic">
                   <Text fontSize="sm" fontFamily="Montserrat" fontWeight="600">
                     Vote Topics
                   </Text>
-                </Link>
+                </Link> */}
               </VStack>
             </>
           ) : (
