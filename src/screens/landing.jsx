@@ -194,7 +194,12 @@ const Index = () => {
       </Center>
 
       {/* What is Barcamp section */}
-      <Center id="about" py="20" bgImage={SectionBg} flexDir="column">
+      <Center
+        id="about"
+        py="20"
+        bgImage={[SectionBgTwo, SectionBgTwo, SectionBg]}
+        flexDir="column"
+      >
         <Container maxW="container.xl">
           <SectionTitle type="center" color="#ffffff" alignItems="flex-start">
             What is Barcamp?
