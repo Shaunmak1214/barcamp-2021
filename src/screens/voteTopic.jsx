@@ -52,11 +52,10 @@ const voteTopic = () => {
 
   const voteTopicHeader = React.useRef(null);
 
-  // loading state
-  const [isFetchVotesLoading, setIsFetchVotesLoading] = useState(true);
-  const [isFetchTopicsLoading, setIsFetchTopicsLoading] = useState(true);
-  const [isPosting, setIsPosting] = useState(false);
+  // section close state
+  const [voteClose, setVoteClose] = useState(false);
 
+  // data state
   const [alreadyVoted, setAlreadyVoted] = useState(false);
   const [topicAvailable, setTopicAvailable] = useState([]);
   const [votes, setVotes] = useState([]);
@@ -81,7 +80,7 @@ const voteTopic = () => {
     [setVotes],
   );
 
-  const { fetch: fetchTopics } = useAxios(
+  const { loading: isFetchTopicsLoading, fetch: fetchTopics } = useAxios(
     {
       method: 'get',
       url: '/topics',
@@ -92,17 +91,15 @@ const voteTopic = () => {
     (err, res) => {
       if (err) {
         if (err.status === 425) {
-          console.log('date range wrong');
+          window.location.href = '/dashboard';
         }
-        setIsFetchTopicsLoading(false);
       } else if (res) {
         setTopicAvailable(res.data);
-        setIsFetchTopicsLoading(false);
       }
     },
   );
 
-  const { fetch: fetchVoteByUser } = useAxios(
+  const { loading: isFetchVotesLoading, fetch: fetchVoteByUser } = useAxios(
     {
       method: 'get',
       url: `/votes/${authState.user.userId}`,
@@ -112,20 +109,22 @@ const voteTopic = () => {
     },
     (err, res) => {
       if (err) {
-        setAlreadyVoted(false);
-        setIsFetchVotesLoading(false);
+        if (err.status === 425) {
+          setVoteClose(true);
+        } else {
+          setAlreadyVoted(false);
+        }
       } else if (res) {
         if (res.data.length > 0) {
           setAlreadyVoted(true);
         } else {
           setAlreadyVoted(false);
         }
-        setIsFetchVotesLoading(false);
       }
     },
   );
 
-  const { fetch: postVoteTopic } = useAxios(
+  const { loading: isPosting, fetch: postVoteTopic } = useAxios(
     {
       method: 'post',
       url: '/votes',
@@ -143,7 +142,6 @@ const voteTopic = () => {
         }
         onModalOpen();
         executeScroll();
-        setIsPosting(false);
       } else if (res) {
         window.location.href = '/dashboard';
       }
@@ -251,14 +249,37 @@ const voteTopic = () => {
 
         {isFetchTopicsLoading ? (
           <Loader type="full-page-loader" />
+        ) : voteClose ? (
+          <Center
+            d="flex"
+            flexDir="column"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Container maxW="container.xl">
+              <InfoBlock
+                theme=""
+                content={
+                  <Text fontSize="lg" py="40px">
+                    Uh, sorry, the voting session is{' '}
+                    <span style={{ fontWeight: 600 }}>
+                      either over or yet to be started
+                    </span>
+                    . In that case kindly check back later. Please contact
+                    Barcamp team if you have any inquiries
+                  </Text>
+                }
+                leadingIcon={NoMessageIcon}
+              />
+              <BCSpacer size="xs" />
+            </Container>
+          </Center>
         ) : topicAvailable && topicAvailable.length >= 5 && !alreadyVoted ? (
           <>
             <Box className="voteTopicHeaderTop" w="100%" h="1px"></Box>
             <Center
               w="100%"
               bg="white"
-              position={['flex', 'flex', 'sticky']}
-              top="0px"
               zIndex={50}
               p="3"
               className="voteTopicHeader"
@@ -268,15 +289,22 @@ const voteTopic = () => {
                 <Flex
                   flexDir={['column', 'column', 'row']}
                   justifyContent="space-between"
-                  alignItems="center"
+                  alignItems={['flex-start', 'flex-start', 'center']}
+                  w={['100%', '100%', null]}
                   pt="5"
                   pb="5"
                   ref={scrollToRef}
                 >
-                  <SectionTitle fontSize="2xl" type="left" mb={['7', '0', '0']}>
+                  <SectionTitle
+                    fontSize="2xl"
+                    type="left"
+                    mb={['10', '0', '0']}
+                  >
                     Pick your choice
                   </SectionTitle>
-                  <Center
+                  <Flex
+                    flexDirection={['column', 'column', 'row']}
+                    w={['100%', '100%', 'auto']}
                     boxShadow="0px 16px 40px rgba(193, 193, 193, 0.25)"
                     borderRadius="8px"
                     px="4"
@@ -289,6 +317,7 @@ const voteTopic = () => {
                       bgColor={votes.length === 5 ? '#C9E1FF' : '#FFDADA'}
                       transition="background-color 0.3s ease-in-out"
                       mr="5"
+                      mb={[3, 0, 0]}
                     >
                       <Text>{votes.length} / 5 selected</Text>
                     </Center>
@@ -296,7 +325,7 @@ const voteTopic = () => {
                       Only <span className="gradientText">FIVE</span> selections
                       per participant
                     </Text>
-                  </Center>
+                  </Flex>
                 </Flex>
               </Container>
             </Center>
@@ -325,7 +354,6 @@ const voteTopic = () => {
                     topicId: votes,
                     vote: 'topic',
                   });
-                  setIsPosting(true);
                 }}
               >
                 {() => (
@@ -342,7 +370,7 @@ const voteTopic = () => {
                             disabledSelect={votes.length >= 5 ? true : false}
                           >
                             <HStack
-                              spacing={7}
+                              spacing={[0, 0, 7]}
                               py="0.5em"
                               px={['0rem', '0rem', '0.5em']}
                             >
@@ -353,7 +381,7 @@ const voteTopic = () => {
                                 w="45px"
                                 alt="Artificial Intelligence"
                               />
-                              <VStack spacing={2} align="flex-start">
+                              <VStack spacing={2} align="flex-start" ml="0">
                                 <TopicBadge topic={topic.theme} />
                                 <Text
                                   as="h3"
@@ -363,7 +391,12 @@ const voteTopic = () => {
                                 >
                                   {topic.name}
                                 </Text>
-                                <Text as="h6" fontSize="sm" fontWeight="500">
+                                <Text
+                                  as="h6"
+                                  fontSize="sm"
+                                  fontWeight="500"
+                                  wordBreak="break-all"
+                                >
                                   {topic.description}
                                 </Text>
                               </VStack>

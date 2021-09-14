@@ -30,6 +30,11 @@ const Dashboard = () => {
   const [votedTopics, setVotedTopics] = useState([]);
   const [leaderboard, setLeaderboard] = useState([]);
 
+  // section close state
+  const [voteSectionClose, setVoteSectionClose] = useState(false);
+  const [voteResultClose, setVoteResultClose] = useState(false);
+  const [proposeSectionClose, setProposeSectionClose] = useState(false);
+
   const { loading: proposedLoading, fetch: getTopicsByUser } = useAxios(
     {
       method: 'get',
@@ -41,6 +46,9 @@ const Dashboard = () => {
 
     (err, res) => {
       if (err) {
+        if (err.status === 425) {
+          setProposeSectionClose(true);
+        }
       } else if (res) {
         setUserTopic(res.data);
       }
@@ -58,6 +66,9 @@ const Dashboard = () => {
     /*eslint-disable */
     (err, res) => {
       if (err) {
+        if (err.status === 425) {
+          setVoteSectionClose(true);
+        }
       } else if (res) {
         setVotedTopics(res.data);
       }
@@ -75,12 +86,169 @@ const Dashboard = () => {
     /*eslint-disable */
     (err, res) => {
       if (err) {
-        console.log(err);
+        if (err.status === 425) {
+          setVoteResultClose(true);
+        }
       } else if (res) {
         setLeaderboard(res.data);
       }
     },
   );
+
+  const ProposedTopicRenderer = () => {
+    if (proposeSectionClose) {
+      return (
+        <InfoBlock
+          theme=""
+          content={
+            <Text fontSize="lg" py="40px">
+              Uh,sorry, the proposing topic session is closed but the voting
+              session is opening now. You may proceed to vote for your desired
+              topic in the next section. Please contact Barcamp team if you have
+              any inquiries.
+            </Text>
+          }
+          leadingIcon={NoMessageIcon}
+        />
+      );
+    } else {
+      if (proposedLoading) {
+        return <Loader type="block-loader" />;
+      } else {
+        if (Object.keys(userTopic).length > 0) {
+          return <TopicBlock rounded topic={userTopic} />;
+        } else {
+          return (
+            <InfoBlock
+              buttonUrl="/propose-topic"
+              buttonLabel="Propose a topic"
+              theme="error"
+              content={
+                <Text fontSize="lg" color="#858585" mt="5">
+                  You haven&apos;t proposed any topic yet. If you are
+                  volunteering to share anything in Barcamp, kindly keep in mind
+                  that the last day of proposing a topic is on
+                  <span style={{ fontWeight: 'bold' }}> 24 September 2021</span>
+                  .
+                </Text>
+              }
+              leadingIcon={NoMessageIcon}
+            />
+          );
+        }
+      }
+    }
+  };
+
+  const VotedTopicRenderer = () => {
+    if (voteSectionClose) {
+      return (
+        <InfoBlock
+          theme=""
+          content={
+            <Text fontSize="lg" py="40px">
+              Uh, sorry, the voting session is{' '}
+              <span style={{ fontWeight: 600 }}>
+                either over or yet to be started
+              </span>
+              . In that case kindly check back later. Please contact Barcamp
+              team if you have any inquiries
+            </Text>
+          }
+          leadingIcon={NoMessageIcon}
+        />
+      );
+    } else {
+      if (votedLoading) {
+        return <Loader type="block-loader" />;
+      } else {
+        if (votedTopics && votedTopics.length > 0) {
+          return votedTopics.map((topic, idx) => (
+            <TopicBlock
+              rounded
+              key={idx}
+              value={topic.topic._id}
+              topic={topic.topic}
+              themeIcon={topic.speaker.picture}
+            />
+          ));
+        } else {
+          return (
+            <InfoBlock
+              theme="error"
+              buttonUrl="/vote-topic"
+              buttonLabel="Vote topics"
+              content={
+                <Text fontSize="lg" color="#858585" mt="5">
+                  You haven&apos;t voted for any topic yet. Vote for your
+                  desired topic now, the topic which gets the most vote will be
+                  held on Barcamp. Kindly keep in mind that the last day for
+                  voting is on{' '}
+                  <span style={{ fontWeight: 'bold' }}>
+                    27 September 2021.{' '}
+                  </span>
+                </Text>
+              }
+              leadingIcon={VotingIcon}
+            />
+          );
+        }
+      }
+    }
+  };
+
+  const LeaderboardRenderer = () => {
+    if (voteResultClose) {
+      return (
+        <InfoBlock
+          theme=""
+          content={
+            <Text fontSize="lg" py="26px">
+              The voting result can be viewed starting from
+              <span style={{ fontWeight: 'bold' }}> 25 September 2021 </span>
+              However, the announcement of the finalized list of voted topics
+              will be made on
+              <span style={{ fontWeight: 'bold' }}> 1 October 2021 </span>
+              (one day before Barcamp). We will notify you via email if you have
+              been selected to share.
+            </Text>
+          }
+          leadingIcon={NoMessageIcon}
+        />
+      );
+    } else {
+      if (leaderboardLoading) {
+        return <Loader type="block-loader" />;
+      } else {
+        if (leaderboard && leaderboard.length > 0) {
+          return leaderboard.map((vote, idx) => (
+            <TopicBlock
+              rounded
+              key={idx}
+              lead={idx}
+              value={vote.topic._id}
+              topic={vote.topic}
+              themeIcon={vote.user.picture}
+              count={vote.count}
+              leaderboard={true}
+            />
+          ));
+        } else {
+          return (
+            <InfoBlock
+              theme=""
+              content={
+                <Text fontSize="lg" py="26px">
+                  Error in retrieving the leaderboard. Please contact Barcamp
+                </Text>
+              }
+              leadingIcon={ResultIcon}
+            />
+          );
+        }
+      }
+    }
+  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -97,6 +265,7 @@ const Dashboard = () => {
         h="100vh"
         justifyContent={['flex-start', 'flex-start', 'center']}
         alignItems="center"
+        mb="20px"
       >
         <BCSpacer d={['flex', 'none', 'none']} size="sm" />
         <Container maxW="container.xl">
@@ -142,6 +311,7 @@ const Dashboard = () => {
                   onClick={() => {
                     window.location.href = '/vote-topic';
                   }}
+                  disabled={true}
                 >
                   Vote Topic (Coming Soon)
                 </PrimaryButton>
@@ -170,27 +340,8 @@ const Dashboard = () => {
           <SectionTitle fontSize="2xl" type="left" mb="5">
             Your Proposed Topic
           </SectionTitle>
-          {proposedLoading ? (
-            <Loader type="block-loader" />
-          ) : userTopic ? (
-            <TopicBlock rounded topic={userTopic} />
-          ) : (
-            <InfoBlock
-              buttonUrl="/propose-topic"
-              buttonLabel="Propose a topic"
-              theme="error"
-              content={
-                <Text fontSize="lg" color="#858585" mt="5">
-                  You haven&apos;t proposed any topic yet. If you are
-                  volunteering to share anything in Barcamp, kindly keep in mind
-                  that the last day of proposing a topic is on
-                  <span style={{ fontWeight: 'bold' }}> 24 September 2021</span>
-                  .
-                </Text>
-              }
-              leadingIcon={NoMessageIcon}
-            />
-          )}
+
+          <ProposedTopicRenderer />
         </Container>
       </VStack>
       <VStack py="40px">
@@ -203,36 +354,8 @@ const Dashboard = () => {
           <SectionTitle fontSize="2xl" type="left" mb="5">
             Your Voted Topic
           </SectionTitle>
-          {votedLoading ? (
-            <Loader type="block-loader" />
-          ) : votedTopics && votedTopics.length > 0 ? (
-            votedTopics.map((topic, idx) => (
-              <TopicBlock
-                rounded
-                key={idx}
-                value={topic.topic._id}
-                topic={topic.topic}
-                themeIcon={topic.speaker.picture}
-              />
-            ))
-          ) : (
-            <InfoBlock
-              theme=""
-              content={
-                <Text fontSize="lg" py="40px">
-                  The voting session for the topics will be opening soon. All
-                  participants are able to vote on their desired topics starting
-                  from <span style={{ fontWeight: 'bold' }}>25 September </span>
-                  until
-                  <span style={{ fontWeight: 'bold' }}>
-                    {' '}
-                    30 September 2021 .
-                  </span>
-                </Text>
-              }
-              leadingIcon={VotingIcon}
-            />
-          )}
+
+          <VotedTopicRenderer />
         </Container>
       </VStack>
       <VStack py="40px" mb="12">
@@ -245,41 +368,8 @@ const Dashboard = () => {
           <SectionTitle fontSize="2xl" type="left" mb="5">
             Voting Result
           </SectionTitle>
-          {leaderboardLoading ? (
-            <Loader type="block-loader" />
-          ) : leaderboard && leaderboard.length > 0 ? (
-            leaderboard.map((vote, idx) => (
-              <TopicBlock
-                rounded
-                key={idx}
-                lead={idx}
-                value={vote.topic._id}
-                topic={vote.topic}
-                themeIcon={vote.user.picture}
-                count={vote.count}
-                leaderboard={true}
-              />
-            ))
-          ) : (
-            <InfoBlock
-              theme=""
-              content={
-                <Text fontSize="lg" py="26px">
-                  The voting result can be viewed starting from
-                  <span style={{ fontWeight: 'bold' }}>
-                    {' '}
-                    25 September 2021{' '}
-                  </span>
-                  However, the announcement of the finalized list of voted
-                  topics will be made on
-                  <span style={{ fontWeight: 'bold' }}> 1 October 2021 </span>
-                  (one day before Barcamp). We will notify you via email if you
-                  have been selected to share.
-                </Text>
-              }
-              leadingIcon={ResultIcon}
-            />
-          )}
+
+          <LeaderboardRenderer />
         </Container>
       </VStack>
     </>

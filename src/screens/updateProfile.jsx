@@ -47,7 +47,6 @@ const updateProfile = () => {
   const authState = store.getState().auth;
 
   // loading state
-  const [isPosting, setIsPosting] = useState(false);
 
   const [heard, setHeard] = useState([]);
   const [updateErr, setUpdateErr] = useState('');
@@ -57,7 +56,7 @@ const updateProfile = () => {
   });
 
   const dispatch = useDispatch();
-  const { fetch } = useAxios(
+  const { fetch, loading: isPosting } = useAxios(
     {
       method: 'patch',
       url: `/users/${authState.user.userId}`,
@@ -66,10 +65,16 @@ const updateProfile = () => {
         'Content-Type': 'application/json',
       },
     },
-    (res, err) => {
-      setIsPosting(false);
-      if (res) {
-        window.location.href = '/dashboard';
+    (err, res) => {
+      console.log(err, res);
+      if (err) {
+        if (err.data.error) {
+          setUpdateErr(' ' + err.data.error);
+        } else {
+          setUpdateErr(' ' + err);
+        }
+        onModalOpen();
+      } else if (res) {
         let resData = res.data;
         if (res.status === 200 || res.status === 201 || res.status === 203) {
           let decodedData = jwt_decode(resData.accessToken);
@@ -79,14 +84,12 @@ const updateProfile = () => {
             user: decodedData,
           };
           dispatch(LOGIN(loginObj));
+          window.location.href = '/dashboard';
         } else {
+          console.log('here');
           setUpdateErr(' ' + resData.data.error);
           onModalOpen();
         }
-      } else if (err) {
-        window.location.href = '/dashboard';
-        setUpdateErr(' ' + err);
-        onModalOpen();
       }
     },
   );
@@ -186,7 +189,6 @@ const updateProfile = () => {
                 companyOrInstitution: data.noc,
                 heard: heard,
               });
-              setIsPosting(true);
             }}
           >
             {() => (

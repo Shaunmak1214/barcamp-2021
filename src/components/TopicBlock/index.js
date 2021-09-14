@@ -48,7 +48,7 @@ const TopicBlock = ({
       border="1px solid #E9E9E9;"
       borderRadius="8px"
       mb="2"
-      mt="8px"
+      mt="15px"
       cursor="pointer"
       transition="all 0.1s ease-in-out"
       justifyContent="space-between"
@@ -91,7 +91,7 @@ const TopicBlock = ({
         <VStack spacing={3}>
           <MedalRenderer medal={lead} />
           <Box background="#f5f5f5" borderRadius="8px" p="10px">
-            <Text fontSize="sm">
+            <Text width="50px" textAlign="center" fontSize="sm">
               <span className="gradientText">{count}</span> votes
             </Text>
           </Box>

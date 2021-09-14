@@ -74,7 +74,7 @@ const ProposeTopic = () => {
     (err, res) => {
       if (err) {
         if (err.data.error) {
-          setUpdateErr(' ' + err.error);
+          setUpdateErr(' ' + err.data.error);
         } else {
           setUpdateErr(' ' + err);
         }
@@ -95,7 +95,11 @@ const ProposeTopic = () => {
     },
     (err, res) => {
       if (err) {
-        setUpdateErr(' ' + err.data.error);
+        if (err.status == 425) {
+          window.location.href = '/dashboard';
+        } else {
+          setUpdateErr(' ' + err.data.error);
+        }
       } else if (res) {
         setUserTopic(res.data);
       }
@@ -109,26 +113,6 @@ const ProposeTopic = () => {
   useEffect(() => {
     fetchTopicsByUser();
   }, []);
-
-  // useEffect(() => {
-  //   var observer = new IntersectionObserver(
-  //     function (entries) {
-  //       // no intersection with screen
-  //       if (entries[0].intersectionRatio === 0)
-  //         document
-  //           .querySelector('.voteTopicHeader')
-  //           .classList.add('voteTopicHeader-sticky');
-  //       // fully intersects with screen
-  //       else if (entries[0].intersectionRatio === 1)
-  //         document
-  //           .querySelector('.voteTopicHeader')
-  //           .classList.remove('voteTopicHeader-sticky');
-  //     },
-  //     { threshold: [0, 1] },
-  //   );
-
-  //   observer.observe(document.querySelector('.voteTopicHeaderTop'));
-  // }, []);
 
   if (isFetchTopicsLoading) {
     return <Loader type="full-page-loader" />;
@@ -167,6 +151,7 @@ const ProposeTopic = () => {
           h="100vh"
           justifyContent={['flex-start', 'flex-start', 'center']}
           alignItems="center"
+          mb="20px"
         >
           <BCSpacer d={['flex', 'none', 'none']} size="sm" />
           <Container maxW="container.xl">
@@ -231,7 +216,13 @@ const ProposeTopic = () => {
             <Container maxW="container.xl">
               <InfoBlock
                 theme=""
-                content={<Text>You already proposed a topic.</Text>}
+                content={
+                  <Text>
+                    You have already propose a topic for this session. The final
+                    topic announcement will be made on 1 October 2021. See you
+                    soon!
+                  </Text>
+                }
                 leadingIcon={NoMessageIcon}
               />
             </Container>
@@ -305,9 +296,8 @@ const ProposeTopic = () => {
                     name: data.topicName,
                     user: authState.user.userId,
                     theme: data.topicTheme,
-                    description: data.description,
-                    contact: '-',
-                    self_description: '-',
+                    description: data.topicSummary,
+                    self_description: data.description,
                   });
                 }}
               >
