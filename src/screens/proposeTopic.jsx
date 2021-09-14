@@ -74,7 +74,7 @@ const ProposeTopic = () => {
     (err, res) => {
       if (err) {
         if (err.data.error) {
-          setUpdateErr(' ' + err.error);
+          setUpdateErr(' ' + err.data.error);
         } else {
           setUpdateErr(' ' + err);
         }

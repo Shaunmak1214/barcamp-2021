@@ -205,6 +205,7 @@ const Dashboard = () => {
           {votedLoading ? (
             <Loader type="block-loader" />
           ) : votedTopics && votedTopics.length > 0 ? (
+            (console.log(votedTopics),
             votedTopics.map((topic, idx) => (
               <TopicBlock
                 rounded
@@ -213,7 +214,7 @@ const Dashboard = () => {
                 topic={topic.topic}
                 themeIcon={topic.speaker.picture}
               />
-            ))
+            )))
           ) : (
             <InfoBlock
               theme=""
