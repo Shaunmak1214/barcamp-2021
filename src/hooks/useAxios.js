@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
@@ -7,8 +7,6 @@ import { API_URL } from '../constants/';
 axios.defaults.baseURL = API_URL;
 
 const useAxios = (axiosParams, onUpdate) => {
-  const [response, setResponse] = useState(null);
-  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const fetchData = async (data) => {
@@ -19,28 +17,20 @@ const useAxios = (axiosParams, onUpdate) => {
       })
       .then((res) => {
         if (res.status === 200 || res.status === 201 || res.status === 203) {
-          setResponse(res);
+          onUpdate(null, res);
         } else {
-          setError(res);
+          onUpdate(res, null);
         }
       })
       .catch((err) => {
-        if (err.response.data) {
-          setError(err.response.data);
-        } else {
-          setError(err);
-        }
+        onUpdate(err.response, null);
       })
       .finally(() => {
         setLoading(false);
       });
   };
 
-  useEffect(() => {
-    onUpdate(response, error);
-  }, [response, error]);
-
-  return { response, error, loading, fetch: fetchData };
+  return { loading, fetch: fetchData };
 };
 
 useAxios.propTypes = {

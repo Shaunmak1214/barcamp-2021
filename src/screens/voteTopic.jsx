@@ -89,9 +89,11 @@ const voteTopic = () => {
         Authorization: `Bearer ${token}`,
       },
     },
-    (res, err) => {
+    (err, res) => {
       if (err) {
-        console.log(err);
+        if (err.status === 425) {
+          console.log('date range wrong');
+        }
         setIsFetchTopicsLoading(false);
       } else if (res) {
         setTopicAvailable(res.data);
@@ -108,7 +110,7 @@ const voteTopic = () => {
         Authorization: `Bearer ${token}`,
       },
     },
-    (res, err) => {
+    (err, res) => {
       if (err) {
         setAlreadyVoted(false);
         setIsFetchVotesLoading(false);
@@ -132,18 +134,9 @@ const voteTopic = () => {
         'Content-Type': 'application/json',
       },
     },
-    (res, err) => {
-      if (res) {
-        let resData = res.data;
-        if (res.status === 200 || res.status === 201 || res.status === 203) {
-          window.location.href = '/dashboard';
-        } else {
-          setVoteErr(' ' + resData);
-          onModalOpen();
-          setIsPosting(false);
-        }
-      } else if (err) {
-        if (err.error) {
+    (err, res) => {
+      if (err) {
+        if (err.data.error) {
           setVoteErr(' ' + err.error);
         } else {
           setVoteErr(' ' + err);
@@ -151,6 +144,8 @@ const voteTopic = () => {
         onModalOpen();
         executeScroll();
         setIsPosting(false);
+      } else if (res) {
+        window.location.href = '/dashboard';
       }
     },
   );

@@ -1,3 +1,4 @@
+/*eslint-disable */
 import React, { useEffect, useState } from 'react';
 
 import { Image } from '@chakra-ui/image';
@@ -24,17 +25,12 @@ import {
 const Dashboard = () => {
   const authState = store.getState().auth;
 
-  // loading state
-  const [proposedLoading, setProposedLoading] = useState(true);
-  const [votedLoading, setVotedLoading] = useState(true);
-  const [leaderboardLoading, setLeaderboardLoading] = useState(true);
-
   // data state
   const [userTopic, setUserTopic] = useState({});
   const [votedTopics, setVotedTopics] = useState([]);
   const [leaderboard, setLeaderboard] = useState([]);
 
-  const { fetch: getTopicsByUser } = useAxios(
+  const { loading: proposedLoading, fetch: getTopicsByUser } = useAxios(
     {
       method: 'get',
       url: `/topicsByUser/${authState.user.userId}`,
@@ -42,18 +38,16 @@ const Dashboard = () => {
         Authorization: `Bearer ${authState.accessToken}`,
       },
     },
-    /*eslint-disable */
-    (res, err) => {
-      if (res) {
+
+    (err, res) => {
+      if (err) {
+      } else if (res) {
         setUserTopic(res.data);
-        setProposedLoading(false);
-      } else if (err) {
-        setProposedLoading(false);
       }
     },
   );
 
-  const { fetch: getUserVotes } = useAxios(
+  const { loading: votedLoading, fetch: getUserVotes } = useAxios(
     {
       method: 'get',
       url: `/votes/${authState.user.userId}`,
@@ -62,17 +56,15 @@ const Dashboard = () => {
       },
     },
     /*eslint-disable */
-    (res, err) => {
-      if (res) {
+    (err, res) => {
+      if (err) {
+      } else if (res) {
         setVotedTopics(res.data);
-        setVotedLoading(false);
-      } else if (err) {
-        setVotedLoading(false);
       }
     },
   );
 
-  const { fetch: getLeaderboard } = useAxios(
+  const { loading: leaderboardLoading, fetch: getLeaderboard } = useAxios(
     {
       method: 'get',
       url: `/votes/leaderboard`,
@@ -81,13 +73,11 @@ const Dashboard = () => {
       },
     },
     /*eslint-disable */
-    (res, err) => {
-      if (res) {
-        setLeaderboard(res.data);
-        setLeaderboardLoading(false);
-      } else if (err) {
+    (err, res) => {
+      if (err) {
         console.log(err);
-        setLeaderboardLoading(false);
+      } else if (res) {
+        setLeaderboard(res.data);
       }
     },
   );
@@ -97,7 +87,7 @@ const Dashboard = () => {
       getUserVotes();
       getTopicsByUser();
       getLeaderboard();
-    }, 3000);
+    }, 500);
   }, []);
 
   return (
