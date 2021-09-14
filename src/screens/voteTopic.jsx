@@ -250,20 +250,30 @@ const voteTopic = () => {
         {isFetchTopicsLoading ? (
           <Loader type="full-page-loader" />
         ) : voteClose ? (
-          <InfoBlock
-            theme=""
-            content={
-              <Text fontSize="lg" py="40px">
-                Uh, sorry, the voting session is{' '}
-                <span style={{ fontWeight: 600 }}>
-                  either over or yet to be started
-                </span>
-                . In that case kindly check back later. Please contact Barcamp
-                team if you have any inquiries
-              </Text>
-            }
-            leadingIcon={NoMessageIcon}
-          />
+          <Center
+            d="flex"
+            flexDir="column"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Container maxW="container.xl">
+              <InfoBlock
+                theme=""
+                content={
+                  <Text fontSize="lg" py="40px">
+                    Uh, sorry, the voting session is{' '}
+                    <span style={{ fontWeight: 600 }}>
+                      either over or yet to be started
+                    </span>
+                    . In that case kindly check back later. Please contact
+                    Barcamp team if you have any inquiries
+                  </Text>
+                }
+                leadingIcon={NoMessageIcon}
+              />
+              <BCSpacer size="xs" />
+            </Container>
+          </Center>
         ) : topicAvailable && topicAvailable.length >= 5 && !alreadyVoted ? (
           <>
             <Box className="voteTopicHeaderTop" w="100%" h="1px"></Box>
