@@ -61,6 +61,14 @@ function App() {
           path="/vote-topic"
           component={Screens.VoteTopic}
         />
+        <BCRoutes
+          exact
+          header
+          cta
+          transparency="sticky"
+          path="*"
+          component={Screens.Landing}
+        />
       </Switch>
       <Comp.Footer />
     </Router>
