@@ -52,8 +52,10 @@ const voteTopic = () => {
 
   const voteTopicHeader = React.useRef(null);
 
-  // loading state
+  // section close state
+  const [voteClose, setVoteClose] = useState(false);
 
+  // data state
   const [alreadyVoted, setAlreadyVoted] = useState(false);
   const [topicAvailable, setTopicAvailable] = useState([]);
   const [votes, setVotes] = useState([]);
@@ -108,7 +110,7 @@ const voteTopic = () => {
     (err, res) => {
       if (err) {
         if (err.status === 425) {
-          setAlreadyVoted(true);
+          setVoteClose(true);
         } else {
           setAlreadyVoted(false);
         }
@@ -247,6 +249,21 @@ const voteTopic = () => {
 
         {isFetchTopicsLoading ? (
           <Loader type="full-page-loader" />
+        ) : voteClose ? (
+          <InfoBlock
+            theme=""
+            content={
+              <Text fontSize="lg" py="40px">
+                Uh, sorry, the voting session is{' '}
+                <span style={{ fontWeight: 600 }}>
+                  either over or yet to be started
+                </span>
+                . In that case kindly check back later. Please contact Barcamp
+                team if you have any inquiries
+              </Text>
+            }
+            leadingIcon={NoMessageIcon}
+          />
         ) : topicAvailable && topicAvailable.length >= 5 && !alreadyVoted ? (
           <>
             <Box className="voteTopicHeaderTop" w="100%" h="1px"></Box>
