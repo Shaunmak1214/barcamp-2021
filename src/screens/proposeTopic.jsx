@@ -183,14 +183,14 @@ const ProposeTopic = () => {
                 h="100%"
                 pr={[10, 0, 20]}
               >
-                <Text as="h1" fontSize="4xl" fontWeight="600">
-                  Propose a topic TO BECOME A SPEAKER
+                <Text as="h1" fontSize="4xl" fontWeight="600" py="2">
+                  PROPOSE A TOPIC TO SHARE
                 </Text>
-                <Text as="h2" fontSize="sm" fontWeight="500">
-                  Let’s brings people together to share their passion around
-                  technology. There is no preset of speakers for BarCamp like
-                  usual conferences. Propose an interesting topic for the voting
-                  session later.
+                <Text as="h2" fontSize="xl" fontWeight="300">
+                  Let’s brings people together to share their passion with
+                  topics surrounding tech, non-tech and nonsense. There is no
+                  preset sharing for Barcamp like usual conferences. Feel free
+                  to propose anything to share your thought below.
                 </Text>
                 <BCSpacer size="sm" />
                 <HStack>
@@ -231,7 +231,7 @@ const ProposeTopic = () => {
             <Container maxW="container.xl">
               <InfoBlock
                 theme=""
-                content={<Text>You already propose a topic</Text>}
+                content={<Text>You already proposed a topic.</Text>}
                 leadingIcon={NoMessageIcon}
               />
             </Container>
@@ -269,7 +269,7 @@ const ProposeTopic = () => {
                     px="6"
                     py="3"
                   >
-                    <Text as="h2" fontSize="sm" fontWeight="500">
+                    <Text as="h2" fontSize="md" fontWeight="500">
                       You are allowed to propose{' '}
                       <span className="gradientText">ONE</span> topic only
                     </Text>
@@ -333,29 +333,29 @@ const ProposeTopic = () => {
                       <Field
                         label="Theme"
                         name="topicTheme"
-                        placeholder="Theme of your topic"
+                        placeholder="Select a theme for your topic"
                         component={SelectDropdownFormField}
                       />
 
                       <Field
                         label="Topic Name"
                         name="topicName"
-                        placeholder="What if the earth is flat ??!!"
+                        placeholder="What if the earth is flat??!!"
                         component={BCTextFormField}
                       />
 
                       <Field
                         label="Topic Summary"
                         name="topicSummary"
-                        placeholder="We're going to talk about ..."
+                        placeholder="I'm going to talk about ..."
                         maxLength={250}
                         component={BCTextAreaField}
                       />
 
                       <Checkbox size="lg" pl="5" onChange={handleConsentCheck}>
-                        <Text fontSize="sm">
+                        <Text fontSize="md">
                           When you propose a topic, you are aware that other
-                          users can view your information as a speaker.{' '}
+                          users can view your topic and information as a sharer.{' '}
                         </Text>
                       </Checkbox>
 

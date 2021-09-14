@@ -9,13 +9,13 @@ import { LOGIN } from '../reducers/authSlice';
 import store from '../store/store';
 
 import { Image } from '@chakra-ui/image';
-import { Container, Link, SimpleGrid, Text, VStack } from '@chakra-ui/layout';
+import { Container, SimpleGrid, Text, VStack } from '@chakra-ui/layout';
 
 import { PrimaryButton } from '../components/Buttons';
 import BCSpacer from '../components/Spacer';
 import { useAuthorized } from '../hooks/';
 
-import { Splash1 } from '../assets';
+import { LoginBanner } from '../assets';
 
 require('dotenv').config();
 
@@ -82,15 +82,14 @@ const Login = () => {
               pr={[10, 0, 20]}
             >
               <Text as="h1" fontSize="4xl" fontWeight="600">
-                WELCOME TO BARCAMP
+                WELCOME TO BARCAMP 2021!
               </Text>
-              <Text as="h2" fontSize="md" fontWeight="500">
-                Please login to continue. By logging in, you agree to our{' '}
-                <Link color="blue">privacy policy</Link> . We only use this
-                authentication to get your email and protect the app from
-                unauthorised input.
+              <Text as="h2" fontSize="xl" fontWeight="300">
+                Login with your google account to participate Barcamp 2021 now!
+                We only use this authentication to get your email and protect
+                the app from unauthorised input.
               </Text>
-              <BCSpacer size="sm" />
+              <BCSpacer size="2xs" />
               <GoogleLogin
                 clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`}
                 render={(renderProps) => (
@@ -115,7 +114,11 @@ const Login = () => {
                 cookiePolicy={'single_host_origin'}
               />
             </VStack>
-            <Image d={['none', 'none', 'block']} src={Splash1} alt="Login" />
+            <Image
+              d={['none', 'none', 'block']}
+              src={LoginBanner}
+              alt="Login"
+            />
           </SimpleGrid>
         </Container>
       </VStack>
