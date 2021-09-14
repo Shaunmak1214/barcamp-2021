@@ -61,7 +61,7 @@ const updateProfile = () => {
           let decodedData = jwt_decode(resData.accessToken);
           let loginObj = {
             accessToken: resData.accessToken,
-            refreshToken: resData.accessToken,
+            refreshToken: resData.refreshToken,
             user: decodedData,
           };
           dispatch(LOGIN(loginObj));

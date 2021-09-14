@@ -8,6 +8,7 @@ export const authSlice = createSlice({
       cookie.get('user') !== undefined ? JSON.parse(cookie.get('user')) : {},
     isAuthenticated: cookie.get('accessToken') ? true : false,
     accessToken: cookie.get('accessToken') ? cookie.get('accessToken') : '',
+    refreshToken: cookie.get('refreshToken') ? cookie.get('refreshToken') : '',
   },
   reducers: {
     LOGIN: (state, action) => {
