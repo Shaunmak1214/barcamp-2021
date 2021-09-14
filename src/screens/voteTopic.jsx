@@ -157,26 +157,6 @@ const voteTopic = () => {
     fetchTopics();
   }, []);
 
-  // useEffect(() => {
-  //   var observer = new IntersectionObserver(
-  //     function (entries) {
-  //       // no intersection with screen
-  //       if (entries[0].intersectionRatio === 0)
-  //         document
-  //           .querySelector('.voteTopicHeader')
-  //           .classList.add('voteTopicHeader-sticky');
-  //       // fully intersects with screen
-  //       else if (entries[0].intersectionRatio === 1)
-  //         document
-  //           .querySelector('.voteTopicHeader')
-  //           .classList.remove('voteTopicHeader-sticky');
-  //     },
-  //     { threshold: [0, 1] },
-  //   );
-
-  //   observer.observe(document.querySelector('.voteTopicHeaderTop'));
-  // }, []);
-
   const initiateObserver = () => {
     var observer = new IntersectionObserver(
       function (entries) {

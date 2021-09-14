@@ -114,26 +114,6 @@ const ProposeTopic = () => {
     fetchTopicsByUser();
   }, []);
 
-  // useEffect(() => {
-  //   var observer = new IntersectionObserver(
-  //     function (entries) {
-  //       // no intersection with screen
-  //       if (entries[0].intersectionRatio === 0)
-  //         document
-  //           .querySelector('.voteTopicHeader')
-  //           .classList.add('voteTopicHeader-sticky');
-  //       // fully intersects with screen
-  //       else if (entries[0].intersectionRatio === 1)
-  //         document
-  //           .querySelector('.voteTopicHeader')
-  //           .classList.remove('voteTopicHeader-sticky');
-  //     },
-  //     { threshold: [0, 1] },
-  //   );
-
-  //   observer.observe(document.querySelector('.voteTopicHeaderTop'));
-  // }, []);
-
   if (isFetchTopicsLoading) {
     return <Loader type="full-page-loader" />;
   } else {
@@ -236,7 +216,13 @@ const ProposeTopic = () => {
             <Container maxW="container.xl">
               <InfoBlock
                 theme=""
-                content={<Text>You already proposed a topic.</Text>}
+                content={
+                  <Text>
+                    You have already propose a topic for this session. The final
+                    topic announcement will be made on 1 October 2021. See you
+                    soon!
+                  </Text>
+                }
                 leadingIcon={NoMessageIcon}
               />
             </Container>
