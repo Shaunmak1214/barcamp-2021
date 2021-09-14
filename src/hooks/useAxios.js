@@ -7,9 +7,10 @@ import { API_URL } from '../constants/';
 axios.defaults.baseURL = API_URL;
 
 const useAxios = (axiosParams, onUpdate) => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const fetchData = async (data) => {
+    setLoading(true);
     axios
       .request({
         ...axiosParams,

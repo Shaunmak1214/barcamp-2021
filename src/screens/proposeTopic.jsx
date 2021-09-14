@@ -55,9 +55,6 @@ const ProposeTopic = () => {
   });
 
   // loading state
-  // const [isFetchTopicsLoading, setIsFetchTopicsLoading] = useState(true);
-  // const [isPosting, setIsPosting] = useState(false);
-
   const [checked, setChecked] = useState(false);
 
   const [userTopic, setUserTopic] = useState(null);
@@ -82,7 +79,6 @@ const ProposeTopic = () => {
           setUpdateErr(' ' + err);
         }
         onModalOpen();
-        // setIsPosting(false);
       } else if (res) {
         window.location.href = '/dashboard';
       }
@@ -100,10 +96,8 @@ const ProposeTopic = () => {
     (err, res) => {
       if (err) {
         setUpdateErr(' ' + err.data.error);
-        // setIsFetchTopicsLoading(false);
       } else if (res) {
         setUserTopic(res.data);
-        // setIsFetchTopicsLoading(false);
       }
     },
   );
@@ -315,7 +309,6 @@ const ProposeTopic = () => {
                     contact: '-',
                     self_description: '-',
                   });
-                  // setIsPosting(true);
                 }}
               >
                 {() => (
