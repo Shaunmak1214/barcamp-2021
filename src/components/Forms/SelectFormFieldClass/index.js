@@ -55,6 +55,7 @@ export class Index extends Component {
           borderRadius="8px"
           mb="5"
           cursor="pointer"
+          wordBreak="break-all"
           transition="all 0.1s ease-in-out"
           onClick={() => this.handleSelect()}
           {...this.props}

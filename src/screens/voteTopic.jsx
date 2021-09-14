@@ -89,7 +89,7 @@ const voteTopic = () => {
     (err, res) => {
       if (err) {
         if (err.status === 425) {
-          console.log('date range wrong');
+          window.location.href = '/dashboard';
         }
       } else if (res) {
         setTopicAvailable(res.data);
@@ -333,7 +333,7 @@ const voteTopic = () => {
                             disabledSelect={votes.length >= 5 ? true : false}
                           >
                             <HStack
-                              spacing={7}
+                              spacing={[0, 0, 7]}
                               py="0.5em"
                               px={['0rem', '0rem', '0.5em']}
                             >
@@ -344,7 +344,7 @@ const voteTopic = () => {
                                 w="45px"
                                 alt="Artificial Intelligence"
                               />
-                              <VStack spacing={2} align="flex-start">
+                              <VStack spacing={2} align="flex-start" ml="0">
                                 <TopicBadge topic={topic.theme} />
                                 <Text
                                   as="h3"

@@ -95,7 +95,11 @@ const ProposeTopic = () => {
     },
     (err, res) => {
       if (err) {
-        setUpdateErr(' ' + err.data.error);
+        if (err.status == 425) {
+          window.location.href = '/dashboard';
+        } else {
+          setUpdateErr(' ' + err.data.error);
+        }
       } else if (res) {
         setUserTopic(res.data);
       }
@@ -167,6 +171,7 @@ const ProposeTopic = () => {
           h="100vh"
           justifyContent={['flex-start', 'flex-start', 'center']}
           alignItems="center"
+          mb="20px"
         >
           <BCSpacer d={['flex', 'none', 'none']} size="sm" />
           <Container maxW="container.xl">
