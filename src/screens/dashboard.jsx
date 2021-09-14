@@ -114,16 +114,16 @@ const Dashboard = () => {
               pr={[10, 0, 20]}
             >
               <Text as="h1" fontSize="4xl" fontWeight="600">
-                WELCOME TO BARCAMP
+                WELCOME TO BARCAMP 2021!
               </Text>
-              <Text color="#1050A0" mt="0">
+              <Text fontSize="lg" fontWeight="300" color="#DA020E" mt="0">
                 You are one of the participants in Barcamp 2021 now!
               </Text>
-              <BCSpacer size="sm" />
-              <Text as="h2" fontSize="sm" fontWeight="500">
-                If you are volunteering to become a speaker, feel free to
-                propose an interesting topic for your sharing. A voting session
-                will be conducted to select the speakers for Barcamp.
+              <BCSpacer size="3xs" />
+              <Text as="h2" fontSize="xl" fontWeight="300">
+                Propose any interesting topic that you want to share in Barcamp.
+                A voting session will be conducted soon to select the topics for
+                the day of Barcamp.
               </Text>
               <BCSpacer size="sm" />
               <SimpleGrid columns={[1, 1, 2]}>
@@ -143,7 +143,7 @@ const Dashboard = () => {
                     window.location.href = '/vote-topic';
                   }}
                 >
-                  Vote Topic (Comming Soon)
+                  Vote Topic (Coming Soon)
                 </PrimaryButton>
               </SimpleGrid>
             </VStack>
@@ -160,7 +160,7 @@ const Dashboard = () => {
         h="250px"
       ></Center>
 
-      <VStack py="50px">
+      <VStack py="40px">
         <Container
           maxW="container.xl"
           d="flex"
@@ -180,11 +180,12 @@ const Dashboard = () => {
               buttonLabel="Propose a topic"
               theme="error"
               content={
-                <Text>
+                <Text fontSize="lg" color="#858585" mt="5">
                   You haven&apos;t proposed any topic yet. If you are
-                  volunteering to become a speaker in Barcamp, kindly keep in
-                  mind that the last day to propose a topic is on
+                  volunteering to share anything in Barcamp, kindly keep in mind
+                  that the last day of proposing a topic is on
                   <span style={{ fontWeight: 'bold' }}> 24 September 2021</span>
+                  .
                 </Text>
               }
               leadingIcon={NoMessageIcon}
@@ -192,7 +193,7 @@ const Dashboard = () => {
           )}
         </Container>
       </VStack>
-      <VStack py="50px">
+      <VStack py="40px">
         <Container
           maxW="container.xl"
           d="flex"
@@ -219,15 +220,14 @@ const Dashboard = () => {
             <InfoBlock
               theme=""
               content={
-                <Text>
-                  The voting session will be opening soon. Every participants
-                  including speakers are able to vote your desired topics
-                  starting from{' '}
-                  <span style={{ fontWeight: 'bold' }}>25 September </span>
+                <Text fontSize="lg" py="40px">
+                  The voting session for the topics will be opening soon. All
+                  participants are able to vote on their desired topics starting
+                  from <span style={{ fontWeight: 'bold' }}>25 September </span>
                   until
                   <span style={{ fontWeight: 'bold' }}>
                     {' '}
-                    27 September 2021{' '}
+                    30 September 2021 .
                   </span>
                 </Text>
               }
@@ -236,7 +236,7 @@ const Dashboard = () => {
           )}
         </Container>
       </VStack>
-      <VStack py="50px">
+      <VStack py="40px" mb="12">
         <Container
           maxW="container.xl"
           d="flex"
@@ -265,16 +265,17 @@ const Dashboard = () => {
             <InfoBlock
               theme=""
               content={
-                <Text>
-                  The voting result can be viewed strating from
+                <Text fontSize="lg" py="26px">
+                  The voting result can be viewed starting from
                   <span style={{ fontWeight: 'bold' }}>
                     {' '}
                     25 September 2021{' '}
                   </span>
-                  which when the voting session is opened. However, the
-                  announcement for a finalized list of speakers will be made on
-                  <span style={{ fontWeight: 'bold' }}> 28 October 2021 </span>
-                  (One day before the Barcamp event)
+                  However, the announcement of the finalized list of voted
+                  topics will be made on
+                  <span style={{ fontWeight: 'bold' }}> 1 October 2021 </span>
+                  (one day before Barcamp). We will notify you via email if you
+                  have been selected to share.
                 </Text>
               }
               leadingIcon={ResultIcon}

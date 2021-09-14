@@ -80,7 +80,7 @@ const updateProfile = () => {
           let decodedData = jwt_decode(resData.accessToken);
           let loginObj = {
             accessToken: resData.accessToken,
-            refreshToken: resData.accessToken,
+            refreshToken: resData.refreshToken,
             user: decodedData,
           };
           dispatch(LOGIN(loginObj));
@@ -123,7 +123,7 @@ const updateProfile = () => {
               fontFamily="Montserrat"
               fontWeight="600"
             >
-              Theres an error updating your profile
+              There is an error when updating your profile.
             </Text>
             <Text
               as="h3"
@@ -133,7 +133,7 @@ const updateProfile = () => {
               textAlign="center"
               px="3"
             >
-              Please try again later
+              Please try again.
             </Text>
           </>
         }
@@ -144,15 +144,15 @@ const updateProfile = () => {
         <BCSpacer size="xs" />
         <Container maxW="container.lg" alignItems="flex-start">
           <SectionTitle alignItems="flex-start" fontSize="3xl" type="left">
-            <Text fontSize="2xl">
-              Please complete your profile to {'  '}
-              <span style={{ color: '#1050A0' }}>gain access</span>
+            <Text fontSize="3xl">
+              Complete your {'  '}
+              <span style={{ color: '#1050A0' }}>profile</span>
             </Text>
           </SectionTitle>
           <BCSpacer size="3xs" />
-          <Text fontSize="lg" color="#797979">
-            To gain access for the rest of barcamp, your information is
-            required.
+          <Text fontSize="xl" color="#797979">
+            Please take a moment to complete your profile for starting your
+            journey as a Barcamper.
           </Text>
 
           <BCSpacer size="md" />
@@ -163,14 +163,15 @@ const updateProfile = () => {
               <Box flex="1">
                 <AlertTitle>{updateErr}</AlertTitle>
                 <AlertDescription display="block">
-                  There is some error updating your profile. Please try again.
+                  There is an error when updating your profile. Please try it
+                  again.
                 </AlertDescription>
               </Box>
               <CloseButton position="absolute" right="8px" top="8px" />
             </Alert>
           ) : null}
 
-          <BCSpacer size="2xs" />
+          <BCSpacer size="3xs" />
 
           <Formik
             validationSchema={schema}
@@ -195,28 +196,28 @@ const updateProfile = () => {
                 <VStack spacing={10} h="100%">
                   <SimpleGrid w="100%" spacing={10} columns={[1, 2, 2]}>
                     <Field
-                      label="Full Name"
+                      label="Full Name *"
                       name="fullname"
                       placeholder="Enter your full name"
                       component={BCTextFilledFormField}
                     />
                     <Field
-                      label="Age"
+                      label="Age *"
                       name="age"
                       placeholder="Enter your age"
                       component={BCTextFilledFormField}
                     />
                   </SimpleGrid>
                   <Field
-                    label="Contact Number"
+                    label="Contact Number *"
                     name="contactnumber"
                     placeholder="01X-XXXXXXX"
                     component={BCTextFilledFormField}
                   />
                   <Field
-                    label="Name of Company / Name of Institution"
+                    label="Name of Company / Name of Institution *"
                     name="noc"
-                    placeholder="Enter your company name or university name"
+                    placeholder="Enter your company name or university name *"
                     component={BCTextFilledFormField}
                   />
                   <VStack w="100%" h="100%" alignItems="flex-start">
@@ -225,7 +226,8 @@ const updateProfile = () => {
                       fontWeight="500"
                       fontSize="md"
                     >
-                      How do you know about Barcamp Cyberjaya *optional
+                      How do you know about Barcamp Cyberjaya?{' '}
+                      <span style={{ color: '#C2C2C2' }}> (optional)</span>
                     </Text>
                     <Box w="100%" h="100%" py="5" borderRadius="8px">
                       <SelectFormField value="Facebook" onSelect={onSelect}>

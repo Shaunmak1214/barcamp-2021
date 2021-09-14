@@ -166,8 +166,8 @@ const voteTopic = () => {
           theme="error"
           content={
             <>
-              <Text as="h3" fontSize="xl" fontFamily="Poppins" fontWeight="600">
-                Theres an error updating your profile
+              <Text as="h3" fontSize="xl" fontWeight="600">
+                An error occurred when submitting the topics.
               </Text>
               <Text
                 as="h3"
@@ -177,7 +177,7 @@ const voteTopic = () => {
                 textAlign="center"
                 px="3"
               >
-                Please try again later
+                Please try again.
               </Text>
             </>
           }
@@ -205,14 +205,15 @@ const voteTopic = () => {
                 h="100%"
                 pr={[10, 0, 20]}
               >
-                <Text as="h1" fontSize="4xl" fontWeight="600">
-                  Vote for the topics
+                <Text as="h1" fontSize="4xl" fontWeight="600" py="2">
+                  VOTE YOUR DESIRED TOPICS
                 </Text>
-                <Text as="h2" fontSize="md" fontWeight="500">
-                  Everyone votes, democracy at it’s best. The topic which gets
-                  the most vote will be held on Barcamp.
+                <Text as="h2" fontSize="xl" fontWeight="300">
+                  Everyone votes, everyone shares the insight. The topics that
+                  get the most votes will be held on the day of Barcamp. Vote
+                  your desired topics that you&apos;d like to hear below.
                 </Text>
-                <BCSpacer size="sm" />
+                <BCSpacer size="2xs" />
                 <HStack>
                   <PrimaryButton
                     width="200px"
@@ -220,7 +221,7 @@ const voteTopic = () => {
                     variant={alreadyVoted ? 'disabled' : null}
                     onClick={() => executeScroll()}
                   >
-                    {alreadyVoted ? 'You already voted' : 'Start Voting !'}
+                    {alreadyVoted ? 'You already voted' : 'Start Voting!'}
                   </PrimaryButton>
                 </HStack>
               </VStack>
@@ -283,7 +284,7 @@ const voteTopic = () => {
                     >
                       <Text>{votes.length} / 5 selected</Text>
                     </Center>
-                    <Text as="h2" fontSize="sm" fontWeight="500">
+                    <Text as="h2" fontSize="md" fontWeight="500">
                       Only <span className="gradientText">FIVE</span> selections
                       per participant
                     </Text>
@@ -299,7 +300,7 @@ const voteTopic = () => {
                   <Box flex="1">
                     <AlertTitle>{voteErr}</AlertTitle>
                     <AlertDescription display="block">
-                      There is some error processing your request, please try
+                      There is an error when processing your request, please try
                       again.
                     </AlertDescription>
                   </Box>
@@ -375,7 +376,7 @@ const voteTopic = () => {
                         {isPosting ? (
                           <Loader type="" size="md" />
                         ) : (
-                          <Text fontSize="lg">Submit Vote</Text>
+                          <Text fontSize="lg">Submit Votes</Text>
                         )}
                       </PrimaryButton>
                     </VStack>
