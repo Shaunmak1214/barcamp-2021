@@ -29,6 +29,9 @@ const Dashboard = () => {
   const [userTopic, setUserTopic] = useState({});
   const [votedTopics, setVotedTopics] = useState([]);
   const [leaderboard, setLeaderboard] = useState([]);
+  const [voteSectionClose, setVoteSectionClose] = useState(true);
+  const [voteResultClose, setVoteResultClose] = useState(true);
+  const [proposeSectionClose, setProposeSectionClose] = useState(true);
 
   const { loading: proposedLoading, fetch: getTopicsByUser } = useAxios(
     {
@@ -41,6 +44,9 @@ const Dashboard = () => {
 
     (err, res) => {
       if (err) {
+        if (err.status === 425) {
+          setProposeSectionClose(true);
+        }
       } else if (res) {
         setUserTopic(res.data);
       }
@@ -58,6 +64,9 @@ const Dashboard = () => {
     /*eslint-disable */
     (err, res) => {
       if (err) {
+        if (err.status === 425) {
+          setVoteSectionClose(true);
+        }
       } else if (res) {
         setVotedTopics(res.data);
       }
@@ -75,6 +84,9 @@ const Dashboard = () => {
     /*eslint-disable */
     (err, res) => {
       if (err) {
+        if (err.status === 425) {
+          setVoteResultClose(true);
+        }
         console.log(err);
       } else if (res) {
         setLeaderboard(res.data);
@@ -97,6 +109,7 @@ const Dashboard = () => {
         h="100vh"
         justifyContent={['flex-start', 'flex-start', 'center']}
         alignItems="center"
+        mb="20px"
       >
         <BCSpacer d={['flex', 'none', 'none']} size="sm" />
         <Container maxW="container.xl">
@@ -170,7 +183,21 @@ const Dashboard = () => {
           <SectionTitle fontSize="2xl" type="left" mb="5">
             Your Proposed Topic
           </SectionTitle>
-          {proposedLoading ? (
+
+          {proposeSectionClose ? (
+            <InfoBlock
+              theme=""
+              content={
+                <Text fontSize="lg" py="40px">
+                  Uh,sorry, the proposing topic session is closed but the voting
+                  session is opening now. You may proceed to vote for your
+                  desired topic in the next section. Please contact Barcamp team
+                  if you have any inquiries.
+                </Text>
+              }
+              leadingIcon={NoMessageIcon}
+            />
+          ) : proposedLoading ? (
             <Loader type="block-loader" />
           ) : userTopic ? (
             <TopicBlock rounded topic={userTopic} />
@@ -203,9 +230,26 @@ const Dashboard = () => {
           <SectionTitle fontSize="2xl" type="left" mb="5">
             Your Voted Topic
           </SectionTitle>
-          {votedLoading ? (
+          {voteSectionClose ? (
+            <InfoBlock
+              theme=""
+              content={
+                <Text fontSize="lg" py="40px">
+                  Uh, sorry, the voting session is closed but the{' '}
+                  <span fontWeight="bold">
+                    final voting result is released now
+                  </span>
+                  . If you had proposed a topic, kindly check whether your name
+                  is in the list or not. Please contact Barcamp team if you have
+                  any inquiries
+                </Text>
+              }
+              leadingIcon={NoMessageIcon}
+            />
+          ) : votedLoading ? (
             <Loader type="block-loader" />
           ) : votedTopics && votedTopics.length > 0 ? (
+            (console.log(votedTopics),
             votedTopics.map((topic, idx) => (
               <TopicBlock
                 rounded
@@ -214,7 +258,7 @@ const Dashboard = () => {
                 topic={topic.topic}
                 themeIcon={topic.speaker.picture}
               />
-            ))
+            )))
           ) : (
             <InfoBlock
               theme=""
@@ -245,7 +289,17 @@ const Dashboard = () => {
           <SectionTitle fontSize="2xl" type="left" mb="5">
             Voting Result
           </SectionTitle>
-          {leaderboardLoading ? (
+          {voteResultClose ? (
+            <InfoBlock
+              theme=""
+              content={
+                <Text fontSize="lg" py="40px">
+                  Uh, sorry, the voting result is closed now
+                </Text>
+              }
+              leadingIcon={NoMessageIcon}
+            />
+          ) : leaderboardLoading ? (
             <Loader type="block-loader" />
           ) : leaderboard && leaderboard.length > 0 ? (
             leaderboard.map((vote, idx) => (

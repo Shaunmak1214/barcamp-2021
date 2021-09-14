@@ -53,9 +53,6 @@ const voteTopic = () => {
   const voteTopicHeader = React.useRef(null);
 
   // loading state
-  const [isFetchVotesLoading, setIsFetchVotesLoading] = useState(true);
-  const [isFetchTopicsLoading, setIsFetchTopicsLoading] = useState(true);
-  const [isPosting, setIsPosting] = useState(false);
 
   const [alreadyVoted, setAlreadyVoted] = useState(false);
   const [topicAvailable, setTopicAvailable] = useState([]);
@@ -81,7 +78,7 @@ const voteTopic = () => {
     [setVotes],
   );
 
-  const { fetch: fetchTopics } = useAxios(
+  const { loading: isFetchTopicsLoading, fetch: fetchTopics } = useAxios(
     {
       method: 'get',
       url: '/topics',
@@ -92,17 +89,15 @@ const voteTopic = () => {
     (err, res) => {
       if (err) {
         if (err.status === 425) {
-          console.log('date range wrong');
+          window.location.href = '/dashboard';
         }
-        setIsFetchTopicsLoading(false);
       } else if (res) {
         setTopicAvailable(res.data);
-        setIsFetchTopicsLoading(false);
       }
     },
   );
 
-  const { fetch: fetchVoteByUser } = useAxios(
+  const { loading: isFetchVotesLoading, fetch: fetchVoteByUser } = useAxios(
     {
       method: 'get',
       url: `/votes/${authState.user.userId}`,
@@ -113,19 +108,17 @@ const voteTopic = () => {
     (err, res) => {
       if (err) {
         setAlreadyVoted(false);
-        setIsFetchVotesLoading(false);
       } else if (res) {
         if (res.data.length > 0) {
           setAlreadyVoted(true);
         } else {
           setAlreadyVoted(false);
         }
-        setIsFetchVotesLoading(false);
       }
     },
   );
 
-  const { fetch: postVoteTopic } = useAxios(
+  const { loading: isPosting, fetch: postVoteTopic } = useAxios(
     {
       method: 'post',
       url: '/votes',
@@ -143,7 +136,6 @@ const voteTopic = () => {
         }
         onModalOpen();
         executeScroll();
-        setIsPosting(false);
       } else if (res) {
         window.location.href = '/dashboard';
       }
@@ -384,7 +376,6 @@ const voteTopic = () => {
                     topicId: votes,
                     vote: 'topic',
                   });
-                  setIsPosting(true);
                 }}
               >
                 {() => (
@@ -412,7 +403,7 @@ const voteTopic = () => {
                                 w="45px"
                                 alt="Artificial Intelligence"
                               />
-                              <VStack spacing={2} align="flex-start">
+                              <VStack spacing={2} align="flex-start" ml="0">
                                 <TopicBadge topic={topic.theme} />
                                 <Text
                                   as="h3"
