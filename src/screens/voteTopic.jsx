@@ -157,39 +157,6 @@ const voteTopic = () => {
     fetchTopics();
   }, []);
 
-  const initiateObserver = () => {
-    var observer = new IntersectionObserver(
-      function (entries) {
-        // no intersection with screen
-        if (entries[0].intersectionRatio === 0) {
-          console.log('intersects');
-          document
-            .querySelector('.voteTopicHeader')
-            .classList.add('voteTopicHeader-sticky');
-        }
-
-        // fully intersects with screen
-        else if (entries[0].intersectionRatio === 1) {
-          console.log('fully intersects');
-          document
-            .querySelector('.voteTopicHeader')
-            .classList.remove('voteTopicHeader-sticky');
-        }
-      },
-      { threshold: [0, 1] },
-    );
-
-    observer.observe(document.querySelector('.voteTopicHeaderTop'));
-  };
-
-  useEffect(() => {
-    if (isFetchVotesLoading || isFetchTopicsLoading) {
-      return;
-    } else {
-      initiateObserver();
-    }
-  }, [isFetchVotesLoading, isFetchTopicsLoading]);
-
   if (isFetchVotesLoading || isFetchTopicsLoading) {
     return <Loader type="full-page-loader" />;
   } else {
