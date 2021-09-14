@@ -6,6 +6,7 @@ const theme = extendTheme({
     body: '"Source Sans Pro", sans-serif',
   },
   fontSizes: {
+    '2xs': '0.625rem',
     xs: '0.75rem',
     sm: '0.875rem', // 14px
     md: '1rem', // 15px
@@ -37,6 +38,9 @@ const theme = extendTheme({
           return {
             _hover: {
               bg: `linear-gradient(90deg, #4F0004 0%, #630000 100%)`,
+              _disabled: {
+                bg: 'linear-gradient(90deg, #000000 0%, #000000 100%)',
+              },
             },
             _active: { bg: `#A50009` },
           };
@@ -71,11 +75,11 @@ const theme = extendTheme({
             _hover: {
               bg: `#001D41`,
               color: '#fff',
+              _disabled: {
+                bg: '#6F6F6F',
+              },
             },
             _active: { bg: `#00234F` },
-            _disabled: {
-              bg: '#6F6F6F',
-            },
           };
         },
       },

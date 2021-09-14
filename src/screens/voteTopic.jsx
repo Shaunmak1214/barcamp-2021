@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react';
-
+import React, { useState, useEffect } from 'react';
 import { Formik, Form } from 'formik';
 
-import { Image } from '@chakra-ui/image';
 import {
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+  CloseButton,
   Container,
   SimpleGrid,
   Text,
@@ -12,13 +15,7 @@ import {
   Center,
   Flex,
   Box,
-} from '@chakra-ui/layout';
-import {
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
-  CloseButton,
+  Image,
 } from '@chakra-ui/react';
 
 import { PrimaryButton } from '../components/Buttons';
@@ -27,17 +24,20 @@ import { SelectFormFieldClass } from '../components/Forms';
 import BCSpacer from '../components/Spacer';
 import TopicBadge from '../components/TopicBadge';
 import InfoBlock from 'components/InfoBlock';
-import { useScrollTo, useAxios } from '../hooks';
-
 import BCModal from './../components/Modal';
+import Loader from '../components/Loader';
+
+import { useScrollTo, useAxios } from '../hooks';
 import useModal from '../components/Modal/useModal';
 
 import {
   SectionBg,
   VotingPic,
-  AIIcon,
   VotingIcon,
   NoMessageIcon,
+  TechIcon,
+  NonTechIcon,
+  NonsenseIcon,
 } from '../assets';
 import store from './../store/store';
 import '../global.css';
@@ -52,10 +52,15 @@ const voteTopic = () => {
 
   const voteTopicHeader = React.useRef(null);
 
-  const [alreadyVoted, setAlreadyVoted] = React.useState(false);
-  const [topicAvailable, setTopicAvailable] = React.useState([]);
-  const [votes, setVotes] = React.useState([]);
-  const [voteErr, setVoteErr] = React.useState('');
+  // loading state
+  const [isFetchVotesLoading, setIsFetchVotesLoading] = useState(true);
+  const [isFetchTopicsLoading, setIsFetchTopicsLoading] = useState(true);
+  const [isPosting, setIsPosting] = useState(false);
+
+  const [alreadyVoted, setAlreadyVoted] = useState(false);
+  const [topicAvailable, setTopicAvailable] = useState([]);
+  const [votes, setVotes] = useState([]);
+  const [voteErr, setVoteErr] = useState('');
 
   const authState = store.getState().auth;
 
@@ -84,11 +89,15 @@ const voteTopic = () => {
         Authorization: `Bearer ${token}`,
       },
     },
-    (res, err) => {
+    (err, res) => {
       if (err) {
-        console.log(err);
+        if (err.status === 425) {
+          console.log('date range wrong');
+        }
+        setIsFetchTopicsLoading(false);
       } else if (res) {
         setTopicAvailable(res.data);
+        setIsFetchTopicsLoading(false);
       }
     },
   );
@@ -101,20 +110,21 @@ const voteTopic = () => {
         Authorization: `Bearer ${token}`,
       },
     },
-    (res, err) => {
+    (err, res) => {
       if (err) {
         setAlreadyVoted(false);
+        setIsFetchVotesLoading(false);
       } else if (res) {
         if (res.data.length > 0) {
           setAlreadyVoted(true);
         } else {
           setAlreadyVoted(false);
         }
+        setIsFetchVotesLoading(false);
       }
     },
   );
 
-  // eslint-disable-next-line
   const { fetch: postVoteTopic } = useAxios(
     {
       method: 'post',
@@ -124,278 +134,302 @@ const voteTopic = () => {
         'Content-Type': 'application/json',
       },
     },
-    (res, err) => {
-      if (res) {
-        let resData = res.data;
-        if (res.status === 200 || res.status === 201 || res.status === 203) {
-          window.location.href = '/dashboard';
-        } else {
-          setVoteErr(' ' + resData);
-          onModalOpen();
-        }
-      } else if (err) {
-        if (err.error) {
+    (err, res) => {
+      if (err) {
+        if (err.data.error) {
           setVoteErr(' ' + err.error);
         } else {
           setVoteErr(' ' + err);
         }
         onModalOpen();
         executeScroll();
+        setIsPosting(false);
+      } else if (res) {
+        window.location.href = '/dashboard';
       }
     },
   );
+
+  const TopicIconRenderer = (theme) => {
+    if (theme === 'tech') {
+      return TechIcon;
+    } else if (theme === 'non-tech') {
+      return NonTechIcon;
+    } else {
+      return NonsenseIcon;
+    }
+  };
 
   useEffect(() => {
     fetchVoteByUser();
     fetchTopics();
   }, []);
 
-  return (
-    <>
-      <BCModal
-        theme="error"
-        content={
-          <>
-            <Text as="h3" fontSize="xl" fontFamily="Poppins" fontWeight="600">
-              Theres an error updating your profile
-            </Text>
-            <Text
-              as="h3"
-              fontSize="sm"
-              fontFamily="Poppins"
-              fontWeight="400"
-              textAlign="center"
-              px="3"
-            >
-              Please try again later
-            </Text>
-          </>
-        }
-        modalOpen={isOpen}
-        onClose={onModalClose}
-      />
-      <VStack
-        w="100%"
-        h="100vh"
-        justifyContent={['flex-start', 'flex-start', 'center']}
-        alignItems="center"
-      >
-        <BCSpacer d={['flex', 'none', 'none']} size="sm" />
-        <Container maxW="container.xl">
-          <SimpleGrid
-            columns={[1, 1, 2]}
-            w="100%"
-            h="100%"
-            justifyContent="center"
-            alignItems="center"
-          >
-            <VStack
-              alignItems="flex-start"
-              justifyContent="center"
-              h="100%"
-              pr={[10, 0, 20]}
-            >
-              <Text as="h1" fontSize="4xl" fontWeight="600">
-                Vote for the topics
+  if (isFetchVotesLoading || isFetchTopicsLoading) {
+    return <Loader type="full-page-loader" />;
+  } else {
+    return (
+      <>
+        <BCModal
+          theme="error"
+          content={
+            <>
+              <Text as="h3" fontSize="xl" fontWeight="600">
+                An error occurred when submitting the topics.
               </Text>
-              <Text as="h2" fontSize="md" fontWeight="500">
-                Everyone votes, democracy at it’s best. The topic which gets the
-                most vote will be held on Barcamp.
-              </Text>
-              <BCSpacer size="sm" />
-              <HStack>
-                <PrimaryButton
-                  width="200px"
-                  disabled={alreadyVoted ? true : false}
-                  variant={alreadyVoted ? 'disabled' : null}
-                  onClick={() => executeScroll()}
-                >
-                  {alreadyVoted ? 'You already voted' : 'Start Voting !'}
-                </PrimaryButton>
-              </HStack>
-            </VStack>
-            <Image d={['none', 'none', 'block']} src={VotingPic} alt="Login" />
-          </SimpleGrid>
-        </Container>
-      </VStack>
-      <Center
-        bgImg={SectionBg}
-        alignItems="center"
-        justifyContent="center"
-        w="100%"
-        h="250px"
-      ></Center>
-
-      {topicAvailable && topicAvailable.length >= 5 && !alreadyVoted ? (
-        <>
-          <Box className="voteTopicHeaderTop" w="100%" h="1px"></Box>
-          <Center
-            w="100%"
-            bg="white"
-            position={['flex', 'flex', 'sticky']}
-            top="0px"
-            zIndex={50}
-            p="3"
-            className="voteTopicHeader"
-            ref={voteTopicHeader}
-          >
-            <Container maxW="container.xl" w="100%" py="0px">
-              <Flex
-                flexDir={['column', 'column', 'row']}
-                justifyContent="space-between"
-                alignItems="center"
-                pt="5"
-                pb="5"
-                ref={scrollToRef}
+              <Text
+                as="h3"
+                fontSize="sm"
+                fontFamily="Poppins"
+                fontWeight="400"
+                textAlign="center"
+                px="3"
               >
-                <SectionTitle fontSize="2xl" type="left" mb={['7', '0', '0']}>
-                  Pick your choice
-                </SectionTitle>
-                <Center mb={['7', '0', '0']}>
-                  <Text>{votes.length} / 5 selected</Text>
-                </Center>
-                <Center
-                  boxShadow="0px 16px 40px rgba(193, 193, 193, 0.25)"
-                  borderRadius="8px"
-                  px="6"
-                  py="3"
+                Please try again.
+              </Text>
+            </>
+          }
+          modalOpen={isOpen}
+          onClose={onModalClose}
+        />
+        <VStack
+          w="100%"
+          h="100vh"
+          justifyContent={['flex-start', 'flex-start', 'center']}
+          alignItems="center"
+        >
+          <BCSpacer d={['flex', 'none', 'none']} size="sm" />
+          <Container maxW="container.xl">
+            <SimpleGrid
+              columns={[1, 1, 2]}
+              w="100%"
+              h="100%"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <VStack
+                alignItems="flex-start"
+                justifyContent="center"
+                h="100%"
+                pr={[10, 0, 20]}
+              >
+                <Text as="h1" fontSize="4xl" fontWeight="600" py="2">
+                  VOTE YOUR DESIRED TOPICS
+                </Text>
+                <Text as="h2" fontSize="xl" fontWeight="300">
+                  Everyone votes, everyone shares the insight. The topics that
+                  get the most votes will be held on the day of Barcamp. Vote
+                  your desired topics that you&apos;d like to hear below.
+                </Text>
+                <BCSpacer size="2xs" />
+                <HStack>
+                  <PrimaryButton
+                    width="200px"
+                    disabled={alreadyVoted ? true : false}
+                    variant={alreadyVoted ? 'disabled' : null}
+                    onClick={() => executeScroll()}
+                  >
+                    {alreadyVoted ? 'You already voted' : 'Start Voting!'}
+                  </PrimaryButton>
+                </HStack>
+              </VStack>
+              <Image
+                d={['none', 'none', 'block']}
+                src={VotingPic}
+                alt="Login"
+              />
+            </SimpleGrid>
+          </Container>
+        </VStack>
+        <Center
+          bgImg={SectionBg}
+          alignItems="center"
+          justifyContent="center"
+          w="100%"
+          h="250px"
+        ></Center>
+
+        {isFetchTopicsLoading ? (
+          <Loader type="full-page-loader" />
+        ) : topicAvailable && topicAvailable.length >= 5 && !alreadyVoted ? (
+          <>
+            <Box className="voteTopicHeaderTop" w="100%" h="1px"></Box>
+            <Center
+              w="100%"
+              bg="white"
+              position={['flex', 'flex', 'sticky']}
+              top="0px"
+              zIndex={50}
+              p="3"
+              className="voteTopicHeader"
+              ref={voteTopicHeader}
+            >
+              <Container maxW="container.xl" w="100%" py="0px">
+                <Flex
+                  flexDir={['column', 'column', 'row']}
+                  justifyContent="space-between"
+                  alignItems="center"
+                  pt="5"
+                  pb="5"
+                  ref={scrollToRef}
                 >
-                  <Text as="h2" fontSize="sm" fontWeight="500">
-                    Up to <span className="gradientText">FIVE</span> selections
-                    per participant
-                  </Text>
-                </Center>
-              </Flex>
+                  <SectionTitle fontSize="2xl" type="left" mb={['7', '0', '0']}>
+                    Pick your choice
+                  </SectionTitle>
+                  <Center
+                    boxShadow="0px 16px 40px rgba(193, 193, 193, 0.25)"
+                    borderRadius="8px"
+                    px="4"
+                    py="3"
+                  >
+                    <Center
+                      borderRadius="8px"
+                      px="5"
+                      py="1"
+                      bgColor={votes.length === 5 ? '#C9E1FF' : '#FFDADA'}
+                      transition="background-color 0.3s ease-in-out"
+                      mr="5"
+                    >
+                      <Text>{votes.length} / 5 selected</Text>
+                    </Center>
+                    <Text as="h2" fontSize="md" fontWeight="500">
+                      Only <span className="gradientText">FIVE</span> selections
+                      per participant
+                    </Text>
+                  </Center>
+                </Flex>
+              </Container>
+            </Center>
+
+            <Container maxW="container.xl" w="100%" py="50px">
+              {voteErr ? (
+                <Alert mb="10" status="error">
+                  <AlertIcon />
+                  <Box flex="1">
+                    <AlertTitle>{voteErr}</AlertTitle>
+                    <AlertDescription display="block">
+                      There is an error when processing your request, please try
+                      again.
+                    </AlertDescription>
+                  </Box>
+                  <CloseButton position="absolute" right="8px" top="8px" />
+                </Alert>
+              ) : null}
+              <Formik
+                initialValues={{
+                  topic: '',
+                }}
+                onSubmit={() => {
+                  postVoteTopic({
+                    userId: authState.user.userId,
+                    topicId: votes,
+                    vote: 'topic',
+                  });
+                  setIsPosting(true);
+                }}
+              >
+                {() => (
+                  <Form>
+                    <VStack>
+                      <VStack spacing={5} alignItems="flex-start" w="100%">
+                        {topicAvailable.map((topic, idx) => (
+                          <SelectFormFieldClass
+                            key={idx}
+                            value={`${topic._id}`}
+                            onSelect={(value, selected) =>
+                              onSelect(value, selected)
+                            }
+                            disabledSelect={votes.length >= 5 ? true : false}
+                          >
+                            <HStack
+                              spacing={7}
+                              py="0.5em"
+                              px={['0rem', '0rem', '0.5em']}
+                            >
+                              <Image
+                                src={TopicIconRenderer(topic.theme)}
+                                d={['none', 'none', 'flex']}
+                                h="45px"
+                                w="45px"
+                                alt="Artificial Intelligence"
+                              />
+                              <VStack spacing={2} align="flex-start">
+                                <TopicBadge topic={topic.theme} />
+                                <Text
+                                  as="h3"
+                                  fontSize="md"
+                                  fontFamily="Montserrat"
+                                  fontWeight="600"
+                                >
+                                  {topic.name}
+                                </Text>
+                                <Text as="h6" fontSize="sm" fontWeight="500">
+                                  {topic.description}
+                                </Text>
+                              </VStack>
+                            </HStack>
+                          </SelectFormFieldClass>
+                        ))}
+                      </VStack>
+
+                      <BCSpacer size="sm" />
+
+                      <PrimaryButton
+                        alignSelf="flex-end"
+                        w={['100%', 'fit-content', 'fit-content']}
+                        py="25px"
+                        px="75px"
+                        disabled={isPosting || votes.length < 5}
+                        type="submit"
+                      >
+                        {isPosting ? (
+                          <Loader type="" size="md" />
+                        ) : (
+                          <Text fontSize="lg">Submit Votes</Text>
+                        )}
+                      </PrimaryButton>
+                    </VStack>
+                  </Form>
+                )}
+              </Formik>
+            </Container>
+          </>
+        ) : topicAvailable.length < 5 ? (
+          <Center
+            d="flex"
+            flexDir="column"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Container maxW="container.xl">
+              <InfoBlock
+                theme="error"
+                content={<Text>Not enough topic</Text>}
+                leadingIcon={NoMessageIcon}
+              />
+              <BCSpacer size="xs" />
             </Container>
           </Center>
-
-          <Container maxW="container.xl" w="100%" py="50px">
-            {voteErr ? (
-              <Alert mb="10" status="error">
-                <AlertIcon />
-                <Box flex="1">
-                  <AlertTitle>{voteErr}</AlertTitle>
-                  <AlertDescription display="block">
-                    There is some error processing your request, please try
-                    again.
-                  </AlertDescription>
-                </Box>
-                <CloseButton position="absolute" right="8px" top="8px" />
-              </Alert>
-            ) : null}
-            <Formik
-              initialValues={{
-                topic: '',
-              }}
-              onSubmit={() => {
-                postVoteTopic({
-                  userId: authState.user.userId,
-                  topicId: votes,
-                  vote: 'topic',
-                });
-              }}
-            >
-              {() => (
-                <Form>
-                  <VStack>
-                    <VStack spacing={5} alignItems="flex-start" w="100%">
-                      {topicAvailable.map((topic, idx) => (
-                        <SelectFormFieldClass
-                          key={idx}
-                          value={`${topic._id}`}
-                          onSelect={(value, selected) =>
-                            onSelect(value, selected)
-                          }
-                          disabledSelect={votes.length >= 5 ? true : false}
-                        >
-                          <HStack
-                            spacing={7}
-                            py="0.5em"
-                            px={['0rem', '0rem', '0.5em']}
-                          >
-                            <Image
-                              src={AIIcon}
-                              d={['none', 'none', 'flex']}
-                              h="45px"
-                              w="45px"
-                              alt="Artificial Intelligence"
-                            />
-                            <VStack
-                              spacing={2}
-                              align="flex-start"
-                              wordBreak="break-all"
-                            >
-                              <TopicBadge topic={topic.theme} />
-                              <Text
-                                as="h3"
-                                fontSize="md"
-                                fontFamily="Montserrat"
-                                fontWeight="600"
-                              >
-                                {topic.name}
-                              </Text>
-                              <Text as="h6" fontSize="sm" fontWeight="500">
-                                {topic.description}
-                              </Text>
-                            </VStack>
-                          </HStack>
-                        </SelectFormFieldClass>
-                      ))}
-                    </VStack>
-
-                    <BCSpacer size="sm" />
-
-                    <PrimaryButton
-                      alignSelf="flex-end"
-                      w={['100%', 'fit-content', 'fit-content']}
-                      py="25px"
-                      px="75px"
-                      disabled={votes.length < 5}
-                      type="submit"
-                    >
-                      <Text fontSize="lg">Submit Vote</Text>
-                    </PrimaryButton>
-                  </VStack>
-                </Form>
-              )}
-            </Formik>
-          </Container>
-        </>
-      ) : topicAvailable.length < 5 ? (
-        <Center
-          d="flex"
-          flexDir="column"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Container maxW="container.xl">
-            <InfoBlock
-              theme="error"
-              content={<Text>Not enough topic</Text>}
-              leadingIcon={NoMessageIcon}
-            />
-            <BCSpacer size="xs" />
-          </Container>
-        </Center>
-      ) : (
-        <Center
-          d="flex"
-          flexDir="column"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Container maxW="container.xl">
-            <InfoBlock
-              theme="error"
-              content={<Text>Already voted</Text>}
-              leadingIcon={VotingIcon}
-            />
-            <BCSpacer size="xs" />
-          </Container>
-        </Center>
-      )}
-    </>
-  );
+        ) : (
+          <Center
+            d="flex"
+            flexDir="column"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Container maxW="container.xl">
+              <InfoBlock
+                theme="error"
+                content={<Text>Already voted</Text>}
+                leadingIcon={VotingIcon}
+              />
+              <BCSpacer size="xs" />
+            </Container>
+          </Center>
+        )}
+      </>
+    );
+  }
 };
 
 export default voteTopic;
