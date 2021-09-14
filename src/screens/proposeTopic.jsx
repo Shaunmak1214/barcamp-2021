@@ -296,9 +296,8 @@ const ProposeTopic = () => {
                     name: data.topicName,
                     user: authState.user.userId,
                     theme: data.topicTheme,
-                    description: data.description,
-                    contact: '-',
-                    self_description: '-',
+                    description: data.topicSummary,
+                    self_description: data.description,
                   });
                 }}
               >
