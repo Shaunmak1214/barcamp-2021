@@ -57,7 +57,7 @@ function App() {
           header
           protected
           transparency="sticky"
-          // accessDateRange={[new Date(2021, 9, 1), new Date(2021, 12, 31)]}
+          // accessDateRange={[new Date(2021, 9, 2), new Date(2021, 12, 31)]}
           path="/vote-topic"
           component={Screens.VoteTopic}
         /> */}
