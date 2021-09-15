@@ -225,7 +225,13 @@ const MobileMenu = () => {
           )}
         </VStack>
         <Center w="100%" p="2em" alignItems="flex-end">
-          <PrimaryButton w="100%" py="0px">
+          <PrimaryButton
+            w="100%"
+            py="0px"
+            onClick={() => {
+              window.location.href = '/login';
+            }}
+          >
             Join us now
           </PrimaryButton>
         </Center>
