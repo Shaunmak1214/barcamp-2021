@@ -80,7 +80,7 @@ const TopicBlock = ({
             >
               {topic.name}
             </Text>
-            <Text as="h6" fontSize="sm" fontWeight="500">
+            <Text as="h6" fontSize="sm" fontWeight="500" wordBreak="break-word">
               {topic.description}
             </Text>
           </VStack>
