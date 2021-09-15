@@ -70,6 +70,7 @@ function App() {
           component={Screens.Landing}
         />
       </Switch>
+
       <Comp.Footer />
     </Router>
   );
