@@ -14,6 +14,7 @@ import {
   Text,
   VStack,
   Box,
+  useToast,
 } from '@chakra-ui/react';
 
 import { SectionTitle } from '../components/SectionTitle';
@@ -42,6 +43,7 @@ const schema = yup.object({
     .number()
     .required('Age is required')
     .min(16, 'Age must be at least 16')
+    .max(100, 'Age must be at most 100')
     .typeError('Age is not valid'),
   contactnumber: yup
     .string()
@@ -57,7 +59,7 @@ const schema = yup.object({
 const updateProfile = () => {
   const authState = store.getState().auth;
 
-  // loading state
+  const toast = useToast();
 
   const [heard, setHeard] = useState([]);
   const [updateErr, setUpdateErr] = useState('');
@@ -88,6 +90,14 @@ const updateProfile = () => {
       } else if (res) {
         let resData = res.data;
         if (res.status === 200 || res.status === 201 || res.status === 203) {
+          toast({
+            title: 'Update Profile Successfully.',
+            position: 'top-right',
+            variant: 'top-accent',
+            status: 'success',
+            duration: 9000,
+            isClosable: true,
+          });
           let decodedData = jwt_decode(resData.accessToken);
           let loginObj = {
             accessToken: resData.accessToken,
@@ -95,9 +105,10 @@ const updateProfile = () => {
             user: decodedData,
           };
           dispatch(LOGIN(loginObj));
-          window.location.href = '/dashboard';
+          setTimeout(() => {
+            window.location.href = '/dashboard';
+          }, 1000);
         } else {
-          console.log('here');
           setUpdateErr(' ' + resData.data.error);
           onModalOpen();
         }

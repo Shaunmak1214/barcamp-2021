@@ -322,7 +322,7 @@ const Dashboard = () => {
                     : 'Propose topic session closed'}
                 </PrimaryButton>
                 <PrimaryButton
-                  width="250px"
+                  width="215px"
                   backgroundColor="#B1B1B1"
                   onClick={() => {
                     window.location.href = '/vote-topic';

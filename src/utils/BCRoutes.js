@@ -87,6 +87,7 @@ class BCRoutes extends React.Component {
           <>
             {Header && <Comp.Header cta={Cta} type={Transparency} />}
             <Component />
+            <Comp.Footer />
           </>
         );
       }
