@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Image } from '@chakra-ui/image';
-import { HStack, Box, Flex, VStack, Center } from '@chakra-ui/layout';
+import { Box, Flex, VStack, Center } from '@chakra-ui/layout';
 import { PrimaryButton } from '../../components/Buttons';
 
 import { LinearBorder } from '../../assets';
@@ -36,8 +36,8 @@ const InfoBlock = ({ buttonUrl, buttonLabel, theme, content, leadingIcon }) => {
         },
       })}
     >
-      <HStack alignItems="center">
-        {leadingIcon && <Image src={leadingIcon} />}
+      <Flex flexDir={['column', 'column', 'row']} w="100%" alignItems="center">
+        {leadingIcon && <Image mb={[3, 3, 0]} src={leadingIcon} />}
 
         <Flex flexDir="column" alignItems="center" justifyContent="center">
           <Box w="100%" p={['0', '0 50px']}>
@@ -45,7 +45,7 @@ const InfoBlock = ({ buttonUrl, buttonLabel, theme, content, leadingIcon }) => {
           </Box>
           {buttonUrl && <BCSpacer size="sm" />}
         </Flex>
-      </HStack>
+      </Flex>
 
       <Center w="100%">
         {buttonUrl && (
