@@ -51,6 +51,7 @@ const schema = yup.object({
     .string()
     .required('Name of Company/ Name of Institution is required')
     .min(1),
+  value: yup.string().notRequired(),
 });
 
 const updateProfile = () => {
@@ -190,6 +191,7 @@ const updateProfile = () => {
               age: '',
               contactnumber: '',
               noc: '',
+              others: '',
             }}
             onSubmit={(data) => {
               fetch({
@@ -197,7 +199,7 @@ const updateProfile = () => {
                 age: data.age,
                 contactNumber: data.contactnumber,
                 companyOrInstitution: data.noc,
-                heard: heard,
+                heard: [...heard, data.others],
               });
             }}
           >
@@ -282,6 +284,15 @@ const updateProfile = () => {
                       <SelectFormField value="Discord" onSelect={onSelect}>
                         <Text>Discord </Text>
                       </SelectFormField>
+                      <Field
+                        name="others"
+                        placeholder=" Others: Please state if any..."
+                        background="transparent"
+                        border="1px solid #E9E9E9"
+                        borderColor="#e9e9e9"
+                        pl="14px"
+                        component={BCTextFilledFormField}
+                      />
                     </Box>
                   </VStack>
 
