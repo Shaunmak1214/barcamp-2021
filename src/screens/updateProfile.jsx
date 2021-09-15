@@ -30,8 +30,8 @@ import store from './../store/store';
 import useAxios from './../hooks/useAxios';
 import useModal from '../components/Modal/useModal';
 
-const phoneRegExp =
-  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+// eslint-disable-next-line
+const phoneRegExp = /^[+]?[(]?[0-9]{3}[)]?[-s.]?[0-9]{3}[-s.]?[0-9]{4,6}$/im;
 
 const schema = yup.object({
   fullname: yup
@@ -204,10 +204,11 @@ const updateProfile = () => {
             }}
           >
             {() => (
-              <Form h="100%">
+              <Form autoComplete="off" h="100%">
                 <VStack spacing={10} h="100%">
                   <SimpleGrid w="100%" spacing={10} columns={[1, 2, 2]}>
                     <Field
+                      type="text"
                       label="Full Name *"
                       name="fullname"
                       placeholder="Enter your full name"
@@ -223,6 +224,7 @@ const updateProfile = () => {
                       name="age"
                       placeholder="Enter your age"
                       component={BCTextFilledFormField}
+                      type="number"
                       customLabel={
                         <Text fontSize="md" color="#1A202C">
                           Age <span style={{ color: 'red' }}>*</span>
@@ -235,6 +237,7 @@ const updateProfile = () => {
                     name="contactnumber"
                     placeholder="01X-XXXXXXX"
                     component={BCTextFilledFormField}
+                    type="tel"
                     customLabel={
                       <Text fontSize="md" color="#1A202C">
                         Contact Number <span style={{ color: 'red' }}>*</span>
@@ -286,11 +289,13 @@ const updateProfile = () => {
                       </SelectFormField>
                       <Field
                         name="others"
+                        type="text"
                         placeholder=" Others: Please state if any..."
                         background="transparent"
                         border="1px solid #E9E9E9"
                         borderColor="#e9e9e9"
                         pl="14px"
+                        autoComplete="new-password"
                         component={BCTextFilledFormField}
                       />
                     </Box>

@@ -116,7 +116,9 @@ const Dashboard = () => {
         return <Loader type="block-loader" />;
       } else {
         if (Object.keys(userTopic).length > 0) {
-          return <TopicBlock rounded topic={userTopic} />;
+          return (
+            <TopicBlock rounded speaker={userTopic.user} topic={userTopic} />
+          );
         } else {
           return (
             <InfoBlock
@@ -170,6 +172,7 @@ const Dashboard = () => {
               key={idx}
               value={topic.topic._id}
               topic={topic.topic}
+              speaker={topic.speaker}
               themeIcon={topic.speaker.picture}
             />
           ));
@@ -229,6 +232,7 @@ const Dashboard = () => {
               lead={idx}
               value={vote.topic._id}
               topic={vote.topic}
+              speaker={vote.user}
               themeIcon={vote.user.picture}
               count={vote.count}
               leaderboard={true}
@@ -303,8 +307,19 @@ const Dashboard = () => {
                     window.location.href = '/propose-topic';
                   }}
                   mb={['12px', '12px', '0']}
+                  disabled={
+                    !proposeSectionClose
+                      ? Object.keys(userTopic).length > 0
+                        ? true
+                        : false
+                      : true
+                  }
                 >
-                  Propose Topic
+                  {!proposeSectionClose
+                    ? Object.keys(userTopic).length > 0
+                      ? 'Already proposed a topic'
+                      : 'Propose Topic'
+                    : 'Propose topic session closed'}
                 </PrimaryButton>
                 <PrimaryButton
                   width="250px"
@@ -312,9 +327,19 @@ const Dashboard = () => {
                   onClick={() => {
                     window.location.href = '/vote-topic';
                   }}
-                  disabled={true}
+                  disabled={
+                    !voteSectionClose
+                      ? votedTopics.length > 0
+                        ? true
+                        : false
+                      : true
+                  }
                 >
-                  Vote Topic (Coming Soon)
+                  {!voteSectionClose
+                    ? votedTopics.length > 0
+                      ? 'Already voted a topic'
+                      : 'Vote Topics'
+                    : 'Vote Topics (Coming soon)'}
                 </PrimaryButton>
               </SimpleGrid>
             </VStack>
@@ -338,7 +363,7 @@ const Dashboard = () => {
           alignItems="flex-start"
           flexDir="column"
         >
-          <SectionTitle fontSize="2xl" type="left" mb="5">
+          <SectionTitle fontSize="2xl" type="left" mb="10">
             Your Proposed Topic
           </SectionTitle>
 
@@ -352,7 +377,7 @@ const Dashboard = () => {
           alignItems="flex-start"
           flexDir="column"
         >
-          <SectionTitle fontSize="2xl" type="left" mb="5">
+          <SectionTitle fontSize="2xl" type="left" mb="10">
             Your Voted Topic
           </SectionTitle>
 
@@ -366,7 +391,7 @@ const Dashboard = () => {
           alignItems="flex-start"
           flexDir="column"
         >
-          <SectionTitle fontSize="2xl" type="left" mb="5">
+          <SectionTitle fontSize="2xl" type="left" mb="10">
             Voting Result
           </SectionTitle>
 

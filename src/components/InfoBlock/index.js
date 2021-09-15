@@ -20,12 +20,12 @@ const InfoBlock = ({ buttonUrl, buttonLabel, theme, content, leadingIcon }) => {
       justifyContent="center"
       alignItems="flex-start"
       mb="10px"
-      mt="50px"
+      mt="10px"
       p={['25px', '30px 45px 30px 80px']}
       w="100%"
       border={border}
       borderRadius="10px"
-      borderWidth="3px"
+      borderWidth="2px"
       borderStyle="solid"
       {...(border === 'none' && {
         style: {

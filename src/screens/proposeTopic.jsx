@@ -221,6 +221,7 @@ const ProposeTopic = () => {
             flexDir="column"
             alignItems="center"
             justifyContent="center"
+            mt="10"
           >
             <Container maxW="container.xl">
               <InfoBlock

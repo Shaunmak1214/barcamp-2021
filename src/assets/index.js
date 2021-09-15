@@ -23,6 +23,7 @@ import NonsenseIcon from './svgs/nonsense.svg';
 import ChampionIcon from './svgs/champion.svg';
 import SilverIcon from './svgs/silver.svg';
 import BronzeIcon from './svgs/bronze.svg';
+import SpeakerIcon from './svgs/speaker.svg';
 
 // Icons (PNG)
 import NoMessageIcon from './jpg-pngs/no-message-icon.png';
@@ -115,4 +116,5 @@ export {
   SilverIcon,
   BronzeIcon,
   SponsorshipProposal,
+  SpeakerIcon,
 };
