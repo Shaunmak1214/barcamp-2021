@@ -1,8 +1,8 @@
 import React from 'react';
 import { Container, Center } from '@chakra-ui/layout';
+import { Link } from '@chakra-ui/react';
 
 import { SectionTitle } from '../SectionTitle';
-import { SecondaryButton } from '../Buttons';
 import { SponsorBlockRenderer } from '../Sponsors/utils';
 import BCSpacer from '../Spacer';
 import {
@@ -10,6 +10,7 @@ import {
   goldSponsor,
   silverSponsor,
 } from '../../datas/sponsors';
+import { SponsorshipProposal } from '../../assets';
 
 const Index = ({ ...props }) => {
   return (
@@ -23,9 +24,21 @@ const Index = ({ ...props }) => {
         <SponsorBlockRenderer sponsorData={silverSponsor} />
         <BCSpacer size="sm" />
         <Center w="100%">
-          <SecondaryButton px="70px" py="25px">
+          <Link
+            variant="secondary"
+            bg="#1050A0"
+            borderRadius="4px"
+            px="12"
+            py="12px"
+            h="100%"
+            color="white"
+            fontWeight="600"
+            href={SponsorshipProposal}
+            target="_blank"
+            rel="noreferrer"
+          >
             Become a sponsor
-          </SecondaryButton>
+          </Link>
         </Center>
         <BCSpacer />
       </Container>

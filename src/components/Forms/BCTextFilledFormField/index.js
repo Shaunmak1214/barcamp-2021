@@ -8,14 +8,14 @@ import {
 } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 
-const TextFormField = ({ field, form, label, ...props }) => {
+const TextFormField = ({ field, form, label, customLabel, ...props }) => {
   const errorText =
     getIn(form.touched, field.name) && getIn(form.errors, field.name);
 
   return (
     <FormControl w="100%" id="email" isInvalid={errorText ? true : false}>
       <FormLabel fontFamily="Montserrat" fontWeight="500" fontSize="md">
-        {label}
+        {customLabel || label}
       </FormLabel>
       <Input
         fontFamily="Source Sans Pro"
@@ -39,6 +39,7 @@ TextFormField.propTypes = {
   form: PropTypes.any,
   props: PropTypes.any,
   label: PropTypes.any,
+  customLabel: PropTypes.any,
 };
 
 export default TextFormField;

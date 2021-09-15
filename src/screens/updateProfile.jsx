@@ -209,6 +209,11 @@ const updateProfile = () => {
                       label="Full Name *"
                       name="fullname"
                       placeholder="Enter your full name"
+                      customLabel={
+                        <Text fontSize="md" color="#1A202C">
+                          Full Name <span style={{ color: 'red' }}>*</span>
+                        </Text>
+                      }
                       component={BCTextFilledFormField}
                     />
                     <Field
@@ -216,6 +221,11 @@ const updateProfile = () => {
                       name="age"
                       placeholder="Enter your age"
                       component={BCTextFilledFormField}
+                      customLabel={
+                        <Text fontSize="md" color="#1A202C">
+                          Age <span style={{ color: 'red' }}>*</span>
+                        </Text>
+                      }
                     />
                   </SimpleGrid>
                   <Field
@@ -223,12 +233,23 @@ const updateProfile = () => {
                     name="contactnumber"
                     placeholder="01X-XXXXXXX"
                     component={BCTextFilledFormField}
+                    customLabel={
+                      <Text fontSize="md" color="#1A202C">
+                        Contact Number <span style={{ color: 'red' }}>*</span>
+                      </Text>
+                    }
                   />
                   <Field
                     label="Name of Company / Name of Institution *"
                     name="noc"
                     placeholder="Enter your company name or university name *"
                     component={BCTextFilledFormField}
+                    customLabel={
+                      <Text fontSize="md" color="#1A202C">
+                        Name of Company / Name of Institution{' '}
+                        <span style={{ color: 'red' }}>*</span>
+                      </Text>
+                    }
                   />
                   <VStack w="100%" h="100%" alignItems="flex-start">
                     <Text
