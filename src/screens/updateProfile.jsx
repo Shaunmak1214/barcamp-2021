@@ -34,13 +34,23 @@ const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
 const schema = yup.object({
-  fullname: yup.string().required().min(3),
-  age: yup.number().required().min(18),
+  fullname: yup
+    .string()
+    .required('Full Name is required')
+    .min(3, 'Full Name must be at least 3 characters'),
+  age: yup
+    .number()
+    .required('Age is required')
+    .min(16, 'Age must be at least 16')
+    .typeError('Age is not valid'),
   contactnumber: yup
     .string()
-    .required()
+    .required('Contact Number is required')
     .matches(phoneRegExp, 'Phone number is not valid'),
-  noc: yup.string().required().min(1),
+  noc: yup
+    .string()
+    .required('Name of Company/ Name of Institution is required')
+    .min(1),
 });
 
 const updateProfile = () => {
@@ -199,6 +209,11 @@ const updateProfile = () => {
                       label="Full Name *"
                       name="fullname"
                       placeholder="Enter your full name"
+                      customLabel={
+                        <Text fontSize="md" color="#1A202C">
+                          Full Name <span style={{ color: 'red' }}>*</span>
+                        </Text>
+                      }
                       component={BCTextFilledFormField}
                     />
                     <Field
@@ -206,6 +221,11 @@ const updateProfile = () => {
                       name="age"
                       placeholder="Enter your age"
                       component={BCTextFilledFormField}
+                      customLabel={
+                        <Text fontSize="md" color="#1A202C">
+                          Age <span style={{ color: 'red' }}>*</span>
+                        </Text>
+                      }
                     />
                   </SimpleGrid>
                   <Field
@@ -213,12 +233,23 @@ const updateProfile = () => {
                     name="contactnumber"
                     placeholder="01X-XXXXXXX"
                     component={BCTextFilledFormField}
+                    customLabel={
+                      <Text fontSize="md" color="#1A202C">
+                        Contact Number <span style={{ color: 'red' }}>*</span>
+                      </Text>
+                    }
                   />
                   <Field
                     label="Name of Company / Name of Institution *"
                     name="noc"
                     placeholder="Enter your company name or university name *"
                     component={BCTextFilledFormField}
+                    customLabel={
+                      <Text fontSize="md" color="#1A202C">
+                        Name of Company / Name of Institution{' '}
+                        <span style={{ color: 'red' }}>*</span>
+                      </Text>
+                    }
                   />
                   <VStack w="100%" h="100%" alignItems="flex-start">
                     <Text
@@ -242,11 +273,14 @@ const updateProfile = () => {
                       <SelectFormField value="Youtube" onSelect={onSelect}>
                         <Text>Youtube</Text>
                       </SelectFormField>
-                      <SelectFormField value="MMU" onSelect={onSelect}>
-                        <Text>MMU</Text>
+                      <SelectFormField
+                        value="MMU Portal / MMLS"
+                        onSelect={onSelect}
+                      >
+                        <Text>MMU Portal / MMLS</Text>
                       </SelectFormField>
-                      <SelectFormField value="other" onSelect={onSelect}>
-                        <Text>Other ... </Text>
+                      <SelectFormField value="Discord" onSelect={onSelect}>
+                        <Text>Discord </Text>
                       </SelectFormField>
                     </Box>
                   </VStack>
@@ -257,11 +291,12 @@ const updateProfile = () => {
                     py="25px"
                     px="75px"
                     type="submit"
+                    disabled={isPosting}
                   >
                     {isPosting ? (
                       <Loader type="" size="md" />
                     ) : (
-                      <Text fontSize="lg">Update Profile</Text>
+                      <Text fontSize="lg">Submit</Text>
                     )}
                   </PrimaryButton>
                 </VStack>

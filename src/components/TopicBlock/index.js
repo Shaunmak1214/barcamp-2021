@@ -55,7 +55,7 @@ const TopicBlock = ({
       alignItems="center"
       boxShadow="0px 16px 40px rgba(195, 195, 195, 0.25)"
     >
-      <Box width="90%">
+      <Box width="100%">
         <HStack spacing={[0, 0, 7]} py="0.3em" px={['0rem', '0rem', '0.5em']}>
           <Image
             src={icon}
@@ -64,10 +64,10 @@ const TopicBlock = ({
             h="52px"
             w="52px"
           />
-          <VStack align="flex-start" w="85%" wordBreak="break-all">
+          <VStack align="flex-start" w="100%" wordBreak="break-all">
             <Flex
               justifyContent="space-between"
-              w="95%"
+              w={['50%', '50%', '95%']}
               flexDir={['column', 'column', 'row']}
             >
               <TopicBadge topic={topic.theme} />
@@ -80,7 +80,7 @@ const TopicBlock = ({
             >
               {topic.name}
             </Text>
-            <Text as="h6" fontSize="sm" fontWeight="500">
+            <Text as="h6" fontSize="sm" fontWeight="500" wordBreak="break-word">
               {topic.description}
             </Text>
           </VStack>
@@ -92,7 +92,8 @@ const TopicBlock = ({
           <MedalRenderer medal={lead} />
           <Box background="#f5f5f5" borderRadius="8px" p="10px">
             <Text width="50px" textAlign="center" fontSize="sm">
-              <span className="gradientText">{count}</span> votes
+              <span className="gradientText">{count}</span>{' '}
+              {count <= 1 ? 'vote' : 'votes'}
             </Text>
           </Box>
         </VStack>

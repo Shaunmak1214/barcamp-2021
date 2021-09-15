@@ -149,10 +149,11 @@ const Dashboard = () => {
             <Text fontSize="lg" py="40px">
               Uh, sorry, the voting session is{' '}
               <span style={{ fontWeight: 600 }}>
-                either over or yet to be started
+                either over or yet to be started ( starting from 25 September
+                until 30 September)
               </span>
               . In that case kindly check back later. Please contact Barcamp
-              team if you have any inquiries
+              team if you have any inquiries.
             </Text>
           }
           leadingIcon={NoMessageIcon}
@@ -185,7 +186,7 @@ const Dashboard = () => {
                   held on Barcamp. Kindly keep in mind that the last day for
                   voting is on{' '}
                   <span style={{ fontWeight: 'bold' }}>
-                    27 September 2021.{' '}
+                    30 September 2021.{' '}
                   </span>
                 </Text>
               }
@@ -206,7 +207,7 @@ const Dashboard = () => {
             <Text fontSize="lg" py="26px">
               The voting result can be viewed starting from
               <span style={{ fontWeight: 'bold' }}> 25 September 2021 </span>
-              However, the announcement of the finalized list of voted topics
+              .However, the announcement of the finalized list of voted topics
               will be made on
               <span style={{ fontWeight: 'bold' }}> 1 October 2021 </span>
               (one day before Barcamp). We will notify you via email if you have

@@ -60,6 +60,9 @@ import SectionBgTwo from './jpg-pngs/section-bg2.jpg';
 import BarcampWhiteLogo from './svgs/barcamp-white-logo.svg';
 import BarcampFullLogo from './svgs/barcamp-logo.svg';
 
+// PDFS
+import SponsorshipProposal from './pdfs/Barcamp Cyberjaya 2021 Sponsorship Proposal.pdf';
+
 export {
   BarcampFullLogo,
   BarcampLandingImg,
@@ -111,4 +114,5 @@ export {
   ChampionIcon,
   SilverIcon,
   BronzeIcon,
+  SponsorshipProposal,
 };

@@ -50,6 +50,9 @@ const Index = () => {
               height="auto"
               src={BarcampWhiteLogo}
               alt="Barcamp-logo"
+              onClick={() => {
+                window.location.href = '/';
+              }}
             />
           </VStack>
           <SimpleGrid
@@ -69,14 +72,15 @@ const Index = () => {
                   <Text fontSize="lg" fontWeight="700" pb="10px">
                     QUICK LINKS
                   </Text>
-                  <Link href="/#agenda">
-                    <Text fontSize="md" pb="10px">
-                      {'>'} AGENDA
-                    </Text>
-                  </Link>
+
                   <Link href="/#about">
                     <Text fontSize="md" pb="10px">
                       {'>'} ABOUT
+                    </Text>
+                  </Link>
+                  <Link href="/#agenda">
+                    <Text fontSize="md" pb="10px">
+                      {'>'} AGENDA
                     </Text>
                   </Link>
                   <Link href="/#faq">
