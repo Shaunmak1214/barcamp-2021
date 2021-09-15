@@ -41,10 +41,19 @@ import store from './../store/store';
 import '../global.css';
 
 const schema = yup.object({
-  description: yup.string().required().min(3),
-  topicTheme: yup.string().required(),
-  topicName: yup.string().required().min(3),
-  topicSummary: yup.string().required().min(3),
+  description: yup
+    .string()
+    .required('Description is required')
+    .min(3, 'Description must be at least 3 characters'),
+  topicTheme: yup.string().required('Topic theme is required'),
+  topicName: yup
+    .string()
+    .required('Topic name is required')
+    .min(3, 'Topic name must be at least 3 characters'),
+  topicSummary: yup
+    .string()
+    .required('Topic Summary is required')
+    .min(3, 'Topic Summary must be at least 3 characters'),
 });
 
 const ProposeTopic = () => {

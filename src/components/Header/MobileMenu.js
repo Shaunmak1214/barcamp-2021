@@ -23,12 +23,20 @@ import {
 import BCSpacer from 'components/Spacer';
 import { useCountdown } from '../../hooks';
 import store from '../../store/store';
+import { useDispatch } from 'react-redux';
+import { LOGOUT } from '../../reducers/authSlice';
 const MobileMenu = () => {
   const { daysRef, hoursRef, minutesRef, secondsRef } = useCountdown(
     'October 2, 2021 00:00:00',
   );
   const isOpen = useRef(false);
   const authState = store.getState().auth;
+  const dispatch = useDispatch();
+
+  const logout = () => {
+    dispatch(LOGOUT());
+    window.location.href = '/login';
+  };
 
   return (
     <>
@@ -202,6 +210,11 @@ const MobileMenu = () => {
                 <Link href="/vote-topic">
                   <Text fontSize="sm" fontFamily="Montserrat" fontWeight="600">
                     Vote Topics
+                  </Text>
+                </Link>
+                <Link onClick={logout}>
+                  <Text fontSize="sm" fontFamily="Montserrat" fontWeight="600">
+                    Logout
                   </Text>
                 </Link>
               </VStack>

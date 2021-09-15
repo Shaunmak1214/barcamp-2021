@@ -263,7 +263,8 @@ const voteTopic = () => {
                   <Text fontSize="lg" py="40px">
                     Uh, sorry, the voting session is{' '}
                     <span style={{ fontWeight: 600 }}>
-                      either over or yet to be started
+                      either over or yet to be started ( starting from 25
+                      September until 30 September)
                     </span>
                     . In that case kindly check back later. Please contact
                     Barcamp team if you have any inquiries
