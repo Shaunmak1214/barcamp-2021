@@ -17,7 +17,7 @@ const TopicBlock = ({
   rounded,
   topic,
   speaker,
-  lead,
+  // lead,
   themeIcon,
   count,
   leaderboard,
@@ -108,14 +108,13 @@ const TopicBlock = ({
       </Box>
 
       {leaderboard && (
-        <VStack spacing={3}>
-          <MedalRenderer medal={lead} />
-          <Box background="#f5f5f5" borderRadius="8px" p="10px">
-            <Text width="50px" textAlign="center" fontSize="sm">
-              <span className="gradientText">{count}</span>{' '}
-              {count <= 1 ? 'vote' : 'votes'}
-            </Text>
-          </Box>
+        <VStack spacing={0} h="100%" px="5">
+          <Text className="gradientText" style={{ fontSize: '35px' }}>
+            {count}
+          </Text>
+          <Text textAlign="center" fontSize="sm">
+            {count <= 1 ? 'vote' : 'votes'}
+          </Text>
         </VStack>
       )}
     </HStack>
