@@ -107,7 +107,7 @@ const Index = ({ ...props }) => {
         title:
           'My topic was voted and a slot has been allocated for me, but I have an emergency and cannot make it on the day of the event. What should I do?',
         content:
-          'Feel free to contact our Barcamp team via itsoc.mmu@gmail.com to assist you further on this matter. ',
+          'Feel free to contact our BarCamp team via itsoc.mmu@gmail.com to assist you further on this matter. ',
       },
       {
         idx: 7,
@@ -126,7 +126,7 @@ const Index = ({ ...props }) => {
         title:
           'I cannot access the Gather.Town BarCamp Cyberjaya 2021 Server, what should I do?',
         content:
-          'Feel free to contact our Barcamp team via itsoc.mmu@gmail.com to assist you further on this matter. ',
+          'Feel free to contact our BarCamp team via itsoc.mmu@gmail.com to assist you further on this matter. ',
       },
       {
         idx: 10,
@@ -202,7 +202,7 @@ const Index = ({ ...props }) => {
         title:
           'My topic was voted and a slot has been allocated for me, but I have an emergency and cannot make it on the day of the event. What should I do?',
         content:
-          'Feel free to contact our Barcamp team via itsoc.mmu@gmail.com to assist you further on this matter. ',
+          'Feel free to contact our BarCamp team via itsoc.mmu@gmail.com to assist you further on this matter. ',
       },
     ],
     votingTopic: [
@@ -210,7 +210,7 @@ const Index = ({ ...props }) => {
         idx: 0,
         title: 'What is the voting session conducted for?',
         content:
-          'The voting for the topics will be conducted starting from 25th September to 30th September 2021. The 15 topics with the most votes will be selected to share on the day of Barcamp, the finalized list of ',
+          'The voting for the topics will be conducted starting from 25th September to 30th September 2021. The 15 topics with the most votes will be selected to share on the day of BarCamp, the finalized list of ',
       },
       {
         idx: 1,
@@ -224,7 +224,7 @@ const Index = ({ ...props }) => {
         title:
           'My topic was voted and a slot has been allocated for me, but I have an emergency and cannot make it on the day of the event. What should I do?',
         content:
-          'Feel free to contact our Barcamp team via itsoc.mmu@gmail.com to assist you further on this matter. ',
+          'Feel free to contact our BarCamp team via itsoc.mmu@gmail.com to assist you further on this matter. ',
       },
     ],
     gatherTown: [
@@ -245,7 +245,7 @@ const Index = ({ ...props }) => {
         title:
           'I cannot access the Gather.Town BarCamp Cyberjaya 2021 Server, what should I do?',
         content:
-          'Feel free to contact our Barcamp team via itsoc.mmu@gmail.com to assist you further on this matter. ',
+          'Feel free to contact our BarCamp team via itsoc.mmu@gmail.com to assist you further on this matter. ',
       },
       {
         idx: 3,

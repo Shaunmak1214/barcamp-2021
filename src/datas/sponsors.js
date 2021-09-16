@@ -1,4 +1,4 @@
-import { BarcampFullLogo } from '../assets';
+import { BarCampFullLogo } from '../assets';
 
 const platinumSponsor = {
   type: 'Platinum',
@@ -6,15 +6,15 @@ const platinumSponsor = {
   sponsors: [
     {
       idx: 0,
-      imageSrc: BarcampFullLogo,
+      imageSrc: BarCampFullLogo,
     },
     {
       idx: 2,
-      imageSrc: BarcampFullLogo,
+      imageSrc: BarCampFullLogo,
     },
     {
       idx: 3,
-      imageSrc: BarcampFullLogo,
+      imageSrc: BarCampFullLogo,
     },
   ],
 };
@@ -25,19 +25,19 @@ const goldSponsor = {
   sponsors: [
     {
       idx: 0,
-      imageSrc: BarcampFullLogo,
+      imageSrc: BarCampFullLogo,
     },
     {
       idx: 2,
-      imageSrc: BarcampFullLogo,
+      imageSrc: BarCampFullLogo,
     },
     {
       idx: 3,
-      imageSrc: BarcampFullLogo,
+      imageSrc: BarCampFullLogo,
     },
     {
       idx: 4,
-      imageSrc: BarcampFullLogo,
+      imageSrc: BarCampFullLogo,
     },
   ],
 };
@@ -48,23 +48,23 @@ const silverSponsor = {
   sponsors: [
     {
       idx: 0,
-      imageSrc: BarcampFullLogo,
+      imageSrc: BarCampFullLogo,
     },
     {
       idx: 2,
-      imageSrc: BarcampFullLogo,
+      imageSrc: BarCampFullLogo,
     },
     {
       idx: 4,
-      imageSrc: BarcampFullLogo,
+      imageSrc: BarCampFullLogo,
     },
     {
       idx: 5,
-      imageSrc: BarcampFullLogo,
+      imageSrc: BarCampFullLogo,
     },
     {
       idx: 6,
-      imageSrc: BarcampFullLogo,
+      imageSrc: BarCampFullLogo,
     },
   ],
 };

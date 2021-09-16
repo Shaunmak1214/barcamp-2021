@@ -82,10 +82,10 @@ const Login = () => {
               pr={[10, 0, 20]}
             >
               <Text as="h1" fontSize="4xl" fontWeight="600">
-                WELCOME TO BARCAMP 2021!
+                WELCOME TO BarCamp 2021!
               </Text>
               <Text as="h2" fontSize="xl" fontWeight="300">
-                Login with your google account to participate Barcamp 2021 now!
+                Login with your google account to participate BarCamp 2021 now!
                 We only use this authentication to get your email and protect
                 the app from unauthorised input.
               </Text>
@@ -101,7 +101,7 @@ const Login = () => {
                     px="50"
                     py="6"
                   >
-                    Login to barcamp
+                    Login to BarCamp
                   </PrimaryButton>
                 )}
                 autoLoad={false}

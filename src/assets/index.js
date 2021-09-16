@@ -2,7 +2,7 @@
 import CountDownGif from './gif/countdown.gif';
 
 // Icons (SVG)
-import BarcampFavicon from './svgs/barcamp-favicon.svg';
+import BarCampFavicon from './svgs/BarCamp-favicon.svg';
 import BurgerDivIcon from './svgs/burger-div.svg';
 import ProposePic from './jpg-pngs/propose.png';
 import MenuIcon from './svgs/menu.svg';
@@ -43,8 +43,8 @@ import Splash1 from './jpg-pngs/splash-1.png';
 import VotingPic from './jpg-pngs/votingPic.png';
 import SectionBg from './jpg-pngs/section-bg.png';
 import AuronexLogo from './jpg-pngs/auronex.png';
-import BarcampLandingImg from './jpg-pngs/landing.png';
-import BarcampLandingImgMobile from './jpg-pngs/barcamp-landing-mobile.png';
+import BarCampLandingImg from './jpg-pngs/landing.png';
+import BarCampLandingImgMobile from './jpg-pngs/BarCamp-landing-mobile.png';
 import LinearBorder from './jpg-pngs/linear-border.png';
 import SamplePicOne from './jpg-pngs/gallery1.png';
 import SamplePicTwo from './jpg-pngs/gallery2.png';
@@ -52,25 +52,25 @@ import SamplePicThree from './jpg-pngs/gallery3.png';
 import SamplePicFour from './jpg-pngs/gallery4.png';
 import SamplePicFive from './jpg-pngs/gallery5.png';
 import SamplePicSix from './jpg-pngs/gallery6.png';
-import Agenda from './jpg-pngs/barcamp-agenda.png';
+import Agenda from './jpg-pngs/BarCamp-agenda.png';
 import LoginBanner from './jpg-pngs/login.png';
 
 // Pictures (JPG)
 import SectionBgTwo from './jpg-pngs/section-bg2.jpg';
 
 // Pictures (SVG)
-import BarcampWhiteLogo from './svgs/barcamp-white-logo.svg';
-import BarcampFullLogo from './svgs/barcamp-logo.svg';
+import BarCampWhiteLogo from './svgs/BarCamp-white-logo.svg';
+import BarCampFullLogo from './svgs/BarCamp-logo.svg';
 
 // PDFS
-import SponsorshipProposal from './pdfs/Barcamp Cyberjaya 2021 Sponsorship Proposal.pdf';
+import SponsorshipProposal from './pdfs/BarCamp Cyberjaya 2021 Sponsorship Proposal.pdf';
 
 export {
-  BarcampFullLogo,
-  BarcampLandingImg,
-  BarcampLandingImgMobile,
-  BarcampWhiteLogo,
-  BarcampFavicon,
+  BarCampFullLogo,
+  BarCampLandingImg,
+  BarCampLandingImgMobile,
+  BarCampWhiteLogo,
+  BarCampFavicon,
   AuronexLogo,
   PlatinumIcon,
   SectionBg,
