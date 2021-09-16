@@ -104,7 +104,7 @@ const Dashboard = () => {
             <Text fontSize="lg" py="40px">
               Uh,sorry, the proposing topic session is closed but the voting
               session is opening now. You may proceed to vote for your desired
-              topic in the next section. Please contact Barcamp team if you have
+              topic in the next section. Please contact BarCamp team if you have
               any inquiries.
             </Text>
           }
@@ -128,7 +128,7 @@ const Dashboard = () => {
               content={
                 <Text fontSize="lg" color="#858585" mt="5">
                   You haven&apos;t proposed any topic yet. If you are
-                  volunteering to share anything in Barcamp, kindly keep in mind
+                  volunteering to share anything in BarCamp, kindly keep in mind
                   that the last day of proposing a topic is on
                   <span style={{ fontWeight: 'bold' }}> 24 September 2021</span>
                   .
@@ -152,7 +152,7 @@ const Dashboard = () => {
               Voting will open on{' '}
               <span style={{ fontWeight: 600 }}>25 September! </span>Please
               remember to check back and vote for your topics then! Please
-              contact Barcamp team if you have any inquiries.
+              contact BarCamp team if you have any inquiries.
             </Text>
           }
           leadingIcon={NoMessageIcon}
@@ -183,7 +183,7 @@ const Dashboard = () => {
                 <Text fontSize="lg" color="#858585" mt="5">
                   You haven&apos;t voted for any topic yet. Vote for your
                   desired topic now, the topic which gets the most vote will be
-                  held on Barcamp. Kindly keep in mind that the last day for
+                  held on BarCamp. Kindly keep in mind that the last day for
                   voting is on{' '}
                   <span style={{ fontWeight: 'bold' }}>
                     30 September 2021.{' '}
@@ -210,7 +210,7 @@ const Dashboard = () => {
               .However, the announcement of the finalized list of voted topics
               will be made on
               <span style={{ fontWeight: 'bold' }}> 1 October 2021 </span>
-              (one day before Barcamp). We will notify you via email if you have
+              (one day before BarCamp). We will notify you via email if you have
               been selected to share.
             </Text>
           }
@@ -241,7 +241,7 @@ const Dashboard = () => {
               theme=""
               content={
                 <Text fontSize="lg" py="26px">
-                  Error in retrieving the leaderboard. Please contact Barcamp
+                  Error in retrieving the leaderboard. Please contact BarCamp
                 </Text>
               }
               leadingIcon={ResultIcon}
@@ -285,16 +285,16 @@ const Dashboard = () => {
               pr={[10, 0, 20]}
             >
               <Text as="h1" fontSize="4xl" fontWeight="600">
-                WELCOME TO BARCAMP 2021!
+                WELCOME TO BarCamp 2021!
               </Text>
               <Text fontSize="lg" fontWeight="300" color="#DA020E" mt="0">
-                You are one of the participants in Barcamp 2021 now!
+                You are one of the participants in BarCamp 2021 now!
               </Text>
               <BCSpacer size="3xs" />
               <Text as="h2" fontSize="xl" fontWeight="300">
-                Propose any interesting topic that you want to share in Barcamp.
+                Propose any interesting topic that you want to share in BarCamp.
                 A voting session will be conducted soon to select the topics for
-                the day of Barcamp.
+                the day of BarCamp.
               </Text>
               <BCSpacer size="sm" />
               <SimpleGrid columns={[1, 1, 2]}>

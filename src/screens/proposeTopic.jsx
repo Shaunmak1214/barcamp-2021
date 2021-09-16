@@ -202,7 +202,7 @@ const ProposeTopic = () => {
                 <Text as="h2" fontSize="xl" fontWeight="300">
                   Let’s brings people together to share their passion with
                   topics surrounding tech, non-tech and nonsense. There is no
-                  preset sharing for Barcamp like usual conferences. Feel free
+                  preset sharing for BarCamp like usual conferences. Feel free
                   to propose anything to share your thought below.
                 </Text>
                 <BCSpacer size="sm" />

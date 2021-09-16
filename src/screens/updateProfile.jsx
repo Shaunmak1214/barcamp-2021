@@ -174,7 +174,7 @@ const updateProfile = () => {
           <BCSpacer size="3xs" />
           <Text fontSize="xl" color="#797979">
             Please take a moment to complete your profile for starting your
-            journey as a Barcamper.
+            journey as a BarCamper.
           </Text>
 
           <BCSpacer size="md" />
@@ -272,7 +272,7 @@ const updateProfile = () => {
                       fontWeight="500"
                       fontSize="md"
                     >
-                      How do you know about Barcamp Cyberjaya?{' '}
+                      How do you know about BarCamp Cyberjaya?{' '}
                       <span style={{ color: '#C2C2C2' }}> (optional)</span>
                     </Text>
                     <Box w="100%" h="100%" py="5" borderRadius="8px">
