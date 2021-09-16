@@ -16,7 +16,7 @@ const SectionTitle = ({ type, ...props }) => {
         {children}
         <Box
           position="absolute"
-          bottom="-18px"
+          bottom="-10px"
           left="0px"
           h="3px"
           w="80px"
@@ -37,7 +37,7 @@ const SectionTitle = ({ type, ...props }) => {
           {children}
           <Box
             position="absolute"
-            bottom="-15px"
+            bottom="-10px"
             h="3px"
             w="90px"
             bg="linear-gradient(90deg, #5BA4FF 0%, #FF5E66 100%)"
@@ -58,7 +58,7 @@ const SectionTitle = ({ type, ...props }) => {
           {children}
           <Box
             position="absolute"
-            bottom="-15px"
+            bottom="-10px"
             h="3px"
             w="90px"
             bg="linear-gradient(90deg, #5BA4FF 0%, #FF5E66 100%)"

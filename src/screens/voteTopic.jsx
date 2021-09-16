@@ -16,6 +16,7 @@ import {
   Flex,
   Box,
   Image,
+  useToast,
 } from '@chakra-ui/react';
 
 import { PrimaryButton } from '../components/Buttons';
@@ -46,6 +47,7 @@ const voteTopic = () => {
   const token = store.getState().auth.accessToken;
 
   const { scrollToRef, executeScroll } = useScrollTo();
+  const toast = useToast();
   const { isOpen, onModalClose, onModalOpen } = useModal({
     initialState: false,
   });
@@ -143,7 +145,17 @@ const voteTopic = () => {
         onModalOpen();
         executeScroll();
       } else if (res) {
-        window.location.href = '/dashboard';
+        toast({
+          title: 'Update Profile Successfully.',
+          position: 'top-right',
+          variant: 'top-accent',
+          status: 'success',
+          duration: 9000,
+          isClosable: true,
+        });
+        setTimeout(() => {
+          window.location.href = '/dashboard';
+        }, 1000);
       }
     },
   );
@@ -255,6 +267,7 @@ const voteTopic = () => {
             flexDir="column"
             alignItems="center"
             justifyContent="center"
+            mt="10"
           >
             <Container maxW="container.xl">
               <InfoBlock
@@ -434,6 +447,7 @@ const voteTopic = () => {
             flexDir="column"
             alignItems="center"
             justifyContent="center"
+            mt="10"
           >
             <Container maxW="container.xl">
               <InfoBlock
@@ -450,6 +464,7 @@ const voteTopic = () => {
             flexDir="column"
             alignItems="center"
             justifyContent="center"
+            mt="10"
           >
             <Container maxW="container.xl">
               <InfoBlock
