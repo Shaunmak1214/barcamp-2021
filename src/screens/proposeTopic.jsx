@@ -339,7 +339,7 @@ const ProposeTopic = () => {
                       <Field
                         label="A short description of yourself"
                         name="description"
-                        placeholder="I'm from ... "
+                        placeholder="I'm a ... "
                         maxLength={100}
                         component={BCTextAreaField}
                       />
@@ -359,7 +359,7 @@ const ProposeTopic = () => {
                       <Field
                         label="Topic Name"
                         name="topicName"
-                        placeholder="What if the earth is flat??!!"
+                        placeholder="How coding is more like baking a pie than reading a book."
                         component={BCTextFormField}
                       />
 

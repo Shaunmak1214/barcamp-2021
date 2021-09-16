@@ -258,12 +258,11 @@ const updateProfile = () => {
                   <Field
                     label="Name of Company / Name of Institution *"
                     name="noc"
-                    placeholder="Enter your company name or university name *"
+                    placeholder="Enter your company name or university name "
                     component={BCTextFilledFormField}
                     customLabel={
                       <Text fontSize="md" color="#1A202C">
-                        Name of Company / Name of Institution{' '}
-                        <span style={{ color: 'red' }}>*</span>
+                        Name of Company / Name of Institution
                       </Text>
                     }
                   />

@@ -149,13 +149,10 @@ const Dashboard = () => {
           theme=""
           content={
             <Text fontSize="lg" py="40px">
-              Uh, sorry, the voting session is{' '}
-              <span style={{ fontWeight: 600 }}>
-                either over or yet to be started ( starting from 25 September
-                until 30 September)
-              </span>
-              . In that case kindly check back later. Please contact Barcamp
-              team if you have any inquiries.
+              Voting will open on{' '}
+              <span style={{ fontWeight: 600 }}>25 September! </span>Please
+              remember to check back and vote for your topics then! Please
+              contact Barcamp team if you have any inquiries.
             </Text>
           }
           leadingIcon={NoMessageIcon}

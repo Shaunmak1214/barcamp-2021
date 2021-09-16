@@ -78,7 +78,9 @@ const Index = () => {
         <Container maxW="container.xl">
           <VStack w={['100%', '50%', '35%']} alignItems="flex-start">
             <Heading fontSize="3xl" fontWeight="400" lineHeight="1.5">
-              We bring people together to share their passion around technology.
+              We bring people who are passionate about sharing to learn from
+              each other. We do a lot of tech conversations, but we welcome all
+              topics!
             </Heading>
             <BCSpacer size="sm" />
             <PrimaryButton
@@ -100,7 +102,7 @@ const Index = () => {
           alignItems="center"
         >
           <Heading textAlign="center" fontSize="3xl">
-            We can&apos;t wait to show you what we&apos;ve got prepared
+            We can&apos;t wait for the sharing to begin!
           </Heading>
           <Box
             position="relative"
@@ -214,7 +216,7 @@ const Index = () => {
         >
           <Text color="#ffffff" textAlign="center" fontSize={['lg', '2xl']}>
             Barcamp Cyberjaya is an annual user-generated unconference with
-            topics surrounding technology and entrepreneurships.
+            topics surrounding technology and entrepreneurship.
           </Text>
         </Container>
 
