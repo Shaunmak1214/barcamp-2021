@@ -48,6 +48,7 @@ const voteTopic = () => {
 
   const { scrollToRef, executeScroll } = useScrollTo();
   const toast = useToast();
+  const limitToast = useToast();
   const { isOpen, onModalClose, onModalOpen } = useModal({
     initialState: false,
   });
@@ -146,7 +147,7 @@ const voteTopic = () => {
         executeScroll();
       } else if (res) {
         toast({
-          title: 'Update Profile Successfully.',
+          title: 'Votes Submitted!',
           position: 'top-right',
           variant: 'top-accent',
           status: 'success',
@@ -335,9 +336,22 @@ const voteTopic = () => {
                     >
                       <Text>{votes.length} / 5 selected</Text>
                     </Center>
-                    <Text as="h2" fontSize="md" fontWeight="500">
-                      Only <span className="gradientText">FIVE</span> selections
-                      per participant
+                    <Text
+                      as="h2"
+                      fontSize="md"
+                      fontWeight="500"
+                      d="flex"
+                      alignItems="center"
+                    >
+                      Must submit exactly{' '}
+                      <span
+                        className="gradientText"
+                        style={{ marginLeft: '3px', marginRight: '3px' }}
+                      >
+                        {' '}
+                        FIVE{' '}
+                      </span>{' '}
+                      selections
                     </Text>
                   </Flex>
                 </Flex>
@@ -381,6 +395,14 @@ const voteTopic = () => {
                             onSelect={(value, selected) =>
                               onSelect(value, selected)
                             }
+                            onLimitClick={() => {
+                              limitToast({
+                                title: `Can only select 5 votes`,
+                                position: 'top-right',
+                                status: 'warning',
+                                isClosable: true,
+                              });
+                            }}
                             disabledSelect={votes.length >= 5 ? true : false}
                           >
                             <HStack

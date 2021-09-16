@@ -12,6 +12,7 @@ export class Index extends Component {
     return {
       value: PropTypes.string,
       onSelect: PropTypes.func,
+      onLimitClick: PropTypes.func,
       children: PropTypes.node,
       props: PropTypes.object,
       disabledSelect: PropTypes.bool,
@@ -32,7 +33,7 @@ export class Index extends Component {
           this.props.onSelect(this.props.value, this.state.selected);
         });
       } else {
-        return;
+        this.props.onLimitClick();
       }
     } else {
       this.setState({ selected: !this.state.selected }, () => {
