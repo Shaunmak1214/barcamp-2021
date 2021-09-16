@@ -15,7 +15,7 @@ import { Image } from '@chakra-ui/image';
 import { Text } from '@chakra-ui/react';
 import store from '../../store/store';
 import {
-  BarcampWhiteLogo,
+  BarCampWhiteLogo,
   FacebookIcon,
   InstagramIcon,
   LinkedinIcon,
@@ -48,8 +48,8 @@ const Index = () => {
             <Image
               width="400px"
               height="auto"
-              src={BarcampWhiteLogo}
-              alt="Barcamp-logo"
+              src={BarCampWhiteLogo}
+              alt="BarCamp-logo"
               onClick={() => {
                 window.location.href = '/';
               }}
