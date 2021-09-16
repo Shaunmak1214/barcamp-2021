@@ -474,7 +474,13 @@ const voteTopic = () => {
             <Container maxW="container.xl">
               <InfoBlock
                 theme="error"
-                content={<Text>Not enough topic</Text>}
+                content={
+                  <Text>
+                    Uh, sorry. The proposing topic session is still in progress.
+                    The voting session will be opening soon. Please contact
+                    Barcamp team if you have any inquiries.
+                  </Text>
+                }
                 leadingIcon={NoMessageIcon}
               />
               <BCSpacer size="xs" />
@@ -491,7 +497,14 @@ const voteTopic = () => {
             <Container maxW="container.xl">
               <InfoBlock
                 theme="error"
-                content={<Text>Already voted</Text>}
+                content={
+                  <Text>
+                    You have already voted on the topics for this session. The
+                    final topic announcement will be made on 1 October 2021.
+                    Welcome to attend the sharing that you{"'"}d like to hear in
+                    Barcamp on 2 October 2021. See you soon!
+                  </Text>
+                }
                 leadingIcon={VotingIcon}
               />
               <BCSpacer size="xs" />

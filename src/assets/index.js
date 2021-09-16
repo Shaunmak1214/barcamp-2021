@@ -24,6 +24,7 @@ import ChampionIcon from './svgs/champion.svg';
 import SilverIcon from './svgs/silver.svg';
 import BronzeIcon from './svgs/bronze.svg';
 import SpeakerIcon from './svgs/speaker.svg';
+import DiscordOutlinedIcon from './svgs/discord-outlined.svg';
 
 // Icons (PNG)
 import NoMessageIcon from './jpg-pngs/no-message-icon.png';
@@ -117,4 +118,5 @@ export {
   BronzeIcon,
   SponsorshipProposal,
   SpeakerIcon,
+  DiscordOutlinedIcon,
 };

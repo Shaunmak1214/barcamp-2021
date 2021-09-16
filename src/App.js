@@ -1,6 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import * as Screens from './screens';
+import * as Comp from './components';
 import BCRoutes from './utils/BCRoutes';
 
 function App() {
@@ -69,6 +70,7 @@ function App() {
           component={Screens.Landing}
         />
       </Switch>
+      <Comp.Floater />
     </Router>
   );
 }
