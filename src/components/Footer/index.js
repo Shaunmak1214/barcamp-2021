@@ -93,6 +93,11 @@ const Index = () => {
                       {'>'} SPONSORS
                     </Text>
                   </Link>
+                  <Link href="mailto: itsoc.mmu@gmail.com">
+                    <Text fontSize="md" pb="10px">
+                      {'>'} CONTACT US
+                    </Text>
+                  </Link>
                 </Box>
               </VStack>
             </VStack>

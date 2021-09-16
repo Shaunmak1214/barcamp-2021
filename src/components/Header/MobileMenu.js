@@ -177,6 +177,11 @@ const MobileMenu = () => {
                 Sponsors
               </Text>
             </Link>
+            <Link href="mailto: itsoc.mmu@gmail.com">
+              <Text fontSize="sm" fontFamily="Montserrat" fontWeight="600">
+                Contact Us
+              </Text>
+            </Link>
           </VStack>
 
           {authState.isAuthenticated ? (
