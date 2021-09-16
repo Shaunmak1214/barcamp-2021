@@ -6,9 +6,12 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ChakraProvider } from '@chakra-ui/react';
+import ReactGA from 'react-ga';
 
 import store from './store/store';
 import theme from './utils/theme';
+
+ReactGA.initialize('UA-66076187-9');
 
 ReactDOM.render(
   <BrowserRouter>
