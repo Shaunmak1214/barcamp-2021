@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { LOGOUT } from '../../reducers/authSlice';
 import PropTypes from 'prop-types';
+import ReactGA from 'react-ga';
 
 import { Image } from '@chakra-ui/image';
 import {
@@ -136,6 +137,10 @@ const Index = ({ cta, type }) => {
 
   useEffect(() => {
     window.addEventListener('scroll', (e) => handleScroll(e));
+
+    // Google Analytics
+    ReactGA.pageview(window.location.pathname + window.location.search);
+
     return () => {
       window.removeEventListener('scroll', (e) => handleScroll(e));
     };

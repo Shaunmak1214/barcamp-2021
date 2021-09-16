@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import * as yup from 'yup';
 import { Formik, Form, Field } from 'formik';
@@ -58,6 +58,9 @@ const schema = yup.object({
 });
 
 const ProposeTopic = () => {
+  const viewRef = useRef(null);
+  const permanentRef = useRef(null);
+
   const { scrollToRef, executeScroll } = useScrollTo();
   const toast = useToast();
 
@@ -92,7 +95,7 @@ const ProposeTopic = () => {
         onModalOpen();
       } else if (res) {
         toast({
-          title: 'Update Profile Successfully.',
+          title: 'Topics Submitted!',
           position: 'top-right',
           variant: 'top-accent',
           status: 'success',
@@ -127,8 +130,12 @@ const ProposeTopic = () => {
     },
   );
 
-  const handleConsentCheck = (e) => {
-    setChecked(e.target.checked);
+  const handleConsentCheck = () => {
+    if (permanentRef.current.checked && viewRef.current.checked) {
+      setChecked(true);
+    } else {
+      setChecked(false);
+    }
   };
 
   useEffect(() => {
@@ -364,10 +371,27 @@ const ProposeTopic = () => {
                         component={BCTextAreaField}
                       />
 
-                      <Checkbox size="lg" pl="5" onChange={handleConsentCheck}>
-                        <Text fontSize="md">
-                          When you propose a topic, you are aware that other
-                          users can view your topic and information as a sharer.{' '}
+                      <Checkbox
+                        ref={viewRef}
+                        size="lg"
+                        pl="5"
+                        onChange={handleConsentCheck}
+                      >
+                        <Text fontSize="md" ml="5px">
+                          I{"'"}m aware that other users can view your topic and
+                          information as a sharer.{' '}
+                        </Text>
+                      </Checkbox>
+
+                      <Checkbox
+                        ref={permanentRef}
+                        size="lg"
+                        pl="5"
+                        onChange={handleConsentCheck}
+                      >
+                        <Text fontSize="md" ml="5px">
+                          I{"'"}m aware that the information I submit will be
+                          permanent and cannot be changed.
                         </Text>
                       </Checkbox>
 
