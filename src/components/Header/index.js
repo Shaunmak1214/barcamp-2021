@@ -17,7 +17,7 @@ import {
 import { Text } from '@chakra-ui/react';
 
 import { PrimaryButton } from '../Buttons';
-import { BarcampFullLogo, DownIcon, PlatinumIcon } from '../../assets/';
+import { BarCampFullLogo, DownIcon, PlatinumIcon } from '../../assets/';
 import MobileMenu from './MobileMenu';
 import store from '../../store/store';
 
@@ -167,7 +167,7 @@ const Index = ({ cta, type }) => {
             cursor="pointer"
             width="200px"
             height="auto"
-            src={BarcampFullLogo}
+            src={BarCampFullLogo}
             alt="Logo"
           />
           {mobileSize && <MobileMenu />}
@@ -277,7 +277,7 @@ const Index = ({ cta, type }) => {
                   </>
                 ) : (
                   <Link href="/login" py="3">
-                    <Text fontSize="sm">Login to barcamp</Text>
+                    <Text fontSize="sm">Login to BarCamp</Text>
                   </Link>
                 )}
               </VStack>
@@ -331,7 +331,7 @@ const Index = ({ cta, type }) => {
               </VStack>
 
               <Center w="35%" p={5}>
-                <Image src={BarcampFullLogo} />
+                <Image src={BarCampFullLogo} />
               </Center>
             </HStack>
           </HStack>

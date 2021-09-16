@@ -1,5 +1,5 @@
 <h1 align="center">
-  <a href="#"><img src="https://res.cloudinary.com/shaun-storage/image/upload/v1630294835/barcamp-logo_3_p7gvhg.png" alt="Barcamp Cyberjaya" width="100%"></a>
+  <a href="#"><img src="https://res.cloudinary.com/shaun-storage/image/upload/v1630294835/BarCamp-logo_3_p7gvhg.png" alt="BarCamp Cyberjaya" width="100%"></a>
 </h1>
 
 <p align="center">

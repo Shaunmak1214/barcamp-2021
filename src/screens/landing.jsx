@@ -24,8 +24,8 @@ import Banner from '../components/Banner';
 import { useCountdown } from '../hooks';
 
 import {
-  BarcampLandingImg,
-  BarcampLandingImgMobile,
+  BarCampLandingImg,
+  BarCampLandingImgMobile,
   ShareIcon,
   IconContainer,
   TrainingIcon,
@@ -53,14 +53,14 @@ const Index = () => {
       return (
         <Image
           position="absolute"
-          src={BarcampLandingImgMobile}
+          src={BarCampLandingImgMobile}
           w="100%"
           h="100%"
         />
       );
     } else {
       return (
-        <Image position="absolute" src={BarcampLandingImg} w="100%" h="100%" />
+        <Image position="absolute" src={BarCampLandingImg} w="100%" h="100%" />
       );
     }
   };
@@ -78,7 +78,7 @@ const Index = () => {
         <Container maxW="container.xl">
           <VStack w={['100%', '50%', '35%']} alignItems="flex-start">
             <Heading fontSize="3xl" fontWeight="400" lineHeight="1.5">
-              We bring people together to share their passion around technology.
+              We bring people together to share their passion around technology
             </Heading>
             <BCSpacer size="sm" />
             <PrimaryButton
@@ -100,7 +100,7 @@ const Index = () => {
           alignItems="center"
         >
           <Heading textAlign="center" fontSize="3xl">
-            We can&apos;t wait to show you what we&apos;ve got prepared
+            We can&apos;t wait for the sharing to begin!
           </Heading>
           <Box
             position="relative"
@@ -202,7 +202,7 @@ const Index = () => {
       >
         <Container maxW="container.xl">
           <SectionTitle type="center" color="#ffffff" alignItems="flex-start">
-            What is Barcamp?
+            What is BarCamp?
           </SectionTitle>
         </Container>
         <Container
@@ -212,9 +212,13 @@ const Index = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <Text color="#ffffff" textAlign="center" fontSize={['lg', '2xl']}>
-            Barcamp Cyberjaya is an annual user-generated unconference with
-            topics surrounding technology and entrepreneurships.
+          <Text color="#ffffff" textAlign="center" fontSize={['md', 'xl']}>
+            BarCamp Cyberjaya is an annual user-generated unconference with
+            topics surrounding technology and entrepreneurship. What this means
+            is that we gather, everyone proposes what they{"'"}d like to share
+            and talk about, we vote on the topics we{"'"}re interested in, and
+            off we go to listen and learn. Join us and bring your passion for
+            sharing!
           </Text>
         </Container>
 
