@@ -55,7 +55,11 @@ export class Index extends Component {
           border="1px solid #E9E9E9;"
           borderRadius="8px"
           mb="5"
-          cursor="pointer"
+          cursor={
+            this.props.disabledSelect && !this.state.selected
+              ? 'not-allowed'
+              : 'pointer'
+          }
           wordBreak="break-all"
           transition="all 0.1s ease-in-out"
           onClick={() => this.handleSelect()}

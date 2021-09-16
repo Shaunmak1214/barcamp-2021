@@ -229,7 +229,7 @@ const voteTopic = () => {
                 </Text>
                 <Text as="h2" fontSize="xl" fontWeight="300">
                   Everyone votes, everyone shares the insight. The topics that
-                  get the most votes will be held on the day of Barcamp. Vote
+                  get the most votes will be held on the day of BarCamp. Vote
                   your desired topics that you&apos;d like to hear below.
                 </Text>
                 <BCSpacer size="2xs" />
@@ -281,7 +281,7 @@ const voteTopic = () => {
                       September until 30 September)
                     </span>
                     . In that case kindly check back later. Please contact
-                    Barcamp team if you have any inquiries
+                    BarCamp team if you have any inquiries
                   </Text>
                 }
                 leadingIcon={NoMessageIcon}
@@ -474,7 +474,13 @@ const voteTopic = () => {
             <Container maxW="container.xl">
               <InfoBlock
                 theme="error"
-                content={<Text>Not enough topic</Text>}
+                content={
+                  <Text>
+                    Uh, sorry. The proposing topic session is still in progress.
+                    The voting session will be opening soon. Please contact
+                    BarCamp team if you have any inquiries.
+                  </Text>
+                }
                 leadingIcon={NoMessageIcon}
               />
               <BCSpacer size="xs" />
@@ -491,7 +497,14 @@ const voteTopic = () => {
             <Container maxW="container.xl">
               <InfoBlock
                 theme="error"
-                content={<Text>Already voted</Text>}
+                content={
+                  <Text>
+                    You have already voted on the topics for this session. The
+                    final topic announcement will be made on 1 October 2021.
+                    Welcome to attend the sharing that you{"'"}d like to hear in
+                    BarCamp on 2 October 2021. See you soon!
+                  </Text>
+                }
                 leadingIcon={VotingIcon}
               />
               <BCSpacer size="xs" />

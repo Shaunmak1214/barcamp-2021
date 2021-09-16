@@ -67,7 +67,7 @@ const MobileMenu = () => {
         justifyContent="flex-start"
         bg="#fff"
         minW="92vw"
-        h="92vh"
+        h="85vh"
         position="absolute"
         top="20px"
         left="50%"
@@ -175,6 +175,11 @@ const MobileMenu = () => {
             <Link href="/#sponsors">
               <Text fontSize="sm" fontFamily="Montserrat" fontWeight="600">
                 Sponsors
+              </Text>
+            </Link>
+            <Link href="mailto: itsoc.mmu@gmail.com">
+              <Text fontSize="sm" fontFamily="Montserrat" fontWeight="600">
+                Contact Us
               </Text>
             </Link>
           </VStack>

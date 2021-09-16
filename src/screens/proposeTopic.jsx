@@ -202,7 +202,7 @@ const ProposeTopic = () => {
                 <Text as="h2" fontSize="xl" fontWeight="300">
                   Let’s brings people together to share their passion with
                   topics surrounding tech, non-tech and nonsense. There is no
-                  preset sharing for Barcamp like usual conferences. Feel free
+                  preset sharing for BarCamp like usual conferences. Feel free
                   to propose anything to share your thought below.
                 </Text>
                 <BCSpacer size="sm" />
@@ -339,7 +339,7 @@ const ProposeTopic = () => {
                       <Field
                         label="A short description of yourself"
                         name="description"
-                        placeholder="I'm from ... "
+                        placeholder="I'm a ... "
                         maxLength={100}
                         component={BCTextAreaField}
                       />
@@ -359,7 +359,7 @@ const ProposeTopic = () => {
                       <Field
                         label="Topic Name"
                         name="topicName"
-                        placeholder="What if the earth is flat??!!"
+                        placeholder="How coding is more like baking a pie than reading a book."
                         component={BCTextFormField}
                       />
 
