@@ -67,7 +67,7 @@ const MobileMenu = () => {
         justifyContent="flex-start"
         bg="#fff"
         minW="92vw"
-        h="92vh"
+        h="85vh"
         position="absolute"
         top="20px"
         left="50%"
