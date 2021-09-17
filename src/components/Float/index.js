@@ -1,10 +1,12 @@
 import { HStack, Link, Text } from '@chakra-ui/layout';
-import { Image } from '@chakra-ui/react';
+import { Image, useToast } from '@chakra-ui/react';
 import React from 'react';
 
 import { DiscordOutlinedIcon } from '../../assets';
 
 const Index = () => {
+  const toast = useToast();
+
   return (
     <HStack position="fixed" bottom="20px" right="20px" zIndex="1001">
       <Link
@@ -17,7 +19,15 @@ const Index = () => {
         d="flex"
         flexDir="row"
         alignItems="center"
-        href="#"
+        onClick={() => {
+          toast({
+            title: `Our discord server will be available soon`,
+            status: 'info',
+            position: 'top-right',
+            duration: 5000,
+            isClosable: true,
+          });
+        }}
       >
         <Image
           src={DiscordOutlinedIcon}
