@@ -49,10 +49,7 @@ const schema = yup.object({
     .string()
     .required('Contact Number is required')
     .matches(phoneRegExp, 'Phone number is not valid'),
-  noc: yup
-    .string()
-    .required('Name of Company/ Name of Institution is required')
-    .min(1),
+  noc: yup.string().typeError('Name of company or institution is not valid'),
   value: yup.string().notRequired(),
 });
 

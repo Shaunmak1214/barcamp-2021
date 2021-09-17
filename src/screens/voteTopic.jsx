@@ -23,7 +23,6 @@ import { PrimaryButton } from '../components/Buttons';
 import { SectionTitle } from 'components/SectionTitle';
 import { SelectFormFieldClass } from '../components/Forms';
 import BCSpacer from '../components/Spacer';
-import TopicBadge from '../components/TopicBadge';
 import InfoBlock from 'components/InfoBlock';
 import BCModal from './../components/Modal';
 import Loader from '../components/Loader';
@@ -392,9 +391,11 @@ const voteTopic = () => {
                           <SelectFormFieldClass
                             key={idx}
                             value={`${topic._id}`}
+                            topic={topic}
                             onSelect={(value, selected) =>
                               onSelect(value, selected)
                             }
+                            TopicIconRenderer={TopicIconRenderer}
                             onLimitClick={() => {
                               limitToast({
                                 title: `Can only select 5 votes`,
@@ -404,40 +405,7 @@ const voteTopic = () => {
                               });
                             }}
                             disabledSelect={votes.length >= 5 ? true : false}
-                          >
-                            <HStack
-                              spacing={[0, 0, 7]}
-                              py="0.5em"
-                              px={['0rem', '0rem', '0.5em']}
-                            >
-                              <Image
-                                src={TopicIconRenderer(topic.theme)}
-                                d={['none', 'none', 'flex']}
-                                h="45px"
-                                w="45px"
-                                alt="Artificial Intelligence"
-                              />
-                              <VStack spacing={2} align="flex-start" ml="0">
-                                <TopicBadge topic={topic.theme} />
-                                <Text
-                                  as="h3"
-                                  fontSize="md"
-                                  fontFamily="Montserrat"
-                                  fontWeight="600"
-                                >
-                                  {topic.name}
-                                </Text>
-                                <Text
-                                  as="h6"
-                                  fontSize="sm"
-                                  fontWeight="500"
-                                  wordBreak="break-all"
-                                >
-                                  {topic.description}
-                                </Text>
-                              </VStack>
-                            </HStack>
-                          </SelectFormFieldClass>
+                          ></SelectFormFieldClass>
                         ))}
                       </VStack>
 
