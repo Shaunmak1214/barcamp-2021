@@ -258,9 +258,9 @@ const Index = ({ cta, type }) => {
                     <Link href="/dashboard" py="3">
                       <Text fontSize="sm">Dashboard</Text>
                     </Link>
-                    <Link href="/vote-topic" py="3">
+                    {/* <Link href="/vote-topic" py="3">
                       <Text fontSize="sm">Vote Topics</Text>
-                    </Link>
+                    </Link> */}
                     <Link href="/propose-topic" py="3">
                       <Text fontSize="sm">Propose Topic</Text>
                     </Link>
