@@ -1,43 +1,34 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { GoogleLogin } from 'react-google-login';
 import { Redirect } from 'react-router';
-
 import { useDispatch } from 'react-redux';
-import { LOGIN } from '../reducers/authSlice';
-import store from '../store/store';
-
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 
-import { loadGoogleScript } from '../lib/GoogleLogin';
+import { LOGIN } from '../reducers/authSlice';
+import store from '../store/store';
 
 import { Image } from '@chakra-ui/image';
 import { Container, SimpleGrid, Text, VStack } from '@chakra-ui/layout';
-import { useToast } from '@chakra-ui/toast';
+
+import { PrimaryButton } from '../components/Buttons';
 import BCSpacer from '../components/Spacer';
 import { useAuthorized } from '../hooks';
-import { PrimaryButton } from '../components/Buttons';
+
 import { LoginBanner } from '../assets';
 
 require('dotenv').config();
 
-function Login() {
-  const toast = useToast();
+const Login = () => {
   const dispatch = useDispatch();
   const authStore = store.getState().auth;
   const { authorized, checkAuthorized } = useAuthorized('auth/check');
 
-  // eslint-disable-next-line
-  const [gapi, setGapi] = useState();
-  // eslint-disable-next-line
-  const [googleAuth, setGoogleAuth] = useState();
-
-  const onSuccess = async (googleUser) => {
-    const id_token = googleUser.getAuthResponse().id_token;
-
-    if (id_token) {
+  const handleGoogleLogin = async (googleData) => {
+    if (googleData) {
       await axios
         .post(`${process.env.REACT_APP_API_URL}auth/`, {
-          googleId: googleUser.$b.id_token,
+          googleId: googleData.tokenId,
         })
         .then((res) => {
           if (res.status === 201) {
@@ -55,65 +46,12 @@ function Login() {
           console.log(err);
         });
     } else {
-      toast({
-        title: `Google Login Failed`,
-        description: 'Use the chrome browser instead.',
-        variant: 'top-accent',
-        status: 'error',
-        isClosable: true,
-      });
+      console.log('error');
     }
-  };
-
-  const onFailure = () => {
-    toast({
-      title: `Google Login Failed`,
-      description: 'Use the chrome browser instead.',
-      variant: 'top-accent',
-      status: 'error',
-      isClosable: true,
-    });
-  };
-
-  // const logOut = () => {
-  //   // (Ref. 8)
-  //   (async () => {
-  //     await googleAuth.signOut();
-  //   })();
-  // };
-
-  const attachSignIn = (auth2) => {
-    auth2.attachClickHandler(
-      'google-signin',
-      {
-        scope: 'profile email',
-      },
-      onSuccess,
-      onFailure,
-    );
   };
 
   useEffect(() => {
     checkAuthorized();
-
-    // Window.gapi is available at this point
-    window.onGoogleScriptLoad = () => {
-      const _gapi = window.gapi;
-      setGapi(_gapi);
-
-      _gapi.load('auth2', () => {
-        (async () => {
-          const _googleAuth = await _gapi.auth2.init({
-            client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
-          });
-          setGoogleAuth(_googleAuth);
-          attachSignIn(_googleAuth);
-        })();
-      });
-    };
-
-    // Ensure everything is set before loading the script
-    loadGoogleScript(); // (Ref. 9)
   }, []);
 
   if (authStore.isAuthenticated && authorized) {
@@ -152,9 +90,29 @@ function Login() {
                 the app from unauthorised input.
               </Text>
               <BCSpacer size="2xs" />
-              <PrimaryButton id="google-signin" px="50" py="6">
-                Login to BarCamp
-              </PrimaryButton>
+              <GoogleLogin
+                clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`}
+                render={(renderProps) => (
+                  <PrimaryButton
+                    onClick={() => {
+                      renderProps.onClick();
+                    }}
+                    disabled={renderProps.disabled}
+                    px="50"
+                    py="6"
+                  >
+                    Login to BarCamp
+                  </PrimaryButton>
+                )}
+                autoLoad={false}
+                onAutoLoadFinished={() => {
+                  console.log('Google Login Loaded');
+                }}
+                buttonText="Log in with Google"
+                onSuccess={handleGoogleLogin}
+                onFailure={handleGoogleLogin}
+                cookiePolicy={'single_host_origin'}
+              />
             </VStack>
             <Image
               d={['none', 'none', 'block']}
@@ -166,6 +124,6 @@ function Login() {
       </VStack>
     </>
   );
-}
+};
 
 export default Login;
