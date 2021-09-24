@@ -9,8 +9,9 @@ import {
   Box,
   SimpleGrid,
   Heading,
+  Flex,
 } from '@chakra-ui/layout';
-import { Text } from '@chakra-ui/react';
+import { Text, CloseButton } from '@chakra-ui/react';
 import Lottie from 'react-lottie';
 
 import Faq from '../components/Faqs';
@@ -42,11 +43,13 @@ import {
 } from '../assets';
 
 import { Countdown } from '../constants';
+import { useState } from 'react';
 
 const Index = () => {
   const { daysRef, hoursRef, minutesRef, secondsRef } = useCountdown(
     'October 2, 2021 00:00:00',
   );
+  const [topicModalNotifierOpen, setTopicModalNotifierOpen] = useState(true);
 
   const LandingImgRenderer = () => {
     if (window.screen.width < 768) {
@@ -67,6 +70,51 @@ const Index = () => {
 
   return (
     <>
+      <Flex
+        display={topicModalNotifierOpen ? 'flex' : 'none'}
+        flexDir={['column', 'column', 'row']}
+        justifyContent="center"
+        alignItems="center"
+        zIndex="1001"
+        position="fixed"
+        bottom={['85px', '85px', '5']}
+        left="50%"
+        transform="translateX(-50%)"
+        bg="white"
+        boxShadow="0px 0px 10px rgba(0, 0, 0, 0.1)"
+        borderRadius="md"
+        py="0.8rem"
+        px="1.5rem"
+        w="fit-content"
+        maxW="90%"
+      >
+        <Text
+          w={['100%', '100%', '65%']}
+          mr={['0', '0', '5']}
+          mb={['10px', '10px', '0']}
+          textAlign="center"
+        >
+          Topic proposal session has been extended to{' '}
+          <span style={{ color: 'red' }}>30 September</span>!
+        </Text>
+        <PrimaryButton
+          onClick={() => {
+            window.location.href = '/propose-topic';
+          }}
+          mr={['0', '0', '5']}
+        >
+          Propose your topic
+        </PrimaryButton>
+        <CloseButton
+          position="absolute"
+          top="7px"
+          right="7px"
+          size="sm"
+          onClick={() => {
+            setTopicModalNotifierOpen(false);
+          }}
+        />
+      </Flex>
       <HStack
         position="relative"
         w="100%"
