@@ -236,7 +236,7 @@ const MobileMenu = () => {
               window.location.href = '/login';
             }}
           >
-            Join us now
+            Login / Register
           </PrimaryButton>
         </Center>
       </VStack>
