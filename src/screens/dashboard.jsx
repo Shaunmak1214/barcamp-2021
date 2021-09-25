@@ -17,9 +17,12 @@ import { SectionTitle } from 'components/SectionTitle';
 import InfoBlock from 'components/InfoBlock';
 import TopicBlock from 'components/TopicBlock';
 import Loader from '../components/Loader';
+import Lottie from 'react-lottie';
 
 import { useAxios } from '../hooks';
 import store from './../store/store';
+import useModal from '../components/Modal/useModal';
+import BCModal from '../components/Modal/index';
 
 import {
   ResultIcon,
@@ -28,6 +31,7 @@ import {
   SectionBg,
   NoMessageIcon,
 } from '../assets';
+import { BlackLoader } from '../constants';
 
 const Dashboard = () => {
   const authState = store.getState().auth;
@@ -38,9 +42,14 @@ const Dashboard = () => {
   const [leaderboard, setLeaderboard] = useState([]);
 
   // section close state
+
   const [voteSectionClose, setVoteSectionClose] = useState(false);
   const [voteResultClose, setVoteResultClose] = useState(false);
   const [proposeSectionClose, setProposeSectionClose] = useState(false);
+
+  const { isOpen, onModalClose, onModalOpen } = useModal({
+    initialState: false,
+  });
 
   const { loading: proposedLoading, fetch: getTopicsByUser } = useAxios(
     {
@@ -58,6 +67,23 @@ const Dashboard = () => {
         }
       } else if (res) {
         setUserTopic(res.data);
+      }
+    },
+  );
+
+  const { loading: deleteLoading, fetch: deleteUserVotes } = useAxios(
+    {
+      method: 'delete',
+      url: `/votes/${authState.user.userId}`,
+      headers: {
+        Authorization: `Bearer ${authState.accessToken}`,
+      },
+    },
+
+    (err, res) => {
+      if (err) {
+      } else if (res.status === 200) {
+        window.location.href = '/vote-topic';
       }
     },
   );
@@ -341,7 +367,7 @@ const Dashboard = () => {
                 >
                   {!voteSectionClose
                     ? votedTopics.length > 0
-                      ? 'Revert Vote'
+                      ? 'Already voted'
                       : 'Vote Topics'
                     : 'Vote Topics (Coming soon)'}
                 </PrimaryButton>
@@ -389,9 +415,28 @@ const Dashboard = () => {
               <SectionTitle fontSize="2xl" type="left" mb="10">
                 Your Voted Topic
               </SectionTitle>
-              <RevertButton onRevert={() => console.log('hello')}>
-                Revert Your Voted Topics
-              </RevertButton>
+              {votedTopics.length > 0 ? (
+                <>
+                  <RevertButton onOpen={onModalOpen}>
+                    <Text>Revert Your Voted Topics</Text>
+                  </RevertButton>
+                  <BCModal
+                    theme="normal"
+                    content={
+                      <>
+                        <Text as="h3" fontSize="xl" fontFamily="600">
+                          Are you sure you want to revert your votes?
+                        </Text>
+                      </>
+                    }
+                    modalOpen={isOpen}
+                    onClose={onModalClose}
+                    dialog={true}
+                    onDeleteVotes={deleteUserVotes}
+                    loading={deleteLoading}
+                  />
+                </>
+              ) : null}
             </Flex>
           </Container>
 

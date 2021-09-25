@@ -2,18 +2,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Lottie from 'react-lottie';
 
-import { VStack, Box } from '@chakra-ui/layout';
-import { IconButton } from '@chakra-ui/react';
+import { VStack, Box, Flex } from '@chakra-ui/layout';
+import { IconButton, Text } from '@chakra-ui/react';
 import { CloseIcon } from '@chakra-ui/icons';
 
 import BCSpacer from 'components/Spacer';
-import { PrimaryButton } from 'components/Buttons';
+import { PrimaryButton, SecondaryButton } from 'components/Buttons';
 
 import { CompleteLoader, ErrorLoader } from '../../constants';
-
+import Loader from '../Loader';
 import './modal.css';
 
-const Modal = ({ theme, successUrl, content, modalOpen, onClose }) => {
+const Modal = ({
+  theme,
+  successUrl,
+  content,
+  modalOpen,
+  onClose,
+  dialog,
+  onDeleteVotes,
+  loading,
+}) => {
   let animationData;
   const handleClose = () => {
     onClose();
@@ -21,11 +30,13 @@ const Modal = ({ theme, successUrl, content, modalOpen, onClose }) => {
       window.location.href = successUrl;
     }
   };
-
+  let animationLoader = true;
   if (theme === 'sucess') {
     animationData = CompleteLoader;
   } else if (theme === 'error') {
     animationData = ErrorLoader;
+  } else if (theme === 'normal') {
+    animationLoader = false;
   } else {
     animationData = CompleteLoader;
   }
@@ -77,15 +88,37 @@ const Modal = ({ theme, successUrl, content, modalOpen, onClose }) => {
 
         <BCSpacer size="3xs" />
 
-        <Lottie options={animationData} height={200} width={200} />
+        {animationLoader ? (
+          <Lottie options={animationData} height={200} width={200} />
+        ) : null}
 
         {content}
 
         <BCSpacer size="4xs" />
+        {dialog ? (
+          <>
+            <Flex justifyContent="space-between">
+              <PrimaryButton mr="15px" bg="#c4c4c4" _hover={{ bg: '#000000' }}>
+                Close
+              </PrimaryButton>
 
-        <PrimaryButton py="20px" px="85px" onClick={handleClose}>
-          Close
-        </PrimaryButton>
+              <SecondaryButton
+                onClick={() => onDeleteVotes()}
+                disabled={loading}
+              >
+                {loading ? (
+                  <Loader type="" size="md" />
+                ) : (
+                  <Text fontSize="md">Revert Votes</Text>
+                )}
+              </SecondaryButton>
+            </Flex>
+          </>
+        ) : (
+          <PrimaryButton py="20px" px="85px" onClick={handleClose}>
+            Close
+          </PrimaryButton>
+        )}
       </VStack>
     </>
   );
@@ -97,6 +130,9 @@ Modal.propTypes = {
   content: PropTypes.node,
   modalOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  dialog: PropTypes.bool,
+  onDeleteVotes: PropTypes.func,
+  loading: PropTypes.bool,
 };
 
 export default Modal;

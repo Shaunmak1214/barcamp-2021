@@ -2,6 +2,9 @@ import { Button } from '@chakra-ui/button';
 import { Text } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
+import { HStack } from '@chakra-ui/layout';
+import { Image } from '@chakra-ui/image';
+import { ReturnIconBlue, ReturnIconWhite } from 'assets';
 
 const PrimaryButton = React.forwardRef((props, ref) => (
   <Button
@@ -54,23 +57,38 @@ const RegisterButton = ({ ...props }) => {
   );
 };
 
-const RevertButton = ({ onRevert, ...props }) => {
+const RevertButton = ({ onOpen, ...props }) => {
   const children = props.children;
-  const textRef = useRef(null);
 
+  let imgRef = useRef(null);
   return (
     <Button
       variant="outlined"
       border="1px solid #1050A0"
+      minW="240px"
       borderRadius="7px"
-      px="10"
+      px="5"
       py="20px"
-      onClick={onRevert}
+      onClick={onOpen}
+      _hover={{ bg: '#1050A0', color: '#FFFFFF' }}
+      onMouseEnter={() => {
+        imgRef.current.src = ReturnIconWhite;
+      }}
+      onMouseLeave={() => {
+        imgRef.current.src = ReturnIconBlue;
+      }}
       {...props}
     >
-      <Text ref={textRef} as="h2" fontSize="16px" color="#1050A0">
-        {children}
-      </Text>
+      <HStack
+        justifyContent="space-between"
+        alignItems="center"
+        _hover={{ color: '#FFFFFF' }}
+      >
+        <Text as="h2" fontSize="16px">
+          {children}
+        </Text>
+        <Image ref={imgRef} src={ReturnIconBlue} />
+      </HStack>
     </Button>
   );
 };
@@ -115,9 +133,11 @@ SecondaryButton.propTypes = {
 };
 
 RevertButton.propTypes = {
-  onRevert: PropTypes.func,
+  onOpen: PropTypes.func,
+
   children: PropTypes.node.isRequired,
 };
+
 RegisterButton.propTypes = {
   children: PropTypes.node,
 };
