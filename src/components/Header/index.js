@@ -277,7 +277,7 @@ const Index = ({ cta, type }) => {
                   </>
                 ) : (
                   <Link href="/login" py="3">
-                    <Text fontSize="sm">Login to BarCamp</Text>
+                    <Text fontSize="sm">Login / Register</Text>
                   </Link>
                 )}
               </VStack>
@@ -295,7 +295,7 @@ const Index = ({ cta, type }) => {
                   window.location.href = '/login';
                 }}
               >
-                Join us now
+                Login / Register
               </PrimaryButton>
             )}
 

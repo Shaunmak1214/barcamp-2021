@@ -135,7 +135,7 @@ const Index = () => {
                 window.location.href = '/login';
               }}
             >
-              Join Us Now
+              Login / Register
             </PrimaryButton>
           </VStack>
         </Container>
