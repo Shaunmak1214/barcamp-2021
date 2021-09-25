@@ -7,9 +7,13 @@ import { IconButton, Text } from '@chakra-ui/react';
 import { CloseIcon } from '@chakra-ui/icons';
 
 import BCSpacer from 'components/Spacer';
-import { PrimaryButton, SecondaryButton } from 'components/Buttons';
+import {
+  PrimaryButton,
+  SecondaryButton,
+  MutedButton,
+} from 'components/Buttons';
 
-import { CompleteLoader, ErrorLoader } from '../../constants';
+import { CompleteLoader, ErrorLoader, TrashBin } from '../../constants';
 import Loader from '../Loader';
 import './modal.css';
 
@@ -90,26 +94,44 @@ const Modal = ({
 
         {animationLoader ? (
           <Lottie options={animationData} height={200} width={200} />
-        ) : null}
+        ) : (
+          <Box
+            d="flex"
+            justifyContent="center"
+            alignItems="center"
+            w={['200px', '200px', '350px']}
+          >
+            <Lottie options={TrashBin} height={150} width={370} />
+          </Box>
+        )}
 
         {content}
 
         <BCSpacer size="4xs" />
         {dialog ? (
           <>
-            <Flex justifyContent="space-between">
-              <PrimaryButton mr="15px" bg="#c4c4c4" _hover={{ bg: '#000000' }}>
+            <Flex
+              justifyContent="space-between"
+              flexDir={['column-reverse', 'column-reverse', 'row']}
+            >
+              <MutedButton
+                mr={[0, 0, '15px']}
+                bg="#c4c4c4"
+                _hover={{ bg: '#000000' }}
+                onClick={handleClose}
+              >
                 Close
-              </PrimaryButton>
+              </MutedButton>
 
               <SecondaryButton
                 onClick={() => onDeleteVotes()}
                 disabled={loading}
+                mb={['10px', 0, 0]}
               >
                 {loading ? (
                   <Loader type="" size="md" />
                 ) : (
-                  <Text fontSize="md">Revert Votes</Text>
+                  <Text>Revert Votes</Text>
                 )}
               </SecondaryButton>
             </Flex>

@@ -409,7 +409,8 @@ const Dashboard = () => {
         >
           <Container maxW="container.xl">
             <Flex
-              flexDir={['col', 'col', 'row']}
+              flexDir={['column', 'column', 'row']}
+              pb={['15px', 0, 0]}
               justifyContent="space-between"
             >
               <SectionTitle fontSize="2xl" type="left" mb="10">

@@ -4,7 +4,7 @@ import CompleteGifData from '../assets/lottie/complete-gif.json';
 import CountdownGifData from '../assets/lottie/countdown-gif.json';
 import ErrorGifData from '../assets/lottie/error-gif.json';
 import BCLoadingData from '../assets/lottie/bc-loading.json';
-
+import TrashGifData from '../assets/lottie/revert.json';
 require('dotenv').config();
 
 export const BlackLoader = {
@@ -58,6 +58,15 @@ export const BCLoader = {
   autoplay: true,
   speed: 10,
   animationData: BCLoadingData,
+  rendererSettings: {
+    preserveAspectRatio: 'xMidYMid slice',
+  },
+};
+
+export const TrashBin = {
+  loop: true,
+  autoplay: true,
+  animationData: TrashGifData,
   rendererSettings: {
     preserveAspectRatio: 'xMidYMid slice',
   },

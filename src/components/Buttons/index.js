@@ -93,6 +93,26 @@ const RevertButton = ({ onOpen, ...props }) => {
   );
 };
 
+const MutedButton = ({ ...props }) => {
+  let children = props.children;
+  return (
+    <Button
+      variant="disabled"
+      mr="15px"
+      bg="#c4c4c4"
+      _hover={{ bg: '#000000' }}
+      borderRadius="4px"
+      px="10"
+      py="20px"
+      {...props}
+    >
+      <Text as="h2" fontSize="md" color="white">
+        {children}
+      </Text>
+    </Button>
+  );
+};
+
 const FaqButton = ({ selected, ...props }) => {
   let textRef = useRef(null);
   let children = props.children;
@@ -138,6 +158,10 @@ RevertButton.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
+MutedButton.propTypes = {
+  children: PropTypes.node,
+};
+
 RegisterButton.propTypes = {
   children: PropTypes.node,
 };
@@ -153,4 +177,5 @@ export {
   FaqButton,
   RegisterButton,
   RevertButton,
+  MutedButton,
 };
