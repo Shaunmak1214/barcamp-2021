@@ -11,7 +11,8 @@ import jwt_decode from 'jwt-decode';
 import { loadGoogleScript } from '../lib/GoogleLogin';
 
 import { Image } from '@chakra-ui/image';
-import { Container, SimpleGrid, Text, VStack } from '@chakra-ui/layout';
+import { Container, SimpleGrid, Text, VStack, Flex } from '@chakra-ui/layout';
+import { CloseButton } from '@chakra-ui/react';
 import { useToast } from '@chakra-ui/toast';
 import BCSpacer from '../components/Spacer';
 import { useAuthorized } from '../hooks';
@@ -25,6 +26,8 @@ function Login() {
   const dispatch = useDispatch();
   const authStore = store.getState().auth;
   const { authorized, checkAuthorized } = useAuthorized('auth/check');
+
+  const [noteModalNotifierOpen, setNoteModalNotifierOpen] = useState(true);
 
   // eslint-disable-next-line
   const [gapi, setGapi] = useState();
@@ -125,6 +128,38 @@ function Login() {
 
   return (
     <>
+      <Flex
+        display={noteModalNotifierOpen ? 'flex' : 'none'}
+        flexDir={['column', 'column', 'row']}
+        justifyContent="center"
+        alignItems="center"
+        zIndex="1001"
+        position="fixed"
+        bottom={['85px', '85px', '5']}
+        left="50%"
+        transform="translateX(-50%)"
+        bg="white"
+        boxShadow="0px 0px 10px rgba(0, 0, 0, 0.1)"
+        borderRadius="md"
+        py="0.8rem"
+        px="1.5rem"
+        w="fit-content"
+        maxW="90%"
+      >
+        <Text w="100%" mr={['0', '0', '5']} textAlign="center">
+          Please disable your ad blocker and enable the browser cookies to log
+          in.
+        </Text>
+        <CloseButton
+          position="absolute"
+          top="7px"
+          right="7px"
+          size="sm"
+          onClick={() => {
+            setNoteModalNotifierOpen(false);
+          }}
+        />
+      </Flex>
       <VStack
         w="100%"
         h="100vh"
