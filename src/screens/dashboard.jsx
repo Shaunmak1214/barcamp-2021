@@ -2,9 +2,16 @@
 import React, { useEffect, useState } from 'react';
 
 import { Image } from '@chakra-ui/image';
-import { Container, SimpleGrid, Text, VStack, Center } from '@chakra-ui/layout';
+import {
+  Container,
+  SimpleGrid,
+  Text,
+  VStack,
+  Center,
+  Flex,
+} from '@chakra-ui/layout';
 
-import { PrimaryButton } from '../components/Buttons';
+import { PrimaryButton, RevertButton } from '../components/Buttons';
 import BCSpacer from '../components/Spacer';
 import { SectionTitle } from 'components/SectionTitle';
 import InfoBlock from 'components/InfoBlock';
@@ -334,7 +341,7 @@ const Dashboard = () => {
                 >
                   {!voteSectionClose
                     ? votedTopics.length > 0
-                      ? 'Already voted a topic'
+                      ? 'Revert Vote'
                       : 'Vote Topics'
                     : 'Vote Topics (Coming soon)'}
                 </PrimaryButton>
@@ -374,9 +381,19 @@ const Dashboard = () => {
           alignItems="flex-start"
           flexDir="column"
         >
-          <SectionTitle fontSize="2xl" type="left" mb="10">
-            Your Voted Topic
-          </SectionTitle>
+          <Container maxW="container.xl">
+            <Flex
+              flexDir={['col', 'col', 'row']}
+              justifyContent="space-between"
+            >
+              <SectionTitle fontSize="2xl" type="left" mb="10">
+                Your Voted Topic
+              </SectionTitle>
+              <RevertButton onRevert={() => console.log('hello')}>
+                Revert Your Voted Topics
+              </RevertButton>
+            </Flex>
+          </Container>
 
           <VotedTopicRenderer />
         </Container>

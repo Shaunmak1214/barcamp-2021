@@ -54,6 +54,27 @@ const RegisterButton = ({ ...props }) => {
   );
 };
 
+const RevertButton = ({ onRevert, ...props }) => {
+  const children = props.children;
+  const textRef = useRef(null);
+
+  return (
+    <Button
+      variant="outlined"
+      border="1px solid #1050A0"
+      borderRadius="7px"
+      px="10"
+      py="20px"
+      onClick={onRevert}
+      {...props}
+    >
+      <Text ref={textRef} as="h2" fontSize="16px" color="#1050A0">
+        {children}
+      </Text>
+    </Button>
+  );
+};
+
 const FaqButton = ({ selected, ...props }) => {
   let textRef = useRef(null);
   let children = props.children;
@@ -93,6 +114,10 @@ SecondaryButton.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
+RevertButton.propTypes = {
+  onRevert: PropTypes.func,
+  children: PropTypes.node.isRequired,
+};
 RegisterButton.propTypes = {
   children: PropTypes.node,
 };
@@ -102,4 +127,10 @@ FaqButton.propTypes = {
   selected: PropTypes.bool,
 };
 
-export { PrimaryButton, SecondaryButton, FaqButton, RegisterButton };
+export {
+  PrimaryButton,
+  SecondaryButton,
+  FaqButton,
+  RegisterButton,
+  RevertButton,
+};
