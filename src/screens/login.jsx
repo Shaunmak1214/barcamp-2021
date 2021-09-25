@@ -51,8 +51,15 @@ function Login() {
             window.location.href = '/dashboard';
           }
         })
+        // eslint-disable-next-line
         .catch((err) => {
-          console.log(err);
+          toast({
+            title: `Google Login Failed`,
+            description: 'Please try again!',
+            variant: 'top-accent',
+            status: 'error',
+            isClosable: true,
+          });
         });
     } else {
       toast({
