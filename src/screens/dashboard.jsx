@@ -130,7 +130,7 @@ const Dashboard = () => {
                   You haven&apos;t proposed any topic yet. If you are
                   volunteering to share anything in BarCamp, kindly keep in mind
                   that the last day of proposing a topic is on
-                  <span style={{ fontWeight: 'bold' }}> 24 September 2021</span>
+                  <span style={{ fontWeight: 'bold' }}> 30 September 2021</span>
                   .
                 </Text>
               }

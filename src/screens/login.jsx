@@ -30,6 +30,7 @@ function Login() {
   const [gapi, setGapi] = useState();
   // eslint-disable-next-line
   const [googleAuth, setGoogleAuth] = useState();
+  const [attached, setAttached] = useState(true);
 
   const onSuccess = async (googleUser) => {
     const id_token = googleUser.getAuthResponse().id_token;
@@ -91,6 +92,8 @@ function Login() {
       onSuccess,
       onFailure,
     );
+
+    setAttached(false);
   };
 
   useEffect(() => {
@@ -152,7 +155,12 @@ function Login() {
                 the app from unauthorised input.
               </Text>
               <BCSpacer size="2xs" />
-              <PrimaryButton id="google-signin" px="50" py="6">
+              <PrimaryButton
+                id="google-signin"
+                disabled={attached}
+                px="50"
+                py="6"
+              >
                 Login to BarCamp
               </PrimaryButton>
             </VStack>
