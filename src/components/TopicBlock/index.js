@@ -55,7 +55,6 @@ const TopicBlock = ({
       borderRadius="8px"
       mb="10px"
       mt="0"
-      cursor="pointer"
       transition="all 0.1s ease-in-out"
       justifyContent="space-between"
       alignItems="center"

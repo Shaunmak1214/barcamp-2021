@@ -2,17 +2,27 @@
 import React, { useEffect, useState } from 'react';
 
 import { Image } from '@chakra-ui/image';
-import { Container, SimpleGrid, Text, VStack, Center } from '@chakra-ui/layout';
+import {
+  Container,
+  SimpleGrid,
+  Text,
+  VStack,
+  Center,
+  Flex,
+} from '@chakra-ui/layout';
 
-import { PrimaryButton } from '../components/Buttons';
+import { PrimaryButton, RevertButton } from '../components/Buttons';
 import BCSpacer from '../components/Spacer';
 import { SectionTitle } from 'components/SectionTitle';
 import InfoBlock from 'components/InfoBlock';
 import TopicBlock from 'components/TopicBlock';
 import Loader from '../components/Loader';
+import Lottie from 'react-lottie';
 
 import { useAxios } from '../hooks';
 import store from './../store/store';
+import useModal from '../components/Modal/useModal';
+import BCModal from '../components/Modal/index';
 
 import {
   ResultIcon,
@@ -21,6 +31,7 @@ import {
   SectionBg,
   NoMessageIcon,
 } from '../assets';
+import { BlackLoader } from '../constants';
 
 const Dashboard = () => {
   const authState = store.getState().auth;
@@ -31,9 +42,14 @@ const Dashboard = () => {
   const [leaderboard, setLeaderboard] = useState([]);
 
   // section close state
+
   const [voteSectionClose, setVoteSectionClose] = useState(false);
   const [voteResultClose, setVoteResultClose] = useState(false);
   const [proposeSectionClose, setProposeSectionClose] = useState(false);
+
+  const { isOpen, onModalClose, onModalOpen } = useModal({
+    initialState: false,
+  });
 
   const { loading: proposedLoading, fetch: getTopicsByUser } = useAxios(
     {
@@ -51,6 +67,23 @@ const Dashboard = () => {
         }
       } else if (res) {
         setUserTopic(res.data);
+      }
+    },
+  );
+
+  const { loading: deleteLoading, fetch: deleteUserVotes } = useAxios(
+    {
+      method: 'delete',
+      url: `/votes/${authState.user.userId}`,
+      headers: {
+        Authorization: `Bearer ${authState.accessToken}`,
+      },
+    },
+
+    (err, res) => {
+      if (err) {
+      } else if (res.status === 200) {
+        window.location.href = '/vote-topic';
       }
     },
   );
@@ -130,7 +163,7 @@ const Dashboard = () => {
                   You haven&apos;t proposed any topic yet. If you are
                   volunteering to share anything in BarCamp, kindly keep in mind
                   that the last day of proposing a topic is on
-                  <span style={{ fontWeight: 'bold' }}> 24 September 2021</span>
+                  <span style={{ fontWeight: 'bold' }}> 30 September 2021</span>
                   .
                 </Text>
               }
@@ -334,7 +367,7 @@ const Dashboard = () => {
                 >
                   {!voteSectionClose
                     ? votedTopics.length > 0
-                      ? 'Already voted a topic'
+                      ? 'Already voted'
                       : 'Vote Topics'
                     : 'Vote Topics (Coming soon)'}
                 </PrimaryButton>
@@ -374,9 +407,39 @@ const Dashboard = () => {
           alignItems="flex-start"
           flexDir="column"
         >
-          <SectionTitle fontSize="2xl" type="left" mb="10">
-            Your Voted Topic
-          </SectionTitle>
+          <Container maxW="container.xl">
+            <Flex
+              flexDir={['column', 'column', 'row']}
+              pb={['15px', 0, 0]}
+              justifyContent="space-between"
+            >
+              <SectionTitle fontSize="2xl" type="left" mb="10">
+                Your Voted Topic
+              </SectionTitle>
+              {votedTopics.length > 0 ? (
+                <>
+                  <RevertButton onOpen={onModalOpen}>
+                    <Text>Revert Your Voted Topics</Text>
+                  </RevertButton>
+                  <BCModal
+                    theme="normal"
+                    content={
+                      <>
+                        <Text as="h3" fontSize="xl" fontFamily="600">
+                          Are you sure you want to revert your votes?
+                        </Text>
+                      </>
+                    }
+                    modalOpen={isOpen}
+                    onClose={onModalClose}
+                    dialog={true}
+                    onDeleteVotes={deleteUserVotes}
+                    loading={deleteLoading}
+                  />
+                </>
+              ) : null}
+            </Flex>
+          </Container>
 
           <VotedTopicRenderer />
         </Container>
