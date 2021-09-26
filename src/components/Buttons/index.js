@@ -2,6 +2,9 @@ import { Button } from '@chakra-ui/button';
 import { Text } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
+import { HStack } from '@chakra-ui/layout';
+import { Image } from '@chakra-ui/image';
+import { ReturnIconBlue, ReturnIconWhite } from 'assets';
 
 const PrimaryButton = React.forwardRef((props, ref) => (
   <Button
@@ -54,6 +57,62 @@ const RegisterButton = ({ ...props }) => {
   );
 };
 
+const RevertButton = ({ onOpen, ...props }) => {
+  const children = props.children;
+
+  let imgRef = useRef(null);
+  return (
+    <Button
+      variant="outlined"
+      border="1px solid #1050A0"
+      minW="240px"
+      borderRadius="7px"
+      px="5"
+      py="20px"
+      onClick={onOpen}
+      _hover={{ bg: '#1050A0', color: '#FFFFFF' }}
+      onMouseEnter={() => {
+        imgRef.current.src = ReturnIconWhite;
+      }}
+      onMouseLeave={() => {
+        imgRef.current.src = ReturnIconBlue;
+      }}
+      {...props}
+    >
+      <HStack
+        justifyContent="space-between"
+        alignItems="center"
+        _hover={{ color: '#FFFFFF' }}
+      >
+        <Text as="h2" fontSize="16px">
+          {children}
+        </Text>
+        <Image ref={imgRef} src={ReturnIconBlue} />
+      </HStack>
+    </Button>
+  );
+};
+
+const MutedButton = ({ ...props }) => {
+  let children = props.children;
+  return (
+    <Button
+      variant="disabled"
+      mr="15px"
+      bg="#c4c4c4"
+      _hover={{ bg: '#000000' }}
+      borderRadius="4px"
+      px="10"
+      py="20px"
+      {...props}
+    >
+      <Text as="h2" fontSize="md" color="white">
+        {children}
+      </Text>
+    </Button>
+  );
+};
+
 const FaqButton = ({ selected, ...props }) => {
   let textRef = useRef(null);
   let children = props.children;
@@ -93,6 +152,16 @@ SecondaryButton.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
+RevertButton.propTypes = {
+  onOpen: PropTypes.func,
+
+  children: PropTypes.node.isRequired,
+};
+
+MutedButton.propTypes = {
+  children: PropTypes.node,
+};
+
 RegisterButton.propTypes = {
   children: PropTypes.node,
 };
@@ -102,4 +171,11 @@ FaqButton.propTypes = {
   selected: PropTypes.bool,
 };
 
-export { PrimaryButton, SecondaryButton, FaqButton, RegisterButton };
+export {
+  PrimaryButton,
+  SecondaryButton,
+  FaqButton,
+  RegisterButton,
+  RevertButton,
+  MutedButton,
+};

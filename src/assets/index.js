@@ -61,7 +61,8 @@ import SectionBgTwo from './jpg-pngs/section-bg2.jpg';
 // Pictures (SVG)
 import BarCampWhiteLogo from './svgs/BarCamp-white-logo.svg';
 import BarCampFullLogo from './svgs/BarCamp-logo.svg';
-
+import ReturnIconBlue from './svgs/return-blue.svg';
+import ReturnIconWhite from './svgs/return-white.svg';
 // PDFS
 import SponsorshipProposal from './pdfs/BarCamp Cyberjaya 2021 Sponsorship Proposal.pdf';
 
@@ -119,4 +120,6 @@ export {
   SponsorshipProposal,
   SpeakerIcon,
   DiscordOutlinedIcon,
+  ReturnIconBlue,
+  ReturnIconWhite,
 };

@@ -239,7 +239,7 @@ const voteTopic = () => {
                     variant={alreadyVoted ? 'disabled' : null}
                     onClick={() => executeScroll()}
                   >
-                    {alreadyVoted ? 'You already voted' : 'Start Voting!'}
+                    {alreadyVoted ? 'Already voted' : 'Start Voting!'}
                   </PrimaryButton>
                 </HStack>
               </VStack>
