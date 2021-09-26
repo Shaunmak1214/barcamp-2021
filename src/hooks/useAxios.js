@@ -24,7 +24,6 @@ const useAxios = (axiosParams, onUpdate) => {
         }
       })
       .catch((err) => {
-        console.log(err);
         onUpdate(err.response, null);
       })
       .finally(() => {
