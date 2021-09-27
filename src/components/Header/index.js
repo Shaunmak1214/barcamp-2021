@@ -116,7 +116,16 @@ const Index = ({ cta, type }) => {
           >
             {sponsorData.sponsors.map((sponsor, idx) => {
               return (
-                <Center key={idx} p={3} borderRadius="4px" bg="#F5F5F5">
+                <Center
+                  key={idx}
+                  p={3}
+                  borderRadius="4px"
+                  bg="#F5F5F5"
+                  cursor="pointer"
+                  onClick={() => {
+                    window.open(`${sponsor.link || '#'}`, '_blank');
+                  }}
+                >
                   <Image src={sponsor.imageSrc} w="100%" h="100%" />
                 </Center>
               );

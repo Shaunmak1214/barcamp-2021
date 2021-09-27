@@ -49,6 +49,7 @@ const silverSponsor = {
     {
       idx: 0,
       imageSrc: HackerspaceLogo,
+      link: 'https://hackerspacemmu.github.io/',
     },
   ],
 };
