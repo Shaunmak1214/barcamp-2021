@@ -63,8 +63,12 @@ import BarCampWhiteLogo from './svgs/BarCamp-white-logo.svg';
 import BarCampFullLogo from './svgs/BarCamp-logo.svg';
 import ReturnIconBlue from './svgs/return-blue.svg';
 import ReturnIconWhite from './svgs/return-white.svg';
+
 // PDFS
 import SponsorshipProposal from './pdfs/BarCamp Cyberjaya 2021 Sponsorship Proposal.pdf';
+
+// Sponsors
+import HackerspaceLogo from './sponsors/Hackerspace MMU Horizontal (No BG).png';
 
 export {
   BarCampFullLogo,
@@ -122,4 +126,5 @@ export {
   DiscordOutlinedIcon,
   ReturnIconBlue,
   ReturnIconWhite,
+  HackerspaceLogo,
 };

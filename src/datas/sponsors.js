@@ -1,4 +1,4 @@
-import { BarCampFullLogo } from '../assets';
+import { BarCampFullLogo, HackerspaceLogo } from '../assets';
 
 const platinumSponsor = {
   type: 'Platinum',
@@ -48,23 +48,7 @@ const silverSponsor = {
   sponsors: [
     {
       idx: 0,
-      imageSrc: BarCampFullLogo,
-    },
-    {
-      idx: 2,
-      imageSrc: BarCampFullLogo,
-    },
-    {
-      idx: 4,
-      imageSrc: BarCampFullLogo,
-    },
-    {
-      idx: 5,
-      imageSrc: BarCampFullLogo,
-    },
-    {
-      idx: 6,
-      imageSrc: BarCampFullLogo,
+      imageSrc: HackerspaceLogo,
     },
   ],
 };
