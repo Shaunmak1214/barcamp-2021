@@ -127,6 +127,8 @@ const Modal = ({
                 onClick={() => onDeleteVotes()}
                 disabled={loading}
                 mb={['10px', 0, 0]}
+                cursor={loading ? 'not-allowed' : 'pointer'}
+                _hover={{ bg: '#00234F' }}
               >
                 {loading ? (
                   <Loader type="" size="md" />
