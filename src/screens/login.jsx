@@ -118,6 +118,7 @@ function Login() {
         (async () => {
           const _googleAuth = await _gapi.auth2.init({
             client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+            prompt: 'select_account',
           });
           setGoogleAuth(_googleAuth);
           attachSignIn(_googleAuth);
