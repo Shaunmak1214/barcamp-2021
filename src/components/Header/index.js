@@ -100,7 +100,7 @@ const Index = ({ cta, type }) => {
   const SponsorBlockRenderer = ({ sponsorData }) => {
     if (sponsorData) {
       return (
-        <VStack alignItems="flex-start" justifyContent="center">
+        <VStack alignItems="flex-start" justifyContent="flex-start" w="100%">
           <HStack>
             <Image src={PlatinumIcon} height="15px" width="15px" />
             <Text fontFamily="Montserrat" fontSize="lg" fontWeight="600">
@@ -111,6 +111,7 @@ const Index = ({ cta, type }) => {
             columns={sponsorData.level}
             spacing={5}
             w="100%"
+            minW="100%"
             flexDir="row"
             flexWrap="wrap"
           >
@@ -122,11 +123,19 @@ const Index = ({ cta, type }) => {
                   borderRadius="4px"
                   bg="#F5F5F5"
                   cursor="pointer"
+                  w="100%"
+                  h="100%"
                   onClick={() => {
                     window.open(`${sponsor.link || '#'}`, '_blank');
                   }}
                 >
-                  <Image src={sponsor.imageSrc} w="100%" h="100%" />
+                  <Image
+                    maxH="125px"
+                    src={sponsor.imageSrc}
+                    w="auto"
+                    minW="100px"
+                    h="100%"
+                  />
                 </Center>
               );
             })}

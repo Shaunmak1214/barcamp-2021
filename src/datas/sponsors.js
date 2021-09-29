@@ -1,4 +1,4 @@
-import { BarCampFullLogo, HackerspaceLogo } from '../assets';
+import { BarCampFullLogo, HackerspaceLogo, DerivLogo } from '../assets';
 
 const platinumSponsor = {
   type: 'Platinum',
@@ -6,14 +6,15 @@ const platinumSponsor = {
   sponsors: [
     {
       idx: 0,
+      imageSrc: DerivLogo,
+      link: 'https://deriv.com/',
+    },
+    {
+      idx: 1,
       imageSrc: BarCampFullLogo,
     },
     {
       idx: 2,
-      imageSrc: BarCampFullLogo,
-    },
-    {
-      idx: 3,
       imageSrc: BarCampFullLogo,
     },
   ],

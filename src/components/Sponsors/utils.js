@@ -57,7 +57,7 @@ const SponsorBlockRenderer = ({ sponsorData, ...props }) => {
                   window.open(`${sponsor.link || '#'}`, '_blank');
                 }}
               >
-                <Image src={sponsor.imageSrc} />
+                <Image maxH="125px" src={sponsor.imageSrc} />
               </Center>
             );
           })}
