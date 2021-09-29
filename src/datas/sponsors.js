@@ -1,4 +1,4 @@
-import { BarCampFullLogo, HackerspaceLogo } from '../assets';
+import { BarCampFullLogo, HackerspaceLogo, IxLogo } from '../assets';
 
 const platinumSponsor = {
   type: 'Platinum',
@@ -6,7 +6,8 @@ const platinumSponsor = {
   sponsors: [
     {
       idx: 0,
-      imageSrc: BarCampFullLogo,
+      imageSrc: IxLogo,
+      link: 'https://ixtelecom.net/',
     },
     {
       idx: 2,
