@@ -70,6 +70,7 @@ import SponsorshipProposal from './pdfs/BarCamp Cyberjaya 2021 Sponsorship Propo
 // Sponsors
 import HackerspaceLogo from './sponsors/Hackerspace MMU Horizontal (No BG).png';
 import IxLogo from './sponsors/ix-logo.png';
+import DerivLogo from './sponsors/deriv-logo.png';
 
 export {
   BarCampFullLogo,
@@ -129,4 +130,5 @@ export {
   ReturnIconWhite,
   HackerspaceLogo,
   IxLogo,
+  DerivLogo,
 };
