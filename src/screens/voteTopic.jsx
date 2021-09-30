@@ -55,7 +55,7 @@ const voteTopic = () => {
   const voteTopicHeader = React.useRef(null);
 
   // section close state
-  const [voteClose, setVoteClose] = useState(false);
+  const [voteClose, setVoteClose] = useState(true); //here we set the state of the section close to close - deadline met
 
   // data state
   const [alreadyVoted, setAlreadyVoted] = useState(false);
@@ -235,11 +235,12 @@ const voteTopic = () => {
                 <HStack>
                   <PrimaryButton
                     width="200px"
-                    disabled={alreadyVoted ? true : false}
+                    // disabled={alreadyVoted ? true : false}
+                    disabled={true}
                     variant={alreadyVoted ? 'disabled' : null}
                     onClick={() => executeScroll()}
                   >
-                    {alreadyVoted ? 'Already voted' : 'Start Voting!'}
+                    {alreadyVoted ? 'Already voted' : 'Voting closed!'}
                   </PrimaryButton>
                 </HStack>
               </VStack>

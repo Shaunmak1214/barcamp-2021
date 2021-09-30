@@ -43,9 +43,9 @@ const Dashboard = () => {
 
   // section close state
 
-  const [voteSectionClose, setVoteSectionClose] = useState(false);
+  const [voteSectionClose, setVoteSectionClose] = useState(false); //here we set the state of the section close to close - deadline met
   const [voteResultClose, setVoteResultClose] = useState(false);
-  const [proposeSectionClose, setProposeSectionClose] = useState(false);
+  const [proposeSectionClose, setProposeSectionClose] = useState(true); //here we set the state of the section close to close - deadline met
 
   const { isOpen, onModalClose, onModalOpen } = useModal({
     initialState: false,
@@ -135,10 +135,8 @@ const Dashboard = () => {
           theme=""
           content={
             <Text fontSize="lg" py="40px">
-              Uh,sorry, the proposing topic session is closed but the voting
-              session is opening now. You may proceed to vote for your desired
-              topic in the next section. Please contact BarCamp team if you have
-              any inquiries.
+              Uh,sorry, both proposing topic session and voting session is
+              closed.
             </Text>
           }
           leadingIcon={NoMessageIcon}
@@ -209,18 +207,20 @@ const Dashboard = () => {
         } else {
           return (
             <InfoBlock
-              theme="error"
-              buttonUrl="/vote-topic"
-              buttonLabel="Vote topics"
+              // theme="error"
+              // buttonUrl="/vote-topic"
+              // buttonLabel="Vote topics"
               content={
-                <Text fontSize="lg" color="#858585" mt="5">
-                  You haven&apos;t voted for any topic yet. Vote for your
+                <Text fontSize="lg" color="#000000" mt="5">
+                  {/* You haven&apos;t voted for any topic yet. Vote for your
                   desired topic now, the topic which gets the most vote will be
                   held on BarCamp. Kindly keep in mind that the last day for
                   voting is on{' '}
                   <span style={{ fontWeight: 'bold' }}>
                     30 September 2021.{' '}
-                  </span>
+                  </span> */}
+                  The voting session is closed and the final results is set.
+                  Kindly check below for the results.
                 </Text>
               }
               leadingIcon={VotingIcon}
@@ -332,7 +332,8 @@ const Dashboard = () => {
               <BCSpacer size="sm" />
               <SimpleGrid columns={[1, 1, 2]}>
                 <PrimaryButton
-                  width="200px"
+                  width="225px"
+                  mr={[0, 0, '20px']}
                   onClick={() => {
                     window.location.href = '/propose-topic';
                   }}
@@ -352,23 +353,24 @@ const Dashboard = () => {
                     : 'Propose topic session closed'}
                 </PrimaryButton>
                 <PrimaryButton
-                  width="215px"
+                  width="200px"
                   backgroundColor="#B1B1B1"
                   onClick={() => {
                     window.location.href = '/vote-topic';
                   }}
                   disabled={
-                    !voteSectionClose
-                      ? votedTopics.length > 0
-                        ? true
-                        : false
-                      : true
+                    true
+                    // !voteSectionClose
+                    //   ? votedTopics.length > 0
+                    //     ? true
+                    //     : false
+                    //   : true
                   }
                 >
                   {!voteSectionClose
                     ? votedTopics.length > 0
                       ? 'Already voted'
-                      : 'Vote Topics'
+                      : 'Voting session closed'
                     : 'Vote Topics (Coming soon)'}
                 </PrimaryButton>
               </SimpleGrid>
