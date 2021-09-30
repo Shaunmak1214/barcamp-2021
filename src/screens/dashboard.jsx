@@ -11,7 +11,7 @@ import {
   Flex,
 } from '@chakra-ui/layout';
 
-import { PrimaryButton, RevertButton } from '../components/Buttons';
+import { PrimaryButton } from '../components/Buttons';
 import BCSpacer from '../components/Spacer';
 import { SectionTitle } from 'components/SectionTitle';
 import InfoBlock from 'components/InfoBlock';
@@ -416,28 +416,6 @@ const Dashboard = () => {
               <SectionTitle fontSize="2xl" type="left" mb="10">
                 Your Voted Topic
               </SectionTitle>
-              {votedTopics.length > 0 ? (
-                <>
-                  <RevertButton onOpen={onModalOpen}>
-                    <Text>Revert Your Voted Topics</Text>
-                  </RevertButton>
-                  <BCModal
-                    theme="normal"
-                    content={
-                      <>
-                        <Text as="h3" fontSize="xl" fontFamily="600">
-                          Are you sure you want to revert your votes?
-                        </Text>
-                      </>
-                    }
-                    modalOpen={isOpen}
-                    onClose={onModalClose}
-                    dialog={true}
-                    onDeleteVotes={deleteUserVotes}
-                    loading={deleteLoading}
-                  />
-                </>
-              ) : null}
             </Flex>
           </Container>
 
