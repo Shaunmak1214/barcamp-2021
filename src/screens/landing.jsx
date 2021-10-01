@@ -313,7 +313,13 @@ const Index = () => {
       </Center>
 
       {/* Agenda section */}
-      <Center id="agenda" py="0" bgImage={SectionBgTwo} flexDir="column">
+      <Center
+        id="agenda"
+        py="0"
+        bgImage={SectionBgTwo}
+        bgAttachment="fixed"
+        flexDir="column"
+      >
         <Container maxW="container.xl">
           <Image src={Agenda} />
         </Container>
