@@ -9,9 +9,8 @@ import {
   Box,
   SimpleGrid,
   Heading,
-  Flex,
 } from '@chakra-ui/layout';
-import { Text, CloseButton } from '@chakra-ui/react';
+import { Text } from '@chakra-ui/react';
 import Lottie from 'react-lottie';
 
 import Faq from '../components/Faqs';
@@ -43,13 +42,13 @@ import {
 } from '../assets';
 
 import { Countdown } from '../constants';
-import { useState } from 'react';
+// import { useState } from 'react';
 
 const Index = () => {
   const { daysRef, hoursRef, minutesRef, secondsRef } = useCountdown(
     'October 2, 2021 00:00:00',
   );
-  const [topicModalNotifierOpen, setTopicModalNotifierOpen] = useState(true);
+  // const [topicModalNotifierOpen, setTopicModalNotifierOpen] = useState(true);
 
   const LandingImgRenderer = () => {
     if (window.screen.width < 768) {
@@ -70,7 +69,7 @@ const Index = () => {
 
   return (
     <>
-      <Flex
+      {/* <Flex
         display={topicModalNotifierOpen ? 'flex' : 'none'}
         flexDir={['column', 'column', 'row']}
         justifyContent="center"
@@ -114,7 +113,7 @@ const Index = () => {
             setTopicModalNotifierOpen(false);
           }}
         />
-      </Flex>
+      </Flex> */}
       <HStack
         position="relative"
         w="100%"
@@ -314,7 +313,13 @@ const Index = () => {
       </Center>
 
       {/* Agenda section */}
-      <Center id="agenda" py="0" bgImage={SectionBgTwo} flexDir="column">
+      <Center
+        id="agenda"
+        py="0"
+        bgImage={SectionBgTwo}
+        bgAttachment="fixed"
+        flexDir="column"
+      >
         <Container maxW="container.xl">
           <Image src={Agenda} />
         </Container>

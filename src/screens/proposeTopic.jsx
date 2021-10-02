@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect, useRef } from 'react';
 
 import * as yup from 'yup';
@@ -71,7 +72,8 @@ const ProposeTopic = () => {
   // loading state
   const [checked, setChecked] = useState(false);
 
-  const [userTopic, setUserTopic] = useState(null);
+  // eslint-disable-next-line
+  const [userTopic, setUserTopic] = useState(true);
   const [updateErr, setUpdateErr] = React.useState('');
 
   const authState = store.getState().auth;
@@ -109,26 +111,26 @@ const ProposeTopic = () => {
     },
   );
 
-  const { loading: isFetchTopicsLoading, fetch: fetchTopicsByUser } = useAxios(
-    {
-      method: 'get',
-      url: `/topicsByUser/${authState.user.userId}`,
-      headers: {
-        Authorization: `Bearer ${authState.accessToken}`,
-      },
-    },
-    (err, res) => {
-      if (err) {
-        if (err.status == 425) {
-          window.location.href = '/dashboard';
-        } else {
-          setUpdateErr(' ' + err.data.error);
-        }
-      } else if (res) {
-        setUserTopic(res.data);
-      }
-    },
-  );
+  // const { loading: isFetchTopicsLoading, fetch: fetchTopicsByUser } = useAxios(
+  //   {
+  //     method: 'get',
+  //     url: `/topicsByUser/${authState.user.userId}`,
+  //     headers: {
+  //       Authorization: `Bearer ${authState.accessToken}`,
+  //     },
+  //   },
+  //   (err, res) => {
+  //     if (err) {
+  //       if (err.status == 425) {
+  //         window.location.href = '/dashboard';
+  //       } else {
+  //         setUpdateErr(' ' + err.data.error);
+  //       }
+  //     } else if (res) {
+  //       setUserTopic(res.data);
+  //     }
+  //   },
+  // );
 
   const handleConsentCheck = () => {
     if (permanentRef.current.checked && viewRef.current.checked) {
@@ -138,287 +140,284 @@ const ProposeTopic = () => {
     }
   };
 
-  useEffect(() => {
-    fetchTopicsByUser();
-  }, []);
+  // useEffect(() => {
+  //   fetchTopicsByUser();
+  // }, []);
 
-  if (isFetchTopicsLoading) {
-    return <Loader type="full-page-loader" />;
-  } else {
-    return (
-      <>
-        <BCModal
-          theme="error"
-          content={
-            <>
-              <Text
-                as="h3"
-                fontSize="xl"
-                fontFamily="Montserrat"
-                fontWeight="600"
-              >
-                Theres an error with your request.
-              </Text>
-              <Text
-                as="h3"
-                fontSize="sm"
-                fontFamily="Montserrat"
-                fontWeight="400"
-                textAlign="center"
-                px="3"
-              >
-                Please try again later
-              </Text>
-            </>
-          }
-          modalOpen={isOpen}
-          onClose={onModalClose}
-        />
-        <VStack
-          w="100%"
-          h="100vh"
-          justifyContent={['flex-start', 'flex-start', 'center']}
-          alignItems="center"
-          mb="20px"
-        >
-          <BCSpacer d={['flex', 'none', 'none']} size="sm" />
-          <Container maxW="container.xl">
-            <SimpleGrid
-              columns={[1, 1, 2]}
-              w="100%"
-              h="100%"
-              justifyContent="center"
-              alignItems="center"
+  // if (isFetchTopicsLoading) {
+  //   return <Loader type="full-page-loader" />;
+  // } else {
+  return (
+    <>
+      <BCModal
+        theme="error"
+        content={
+          <>
+            <Text
+              as="h3"
+              fontSize="xl"
+              fontFamily="Montserrat"
+              fontWeight="600"
             >
-              <VStack
-                alignItems="flex-start"
-                justifyContent="center"
-                h="100%"
-                pr={[10, 0, 20]}
-              >
-                <Text as="h1" fontSize="4xl" fontWeight="600" py="2">
-                  PROPOSE A TOPIC TO SHARE
-                </Text>
-                <Text as="h2" fontSize="xl" fontWeight="300">
-                  Let’s brings people together to share their passion with
-                  topics surrounding tech, non-tech and nonsense. There is no
-                  preset sharing for BarCamp like usual conferences. Feel free
-                  to propose anything to share your thought below.
-                </Text>
-                <BCSpacer size="sm" />
-                <HStack>
-                  <PrimaryButton
-                    width="200px"
-                    disabled={userTopic ? true : false}
-                    onClick={() => executeScroll()}
-                    variant={userTopic ? 'disabled' : null}
-                  >
-                    {userTopic ? 'You already proposed' : 'Propose a topic'}
-                  </PrimaryButton>
-                </HStack>
-              </VStack>
-              <Image
-                d={['none', 'none', 'block']}
-                src={ProposePic}
-                alt="Login"
-              />
-            </SimpleGrid>
-          </Container>
-        </VStack>
+              Theres an error with your request.
+            </Text>
+            <Text
+              as="h3"
+              fontSize="sm"
+              fontFamily="Montserrat"
+              fontWeight="400"
+              textAlign="center"
+              px="3"
+            >
+              Please try again later
+            </Text>
+          </>
+        }
+        modalOpen={isOpen}
+        onClose={onModalClose}
+      />
+      <VStack
+        w="100%"
+        h="100vh"
+        justifyContent={['flex-start', 'flex-start', 'center']}
+        alignItems="center"
+        mb="20px"
+      >
+        <BCSpacer d={['flex', 'none', 'none']} size="sm" />
+        <Container maxW="container.xl">
+          <SimpleGrid
+            columns={[1, 1, 2]}
+            w="100%"
+            h="100%"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <VStack
+              alignItems="flex-start"
+              justifyContent="center"
+              h="100%"
+              pr={[10, 0, 20]}
+            >
+              <Text as="h1" fontSize="4xl" fontWeight="600" py="2">
+                PROPOSE A TOPIC TO SHARE
+              </Text>
+              <Text as="h2" fontSize="xl" fontWeight="300">
+                Let’s brings people together to share their passion with topics
+                surrounding tech, non-tech and nonsense. There is no preset
+                sharing for BarCamp like usual conferences. Feel free to propose
+                anything to share your thought below.
+              </Text>
+              <BCSpacer size="sm" />
+              <HStack>
+                <PrimaryButton
+                  width="225px"
+                  // disabled={userTopic ? true : false}
+                  disabled={true}
+                  onClick={() => executeScroll()}
+                  variant={userTopic ? 'disabled' : null}
+                >
+                  {userTopic
+                    ? 'Propose topic session closed'
+                    : 'Propose topic session closed'}
+                </PrimaryButton>
+              </HStack>
+            </VStack>
+            <Image d={['none', 'none', 'block']} src={ProposePic} alt="Login" />
+          </SimpleGrid>
+        </Container>
+      </VStack>
+      <Center
+        bgImg={SectionBg}
+        alignItems="center"
+        justifyContent="center"
+        w="100%"
+        h="250px"
+      ></Center>
+
+      {userTopic ? (
         <Center
-          bgImg={SectionBg}
+          w="100%"
+          d="flex"
+          flexDir="column"
           alignItems="center"
           justifyContent="center"
-          w="100%"
-          h="250px"
-        ></Center>
+          mt="10"
+        >
+          <Container maxW="container.xl">
+            <InfoBlock
+              theme=""
+              content={
+                <Text>
+                  The topic proposing session has ended. The final topic
+                  announcement will be made on 1 October 2021. See you soon!
+                </Text>
+              }
+              leadingIcon={NoMessageIcon}
+            />
+          </Container>
+          <BCSpacer size="xs" />
+        </Center>
+      ) : (
+        <>
+          <BCSpacer size="sm" />
 
-        {userTopic ? (
+          <Box className="voteTopicHeaderTop" w="100%" h="1px"></Box>
           <Center
             w="100%"
-            d="flex"
-            flexDir="column"
-            alignItems="center"
-            justifyContent="center"
-            mt="10"
+            bg="white"
+            position={['flex', 'flex', 'sticky']}
+            top="0px"
+            zIndex={50}
+            p="3"
+            className="voteTopicHeader"
           >
-            <Container maxW="container.xl">
-              <InfoBlock
-                theme=""
-                content={
-                  <Text>
-                    You have already propose a topic for this session. The final
-                    topic announcement will be made on 1 October 2021. See you
-                    soon!
-                  </Text>
-                }
-                leadingIcon={NoMessageIcon}
-              />
-            </Container>
-            <BCSpacer size="xs" />
-          </Center>
-        ) : (
-          <>
-            <BCSpacer size="sm" />
-
-            <Box className="voteTopicHeaderTop" w="100%" h="1px"></Box>
-            <Center
-              w="100%"
-              bg="white"
-              position={['flex', 'flex', 'sticky']}
-              top="0px"
-              zIndex={50}
-              p="3"
-              className="voteTopicHeader"
-            >
-              <Container maxW="container.xl" w="100%" py="0px">
-                <Flex
-                  flexDir={['column', 'column', 'row']}
-                  justifyContent="space-between"
-                  alignItems={['flex-start', 'flex-start', 'center']}
-                  pt="5"
-                  pb="5"
-                  ref={scrollToRef}
-                >
-                  <SectionTitle fontSize="2xl" type="left" mb={['7', '0', '0']}>
-                    Propose a topic
-                  </SectionTitle>
-                  <Center
-                    boxShadow="0px 16px 40px rgba(193, 193, 193, 0.25)"
-                    borderRadius="8px"
-                    px="6"
-                    py="3"
-                  >
-                    <Text as="h2" fontSize="md" fontWeight="500">
-                      You are allowed to propose{' '}
-                      <span className="gradientText">ONE</span> topic only
-                    </Text>
-                  </Center>
-                </Flex>
-              </Container>
-            </Center>
-
-            <Container maxW="container.xl" w="100%" py="50px">
-              {updateErr ? (
-                <Alert mb="10" status="error">
-                  <AlertIcon />
-                  <Box flex="1">
-                    <AlertTitle>{updateErr}</AlertTitle>
-                    <AlertDescription display="block">
-                      There is some error updating your profile. Please try
-                      again.
-                    </AlertDescription>
-                  </Box>
-                  <CloseButton position="absolute" right="8px" top="8px" />
-                </Alert>
-              ) : null}
-              <Formik
-                validationSchema={schema}
-                initialValues={{
-                  description: '',
-                  topicTheme: '',
-                  topicName: '',
-                  topicSummary: '',
-                }}
-                onSubmit={(data) => {
-                  postProposedTopic({
-                    name: data.topicName,
-                    user: authState.user.userId,
-                    theme: data.topicTheme,
-                    description: data.topicSummary,
-                    self_description: data.description,
-                  });
-                }}
+            <Container maxW="container.xl" w="100%" py="0px">
+              <Flex
+                flexDir={['column', 'column', 'row']}
+                justifyContent="space-between"
+                alignItems={['flex-start', 'flex-start', 'center']}
+                pt="5"
+                pb="5"
+                ref={scrollToRef}
               >
-                {() => (
-                  <Form>
-                    <VStack spacing={5} alignItems="flex-start">
-                      <Text as="h3" fontSize="xl" textTransform="uppercase">
-                        Speaker Details
-                      </Text>
-                      <Field
-                        label="A short description of yourself"
-                        name="description"
-                        placeholder="I'm a ... "
-                        maxLength={100}
-                        component={BCTextAreaField}
-                      />
-
-                      <BCSpacer size="xs" />
-
-                      <Text as="h3" fontSize="xl" textTransform="uppercase">
-                        Topic Details
-                      </Text>
-                      <Field
-                        label="Theme"
-                        name="topicTheme"
-                        placeholder="Select a theme for your topic"
-                        component={SelectDropdownFormField}
-                      />
-
-                      <Field
-                        label="Topic Name"
-                        name="topicName"
-                        placeholder="How coding is more like baking a pie than reading a book."
-                        component={BCTextFormField}
-                      />
-
-                      <Field
-                        label="Topic Summary"
-                        name="topicSummary"
-                        placeholder="I'm going to talk about ..."
-                        maxLength={250}
-                        component={BCTextAreaField}
-                      />
-
-                      <Checkbox
-                        ref={viewRef}
-                        size="lg"
-                        pl="5"
-                        onChange={handleConsentCheck}
-                      >
-                        <Text fontSize="md" ml="5px">
-                          I{"'"}m aware that other users can view your topic and
-                          information as a sharer.{' '}
-                        </Text>
-                      </Checkbox>
-
-                      <Checkbox
-                        ref={permanentRef}
-                        size="lg"
-                        pl="5"
-                        onChange={handleConsentCheck}
-                      >
-                        <Text fontSize="md" ml="5px">
-                          I{"'"}m aware that the information I submit will be
-                          permanent and cannot be changed.
-                        </Text>
-                      </Checkbox>
-
-                      <PrimaryButton
-                        alignSelf="flex-end"
-                        w={['100%', 'fit-content', 'fit-content']}
-                        py="25px"
-                        px="75px"
-                        type="submit"
-                        disabled={isPosting || !checked}
-                      >
-                        {isPosting ? (
-                          <Loader type="" size="md" />
-                        ) : (
-                          <Text fontSize="lg">Propose</Text>
-                        )}
-                      </PrimaryButton>
-                    </VStack>
-                  </Form>
-                )}
-              </Formik>
+                <SectionTitle fontSize="2xl" type="left" mb={['7', '0', '0']}>
+                  Propose a topic
+                </SectionTitle>
+                <Center
+                  boxShadow="0px 16px 40px rgba(193, 193, 193, 0.25)"
+                  borderRadius="8px"
+                  px="6"
+                  py="3"
+                >
+                  <Text as="h2" fontSize="md" fontWeight="500">
+                    You are allowed to propose{' '}
+                    <span className="gradientText">ONE</span> topic only
+                  </Text>
+                </Center>
+              </Flex>
             </Container>
-          </>
-        )}
-      </>
-    );
-  }
+          </Center>
+
+          <Container maxW="container.xl" w="100%" py="50px">
+            {updateErr ? (
+              <Alert mb="10" status="error">
+                <AlertIcon />
+                <Box flex="1">
+                  <AlertTitle>{updateErr}</AlertTitle>
+                  <AlertDescription display="block">
+                    There is some error updating your profile. Please try again.
+                  </AlertDescription>
+                </Box>
+                <CloseButton position="absolute" right="8px" top="8px" />
+              </Alert>
+            ) : null}
+            <Formik
+              validationSchema={schema}
+              initialValues={{
+                description: '',
+                topicTheme: '',
+                topicName: '',
+                topicSummary: '',
+              }}
+              onSubmit={(data) => {
+                postProposedTopic({
+                  name: data.topicName,
+                  user: authState.user.userId,
+                  theme: data.topicTheme,
+                  description: data.topicSummary,
+                  self_description: data.description,
+                });
+              }}
+            >
+              {() => (
+                <Form>
+                  <VStack spacing={5} alignItems="flex-start">
+                    <Text as="h3" fontSize="xl" textTransform="uppercase">
+                      Speaker Details
+                    </Text>
+                    <Field
+                      label="A short description of yourself"
+                      name="description"
+                      placeholder="I'm a ... "
+                      maxLength={100}
+                      component={BCTextAreaField}
+                    />
+
+                    <BCSpacer size="xs" />
+
+                    <Text as="h3" fontSize="xl" textTransform="uppercase">
+                      Topic Details
+                    </Text>
+                    <Field
+                      label="Theme"
+                      name="topicTheme"
+                      placeholder="Select a theme for your topic"
+                      component={SelectDropdownFormField}
+                    />
+
+                    <Field
+                      label="Topic Name"
+                      name="topicName"
+                      placeholder="How coding is more like baking a pie than reading a book."
+                      component={BCTextFormField}
+                    />
+
+                    <Field
+                      label="Topic Summary"
+                      name="topicSummary"
+                      placeholder="I'm going to talk about ..."
+                      maxLength={250}
+                      component={BCTextAreaField}
+                    />
+
+                    <Checkbox
+                      ref={viewRef}
+                      size="lg"
+                      pl="5"
+                      onChange={handleConsentCheck}
+                    >
+                      <Text fontSize="md" ml="5px">
+                        I{"'"}m aware that other users can view your topic and
+                        information as a sharer.{' '}
+                      </Text>
+                    </Checkbox>
+
+                    <Checkbox
+                      ref={permanentRef}
+                      size="lg"
+                      pl="5"
+                      onChange={handleConsentCheck}
+                    >
+                      <Text fontSize="md" ml="5px">
+                        I{"'"}m aware that the information I submit will be
+                        permanent and cannot be changed.
+                      </Text>
+                    </Checkbox>
+
+                    <PrimaryButton
+                      alignSelf="flex-end"
+                      w={['100%', 'fit-content', 'fit-content']}
+                      py="25px"
+                      px="75px"
+                      type="submit"
+                      disabled={isPosting || !checked}
+                    >
+                      {isPosting ? (
+                        <Loader type="" size="md" />
+                      ) : (
+                        <Text fontSize="lg">Propose</Text>
+                      )}
+                    </PrimaryButton>
+                  </VStack>
+                </Form>
+              )}
+            </Formik>
+          </Container>
+        </>
+      )}
+    </>
+  );
+  // }
 };
 
 export default ProposeTopic;
