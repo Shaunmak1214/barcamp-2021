@@ -38,7 +38,7 @@ import {
   SamplePicFour,
   SamplePicFive,
   SamplePicSix,
-  Agenda,
+  Agenda2022,
 } from '../assets';
 
 import { Countdown } from '../constants';
@@ -46,7 +46,7 @@ import { Countdown } from '../constants';
 
 const Index = () => {
   const { daysRef, hoursRef, minutesRef, secondsRef } = useCountdown(
-    'October 2, 2021 00:00:00',
+    'October 1, 2022 00:00:00',
   );
   // const [topicModalNotifierOpen, setTopicModalNotifierOpen] = useState(true);
 
@@ -131,7 +131,8 @@ const Index = () => {
             <PrimaryButton
               py="25px"
               onClick={() => {
-                window.location.href = '/login';
+                window.location.href =
+                  'https://docs.google.com/forms/d/e/1FAIpQLSdTi-Pyc6i7L_CtYAleBQuQXI94jvIxW04xfXv_EuITz8Ausw/viewform';
               }}
             >
               Login / Register
@@ -305,7 +306,7 @@ const Index = () => {
           <iframe
             width="100%"
             height="670"
-            src="https://www.youtube.com/embed/V4yuHoLQpck"
+            src="https://www.youtube.com/embed/yRiAEW9texE"
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           ></iframe>
@@ -321,7 +322,7 @@ const Index = () => {
         flexDir="column"
       >
         <Container maxW="container.xl">
-          <Image src={Agenda} />
+          <Image src={Agenda2022} />
         </Container>
       </Center>
 

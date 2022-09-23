@@ -1,4 +1,4 @@
-import { BarCampFullLogo, HackerspaceLogo, DerivLogo, IxLogo } from '../assets';
+import { BarCampFullLogo, DerivLogo, AuronexLogo } from '../assets';
 
 const platinumSponsor = {
   type: 'Platinum',
@@ -11,8 +11,8 @@ const platinumSponsor = {
     },
     {
       idx: 1,
-      imageSrc: IxLogo,
-      link: 'https://ixtelecom.net/',
+      imageSrc: AuronexLogo,
+      link: 'https://auronex.com/',
     },
   ],
 };
@@ -46,8 +46,23 @@ const silverSponsor = {
   sponsors: [
     {
       idx: 0,
-      imageSrc: HackerspaceLogo,
-      link: 'https://hackerspacemmu.github.io/',
+      imageSrc: BarCampFullLogo,
+    },
+    {
+      idx: 2,
+      imageSrc: BarCampFullLogo,
+    },
+    {
+      idx: 3,
+      imageSrc: BarCampFullLogo,
+    },
+    {
+      idx: 4,
+      imageSrc: BarCampFullLogo,
+    },
+    {
+      idx: 5,
+      imageSrc: BarCampFullLogo,
     },
   ],
 };

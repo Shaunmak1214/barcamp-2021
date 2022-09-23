@@ -53,6 +53,7 @@ import SamplePicFour from './jpg-pngs/gallery4.png';
 import SamplePicFive from './jpg-pngs/gallery5.png';
 import SamplePicSix from './jpg-pngs/gallery6.png';
 import Agenda from './jpg-pngs/BarCamp-agenda.png';
+import Agenda2022 from './jpg-pngs/barcamp-agenda-2022.png';
 import LoginBanner from './jpg-pngs/login.png';
 
 // Pictures (JPG)
@@ -131,4 +132,5 @@ export {
   HackerspaceLogo,
   IxLogo,
   DerivLogo,
+  Agenda2022,
 };

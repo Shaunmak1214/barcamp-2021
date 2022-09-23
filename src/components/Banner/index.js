@@ -30,7 +30,8 @@ const Index = () => {
             px="45px"
             fontFamily="Source Sans Pro"
             onClick={() => {
-              window.location.href = '/login';
+              window.location.href =
+                'https://docs.google.com/forms/d/e/1FAIpQLSdTi-Pyc6i7L_CtYAleBQuQXI94jvIxW04xfXv_EuITz8Ausw/viewform';
             }}
           >
             Login / Register

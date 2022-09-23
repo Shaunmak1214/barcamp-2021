@@ -43,7 +43,8 @@ const Index = ({ cta, type }) => {
 
   const logout = () => {
     dispatch(LOGOUT());
-    window.location.href = '/login';
+    window.location.href =
+      'https://docs.google.com/forms/d/e/1FAIpQLSdTi-Pyc6i7L_CtYAleBQuQXI94jvIxW04xfXv_EuITz8Ausw/viewform';
   };
 
   const handleScroll = (e) => {
@@ -135,6 +136,7 @@ const Index = ({ cta, type }) => {
                     w="auto"
                     minW="100px"
                     h="100%"
+                    objectFit="contain"
                   />
                 </Center>
               );
@@ -294,7 +296,10 @@ const Index = ({ cta, type }) => {
                     )}
                   </>
                 ) : (
-                  <Link href="/login" py="3">
+                  <Link
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSdTi-Pyc6i7L_CtYAleBQuQXI94jvIxW04xfXv_EuITz8Ausw/viewform"
+                    py="3"
+                  >
                     <Text fontSize="sm">Login / Register</Text>
                   </Link>
                 )}
@@ -310,7 +315,8 @@ const Index = ({ cta, type }) => {
                 py="20px"
                 fontFamily="Source Sans Pro"
                 onClick={() => {
-                  window.location.href = '/login';
+                  window.location.href =
+                    'https://docs.google.com/forms/d/e/1FAIpQLSdTi-Pyc6i7L_CtYAleBQuQXI94jvIxW04xfXv_EuITz8Ausw/viewform';
                 }}
               >
                 Login / Register
