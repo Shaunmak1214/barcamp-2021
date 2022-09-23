@@ -27,7 +27,7 @@ import { useDispatch } from 'react-redux';
 import { LOGOUT } from '../../reducers/authSlice';
 const MobileMenu = () => {
   const { daysRef, hoursRef, minutesRef, secondsRef } = useCountdown(
-    'October 2, 2021 00:00:00',
+    'October 1, 2022 00:00:00',
   );
   const isOpen = useRef(false);
   const authState = store.getState().auth;
