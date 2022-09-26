@@ -50,17 +50,7 @@ const Index = ({ ...props }) => {
       idx: 4,
       identifier: 'votingTopic',
       title: 'Voting Topic',
-    },
-    {
-      idx: 5,
-      identifier: 'gatherTown',
-      title: 'Gather Town',
-    },
-    {
-      idx: 6,
-      identifier: 'discordServer',
-      title: 'Discord Server',
-    },
+    }
   ];
 
   const FaqItemsByCat = {
@@ -69,13 +59,13 @@ const Index = ({ ...props }) => {
         idx: 0,
         title: 'What do I have to prepare for this event?',
         content:
-          'The first thing you need to do is to create an account for Gather Town, and familiarize yourself with the features of the platform before the event day itself to ensure a smooth session. Secondly, do join this event with the intent of sharing your knowledge with others <3.',
+          'All you have to do is join us at the Faculty of Computing and Informatics at Multimedia University, Cyberjaya. All you have to do is register yourself, and vote for topics you find interesting!',
       },
       {
         idx: 1,
-        title: 'Do I have to open my camera and microphone?',
+        title: 'Is it necessary for me to present a topic during BarCamp?',
         content:
-          'Throughout the event, you do not have to turn on your camera and microphone, although we definitely encourage you to do so! Of course, if you are to speak in your slot, you should open your camera and microphone so that everyone can see and hear you!',
+          'If this is your first time attending BarCamp, we highly encourage you to give yourself a chance and come up with a topic which you can present to the audience! Of course, if you do not want to, that is perfectly fine as well.',
       },
       {
         idx: 2,
@@ -87,65 +77,42 @@ const Index = ({ ...props }) => {
         idx: 3,
         title: 'How do I register as a participant?',
         content:
-          'Click the "Join Us Now" button in this website and log in with your Google account. ',
+          'Click the "Join Us Now" button in this website and fill in the details in the Google Form! You can also register yourself on the day of the event at our registration counter!',
       },
       {
         idx: 4,
-        title: 'Is it necessary for me to present a topic during BarCamp?',
+        title:
+          'How do I know if my topic is getting into the slots of BarCamp Cyberjaya 2022?',
         content:
-          'If this is your first time attending BarCamp, we highly encourage you to give yourself a chance and come up with a topic which you can present to the audience! Of course, if you do not want to, that is perfectly fine as well.',
+          'At 12:45pm, the votes will be counted for all proposed topics. And once the topics and slots have been confirmed, we will call for all speakers to check the time slots and room number so that everyone will be well informed on the topics which were voted for.',
       },
       {
         idx: 5,
         title:
-          'How do I know if my topic is getting into the slots of BarCamp 2021?',
+          'My topic was voted and a slot has been allocated for me, but I have an emergency and cannot make it on the day of the event. What should I do?',
         content:
-          'The voting for the topics will be open from 25th September to 30th September 2021. The 15 topics with the most votes will be announced on the next day, with their specified time slots, so make sure to check back on the 1st of October to see if your topic was voted!',
+          'Let us know at the registration counter! We will make the necessary ammendments to the agenda.',
       },
       {
         idx: 6,
         title:
-          'My topic was voted and a slot has been allocated for me, but I have an emergency and cannot make it on the day of the event. What should I do?',
+          'Will lunch be served?',
         content:
-          'Feel free to contact our BarCamp team via itsoc.mmu@gmail.com to assist you further on this matter. ',
+          'Yes, we have prepared a lunch buffet for all participants. If that does not suffice, you may also visit other food stalls located in the vicinity of MMU as well.',
       },
       {
         idx: 7,
-        title: 'How do I register on Gather.Town?',
+        title:
+          'Will there by any car parkings available in this event?',
         content:
-          'Just click into the Gather.Town link (https://www.gather.town/) and click on the ‘Sign Up’ button on the top right corner of the screen. ',
+          'Yes, if your mode of transport is by your own personal car, we have made the necessary arrangements to ensure that all visitors will be able to park their cars within the university.',
       },
       {
         idx: 8,
-        title: 'Do I have to install the desktop app for Gather.Town? ',
-        content:
-          'No, you do not have to install the desktop app for Gather.Town. You can just log into the website to enter BarCamp Cyberjaya 2021 Server after registering on Gather.Town.',
-      },
-      {
-        idx: 9,
         title:
-          'I cannot access the Gather.Town BarCamp Cyberjaya 2021 Server, what should I do?',
+          'In an ongoing session, I realise I do not enjoy it. Can I leave halfway and join another ongoing session? ',
         content:
-          'Feel free to contact our BarCamp team via itsoc.mmu@gmail.com to assist you further on this matter. ',
-      },
-      {
-        idx: 10,
-        title:
-          'Can I use any of the rooms in Gather.Town during the day of the event?',
-        content:
-          'Yes you can! Feel free to use any empty space in Gather.Town to hang out with your friends! Only the spaces in the 3 Halls are reserved for proposed topics to be shared. Any other place is free for you to explore and stay in.',
-      },
-      {
-        idx: 11,
-        title: 'Why do I have to join the Discord server?',
-        content:
-          'For BarCamp Cyberjaya 2021, we will be using a Discord server as our main channel to upload our event announcements to keep you updated with the latest news, as well as encouraging everyone to communicate and make friends with each other before the day of the event. ',
-      },
-      {
-        idx: 12,
-        title: 'What can I do inside the Discord Server?',
-        content:
-          'You can chat and also meet up with anyone inside the Discord Server! Make yourself at home and make some new friends too! Just make sure to follow our Discord Server Rules so that everyone can have a pleasant experience. ',
+          'Yes of course you can! We would like to stress that on the day of the event you get to VOTE WITH YOUR FEET, meaning you can either enter or leave a hall anytime you please to join another topic you may find interesting as well!',
       },
     ],
     general: [
@@ -153,13 +120,14 @@ const Index = ({ ...props }) => {
         idx: 0,
         title: 'What do I have to prepare for this event?',
         content:
-          'The first thing you need to do is to create an account for Gather.Town  and familiarize yourself with the features of the platform before the event day itself to ensure a smooth session. Secondly, do join this event with the intent of sharing your knowledge with others!',
+        'All you have to do is join us at the Faculty of Computing and Informatics at Multimedia University, Cyberjaya. All you have to do is register yourself, and vote for topics you find interesting!',
       },
       {
         idx: 1,
-        title: 'Do I have to open my camera and microphone?',
+        title:
+          'Will there by any car parkings available in this event?',
         content:
-          'Throughout the event, you do not have to turn on your camera and microphone, although we definitely encourage you to do so! Of course, if you are to speak in your slot, you should open your camera and microphone so that everyone can see and hear you!',
+          'Yes, if your mode of transport is by your own personal car, we have made the necessary arrangements to ensure that all visitors will be able to park their cars within the university.',
       },
       {
         idx: 2,
@@ -167,6 +135,13 @@ const Index = ({ ...props }) => {
           'In an ongoing session, I realise I do not enjoy it. Can I leave halfway and join another ongoing session? ',
         content:
           'Yes of course you can! We would like to stress that on the day of the event you get to VOTE WITH YOUR FEET, meaning you can either enter or leave a hall anytime you please to join another topic you may find interesting as well!',
+      },
+      {
+        idx: 3,
+        title:
+          'Will lunch be served?',
+        content:
+          'Yes, we have prepared a lunch buffet for all participants. If that does not suffice, you may also visit other food stalls located in the vicinity of MMU as well.',
       },
     ],
     registration: [
@@ -180,7 +155,7 @@ const Index = ({ ...props }) => {
         idx: 1,
         title: 'How do I register as a participant?',
         content:
-          'Click the "Join Us Now" button in this website and log in with your Google account. ',
+          'Click the "Join Us Now" button in this website and fill in the details in the Google Form! You can also register yourself on the day of the event at our registration counter!',
       },
     ],
     proposingTopic: [
@@ -193,16 +168,23 @@ const Index = ({ ...props }) => {
       {
         idx: 1,
         title:
-          'How do I know if my topic is getting into the slots of BarCamp 2021?',
+          'How do I Propose a Topic in BarCamp?',
         content:
-          'The voting for the topics will be open from 25th September to 30th September 2021. The 15 topics with the most votes will be announced on the next day, with their specified time slots, so make sure to check back on the 1st of October to see if your topic was voted!',
+          'You will be provided with materials to write down the name of your topic. After that, you may paste it on our designated board in the Main Hall, where other participants will be able to vote for your topics',
       },
       {
         idx: 2,
         title:
+          'How do I know if my topic is getting into the slots of BarCamp Cyberjaya 2022?',
+        content:
+          'At 12:45pm, the votes will be counted for all proposed topics. And once the topics and slots have been confirmed, we will call for all speakers to check the time slots and room number so that everyone will be well informed on the topics which were voted for.',
+      },
+      {
+        idx: 3,
+        title:
           'My topic was voted and a slot has been allocated for me, but I have an emergency and cannot make it on the day of the event. What should I do?',
         content:
-          'Feel free to contact our BarCamp team via itsoc.mmu@gmail.com to assist you further on this matter. ',
+          'Let us know at the registration counter! We will make the necessary ammendments to the agenda.',
       },
     ],
     votingTopic: [
@@ -210,65 +192,23 @@ const Index = ({ ...props }) => {
         idx: 0,
         title: 'What is the voting session conducted for?',
         content:
-          'The voting for the topics will be conducted starting from 25th September to 30th September 2021. The 15 topics with the most votes will be selected to share on the day of BarCamp, the finalized list of ',
+          'The voting session allows all BarCampers to vote for their most favoured topics!',
       },
       {
         idx: 1,
         title:
-          'How do I know if my topic is getting into the slots of BarCamp 2021?',
+          'How do I know if my topic is getting into the slots of BarCamp Cyberjaya 2022?',
         content:
-          'The voting for the topics will be open from 25th September to 30th September 2021. The 15 topics with the most votes will be announced on the next day, with their specified time slots, so make sure to check back on the 1st of October to see if your topic was voted!',
+          'At 12:45pm, the votes will be counted for all proposed topics. And once the topics and slots have been confirmed, we will call for all speakers to check the time slots and room number so that everyone will be well informed on the topics which were voted for.',
       },
       {
         idx: 2,
         title:
           'My topic was voted and a slot has been allocated for me, but I have an emergency and cannot make it on the day of the event. What should I do?',
         content:
-          'Feel free to contact our BarCamp team via itsoc.mmu@gmail.com to assist you further on this matter. ',
+          'Let us know at the registration counter! We will make the necessary ammendments to the agenda.',
       },
-    ],
-    gatherTown: [
-      {
-        idx: 0,
-        title: 'How do I register on Gather.Town?',
-        content:
-          'Just click into the Gather.Town link (https://www.gather.town/) and click on the ‘Sign Up’ button on the top right corner of the screen. ',
-      },
-      {
-        idx: 1,
-        title: 'Do I have to install the desktop app for Gather.Town? ',
-        content:
-          'No, you do not have to install the desktop app for Gather.Town. You can just log into the website to enter BarCamp Cyberjaya 2021 Server after registering on Gather.Town.',
-      },
-      {
-        idx: 2,
-        title:
-          'I cannot access the Gather.Town BarCamp Cyberjaya 2021 Server, what should I do?',
-        content:
-          'Feel free to contact our BarCamp team via itsoc.mmu@gmail.com to assist you further on this matter. ',
-      },
-      {
-        idx: 3,
-        title:
-          'Can I use any of the rooms in Gather.Town during the day of the event?',
-        content:
-          'Yes you can! Feel free to use any empty space in Gather.Town to hang out with your friends! Only the spaces in the 3 Halls are reserved for proposed topics to be shared. Any other place is free for you to explore and stay in.',
-      },
-    ],
-    discordServer: [
-      {
-        idx: 0,
-        title: 'Why do I have to join the Discord server?',
-        content:
-          'For BarCamp Cyberjaya 2021, we will be using a Discord server as our main channel to upload our event announcements to keep you updated with the latest news, as well as encouraging everyone to communicate and make friends with each other before the day of the event. ',
-      },
-      {
-        idx: 1,
-        title: 'What can I do inside the Discord Server?',
-        content:
-          'You can chat and also meet up with anyone inside the Discord Server! Make yourself at home and make some new friends too! Just make sure to follow our Discord Server Rules so that everyone can have a pleasant experience. ',
-      },
-    ],
+    ]
   };
 
   useEffect(() => {
