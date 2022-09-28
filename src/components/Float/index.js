@@ -6,7 +6,7 @@ import { DiscordOutlinedIcon } from '../../assets';
 
 const Index = () => {
   return (
-    <HStack position="fixed" bottom="20px" right="20px" zIndex="1001">
+    <HStack position="fixed" bottom="20px" right="20px" zIndex="1001" d="none">
       <Link
         _hover={{ bg: 'black' }}
         bg="#5865F2"
