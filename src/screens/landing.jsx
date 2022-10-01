@@ -322,7 +322,13 @@ const Index = () => {
         flexDir="column"
       >
         <Container maxW="container.xl">
-          <Image src={Agenda2022} />
+          <Image
+            src={Agenda2022}
+            style={{
+              margin: '0 auto',
+              padding: '50px 0',
+            }}
+          />
         </Container>
       </Center>
 
